@@ -40,6 +40,7 @@ Dlg.DEFAULTS.icons.wait = '<i class="material-icons">build</i>'
 
 Dlg.DEFAULTS.input.classes.input = 'form-control'
 Dlg.DEFAULTS.input.classes.label = 'col-form-label fw-bolder'
+
 </code></pre>
 </p>
 <script>
@@ -60,7 +61,7 @@ const Test = (function(window, document) {
 	Dlg.DEFAULTS.icons.input = '' //'<i class="medium material-icons blue-text">edit</i>'
   Dlg.DEFAULTS.icons.wait = '<i class="small material-icons blue-text">build</i>'
 
-	Dlg.DEFAULTS.input.classes.input = 'valign-wrapper'
+	Dlg.DEFAULTS.input.classes.label = 'hide'
 /*
 	Dlg.DEFAULTS.input.classes.label = 'col-form-label fw-bolder'
 */
@@ -88,7 +89,7 @@ const Test = (function(window, document) {
 			}, 1500)
 		}
 		gebi('basic-input').onclick = function() {
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(function(input) {
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(function(input) {
 				console.log('bs5 result', input)
 			})
 		}

@@ -7,9 +7,101 @@
 
 "use strict";
 
+/*
+`background: repeating-linear-gradient(
+						    45deg,
+						    rgba(255, 0, 0, 0.2),
+						    rgba(255, 0, 0, 0.2) 1px,
+						    rgba(255, 0, 0, 0.3) 1px,
+						    rgba(255, 0, 0, 0.3) 20px
+						  );`,
+
+*/
+
+/* hearts
+background:
+radial-gradient(circle closest-side at 60% 43%, #b03 26%, rgba(187,0,51,0) 27%),
+radial-gradient(circle closest-side at 40% 43%, #b03 26%, rgba(187,0,51,0) 27%),
+radial-gradient(circle closest-side at 40% 22%, #d35 45%, rgba(221,51,85,0) 46%),
+radial-gradient(circle closest-side at 60% 22%, #d35 45%, rgba(221,51,85,0) 46%),
+radial-gradient(circle closest-side at 50% 35%, #d35 30%, rgba(221,51,85,0) 31%),
+
+radial-gradient(circle closest-side at 60% 43%, #b03 26%, rgba(187,0,51,0) 27%) 50px 50px,
+radial-gradient(circle closest-side at 40% 43%, #b03 26%, rgba(187,0,51,0) 27%) 50px 50px,
+radial-gradient(circle closest-side at 40% 22%, #d35 45%, rgba(221,51,85,0) 46%) 50px 50px,
+radial-gradient(circle closest-side at 60% 22%, #d35 45%, rgba(221,51,85,0) 46%) 50px 50px,
+radial-gradient(circle closest-side at 50% 35%, #d35 30%, rgba(221,51,85,0) 31%) 50px 50px;
+background-color:#b03;
+opacity: 0.4;
+background-size:100px 100px;
+*/
+
+/* ying yang
+background:
+radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 50px 0,
+radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 50px 0,
+radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 0 50px,
+radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 0 50px,
+radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%),
+radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%),
+radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%) 50px 50px,
+radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%) 50px 50px;
+background-color:#fff; 
+opacity: 0.4;
+background-size:100px 100px;
+*/
+
+/* bricks
+background-color: transparent;
+background-image: linear-gradient(335deg, #b00 23px, transparent 23px),
+linear-gradient(155deg, #d00 23px, transparent 23px),
+linear-gradient(335deg, #b00 23px, transparent 23px),
+linear-gradient(155deg, #d00 23px, transparent 23px);
+background-size: 58px 58px;
+opacity: 0.4;
+background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+*/
+
+/* carbon pattern
+background:
+linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+background-color: #131313;
+opacity: 0.4;
+background-size: 20px 20px;
+*/
+
+/* stairs
+`background:
+linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
+linear-gradient(63deg, transparent 74%, #999 78%),
+linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444;
+opacity: 0.4;
+background-size: 16px 48px;
+`
+*/
+
+/* bluepprint
+	background-color: #269;
+  background-image:
+    linear-gradient(rgba(255,255,255,.5) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,.5) 2px, transparent 2px),
+    linear-gradient(rgba(255,255,255,.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.28) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+*/
+
+//https://projects.verou.me/css3patterns/
+
 const SimplyDialogs = (function(document) {
 
 	let defaults = {
+		backdrop: undefined,
 		headers: {
 			alert: 'Alert', 
 			error: 'Error',
@@ -110,6 +202,12 @@ const SimplyDialogs = (function(document) {
 		if (type !== 'wait') dialog.querySelector('.dialog-header').innerHTML = use.headers[type]
 		dialog.querySelector('.dialog-icon').innerHTML = use.icons[type]
 		;['ok', 'cancel', 'yes', 'no'].forEach((name) => popBtn(name))
+		if (use.backdrop) {
+			dialog.backdrop = document.createElement('style')
+			dialog.backdrop.id = 'sd' + Math.random()
+			dialog.backdrop.innerText = `dialog::backdrop { ${use.backdrop.replace(/\r?\n|\r/g, '')} }`
+			document.head.appendChild(dialog.backdrop)
+		}
 		return use
 	}
 
@@ -117,6 +215,7 @@ const SimplyDialogs = (function(document) {
 		dialog.classList.add('close')
 		setTimeout(function() {
 			dialog.close()
+			if (dialog.backdrop) gebi(dialog.backdrop.id).remove()
 			if (document.body.contains(cnt)) document.body.removeChild(cnt)
 		}, dialog.clientHeight - 70)
 	}
@@ -133,6 +232,36 @@ const SimplyDialogs = (function(document) {
 	`;
 
 //alert
+	const alertGeneric = function(message, options, type) {
+		return new Promise(function(resolve) {
+			const cnt = getCnt(genericHTML)
+			const dialog = gebi('dialog-generic')
+			initDialog(dialog, type, options)		
+			dialog.querySelector('.dialog-message').innerHTML = message
+			dialog.showModal()
+			const ret = function(val) {
+				closeDialog(dialog, cnt)
+				resolve(val)
+			}
+			dialog.querySelector('.dialog-ok').onclick = () => { ret(true) }
+			dialog.addEventListener('close', () => { ret(true) })
+			dialog.addEventListener('cancel', () => { ret(false) })
+		})
+	}
+
+	const alert = function(message, options) {
+		return alertGeneric(message, options, 'alert')
+	}
+
+	const information = function(message, options) {
+		return alertGeneric(message, options, 'information')
+	}
+
+	const error = function(message, options) {
+		return alertGeneric(message, options, 'error')
+	}
+
+/*
 	const alert = function(message, options) {
 		return new Promise(function(resolve) {
 			const cnt = getCnt(genericHTML)
@@ -140,12 +269,13 @@ const SimplyDialogs = (function(document) {
 			initDialog(dialog, 'alert', options)		
 			dialog.querySelector('.dialog-message').innerHTML = message
 			dialog.showModal()
-			dialog.querySelector('.dialog-ok').onclick = function() {
+			const ret = function(val) {
 				closeDialog(dialog, cnt)
-				resolve(true)
+				resolve(val)
 			}
-			dialog.addEventListener('close', () => { resolve(true) })
-			dialog.addEventListener('cancel', () => { resolve(false) })
+			dialog.querySelector('.dialog-ok').onclick = () => { ret(true) })
+			dialog.addEventListener('close', () => { ret(true) })
+			dialog.addEventListener('cancel', () => { ret(false) })
 		})
 	}
 
@@ -184,6 +314,7 @@ const SimplyDialogs = (function(document) {
 			dialog.addEventListener('cancel', () => { resolve(false) })
 		})
 	}
+*/
 
 //confirm
 	const confirmHTML = `
@@ -238,10 +369,13 @@ const SimplyDialogs = (function(document) {
 			initDialog(dialog, 'bell', options)		
 			dialog.querySelector('.dialog-message').innerHTML = message
 			dialog.showModal()
-			dialog.querySelector('.dialog-ok').onclick = function() {
+			const ret = function(val) {
 				closeDialog(dialog, cnt)
-				resolve(true)
+				resolve(val)
 			}
+			dialog.querySelector('.dialog-ok').onclick = () => { ret(true) }
+			dialog.addEventListener('close', () => { ret(true) })
+			dialog.addEventListener('cancel', () => { ret(false) })
 		})
 	}
 
@@ -258,6 +392,7 @@ const SimplyDialogs = (function(document) {
 		const dialog = gebi('dialog-wait')
 		initDialog(dialog, 'wait', options)		
 		dialog.querySelector('.dialog-message').innerHTML = message
+		dialog.addEventListener('cancel', (e) => { e.preventDefault() })
 		dialog.showModal()
 		return { 
 			close: function() {
@@ -310,7 +445,6 @@ const SimplyDialogs = (function(document) {
 		}
 
 		const br = function() { return document.createElement('BR') }
-
 		const div = function() { return document.createElement('DIV') }
 
 		const getLabel = function(label, forId) {

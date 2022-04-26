@@ -13,41 +13,103 @@
 <script src="assets/rainbow/src/language/generic.js"></script>
 <script src="assets/rainbow/src/language/javascript.js"></script>
 <script src="assets/dialogs/dialogs.js"></script>
+<script src="assets/gumshoe.min.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
 <link rel="stylesheet" type="text/css" href="assets/rainbow/themes/css/github.css">
 <style>
-main, button {
-	XXXfont-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-	XXcolor: #222;
-	XXfont-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-}
 main {
 	width: 900px;
 	margin: auto auto;
-}
-button {
-	XXfont-size: small;
-	XXfont-weight: bold;
-	XXvertical-align: bottom;
+	margin-top: 10px;
 }
 span.icon {
 	XXXfont-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
 	font-size: medium;
 }
 iframe {
-	border: 1px solid #dadada;
+	border: 1px dotted #dadada;
 	padding: 2px;
+}
+aside {
+	position: fixed;
+	width: 180px;
+	top: 20px;
+	padding: 10px;
+	border: 1px solid #dadada;	
+}
+aside menu {
+	margin: 0;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	padding-inline-start: 0;
+}
+aside ul {
+	list-style-type: none;
+}
+aside ul:not(.root) {
+	padding-left: 14px;
+}
+aside li {
+	color: #222;
+}
+aside li.active {
+	font-weight: bolder;
+	color: #0969da !important;
+}
+aside li a,
+aside li a:active,
+aside li a:hover {
+	color: inherit;
+	text-decoration: none;
+}
+section {
+	margin-bottom: 1rem;
 }
 </style>
 <script>function rf(f) { f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight)+10) + 'px'; }</script>
 </head>
 <body>
+<aside>
+<menu>
+<ul class="root">
+	<li><a href="#introduction">Introduction</a></li>
+	<li><a href="#basic-samples">Basic samples</a></li>
+	<li><a href="#global-settings">Global settings</a>
+		<ul>
+			<li><a href="#defaults">DEFAULTS</a></li>
+			<li><a href="#defaults-lang">Language</a></li>
+			<li><a href="#defaults-icons">Icons</a></li>
+			<li><a href="#defaults-classes">Classes</a></li>
+			<li><a href="#defaults-backdrop">::backdrop</a></li>
+		</ul>
+	</li>
+	<li><a href="#integration">Integration</a>
+		<ul>
+			<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
+			<li><a href="#integration-materialize">Materialize CSS</a></li>
+			<li><a href="#integration-fontawesome">FontAwesome</a></li>
+		</ul>
+	</li>
+	<li><a href="#advanced-inputs">Advanced inputs</a>
+		<ul>
+			<li><a href="#ai-input-options">Input options</a></li>
+			<li><a href="#ai-input-callback">Callback</a></li>
+			<li><a href="#ai-handling-result">Handling result</a></li>
+		</ul>
+	</li>
+
+</ul>
+</menu>
+</aside>
 <main>
+	<section id="introduction">
 	<h1>SimplyDialogs</h1>
 	<p>This is demonstration / test page for <a href="github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a>. Simplydialogs offers 
 a range of common dialogs, all highly customizeable - comes with no dependencies and a really small footprint.
-	</p>
-<p>
+	</p><br>
+	</section>
+<section id="basic-samples">
+	<p>
 Samples:  
 <button id="basic-alert">Alert</button>
 <button id="basic-info">Info</button>
@@ -56,30 +118,184 @@ Samples:
 <button id="basic-error">Error</button>
 <button id="basic-wait">Wait</button>
 <button id="basic-input">Input</button>
-</p>	
-	
+</p><br>	
+
 <pre><code data-language="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	
   console.log('alert', answer) 
 })
+
 Dlg.confirm('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
 Dlg.information('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
 Dlg.bell('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
 Dlg.error('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
 
 const wait = Dlg.wait('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
-setTimeout(function() {
-  wait.close()
-}, 1500)
+setTimeout(() => { wait.close() }, 1500)
 
 Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input => {
   console.log('input', input)
 })
 </code></pre>
+</section>
 
-<h3>Bootstrap 5</h3>
-<iframe src="assets/frames/bs5.html" border="0" width="100%;" onload="rf(this)"></iframe>
-<h3>Materialize CSS</h3>
-<iframe src="assets/frames/materialize.html" border="0" width="100%;" onload="rf(this)"></iframe>
+<section id="defaults">
+<h2>Global settings</h2>
+</section>
+
+<section id="defaults">
+<h3>DEFAULTS</h3>
+<p>Simplydialogs uses internally a <code>defaults</code> literal, which is accessible through the <code>.DEFAULTS</code> property :</p>
+<pre><code data-language="javascript">let defaults = {
+  backdrop: undefined,
+  headers: {
+    alert: 'Alert', 
+    error: 'Error',
+    confirm: 'Confirm',
+    information: 'Information',
+    bell: 'Notice',
+    input: ''
+  },
+  icons: {
+    alert: '⚠', 
+    error: '⛔',
+    confirm: '✔️',
+    information: '💡',
+    bell: '🔔',
+    wait: '⚙️',
+    input: '✏️'
+  },
+  buttons: {
+    captions: {
+      ok: 'Ok',
+      cancel: 'Cancel',
+      yes: 'Yes',
+      no: 'No'
+    },
+    classes: {
+      ok: '',
+      cancel: '',
+      yes: '',
+      no: ''
+    }
+  },
+  input: {
+    callback: undefined,
+    classes: {
+      label: '',
+      input: ''
+    },
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'Input ', name: 'input', placeholder: 'Enter text ..' },
+    ]
+  }
+}
+</code></pre>
+<p>You can alter those defaults by simple assignment, i.e <code>&lt;instance>.DEFAULTS.icons.alert = '&lt;img src="path/to/image">' </code>. 
+Changes to <code>DEFAULTS</code> are global, but you can still pass alternative options to each dialog (see later).
+</section>
+<br>
+<section id="defaults-lang">
+<h3>Language</h3>
+There is no such thing as "language" in SimplyDialogs, but most people would like to adjust their basic dialogs to the lingo or language they use. 
+You can use <code>DEFAULTS</code> to change the dialogs into "spanish" as default by :
+<pre><code data-language="javascript">const Dlg = SimplyDialogs
+Dlg.DEFAULTS.buttons.captions = {
+  ok: 'Ok',	
+  yes: 'Aceptar',
+  no: 'Salir',
+  cancel: 'Cancelar'
+}
+Dlg.DEFAULTS.headers = {
+  alert: 'Alert', 
+  error: 'Error',
+  confirm: 'Confirm',
+  information: 'Information',
+  bell: 'Notice',
+  input: ''
+}
+</code></pre>
+</section>
+
+<section id="defaults-icons">
+DEFAULTS
+</section>
+
+<section id="defaults-classes">
+DEFAULTS
+</section>
+
+<section id="defaults-backdrop">
+<h3>::backdrop</h3>
+<p>The native <code>::backdrop</code> more or less look like this across the browsers:</p>
+<pre><code data-language="css3">dialog::backdrop {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.1);
+}
+</code></pre>
+<p>You can change <code>DEFAULTS.backdrop</code> in order to change the background of the dialogs. You can specify the <code>background</code> style itself by passing a valid CSS class-definition. Here are some examples:</p>
+<p><button id="backdrop-none">No backdrop (reset)</button>
+<pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0);'</pre></code>
+</p>
+<p><button id="backdrop-darker">Darker backdrop</button>
+<pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0.5);'</pre></code>
+</p>
+<p><button id="backdrop-carbon">A "carbon" backdrop</button> <button id="backdrop-stairs">A "stair-style" backdrop</button> <button id="backdrop-yingyang">A "yin-yan" backdrop</button>
+<pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = `background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+  linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+  linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+  linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+  linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+  linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+  background-color: #131313;
+  opacity: 0.4;
+  background-size: 20px 20px;`
+
+&lt;instance>.DEFAULTS.backdrop = `background: radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 50px 0,
+  radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 50px 0,
+  radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 0 50px,
+  radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 0 50px,
+  radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%),
+  radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%),
+  radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%) 50px 50px,
+  radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%) 50px 50px;
+  background-color:#fff; 
+  opacity: 0.4;
+  background-size:100px 100px;`
+
+&lt;instance>.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
+  linear-gradient(63deg, transparent 74%, #999 78%),
+  linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444;
+  opacity: 0.4;
+  background-size: 16px 48px;
+</pre></code>
+Get more inspiration at <a href="https://projects.verou.me/css3patterns/">https://projects.verou.me/css3patterns/</a>.	
+</p>
+
+</section>
+
+<section id="integration">
+<h2>Integration</h2>
+<p>lorem ipsum</h2>
+</section>
+
+<section id="integration-bootstrap5">
+	<h3>Bootstrap 5</h3>
+	<iframe src="assets/frames/bs5.html" border="0" width="100%;" height="400" onload="rf(this)"></iframe>
+</section>
+
+<section id="integration-materialize">
+	<h3>Materialize CSS</h3>
+	<iframe src="assets/frames/materialize.html" border="0" width="100%;" height="400" onload="rf(this)"></iframe>
+</section>
+
+<section id="integration-fontawesome">
+	<h3>Fontawesome</h3>
+	<iframe src="assets/frames/fa.html" border="0" width="100%;" height="400" onload="rf(this)"></iframe>
+</section>
 
 </main>
 <script src="assets/script.js"></script>

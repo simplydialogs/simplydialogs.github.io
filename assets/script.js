@@ -2,6 +2,20 @@ const Test = (function(window, document) {
 	const gebi = (id) => { return document.getElementById(id) }
 	const Dlg = SimplyDialogs
 
+	const aside = function() {
+		const a = document.querySelector('aside')
+		const m = document.querySelector('main')
+		a.style.left = (m.offsetLeft - 200)+'px';
+
+		window.addEventListener('load', (event) => {
+			new Gumshoe('menu a', {
+				reflow: true,
+				nested: true,
+				nestedClass: 'active-parent'
+			})
+		})
+	}
+
 	const basic = function() {
 		gebi('basic-alert').onclick = function() {
 			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('alert', answer) })
@@ -31,8 +45,70 @@ const Test = (function(window, document) {
 		}
 	}
 
+	const backdrop = function() {
+		gebi('backdrop-none').onclick = function() {
+			const o = {
+				backdrop: 'background: rgba(0, 0, 0, 0);'
+			}
+			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
+		}
+		gebi('backdrop-darker').onclick = function() {
+			const o = {
+				backdrop: 'background: rgba(0, 0, 0, 0.5);'
+			}
+			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
+		}
+		gebi('backdrop-carbon').onclick = function() {
+			const o = {
+				backdrop: `background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+									linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+									linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+									linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+									linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+									linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+									background-color: #131313;
+									opacity: 0.4;
+									background-size: 20px 20px;`
+			}
+			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
+		}
+		gebi('backdrop-yingyang').onclick = function() {
+			const o = {
+				backdrop: `background: radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 50px 0,
+								radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 50px 0,
+								radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 0 50px,
+								radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 0 50px,
+								radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%),
+								radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%),
+								radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%) 50px 50px,
+								radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%) 50px 50px;
+								background-color:#fff; 
+								opacity: 0.4;
+								background-size:100px 100px;`
+			}
+			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
+		}
+		gebi('backdrop-stairs').onclick = function() {
+			const o = {
+				backdrop: `background:
+								linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
+								linear-gradient(63deg, transparent 74%, #999 78%),
+								linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444;
+								opacity: 0.4;
+								background-size: 16px 48px;`
+			}
+			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
+		}
+
+
+
+	}
+
 	//
-	basic()		
+	aside()
+	basic()
+	backdrop()
+		
 })(window, document)
 
 

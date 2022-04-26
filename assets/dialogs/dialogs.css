@@ -36,7 +36,7 @@ dialog.close {
 } 
 
 dialog span.dialog-icon {
-	XXfont-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
+	font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
 	font-size: xxx-large;
 	margin-right: 15px;
 	float: left;
@@ -50,7 +50,7 @@ dialog span.dialog-icon {
 }
 
 dialog span.dialog-spinner {
-	display: inline;
+	display: inline-block;
 	animation: spin 2s infinite linear;
 }
 
