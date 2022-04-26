@@ -1,12 +1,87 @@
+
 <!doctype html>
-<html lang="da">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<!--
+<link rel="stylesheet" type="text/css" href="assets/normalize.css">
+<link rel="stylesheet" type="text/css" href="assets/github-pandoc.css">
+-->
+<link rel="stylesheet" type="text/css" href="assets/primer.css">
+<script src="assets/rainbow/dist/rainbow.min.js"></script>
+<script src="assets/rainbow/src/language/generic.js"></script>
+<script src="assets/rainbow/src/language/javascript.js"></script>
+<script src="assets/dialogs/dialogs.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
+<link rel="stylesheet" type="text/css" href="assets/rainbow/themes/css/github.css">
+<style>
+main, button {
+	XXXfont-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+	XXcolor: #222;
+	XXfont-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+}
+main {
+	width: 900px;
+	margin: auto auto;
+}
+button {
+	XXfont-size: small;
+	XXfont-weight: bold;
+	XXvertical-align: bottom;
+}
+span.icon {
+	XXXfont-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
+	font-size: medium;
+}
+iframe {
+	border: 1px solid #dadada;
+	padding: 2px;
+}
+</style>
+<script>function rf(f) { f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight)+10) + 'px'; }</script>
 </head>
 <body>
-<h1>Hello world</h1>
+<main>
+	<h1>SimplyDialogs</h1>
+	<p>This is demonstration / test page for <a href="github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a>. Simplydialogs offers 
+a range of common dialogs, all highly customizeable - comes with no dependencies and a really small footprint.
+	</p>
+<p>
+Samples:  
+<button id="basic-alert">Alert</button>
+<button id="basic-info">Info</button>
+<button id="basic-confirm">Confirm</button>
+<button id="basic-bell">Bell</button>
+<button id="basic-error">Error</button>
+<button id="basic-wait">Wait</button>
+<button id="basic-input">Input</button>
+</p>	
+	
+<pre><code data-language="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	
+  console.log('alert', answer) 
+})
+Dlg.confirm('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
+Dlg.information('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
+Dlg.bell('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
+Dlg.error('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
 
+const wait = Dlg.wait('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+setTimeout(function() {
+  wait.close()
+}, 1500)
 
+Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input => {
+  console.log('input', input)
+})
+</code></pre>
+
+<h3>Bootstrap 5</h3>
+<iframe src="assets/frames/bs5.html" border="0" width="100%;" onload="rf(this)"></iframe>
+<h3>Materialize CSS</h3>
+<iframe src="assets/frames/materialize.html" border="0" width="100%;" onload="rf(this)"></iframe>
+
+</main>
+<script src="assets/script.js"></script>
 </body>
 </html>
