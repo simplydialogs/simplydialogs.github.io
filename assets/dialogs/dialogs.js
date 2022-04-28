@@ -7,101 +7,12 @@
 
 "use strict";
 
-/*
-`background: repeating-linear-gradient(
-						    45deg,
-						    rgba(255, 0, 0, 0.2),
-						    rgba(255, 0, 0, 0.2) 1px,
-						    rgba(255, 0, 0, 0.3) 1px,
-						    rgba(255, 0, 0, 0.3) 20px
-						  );`,
-
-*/
-
-/* hearts
-background:
-radial-gradient(circle closest-side at 60% 43%, #b03 26%, rgba(187,0,51,0) 27%),
-radial-gradient(circle closest-side at 40% 43%, #b03 26%, rgba(187,0,51,0) 27%),
-radial-gradient(circle closest-side at 40% 22%, #d35 45%, rgba(221,51,85,0) 46%),
-radial-gradient(circle closest-side at 60% 22%, #d35 45%, rgba(221,51,85,0) 46%),
-radial-gradient(circle closest-side at 50% 35%, #d35 30%, rgba(221,51,85,0) 31%),
-
-radial-gradient(circle closest-side at 60% 43%, #b03 26%, rgba(187,0,51,0) 27%) 50px 50px,
-radial-gradient(circle closest-side at 40% 43%, #b03 26%, rgba(187,0,51,0) 27%) 50px 50px,
-radial-gradient(circle closest-side at 40% 22%, #d35 45%, rgba(221,51,85,0) 46%) 50px 50px,
-radial-gradient(circle closest-side at 60% 22%, #d35 45%, rgba(221,51,85,0) 46%) 50px 50px,
-radial-gradient(circle closest-side at 50% 35%, #d35 30%, rgba(221,51,85,0) 31%) 50px 50px;
-background-color:#b03;
-opacity: 0.4;
-background-size:100px 100px;
-*/
-
-/* ying yang
-background:
-radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 50px 0,
-radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 50px 0,
-radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 0 50px,
-radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 0 50px,
-radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%),
-radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%),
-radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%) 50px 50px,
-radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%) 50px 50px;
-background-color:#fff; 
-opacity: 0.4;
-background-size:100px 100px;
-*/
-
-/* bricks
-background-color: transparent;
-background-image: linear-gradient(335deg, #b00 23px, transparent 23px),
-linear-gradient(155deg, #d00 23px, transparent 23px),
-linear-gradient(335deg, #b00 23px, transparent 23px),
-linear-gradient(155deg, #d00 23px, transparent 23px);
-background-size: 58px 58px;
-opacity: 0.4;
-background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
-*/
-
-/* carbon pattern
-background:
-linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
-linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
-linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
-linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
-linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
-linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
-background-color: #131313;
-opacity: 0.4;
-background-size: 20px 20px;
-*/
-
-/* stairs
-`background:
-linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
-linear-gradient(63deg, transparent 74%, #999 78%),
-linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444;
-opacity: 0.4;
-background-size: 16px 48px;
-`
-*/
-
-/* bluepprint
-	background-color: #269;
-  background-image:
-    linear-gradient(rgba(255,255,255,.5) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(255,255,255,.5) 2px, transparent 2px),
-    linear-gradient(rgba(255,255,255,.28) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.28) 1px, transparent 1px);
-  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
-*/
-
-//https://projects.verou.me/css3patterns/
-
 const SimplyDialogs = (function(document) {
 
 	let defaults = {
 		backdrop: undefined,
+		classes: '',
+		enterSubmit: true,
 		headers: {
 			alert: 'Alert', 
 			error: 'Error',
@@ -133,45 +44,18 @@ const SimplyDialogs = (function(document) {
 				no: ''
 			}
 		},
+		bell: '',
 		input: {
-			callback: undefined,
 			classes: {
 				label: '',
 				input: ''
 			},
 			inputs: [
 				{ type: 'input', inputType: 'text', label: 'Input ', name: 'input', placeholder: 'Enter text ..' },
-			]
-/*
-			inputs : [
-				{ type: 'input', inputType: 'text', label: 'input', name: 'input', placeholder: 'Hey! I am a placeholder' },
-				{ type: 'textarea', label: 'textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 80 },
-				{ type: 'select', label: 'select', name: 'select', style:'color:red;', selectedIndex: 2,
-						options: [
-							{ label: 'option1', value: 'option1' },
-							{ label: 'option2', value: 'option2' }
-						]
-				},
-				{ type: 'radio', label: 'radio', name: 'radio',
-						options: [
-							{ label: 'option1', value: 'option1' },
-							{ label: 'option2', value: 'option2' },
-							{ label: 'option3', value: 'option3' }
-						]
-				},
-				{ type: 'input', inputType: 'checkbox', label: 'checkbox', name: 'checkbox' },
-				{ type: 'input', inputType: 'color', label: 'color', name: 'color', value: '#123456' },
-				{ type: 'input', inputType: 'password', label: 'password', name: 'password', style: "color:maroon;background-color:gold;font-size:xxx-large" },
-				{ type: 'input', inputType: 'date', label: 'date', name: 'date' },
-				{ type: 'input', inputType: 'file', label: 'file', name: 'file' },
-				{ type: 'input', inputType: 'range', label: 'range', name: 'range' }
 			],
-			callback: undefined,
-			classes: {
-				label: '',
-				input: ''
+			callback: function(state) {
+				return state.input.length > 1
 			}
-*/
 		}
 	}
 
@@ -202,12 +86,23 @@ const SimplyDialogs = (function(document) {
 		if (type !== 'wait') dialog.querySelector('.dialog-header').innerHTML = use.headers[type]
 		dialog.querySelector('.dialog-icon').innerHTML = use.icons[type]
 		;['ok', 'cancel', 'yes', 'no'].forEach((name) => popBtn(name))
+		if (use.classes && typeof use.classes === 'string') dialog.classList.add(...use.classes.split(' '))
 		if (use.backdrop) {
 			dialog.backdrop = document.createElement('style')
 			dialog.backdrop.id = 'sd' + Math.random()
 			dialog.backdrop.innerText = `dialog::backdrop { ${use.backdrop.replace(/\r?\n|\r/g, '')} }`
 			document.head.appendChild(dialog.backdrop)
 		}
+		dialog.addEventListener('keypress', (e) => { 
+			if (e.which === 13) {
+				if (use.enterSubmit) {
+					const c = new MouseEvent('click', { 'view': window, 'bubbles': true, 'cancelable': false })
+					if (dialog.querySelector('.dialog-ok')) dialog.querySelector('.dialog-ok').dispatchEvent(c)
+					if (dialog.querySelector('.dialog-yes')) dialog.querySelector('.dialog-yes').dispatchEvent(c)
+				}
+				e.preventDefault() 
+			}
+		})
 		return use
 	}
 
@@ -215,7 +110,7 @@ const SimplyDialogs = (function(document) {
 		dialog.classList.add('close')
 		setTimeout(function() {
 			dialog.close()
-			if (dialog.backdrop) gebi(dialog.backdrop.id).remove()
+			if (dialog.backdrop) if (gebi(dialog.backdrop.id)) gebi(dialog.backdrop.id).remove()
 			if (document.body.contains(cnt)) document.body.removeChild(cnt)
 		}, dialog.clientHeight - 70)
 	}
@@ -231,7 +126,7 @@ const SimplyDialogs = (function(document) {
 		</dialog>
 	`;
 
-//alert
+//generics
 	const alertGeneric = function(message, options, type) {
 		return new Promise(function(resolve) {
 			const cnt = getCnt(genericHTML)
@@ -243,78 +138,26 @@ const SimplyDialogs = (function(document) {
 				closeDialog(dialog, cnt)
 				resolve(val)
 			}
-			dialog.querySelector('.dialog-ok').onclick = () => { ret(true) }
+			dialog.querySelector('.dialog-ok').onclick = () => { dialog.close() }
 			dialog.addEventListener('close', () => { ret(true) })
 			dialog.addEventListener('cancel', () => { ret(false) })
 		})
 	}
 
+//alert
 	const alert = function(message, options) {
 		return alertGeneric(message, options, 'alert')
 	}
 
+//information
 	const information = function(message, options) {
 		return alertGeneric(message, options, 'information')
 	}
 
+//error
 	const error = function(message, options) {
 		return alertGeneric(message, options, 'error')
 	}
-
-/*
-	const alert = function(message, options) {
-		return new Promise(function(resolve) {
-			const cnt = getCnt(genericHTML)
-			const dialog = gebi('dialog-generic')
-			initDialog(dialog, 'alert', options)		
-			dialog.querySelector('.dialog-message').innerHTML = message
-			dialog.showModal()
-			const ret = function(val) {
-				closeDialog(dialog, cnt)
-				resolve(val)
-			}
-			dialog.querySelector('.dialog-ok').onclick = () => { ret(true) })
-			dialog.addEventListener('close', () => { ret(true) })
-			dialog.addEventListener('cancel', () => { ret(false) })
-		})
-	}
-
-//information
-	const information = function(message, options) {
-		return new Promise(function(resolve) {
-			const cnt = getCnt(genericHTML)
-			const dialog = gebi('dialog-generic')
-			initDialog(dialog, 'information', options)		
-			dialog.querySelector('.dialog-message').innerHTML = message
-			dialog.showModal()
-			dialog.querySelector('.dialog-ok').onclick = function() {
-				closeDialog(dialog, cnt)
-				resolve(true)
-			}
-			dialog.addEventListener('close', () => { resolve(true) })
-			dialog.addEventListener('cancel', () => { resolve(false) })
-		})
-	}
-
-//error
-	const error = function(message, options) {
-		return new Promise(function(resolve) {
-			const cnt = document.createElement("SPAN")
-			cnt.innerHTML = genericHTML
-			document.body.appendChild(cnt)
-			const dialog = gebi('dialog-generic')
-			initDialog(dialog, 'error', options)
-			dialog.querySelector('.dialog-message').innerHTML = message
-			dialog.showModal()
-			dialog.querySelector('.dialog-ok').onclick = function() {
-				closeDialog(dialog, cnt)
-				resolve(true)
-			}
-			dialog.addEventListener('close', () => { resolve(true) })
-			dialog.addEventListener('cancel', () => { resolve(false) })
-		})
-	}
-*/
 
 //confirm
 	const confirmHTML = `
@@ -366,7 +209,7 @@ const SimplyDialogs = (function(document) {
 		return new Promise(function(resolve) {
 			const cnt = getCnt(bellHTML)
 			const dialog = gebi('dialog-bell')
-			initDialog(dialog, 'bell', options)		
+			initDialog(dialog, 'bell', options)
 			dialog.querySelector('.dialog-message').innerHTML = message
 			dialog.showModal()
 			const ret = function(val) {
@@ -429,6 +272,8 @@ const SimplyDialogs = (function(document) {
 				if (i.type && i.type === 'radio') {	
 					const checked = dialog.querySelector('form').querySelector(`input[name="${i.name}"]:checked`)
 					fs[i.name] = checked ? checked.value : null
+				} else if (i.type && i.type === 'file') {
+					fs[i.name] = i.files.length ? i.files[0] : null
 				} else {
 					fs[i.name] = i.value
 				}
@@ -535,6 +380,7 @@ const SimplyDialogs = (function(document) {
 			options = initDialog(dialog, 'input', options)		
 			dialog.querySelector('.dialog-message').innerHTML = message
 			userCallback = options.input.callback
+			if (userCallback) dialog.querySelector('.dialog-ok').setAttribute('disabled', 'disabled')
 			labelClass = options.input.classes.label
 			inputClass = options.input.classes.input
 			options.input.inputs.forEach(i => {

@@ -69,8 +69,8 @@ dialog .dialog-actions {
 }
 
 dialog .dialog-message {
-	word-wrap: break-all;
-	white-space: normal;
+	overflow-wrap: anywhere;
+	white-space: break-spaces;
 	margin-bottom: 1em;
 	float: none;
 	margin-top: 1em !important;
@@ -99,7 +99,7 @@ dialog form.dialog-input div {
 
 dialog form.dialog-input div label:not(.inline) {
 	margin-left: 1rem;
-	margin-right: 0.5rem;
+	margin-right: 0.7rem;
 }
 
 dialog form.dialog-input div { 

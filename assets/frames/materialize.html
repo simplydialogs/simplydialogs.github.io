@@ -14,33 +14,34 @@
 <link rel="stylesheet" type="text/css" href="../rainbow/themes/css/github.css">
 </head>
 <body>
-<h1>Hello, world!</h1>
-<p>Dialog buttons have <code>btn btn-sm btn-*</code>-classes; default unicode icons are replaced with BS5 <code>bi-*</code> icons ...</p>
-
-<button class="btn btn-primary" id="basic-alert">Alert</button>
-<button class="btn btn-secondary" id="basic-info">Info</button>
-<button class="btn btn-success" id="basic-confirm">Confirm</button>
-<button class="btn btn-warning" id="basic-bell">Bell</button>
-<button class="btn btn-danger" id="basic-error">Error</button>
-<button class="btn btn-link" id="basic-wait">Wait</button>
-<button class="btn btn-dark" id="basic-input">Input</button>
+<p>Dialog buttons get the <code>btn</code>-class; default unicode icons are replaced with Materialize' icons (Google Material Icons) <code>medium material-icons</code>-name (cannot say if this according to the material-concept are the right icons / colors to use) :</p>
+<button class="btn" id="basic-alert">Alert</button>
+<button class="btn" id="basic-info">Info</button>
+<button class="btn" id="basic-confirm">Confirm</button>
+<button class="btn" id="basic-bell">Bell</button>
+<button class="btn" id="basic-error">Error</button>
+<button class="btn" id="basic-wait">Wait</button>
+<button class="btn" id="basic-input">Input</button>
 <p>
-<pre><code data-language="javascript">Dlg.DEFAULTS.buttons.classes.ok = 'btn btn-sm btn-primary'
-Dlg.DEFAULTS.buttons.classes.cancel = 'btn btn-sm btn-light'
-Dlg.DEFAULTS.buttons.classes.yes = 'btn btn-sm btn-success'
-Dlg.DEFAULTS.buttons.classes.no = 'btn btn-sm btn-danger'
-
-Dlg.DEFAULTS.icons.alert = '<i class="bi-exclamation-triangle-fill text-primary"></i>'
-Dlg.DEFAULTS.icons.information = '<i class="bi-info-circle-fill text-primary"></i>'
-Dlg.DEFAULTS.icons.confirm = '<i class="bi-question-circle-fill text-primary"></i>'
-Dlg.DEFAULTS.icons.bell = '<i class="bi-bell-fill text-primary"></i>'
-Dlg.DEFAULTS.icons.error = '<i class="bi-flag-fill text-danger"></i>'
-Dlg.DEFAULTS.icons.input = '<i class="bi-pencil-fill text-primary"></i>'
-Dlg.DEFAULTS.icons.wait = '<i class="material-icons">build</i>'
-
-Dlg.DEFAULTS.input.classes.input = 'form-control'
-Dlg.DEFAULTS.input.classes.label = 'col-form-label fw-bolder'
-
+<pre><code data-language="javascript">Dlg.DEFAULTS.buttons.classes = {
+  ok: 'btn',
+  cancel: 'btn',
+  yes: 'btn',
+  no: 'btn'
+}
+Dlg.DEFAULTS.icons = {
+  alert: '<i class="medium material-icons blue-text">report_problem</i>',
+  information: '<i class="medium material-icons blue-text">info</i>',
+  confirm: '<i class="bi-question-circle-fill text-primary"></i>',
+  bell: '<i class="medium material-icons yellow-text">notifications</i>',
+  error: '<i class="medium material-icons red-text">block</i>',
+  wait: '<i class="small material-icons blue-text">build</i>',
+  input: '', 
+}
+Dlg.DEFAULTS.input.classes.label = 'hide'
+for (const h in Dlg.DEFAULTS.headers) {
+  if (typeof Dlg.DEFAULTS.headers[h] === 'string') Dlg.DEFAULTS.headers[h] = Dlg.DEFAULTS.headers[h].toUpperCase()
+}
 </code></pre>
 </p>
 <script>
@@ -48,39 +49,41 @@ const Test = (function(window, document) {
 	const gebi = (id) => { return document.getElementById(id) }
 	const Dlg = SimplyDialogs
 
-	Dlg.DEFAULTS.buttons.classes.ok = 'btn btn-sm btn-primary'
-	Dlg.DEFAULTS.buttons.classes.cancel = 'btn btn-sm btn-light'
-	Dlg.DEFAULTS.buttons.classes.yes = 'btn btn-sm btn-success'
-	Dlg.DEFAULTS.buttons.classes.no = 'btn btn-sm btn-danger'
-
-	Dlg.DEFAULTS.icons.alert = '<i class="medium material-icons blue-text">new_releases</i>'
-	Dlg.DEFAULTS.icons.information = '<i class="medium material-icons blue-text">info</i>'
-	Dlg.DEFAULTS.icons.confirm = '<i class="bi-question-circle-fill text-primary"></i>'
-	Dlg.DEFAULTS.icons.bell = '<i class="medium material-icons yellow-text">notifications</i>'
-	Dlg.DEFAULTS.icons.error = '<i class="medium material-icons red-text">info</i>'
-	Dlg.DEFAULTS.icons.input = '' //'<i class="medium material-icons blue-text">edit</i>'
-  Dlg.DEFAULTS.icons.wait = '<i class="small material-icons blue-text">build</i>'
-
+	Dlg.DEFAULTS.buttons.classes = {
+		ok: 'btn',
+		cancel: 'btn',
+		yes: 'btn',
+		no: 'btn'
+	}
+	Dlg.DEFAULTS.icons = {
+		alert: '<i class="medium material-icons orange-text">report_problem</i>',
+		information: '<i class="medium material-icons blue-text">info</i>',
+		confirm: '<i class="medium material-icons blue-text">question_answer</i>',
+		bell: '<i class="medium material-icons yellow-text">notifications</i>',
+		error: '<i class="medium material-icons red-text">info</i>',
+		wait: '<i class="small material-icons blue-text">build</i>',
+		input: '',
+	}
 	Dlg.DEFAULTS.input.classes.label = 'hide'
-/*
-	Dlg.DEFAULTS.input.classes.label = 'col-form-label fw-bolder'
-*/
+	for (const h in Dlg.DEFAULTS.headers) {
+		if (typeof Dlg.DEFAULTS.headers[h] === 'string') Dlg.DEFAULTS.headers[h] = Dlg.DEFAULTS.headers[h].toUpperCase()
+	}
 
 	const basic = function() {
 		gebi('basic-alert').onclick = function() {
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('bs5 alert', answer) })
+			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('materialize alert', answer) })
 		}
 		gebi('basic-confirm').onclick = function() {
-			Dlg.confirm('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('bs5 confirm', answer) })
+			Dlg.confirm('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('materialize confirm', answer) })
 		}
 		gebi('basic-info').onclick = function() {
-			Dlg.information('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('bs5 info', answer) })
+			Dlg.information('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('materialize info', answer) })
 		}
 		gebi('basic-bell').onclick = function() {	
-			Dlg.bell('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => { console.log('bs5 bell', answer) })
+			Dlg.bell('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => { console.log('materialize bell', answer) })
 		}
 		gebi('basic-error').onclick = function() {
-			Dlg.error('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('bs5 error', answer) })
+			Dlg.error('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('materialize error', answer) })
 		}
 		gebi('basic-wait').onclick = function() {
 			const wait = Dlg.wait('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
@@ -89,8 +92,8 @@ const Test = (function(window, document) {
 			}, 1500)
 		}
 		gebi('basic-input').onclick = function() {
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(function(input) {
-				console.log('bs5 result', input)
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(function(input) {
+				console.log('materialize input', input)
 			})
 		}
 	}

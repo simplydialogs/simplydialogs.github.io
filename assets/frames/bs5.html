@@ -14,8 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../rainbow/themes/css/github.css">
 </head>
 <body>
-<h1>Hello, world!</h1>
-<p>Dialog buttons have <code>btn btn-sm btn-*</code>-classes; default unicode icons are replaced with BS5 <code>bi-*</code> icons ...</p>
+<p>Dialog buttons have <code>btn btn-*</code>-classes; default unicode icons are replaced with BS5 <code>bi-*</code> icons ...</p>
 <button class="btn btn-primary" id="basic-alert">Alert</button>
 <button class="btn btn-secondary" id="basic-info">Info</button>
 <button class="btn btn-success" id="basic-confirm">Confirm</button>
@@ -24,10 +23,10 @@
 <button class="btn btn-link" id="basic-wait">Wait</button>
 <button class="btn btn-dark" id="basic-input">Input</button>
 <p>
-<pre><code data-language="javascript">Dlg.DEFAULTS.buttons.classes.ok = 'btn btn-sm btn-primary'
-Dlg.DEFAULTS.buttons.classes.cancel = 'btn btn-sm btn-light'
-Dlg.DEFAULTS.buttons.classes.yes = 'btn btn-sm btn-success'
-Dlg.DEFAULTS.buttons.classes.no = 'btn btn-sm btn-danger'
+<pre><code data-language="javascript">Dlg.DEFAULTS.buttons.classes.ok = 'btn btn-primary'
+Dlg.DEFAULTS.buttons.classes.cancel = 'btn btn-light'
+Dlg.DEFAULTS.buttons.classes.yes = 'btn btn-success'
+Dlg.DEFAULTS.buttons.classes.no = 'btn btn-danger'
 
 Dlg.DEFAULTS.icons.alert = '<i class="bi-exclamation-triangle-fill text-primary"></i>'
 Dlg.DEFAULTS.icons.information = '<i class="bi-info-circle-fill text-primary"></i>'
@@ -35,7 +34,7 @@ Dlg.DEFAULTS.icons.confirm = '<i class="bi-question-circle-fill text-primary"></
 Dlg.DEFAULTS.icons.bell = '<i class="bi-bell-fill text-primary"></i>'
 Dlg.DEFAULTS.icons.error = '<i class="bi-flag-fill text-danger"></i>'
 Dlg.DEFAULTS.icons.input = '<i class="bi-pencil-fill text-primary"></i>'
-Dlg.DEFAULTS.icons.wait = '<i class="bi-wrench text-primary"></i>'
+Dlg.DEFAULTS.icons.wait = '<i class="bi-wrench text-secondary"></i>'
 
 Dlg.DEFAULTS.input.classes.input = 'form-control'
 Dlg.DEFAULTS.input.classes.label = 'col-form-label fw-bolder'
@@ -46,10 +45,10 @@ const Test = (function(window, document) {
 	const gebi = (id) => { return document.getElementById(id) }
 	const Dlg = SimplyDialogs
 
-	Dlg.DEFAULTS.buttons.classes.ok = 'btn btn-sm btn-primary'
-	Dlg.DEFAULTS.buttons.classes.cancel = 'btn btn-sm btn-light'
-	Dlg.DEFAULTS.buttons.classes.yes = 'btn btn-sm btn-success'
-	Dlg.DEFAULTS.buttons.classes.no = 'btn btn-sm btn-danger'
+	Dlg.DEFAULTS.buttons.classes.ok = 'btn btn-primary'
+	Dlg.DEFAULTS.buttons.classes.cancel = 'btn btn-light'
+	Dlg.DEFAULTS.buttons.classes.yes = 'btn btn-success'
+	Dlg.DEFAULTS.buttons.classes.no = 'btn btn-danger'
 
 	Dlg.DEFAULTS.icons.alert = '<i class="bi-exclamation-triangle-fill text-primary"></i>'
 	Dlg.DEFAULTS.icons.information = '<i class="bi-info-circle-fill text-primary"></i>'

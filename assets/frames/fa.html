@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<link href="https://unpkg.com/@primer/css@^19.0.0/dist/primer.css" rel="stylesheet" />
+<script src="../dialogs/dialogs.js"></script>
+<link rel="stylesheet" type="text/css" href="../dialogs/dialogs.css">
+<script src="../rainbow/dist/rainbow.min.js"></script>
+<script src="../rainbow/src/language/generic.js"></script>
+<script src="../rainbow/src/language/javascript.js"></script>
+<link rel="stylesheet" type="text/css" href="../rainbow/themes/css/github.css">
+<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+<p>Example: Use Font Awesome-icons instead of the default unicode symbols :</p>
+<button id="basic-alert" >Alert</button>
+<button id="basic-info">Info</button>
+<button id="basic-confirm">Confirm</button>
+<button id="basic-bell">Bell</button>
+<button id="basic-error">Error</button>
+<button id="basic-wait">Wait</button>
+<button id="basic-input">Input</button>
+<p><pre><code data-language="javascript">Dlg.DEFAULTS.icons = {
+  alert: '<i class="fa fa-warning" color="navy"></i>',
+  information: '<i class="fa fa-info-circle"></i>',
+  confirm: '<i class="fa fa-question-circle-o"></i>',
+  bell: '<i class="fa fa-bell-o"></i>',
+  error: '<i class="fa fa-times-circle-o"></i>',
+  wait: '<i class="fa fa-gear">build</i>',
+  input: '<i class="fa fa-pencil">info</i>'
+}
+</code></pre></p>
+<script>
+const Test = (function(window, document) {
+	const gebi = (id) => { return document.getElementById(id) }
+	const Dlg = SimplyDialogs
+
+	Dlg.DEFAULTS.icons = {
+	  alert: '<i class="fa fa-warning" style="color:navy;"></i>',
+	  information: '<i class="fa fa-info-circle" style="color:blue;"></i>',
+	  confirm: '<i class="fa fa-question-circle-o" style="color:forestgreen;"></i>',
+	  bell: '<i class="fa fa-bell" style="color:gold;"></i>',
+	  error: '<i class="fa fa-times-circle-o" style="color:red;"></i>',
+	  input: '<i class="fa fa-pencil" style="color:navy;"></i>',
+	  wait: '<i class="fa fa-gear" style="color:gray;"></i>'
+	}
+
+	const basic = function() {
+		gebi('basic-alert').onclick = function() {
+			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('font-awesome alert', answer) })
+		}
+		gebi('basic-confirm').onclick = function() {
+			Dlg.confirm('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('font-awesome confirm', answer) })
+		}
+		gebi('basic-info').onclick = function() {
+			Dlg.information('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('font-awesome info', answer) })
+		}
+		gebi('basic-bell').onclick = function() {	
+			Dlg.bell('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => { console.log('font-awesome bell', answer) })
+		}
+		gebi('basic-error').onclick = function() {
+			Dlg.error('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('font-awesome error', answer) })
+		}
+		gebi('basic-wait').onclick = function() {
+			const wait = Dlg.wait('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+			setTimeout(function() {
+				wait.close()
+			}, 1500)
+		}
+		gebi('basic-input').onclick = function() {
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(function(input) {
+				console.log('font-awesome input', input)
+			})
+		}
+	}
+
+	//
+	basic()		
+})(window, document)
+</script>
+
+</body>
+</html>

@@ -3,17 +3,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<title>SimplyDialogs - test and documentation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-<!--
-<link rel="stylesheet" type="text/css" href="assets/normalize.css">
-<link rel="stylesheet" type="text/css" href="assets/github-pandoc.css">
--->
-<link rel="stylesheet" type="text/css" href="assets/primer.css">
+<meta name="description" content="SimlyDialogs is a set of common dialogs, using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
+<link href="https://unpkg.com/@primer/css@^19.0.0/dist/primer.css" rel="stylesheet" />
 <script src="assets/rainbow/dist/rainbow.min.js"></script>
 <script src="assets/rainbow/src/language/generic.js"></script>
 <script src="assets/rainbow/src/language/javascript.js"></script>
 <script src="assets/dialogs/dialogs.js"></script>
 <script src="assets/gumshoe.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Mountains of Christmas' rel='stylesheet'>
 <link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
 <link rel="stylesheet" type="text/css" href="assets/rainbow/themes/css/github.css">
 <style>
@@ -22,23 +21,17 @@ main {
 	margin: auto auto;
 	margin-top: 10px;
 }
-span.icon {
-	XXXfont-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
-	font-size: medium;
-}
 iframe {
-	border: 1px dotted #dadada;
-	padding: 2px;
+	border: none;
 }
 aside {
-	position: fixed;
 	width: 180px;
 	top: 20px;
+	left: -300px;
 	padding: 10px;
 	border: 1px solid #dadada;	
 }
 aside menu {
-	margin: 0;
 	margin-block-start: 0;
 	margin-block-end: 0;
 	padding-inline-start: 0;
@@ -65,12 +58,46 @@ aside li a:hover {
 section {
 	margin-bottom: 1rem;
 }
+
+/* options complex example */
+dialog.x-mas {
+	border-radius: 0;
+	max-width: 650px;
+	border: 1mm ridge #34a65f !important;
+	background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+}
+dialog.x-mas h4 {
+	font-size: xxx-large;
+	font-family: 'Mountains of Christmas';
+	font-weight: 900;
+	color: #cc231e;
+  text-shadow: 1px 1px #34A65F;
+}
+dialog.x-mas .dialog-message {
+	font-size: x-large;
+	font-family: cursive;
+	color: #cc231e;
+  text-shadow: -1px -1px gold;
+}
+dialog.x-mas button {
+	background-color: #0f8a5f;
+	font-size: x-large;
+	font-weight: bold;
+	padding: 7px;
+	color: gold;
+	border-color: gold;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-shadow: 1px 1px #fff;
+}
 </style>
-<script>function rf(f) { f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight)+10) + 'px'; }</script>
 </head>
 <body>
-<aside>
+<aside style="display:none;">
 <menu>
+<a href="https://github.com/davidkonrad/simplydialogs" title="View on GitHub">
+	<img src="assets/GitHub-Mark-32px.png" alt="View on GitHub" width="32" height="32">
+</a>
 <ul class="root">
 	<li><a href="#introduction">Introduction</a></li>
 	<li><a href="#basic-samples">Basic samples</a></li>
@@ -79,20 +106,17 @@ section {
 			<li><a href="#defaults">DEFAULTS</a></li>
 			<li><a href="#defaults-lang">Language</a></li>
 			<li><a href="#defaults-icons">Icons</a></li>
-			<li><a href="#defaults-classes">Classes</a></li>
 			<li><a href="#defaults-backdrop">::backdrop</a></li>
-		</ul>
-	</li>
-	<li><a href="#integration">Integration</a>
-		<ul>
+			<li><a href="#defaults-classes">classes</a></li>
+			<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
 			<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
 			<li><a href="#integration-materialize">Materialize CSS</a></li>
-			<li><a href="#integration-fontawesome">FontAwesome</a></li>
+			<li><a href="#complex-example">Complex example</a></li>
 		</ul>
 	</li>
 	<li><a href="#advanced-inputs">Advanced inputs</a>
 		<ul>
-			<li><a href="#ai-input-options">Input options</a></li>
+			<li><a href="#ai-input-inputs">Input options</a></li>
 			<li><a href="#ai-input-callback">Callback</a></li>
 			<li><a href="#ai-handling-result">Handling result</a></li>
 		</ul>
@@ -104,13 +128,24 @@ section {
 <main>
 	<section id="introduction">
 	<h1>SimplyDialogs</h1>
-	<p>This is demonstration / test page for <a href="github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a>. Simplydialogs offers 
+	<p>This is demonstration / test page for <a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a>. Simplydialogs offers 
 a range of common dialogs, all highly customizeable - comes with no dependencies and a really small footprint.
-	</p><br>
-	</section>
+<ul style=margin-left:40px;">
+	<li>No dependencies; using native &lt;dialog> element and unicode</li>
+	<li>Truly blocking interaction with background	</li>
+	<li> Stays in center of viewport, adjusted to message size, stays in focus while scrolling</li>
+	<li>Returns promises</li>
+	<li>Support keyboard / mouse the right way</li>
+	<li>Customizeable</li>
+	<li>Neat exploding / imploding effect without exaggerating</li>
+	<li>No forced styling (beyond very basics), adopts the current "theme"</li>
+	<li>Small footprint, JS + CSS less than 10k minified; Without beep sound ~5k.</li>
+</ul>
+</p>
+</section>
+
 <section id="basic-samples">
-	<p>
-Samples:  
+<p>Samples:  
 <button id="basic-alert">Alert</button>
 <button id="basic-info">Info</button>
 <button id="basic-confirm">Confirm</button>
@@ -118,8 +153,7 @@ Samples:
 <button id="basic-error">Error</button>
 <button id="basic-wait">Wait</button>
 <button id="basic-input">Input</button>
-</p><br>	
-
+</p>
 <pre><code data-language="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	
   console.log('alert', answer) 
 })
@@ -136,6 +170,15 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
   console.log('input', input)
 })
 </code></pre>
+<p>Long text samples:  
+<button id="basic-alert-long-text">Alert</button>
+<button id="basic-info-long-text">Info</button>
+<button id="basic-confirm-long-text">Confirm</button>
+<button id="basic-bell-long-text">Bell</button>
+<button id="basic-error-long-text">Error</button>
+<button id="basic-wait-long-text">Wait</button>
+<button id="basic-input-long-text">Input</button>
+</p>
 </section>
 
 <section id="defaults">
@@ -147,6 +190,7 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
 <p>Simplydialogs uses internally a <code>defaults</code> literal, which is accessible through the <code>.DEFAULTS</code> property :</p>
 <pre><code data-language="javascript">let defaults = {
   backdrop: undefined,
+  enterSubmit: true,
   headers: {
     alert: 'Alert', 
     error: 'Error',
@@ -179,14 +223,16 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
     }
   },
   input: {
-    callback: undefined,
     classes: {
       label: '',
       input: ''
     },
     inputs: [
       { type: 'input', inputType: 'text', label: 'Input ', name: 'input', placeholder: 'Enter text ..' },
-    ]
+    ],
+    callback: function(state) {
+      return state.input.length > 1
+    }
   }
 }
 </code></pre>
@@ -206,28 +252,27 @@ Dlg.DEFAULTS.buttons.captions = {
   cancel: 'Cancelar'
 }
 Dlg.DEFAULTS.headers = {
-  alert: 'Alert', 
+  alert: 'Alerta', 
   error: 'Error',
-  confirm: 'Confirm',
-  information: 'Information',
-  bell: 'Notice',
-  input: ''
+  confirm: 'Confirmar',
+  information: 'Información',
+  bell: 'Nota',
+  input: 'Input'
 }
 </code></pre>
 </section>
 
 <section id="defaults-icons">
-DEFAULTS
-</section>
-
-<section id="defaults-classes">
-DEFAULTS
+<h3>Icons</h3>
+<p>Icons can be replaced the same way; either individually or as a whole :</p>
+<pre><code data-language="javascript">Dlg.DEFAULTS.icons.alert = '🚀' //unicode rocket</code></pre>
+<iframe src="assets/frames/fa.html" border="0" width="100%;" height="200" scrolling="no" onload="Test.rf(this)"></iframe>
 </section>
 
 <section id="defaults-backdrop">
 <h3>::backdrop</h3>
 <p>The native <code>::backdrop</code> more or less look like this across the browsers:</p>
-<pre><code data-language="css3">dialog::backdrop {
+<pre><code data-language="css">dialog::backdrop {
   position: fixed;
   top: 0px;
   right: 0px;
@@ -238,12 +283,12 @@ DEFAULTS
 </code></pre>
 <p>You can change <code>DEFAULTS.backdrop</code> in order to change the background of the dialogs. You can specify the <code>background</code> style itself by passing a valid CSS class-definition. Here are some examples:</p>
 <p><button id="backdrop-none">No backdrop (reset)</button>
-<pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0);'</pre></code>
+<pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0);'</code></pre>
 </p>
 <p><button id="backdrop-darker">Darker backdrop</button>
-<pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0.5);'</pre></code>
+<pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0.5);'</code></pre>
 </p>
-<p><button id="backdrop-carbon">A "carbon" backdrop</button> <button id="backdrop-stairs">A "stair-style" backdrop</button> <button id="backdrop-yingyang">A "yin-yan" backdrop</button>
+<p><button id="backdrop-carbon">A "carbon" backdrop</button> <button id="backdrop-stairs">A "stair-style" backdrop</button> <button id="backdrop-yingyang">A "yin-yan" backdrop</button> <button id="backdrop-heart">Because I love You</button>
 <pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = `background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
   linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
   linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
@@ -272,32 +317,157 @@ DEFAULTS
   opacity: 0.4;
   background-size: 16px 48px;
 </pre></code>
-Get more inspiration at <a href="https://projects.verou.me/css3patterns/">https://projects.verou.me/css3patterns/</a>.	
+Thanks to and get more inspiration at <a href="https://projects.verou.me/css3patterns/">https://projects.verou.me/css3patterns/</a>, where
+the above ideas are taken from 
 </p>
-
 </section>
 
-<section id="integration">
-<h2>Integration</h2>
-<p>lorem ipsum</h2>
+<section id="defaults-classes">
+<h3>.classes</h3>
+<p>You can specify default classes for the <code>&lt;dialog</code> element itself. Either static through <code>.DEFAULTS</code> or on the fly via <code>options</code> :</p>
+<pre><code data-language="javascript">Dlg.DEFAULTS.classes = 'my dialog classes'</pre></code>
+</section>
+
+<section id="defaults-buttons-classes">
+<h3>buttons.classes</h3>
+<p>You can specify default classes for each button, your own layout or adopting the style of a framework. 
+<pre><code data-language="javascript">Dlg.DEFAULTS.buttons.classes = {
+  ok: '',
+  cancel: '',
+  yes: '',
+  no: ''
+}
+</pre></code>
 </section>
 
 <section id="integration-bootstrap5">
-	<h3>Bootstrap 5</h3>
-	<iframe src="assets/frames/bs5.html" border="0" width="100%;" height="400" onload="rf(this)"></iframe>
+	<h3>Example, Bootstrap 5</h3>
+	<iframe src="assets/frames/bs5.html" border="0" width="100%;" height="220" scrolling="no" onload="Test.rf(this)"></iframe>
 </section>
 
 <section id="integration-materialize">
-	<h3>Materialize CSS</h3>
-	<iframe src="assets/frames/materialize.html" border="0" width="100%;" height="400" onload="rf(this)"></iframe>
+	<h3>Example, Materialize CSS</h3>
+	<iframe src="assets/frames/materialize.html" border="0" width="100%;" height="220" scrolling="no" onload="Test.rf(this)"></iframe>
 </section>
 
-<section id="integration-fontawesome">
-	<h3>Fontawesome</h3>
-	<iframe src="assets/frames/fa.html" border="0" width="100%;" height="400" onload="rf(this)"></iframe>
+<section id="complex-example">
+<h3>Complex example</h3>
+<p>Here is an example passing <code>options</code> to a simple alert, demonstrating how to manipulate most of all the settings. The demonstration
+is a kind of "Merry Christmas"-alert. First some X-mas-like CSS :</p>
+<pre><code data-language="css">dialog.x-mas {
+  border-radius: 0;
+  border: 1mm ridge #34a65f !important;
+  background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+}
+dialog.x-mas h4 {
+  font-size: xxx-large;
+  font-family: 'Mountains of Christmas';
+  font-weight: 900;
+  color: #cc231e;
+  text-shadow: 1px 1px #34A65F;
+}
+dialog.x-mas .dialog-message {
+  font-size: medium;
+  font-family: cursive;
+  color: #cc231e;
+  text-shadow: -1px -1px gold;
+}
+dialog.x-mas button {
+  background-color: #0f8a5f;
+  font-size: x-large;
+  font-weight: bold;
+  padding: 7px;
+  color: gold;
+  border-color: gold;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+</pre></code>
+<p>Then activate the dialog in code like this :</p>
+<pre><code data-language="javascript">const options = {
+  classes: 'x-mas',
+  headers: { alert: 'Merry Christmas ...' },
+  icons: { alert : '🎄' },
+  buttons: { captions: { ok: '✨ Ok ✨' }}
+}
+const msg = '🎀 🎁 Frohe Weihnachten, メリークリスマス, Joyeux Noël, Feliz Navidad, 聖誕快樂, Buon Natale, Glædelig Jul ...!'
+Dlg.alert(msg, options)
+</pre></code><p><button role="button" id="options-complex-example">Check it out</button></p>
+</section>
+<br>
+
+<!-- inputs -->
+<section id="advanced-inputs">
+<h2>Advanced inputs</h2>
+<p>You can alter the input form either by changing <code>DEFAULTS</code> or by passing an options literal to <code>input()</code> : </p>
+<pre><code data-language="javascript">const options = {
+  input: { 
+    callback: undefined,
+    inputs: [ ... ],
+    classes: {
+      label: '',
+      input: ''
+    }
+  }
+}
+</pre></code>
+</section>
+<section id="ai-inputs-inputs">
+<p><code>inputs</code> is an array of objects defining each input for the form :</p>
+<pre><code data-language="javascript">const options = {
+  input: {
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'input', name: 'input', placeholder: 'Hey, I am a placeholder' },
+      { type: 'textarea', label: 'textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 80 }
+    ]
+  }
+}
+Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+</pre></code><p><button role="button" id="ai-btn-input-textarea">Check it out</button></p>
+<p>For <code>&lt;input></code>'s you specify the type throgh <code>inputType</code>. 
+If the browser support the input type it can be shown. Pass special properties by their name, i.e <code>value</code>, <code>min</code>, <code>placeholder</code> :
+
+<pre><code data-language="javascript">const options = {
+  input: {
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'Text', name: 'input', placeholder: 'placeholder' },
+      { type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
+      { type: 'input', inputType: 'color', label: 'Color', name: 'color', value: '#123456' },
+      { type: 'input', inputType: 'password', label: 'Password', name: 'password', style: "color:maroon;background-color:gold;font-size:xxx-large" },
+      { type: 'input', inputType: 'date', label: 'Date', name: 'date' },
+      { type: 'input', inputType: 'file', label: 'File', name: 'file' },
+      { type: 'input', inputType: 'range', label: 'Range', name: 'range', value:25, max: 100 }
+    ]
+  }
+}
+Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(function(input) {
+  console.log('result', input)
+})
+</pre></code>
+<p><button id="ai-btn-input-all">Check it out</button>. 
+</section>
+
+{ type: 'select', label: 'select', name: 'select', style:'color:red;', selectedIndex: 2,
+
+
+
+
+
+
+
+
+default Forms with multiple inputs Complex input form
+
+
+
+<h3>Advannced inpts</h3>
 </section>
 
 </main>
+
+<footer>
+</footer>
+
 <script src="assets/script.js"></script>
 </body>
 </html>
