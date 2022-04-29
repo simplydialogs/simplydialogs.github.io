@@ -54,7 +54,7 @@ const SimplyDialogs = (function(document) {
 				{ type: 'input', inputType: 'text', label: 'Input ', name: 'input', placeholder: 'Enter text ..' },
 			],
 			callback: function(state) {
-				return state.input.length > 1
+				return state.input && state.input.length > 1
 			}
 		}
 	}
@@ -282,7 +282,7 @@ const SimplyDialogs = (function(document) {
 		}
 
 		const cb = function() {
-			if (userCallback(getFormState())) {
+			if (userCallback(getFormState(), dialog)) {
 				dialog.querySelector('.dialog-ok').removeAttribute('disabled')
 			} else {
 				dialog.querySelector('.dialog-ok').setAttribute('disabled', 'disabled')
@@ -415,4 +415,5 @@ const SimplyDialogs = (function(document) {
 	}
 	
 })(document);
+	
 

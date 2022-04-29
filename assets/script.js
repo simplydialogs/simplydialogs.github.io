@@ -1,3 +1,4 @@
+
 const Test = (function(window, document, SimplyDialogs) {
 	const gebi = (id) => { return document.getElementById(id) }
 	const Dlg = SimplyDialogs
@@ -15,11 +16,12 @@ const Test = (function(window, document, SimplyDialogs) {
 		window.addEventListener('resize', () => aresize())
 		window.addEventListener('load', () => {
 			aresize()
-			new Gumshoe('menu a', {
+			new Gumshoe('ul.root a', {
 				offset: 110,				
 				reflow: true,
-				nested: true,
-				nestedClass: 'active-parent'
+				nested: false,
+				XXnestedClass: 'active-parent',
+				nestedClass: ''
 			})
 		})
 		a.style.display = 'block'
@@ -175,10 +177,10 @@ const Test = (function(window, document, SimplyDialogs) {
 			const options = {
 			  input: {
 			    inputs: [
-			      { type: 'input', inputType: 'text', label: 'Text', name: 'input', placeholder: 'placeholder' },
+			      { type: 'input', inputType: 'text', label: 'Text', name: 'input', spellcheck: false },
 						{ type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
 						{ type: 'input', inputType: 'color', label: 'Color', name: 'color', value: '#123456' },
-						{ type: 'input', inputType: 'password', label: 'Password', name: 'password', style: "color:maroon;background-color:gold;font-size:xxx-large" },
+						{ type: 'input', inputType: 'password', label: 'Password', name: 'password', style: 'color:maroon;' },
 						{ type: 'input', inputType: 'date', label: 'Date', name: 'date' },
 						{ type: 'input', inputType: 'file', label: 'File', name: 'file' },
 						{ type: 'input', inputType: 'range', label: 'Range', name: 'range', value:25, max: 100 }
@@ -190,6 +192,58 @@ const Test = (function(window, document, SimplyDialogs) {
 			})
 		}
 
+		gebi('ai-btn-radio-select').onclick = function() {
+			const options = { 
+				input: { 
+			    inputs: [
+			      { type: 'radio', label: 'radio', name: 'radio',
+			          options: [
+			            { label: 'option1', value: 'option1' },
+			            { label: 'option2', value: 'option2' },
+			            { label: 'option3', value: 'option3' }
+			          ]
+			      },
+			      { type: 'select', label: 'select', name: 'select', selectedIndex: 2,
+			          options: [
+			            { label: 'option1', value: 'option1' },
+			            { label: 'option2', value: 'option2' }
+			          ]
+				    }
+			    ],
+          callback: function(state) {
+            return state.radio !== '' && state.select !== ''
+          }
+        }
+      }
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(function(input) {
+				console.log('radio select', input)
+			})
+		}
+
+		gebi('ai-btn-input-file').onclick = function() {
+			const options = {
+				headers: { input: 'Upload Image' },
+				icons: { input: '🖼' },
+			  input: {
+			    inputs: [
+						{ type: 'input', inputType: 'image', label: 'Preview', name: 'preview', alt: 'No image yet', disabled: 'disabled',
+							//src: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 
+							src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>',
+							style: 'min-height:200px; max-height:300px; border: 1px solid #dadada; XXbackground: #fdfdfd; object-fit: contain;' },
+						{ type: 'input', inputType: 'file', label: 'Image', name: 'file', accept: 'image/png, image/gif, image/jpeg' }
+			    ],
+					callback: function(state, dialog) {
+						if (state.file) {
+							dialog.querySelector('input[type="image"]').src = URL.createObjectURL(state.file)
+							return true
+						}
+					}
+				}
+			}
+			Dlg.input('Select image file <br><sup>(PNG, GIF, PNG supported)</sup>', options).then(function(input) {
+				console.log('result', input)
+			})
+		}
 	}
 
 	//
@@ -203,69 +257,5 @@ const Test = (function(window, document, SimplyDialogs) {
 	return {
 		rf
 	}		
-})(window, document, SimplyDialogs)
-
-
-
-
-/*
-			inputs : [
-				{ type: 'input', inputType: 'text', label: 'input', name: 'input', placeholder: 'Hey! I am a placeholder' },
-				{ type: 'textarea', label: 'textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 80 },
-				{ type: 'select', label: 'select', name: 'select', style:'color:red;', selectedIndex: 2,
-						options: [
-							{ label: 'option1', value: 'option1' },
-							{ label: 'option2', value: 'option2' }
-						]
-				},
-				{ type: 'radio', label: 'radio', name: 'radio',
-						options: [
-							{ label: 'option1', value: 'option1' },
-							{ label: 'option2', value: 'option2' },
-							{ label: 'option3', value: 'option3' }
-						]
-				},
-				{ type: 'input', inputType: 'checkbox', label: 'checkbox', name: 'checkbox' },
-				{ type: 'input', inputType: 'color', label: 'color', name: 'color', value: '#123456' },
-				{ type: 'input', inputType: 'password', label: 'password', name: 'password', style: "color:maroon;background-color:gold;font-size:xxx-large" },
-				{ type: 'input', inputType: 'date', label: 'date', name: 'date' },
-				{ type: 'input', inputType: 'file', label: 'file', name: 'file' },
-				{ type: 'input', inputType: 'range', label: 'range', name: 'range' }
-			],
-			callback: undefined,
-			classes: {
-				label: '',
-				input: ''
-			}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+})(window, document, SimplyDialogs);
 
