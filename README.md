@@ -1,1 +1,0 @@
-# simplydialogs.github.io

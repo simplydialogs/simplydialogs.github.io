@@ -282,7 +282,7 @@ const SimplyDialogs = (function(document) {
 		}
 
 		const cb = function() {
-			if (userCallback(getFormState(), dialog)) {
+			if (userCallback(getFormState(), dialog) === true) {
 				dialog.querySelector('.dialog-ok').removeAttribute('disabled')
 			} else {
 				dialog.querySelector('.dialog-ok').setAttribute('disabled', 'disabled')

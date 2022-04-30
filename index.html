@@ -1,23 +1,25 @@
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="wait">
 <head>
 <meta charset="utf-8">
 <title>SimplyDialogs - test and documentation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 <meta name="description" content="SimlyDialogs is a set of common dialogs, using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
-<link href="https://unpkg.com/@primer/css@^19.0.0/dist/primer.css" rel="stylesheet" />
+<link href="https://unpkg.com/@primer/css@^19.0.0/dist/primer.css" rel="stylesheet">
 <script src="assets/rainbow/dist/rainbow.min.js"></script>
 <script src="assets/rainbow/src/language/generic.js"></script>
 <script src="assets/rainbow/src/language/javascript.js"></script>
 <script src="assets/dialogs/dialogs.js"></script>
 <script src="assets/gumshoe.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Mountains+of+Christmas" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="assets/style.css">
 <link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
 <link rel="stylesheet" type="text/css" href="assets/rainbow/themes/css/github.css">
 <style>
+html.wait, html.wait * { 
+	cursor: wait !important; 
+}
 main {
-	width: 900px;
 	margin: auto auto;
 	margin-top: 10px;
 }
@@ -30,13 +32,20 @@ aside {
 	top: 20px;
 	left: -300px;
 	padding: 10px;
-	border: 1px solid #dadada;	
+	border: 1px solid #dadada;
+	z-index: 25;
+	opacity: 0.8;
+}
+ul {
+	margin-left: 1rem;
 }
 aside ul {
 	list-style-type: none;
+	margin-block-start: 0px;
+	padding-inline-start: 0px;
 }
-aside ul:not(.root) {
-	padding-left: 14px;
+aside ul.root {
+	margin-left: 0;
 }
 aside li {
 	color: #222;
@@ -123,10 +132,10 @@ dialog.x-mas button {
 </aside>
 <main>
 <section id="introduction">
-	<h1>SimplyDialogs</h1>
-	<p>This is demonstration / test page for <a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a>. Simplydialogs offers 
-a range of common dialogs, all highly customizeable - comes with no dependencies and a really small footprint.
-<ul style="margin-left:40px;">
+<h1>SimplyDialogs</h1>
+<p>This is demonstration / test page for <a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a>. Simplydialogs offers 
+a range of common dialogs, all highly customizeable - comes with no dependencies and a really small footprint.</p>
+<ul>
 	<li>No dependencies; using native &lt;dialog> element and unicode</li>
 	<li>Truly blocking interaction with background	</li>
 	<li> Stays in center of viewport, adjusted to message size, stays in focus while scrolling</li>
@@ -137,7 +146,6 @@ a range of common dialogs, all highly customizeable - comes with no dependencies
 	<li>No forced styling (beyond very basics), adopts the current "theme"</li>
 	<li>Small footprint, JS + CSS less than 10k minified; Without beep sound ~5k.</li>
 </ul>
-</p>
 </section>
 
 <section id="basic-samples">
@@ -263,7 +271,7 @@ Dlg.DEFAULTS.headers = {
 <h3>Icons</h3>
 <p>Icons can be replaced the same way; either individually or as a whole :</p>
 <pre><code data-language="javascript">Dlg.DEFAULTS.icons.alert = '🚀' //unicode rocket</code></pre>
-<iframe src="assets/frames/fa.html" height="200" scrolling="no" onload="Test.rf(this)" title="Font Awesome example"></iframe>
+<iframe src="assets/frames/fa.html" scrolling="no" onload="Test.rf(this)" title="Font Awesome example"></iframe>
 </section>
 
 <section id="defaults-backdrop">
@@ -281,11 +289,11 @@ Dlg.DEFAULTS.headers = {
 <p>You can change <code>DEFAULTS.backdrop</code> in order to change the background of the dialogs. You can specify the <code>background</code> style itself by passing a valid CSS class-definition. Here are some examples:</p>
 <p><button id="backdrop-none">No backdrop (reset)</button>
 <pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0);'</code></pre>
-</p>
 <p><button id="backdrop-darker">Darker backdrop</button>
 <pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0.5);'</code></pre>
-</p>
-<p><button id="backdrop-carbon">A "carbon" backdrop</button> <button id="backdrop-stairs">A "stair-style" backdrop</button> <button id="backdrop-yingyang">A "yin-yan" backdrop</button> <button id="backdrop-heart">Because I love You</button></p>
+<p><button id="backdrop-carbon">A "carbon" backdrop</button> 
+<button id="backdrop-stairs">A "stair-style" backdrop</button> 
+<button id="backdrop-heart">Because I love You</button></p>
 <pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = `background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
   linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
   linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
@@ -295,18 +303,6 @@ Dlg.DEFAULTS.headers = {
   background-color: #131313;
   opacity: 0.4;
   background-size: 20px 20px;`
-
-&lt;instance>.DEFAULTS.backdrop = `background: radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 50px 0,
-  radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 50px 0,
-  radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 0 50px,
-  radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 0 50px,
-  radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%),
-  radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%),
-  radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%) 50px 50px,
-  radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%) 50px 50px;
-  background-color:#fff; 
-  opacity: 0.4;
-  background-size:100px 100px;`
 
 &lt;instance>.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
   linear-gradient(63deg, transparent 74%, #999 78%),
@@ -339,12 +335,12 @@ the above ideas are taken from
 
 <section id="integration-bootstrap5">
 	<h3>Example, Bootstrap 5</h3>
-	<iframe src="assets/frames/bs5.html" height="220" scrolling="no" onload="Test.rf(this)" title="Boostrap 5 example"></iframe>
+	<iframe src="assets/frames/bs5.html" scrolling="no" onload="Test.rf(this)" title="Boostrap 5 example"></iframe>
 </section>
 
 <section id="integration-materialize">
 	<h3>Example, Materialize CSS</h3>
-	<iframe src="assets/frames/materialize.html" height="220" scrolling="no" onload="Test.rf(this)" title="Materialize CSS Example"></iframe>
+	<iframe src="assets/frames/materialize.html" scrolling="no" onload="Test.rf(this)" title="Materialize CSS Example"></iframe>
 </section>
 
 <section id="complex-example">
@@ -441,7 +437,7 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
   console.log('result', input)
 })
 </code></pre>
-<p><button id="ai-btn-input-all">Check it out</button>. 
+<p><button id="ai-btn-input-all">Check it out</button>. </p>
 </section>
 
 <section id="ai-input-radio-select">
@@ -466,35 +462,63 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
       }
     ],
     callback: function(state) {
-      return state.radio !== '' && state.select !== ''
+      return state.radio !== null && state.select !== null
     }
   }
 }	
 </code></pre>
-<p><button id="ai-btn-radio-select">Check it out</button>. 
+<p><button id="ai-btn-radio-select">Check it out</button>. </p>
 </section>
 
 <section id="ai-input-callback">
 <h3>Callback</h3>
-<p></p>
-<pre><code data-language="javascript">
+<p>Use a callback if you want to validate the form before submit. The callback is triggered anytime one of the inputs change state. 
+If the callback return <code>true</code>, the OK-button is enabled. The callback passes two params : </p>
+<pre><code data-language="javascript">callback: function(state, dialog) {
+  ...
+}
 </code></pre>
-<p><button id="ai-btn-callback">Check it out</button>. 
+<p><code>state</code> is an object literal containing <code>{ name: value }</code> for all inputs.</p>
+<p><code>dialog</code> is the dialog's actual <code>HTMLDialogElement</code>, which can be used to manipulate input fields on the form.</p>
+<p>Note: If callback is defined the submit-button will be disabled by default. Otherwise it will be enabled also on empty inputs / form</p>
 </section>
 
 <section id="ai-input-file">
 <h3>File input with preview</h3>
-<p></p>
-<pre><code data-language="javascript">
+<p>You kan combine a <code>image</code> type input with a <code>file</code> type input, and by that create an
+image-upload-dialog with preview. It takes a little more options-tweaks than the prior examples: </p>
+<pre><code data-language="javascript">const options = {
+  headers: { input: 'Upload Image' },
+  icons: { input: '🖼' },
+  input: {
+    inputs: [
+      { type: 'input', inputType: 'image', label: 'Preview', name: 'preview', alt: 'No image yet', disabled: 'disabled',
+        src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>',
+        style: 'min-height:200px; max-height:300px; border: 1px solid #dadada; object-fit: contain;' 
+      }, { 
+        type: 'input', inputType: 'file', label: 'Image', name: 'file', accept: 'image/png, image/gif, image/jpeg' 
+      }
+    ],
+    callback: function(state, dialog) {
+      if (state.file) {
+        dialog.querySelector('input[type="image"]').src = URL.createObjectURL(state.file)
+        return true
+      }
+    }
+  }
+}
+Dlg.input('Select image file <br><sup>(PNG, GIF, PNG supported)</sup>', options).then(function(input) {
+  console.log('image upload', input)
+})
 </code></pre>
-<p><button id="ai-btn-input-file">xxx Check it out</button>. 
+<p><button id="ai-btn-input-file">Check it out</button>. </p>
 </section>
 
 </main>
 
 <footer>
 </footer>
-
 <script src="assets/script.js"></script>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Mountains+of+Christmas">
 </body>
 </html>

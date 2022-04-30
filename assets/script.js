@@ -6,23 +6,34 @@ const Test = (function(window, document, SimplyDialogs) {
 	const rf = function(f) { 
 		setTimeout(() => {
 			f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight) + 10) + 'px'
-		}, 100)
+		}, 200)
 	}
 
 	const aside = function() {
 		const a = document.querySelector('aside')
 		const m = document.querySelector('main')
-		const aresize = function() { a.style.left = (m.offsetLeft - 200) + 'px' }
+		const aresize = function() { 
+			console.log(m.offsetLeft - 210)
+			if ((m.offsetLeft - 210) > 20) {
+				a.style.left = (m.offsetLeft - 210) + 'px' 
+			} else {
+				a.style.left = 'unset'
+				a.style.right = '140px'
+				a.style.top = '-5px'
+				a.style.direction = 'rtl'
+			}
+		}
 		window.addEventListener('resize', () => aresize())
 		window.addEventListener('load', () => {
 			aresize()
 			new Gumshoe('ul.root a', {
-				offset: 110,				
+				offset: 30,
 				reflow: true,
 				nested: false,
 				XXnestedClass: 'active-parent',
 				nestedClass: ''
 			})
+			document.querySelector('html').classList.remove('wait')
 		})
 		a.style.display = 'block'
 		a.style.position = 'fixed'
@@ -98,6 +109,8 @@ const Test = (function(window, document, SimplyDialogs) {
 			}
 			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
 		}
+
+/*
 		gebi('backdrop-yingyang').onclick = function() {
 			const o = {
 				backdrop: `background: radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 50px 0,
@@ -114,6 +127,8 @@ const Test = (function(window, document, SimplyDialogs) {
 			}
 			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
 		}
+*/
+
 		gebi('backdrop-stairs').onclick = function() {
 			const o = {
 				backdrop: `background:
@@ -227,9 +242,8 @@ const Test = (function(window, document, SimplyDialogs) {
 			  input: {
 			    inputs: [
 						{ type: 'input', inputType: 'image', label: 'Preview', name: 'preview', alt: 'No image yet', disabled: 'disabled',
-							//src: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 
 							src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>',
-							style: 'min-height:200px; max-height:300px; border: 1px solid #dadada; XXbackground: #fdfdfd; object-fit: contain;' },
+							style: 'min-height:200px; max-height:300px; border: 1px solid #dadada; object-fit: contain;' },
 						{ type: 'input', inputType: 'file', label: 'Image', name: 'file', accept: 'image/png, image/gif, image/jpeg' }
 			    ],
 					callback: function(state, dialog) {
