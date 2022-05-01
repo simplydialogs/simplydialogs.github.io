@@ -8,7 +8,7 @@
 "use strict";
 
 const SimplyDialogs = (function(document) {
-
+	
 	let defaults = {
 		backdrop: undefined,
 		classes: '',
@@ -59,9 +59,7 @@ const SimplyDialogs = (function(document) {
 		}
 	}
 
-	const gebi = function(id) {
-		return document.getElementById(id)
-	}
+	const gebi = (id) => { return document.getElementById(id) }
 
 	const getCnt = function(html) {
 		const cnt = document.createElement("SPAN")
@@ -93,15 +91,13 @@ const SimplyDialogs = (function(document) {
 			dialog.backdrop.innerText = `dialog::backdrop { ${use.backdrop.replace(/\r?\n|\r/g, '')} }`
 			document.head.appendChild(dialog.backdrop)
 		}
-		dialog.addEventListener('keypress', (e) => { 
+		if (use.enterSubmit) dialog.addEventListener('keypress', (e) => { 
 			if (e.which === 13) {
-				if (use.enterSubmit) {
-					const c = new MouseEvent('click', { 'view': window, 'bubbles': true, 'cancelable': false })
-					if (dialog.querySelector('.dialog-ok')) dialog.querySelector('.dialog-ok').dispatchEvent(c)
-					if (dialog.querySelector('.dialog-yes')) dialog.querySelector('.dialog-yes').dispatchEvent(c)
-				}
-				e.preventDefault() 
+				const c = new MouseEvent('click', { 'view': window, 'bubbles': true, 'cancelable': false })
+				if (dialog.querySelector('.dialog-ok')) dialog.querySelector('.dialog-ok').dispatchEvent(c)
+				if (dialog.querySelector('.dialog-yes')) dialog.querySelector('.dialog-yes').dispatchEvent(c)
 			}
+			e.preventDefault() 
 		})
 		return use
 	}
