@@ -1,4 +1,13 @@
-
+<!--
+      _                 _           _ _       _                        _ _   _           _      _       
+     (_)               | |         | (_)     | |                      (_) | | |         | |    (_)      
+  ___ _ _ __ ___  _ __ | |_   _  __| |_  __ _| | ___   __ _ ___   __ _ _| |_| |__  _   _| |__   _  ___  
+ / __| | '_ ` _ \| '_ \| | | | |/ _` | |/ _` | |/ _ \ / _` / __| / _` | | __| '_ \| | | | '_ \ | |/ _ \ 
+ \__ \ | | | | | | |_) | | |_| | (_| | | (_| | | (_) | (_| \__ \| (_| | | |_| | | | |_| | |_) || | (_) |
+ |___/_|_| |_| |_| .__/|_|\__, |\__,_|_|\__,_|_|\___/ \__, |___(_)__, |_|\__|_| |_|\__,_|_.__(_)_|\___/ 
+                 | |       __/ |                       __/ |      __/ |                                 
+                 |_|      |___/                       |___/      |___/                                  
+-->
 <!doctype html>
 <html lang="en" class="wait">
 <head>
@@ -6,7 +15,6 @@
 <title>SimplyDialogs - test and documentation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 <meta name="description" content="SimlyDialogs is a set of common dialogs, using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
-<link href="https://unpkg.com/@primer/css@^19.0.0/dist/primer.css" rel="stylesheet">
 <script src="assets/rainbow/dist/rainbow.min.js"></script>
 <script src="assets/rainbow/src/language/generic.js"></script>
 <script src="assets/rainbow/src/language/javascript.js"></script>
@@ -22,13 +30,14 @@ html.wait, html.wait * {
 main {
 	margin: auto auto;
 	margin-top: 10px;
+	width: 900px;
 }
 iframe {
 	border: none;
 	width: 100%;
 }
 aside {
-	width: 180px;
+	width: 170px;
 	top: 20px;
 	left: -300px;
 	padding: 10px;
@@ -36,10 +45,8 @@ aside {
 	z-index: 25;
 	opacity: 0.8;
 }
-ul {
-	margin-left: 1rem;
-}
 aside ul {
+	margin-left: 1rem;
 	list-style-type: none;
 	margin-block-start: 0px;
 	padding-inline-start: 0px;
@@ -48,11 +55,16 @@ aside ul.root {
 	margin-left: 0;
 }
 aside li {
-	color: #222;
+	color: #212529;
+	XXmargin-bottom: 2px;
+}
+aside li:hover {
+	color: #000;
 }
 aside li.active {
+	color: blue !important;
+	text-decoration: none;
 	font-weight: bolder;
-	color: #0969da !important;
 }
 aside li.active li {
 	font-weight: normal;
@@ -64,6 +76,9 @@ aside li a:active {
 }
 section {
 	margin-bottom: 1rem;
+}
+details:not([open]) {
+	cursor: pointer;
 }
 /* options complex example */
 dialog.x-mas {
@@ -100,7 +115,7 @@ dialog.x-mas button {
 </head>
 <body>
 <aside style="display:none;">
-<a href="https://github.com/davidkonrad/simplydialogs" title="View on GitHub">
+<a href="https://github.com/davidkonrad/simplydialogs" title="View on GitHub" id="view-on-github">
 	<img src="assets/GitHub-Mark-32px.png" alt="View on GitHub" width="32" height="32">
 </a>
 <ul class="root">
@@ -147,6 +162,12 @@ a range of common dialogs, all highly customizeable - comes with no dependencies
 	<li>Small footprint, JS + CSS less than 10k minified; Without beep sound ~5k.</li>
 </ul>
 </section>
+
+<details>
+	<summary>Table of dialogs</summary>
+xxcxxxzxczxc
+</details>
+
 
 <section id="basic-samples">
 <p>Samples:  
@@ -385,9 +406,9 @@ dialog.x-mas button {
 }
 const msg = '🎀 🎁 Frohe Weihnachten, メリークリスマス, Joyeux Noël, Feliz Navidad, 聖誕快樂, Buon Natale, Glædelig Jul ...!'
 Dlg.alert(msg, options)
-</code></pre><p><button role="button" id="options-complex-example">Check it out</button></p>
+</code></pre>
+<p><button role="button" id="options-complex-example">Check it out</button></p>
 </section>
-<br>
 
 <!-- inputs -->
 <section id="advanced-inputs">
@@ -514,11 +535,41 @@ Dlg.input('Select image file <br><sup>(PNG, GIF, PNG supported)</sup>', options)
 <p><button id="ai-btn-input-file">Check it out</button>. </p>
 </section>
 
+<section id="credits">
+<h2>Credits</h2>
+<p>This site was very easy to make, thanks to :</p>
+<ul>
+  <li>GitHub, for <a href="https://pages.github.com/">github pages</a></li>
+	<li>Primer CSS, for <a href="https://primer.style/css/">page reset</a></li>
+	<li>Chris Ferdinandi, for the <a href="https://github.com/cferdinandi/gumshoe">Scroll spy</a></li>
+	<li>Craig Campbell, for <a href="https://github.com/ccampbell/rainbow">Rainbow</a></li>
+</ul>
+</section>
+
+
 </main>
 
 <footer>
+<a href="https://github.com/simplydialogs/simplydialogs.github.io">This site on GitHub</a>
 </footer>
+
 <script src="assets/script.js"></script>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Mountains+of+Christmas">
+<script>
+/*
+document.styleSheets[0].disabled = true
+const s = document.styleSheets[0].cssRules;
+for (let r in s) {
+	//console.log(s[r])
+	if (s[r].selectorText && s[r].selectorText === 'button, html [type="button"], [type="reset"], [type="submit"]') {
+		console.log('ok', r)
+		document.styleSheets[0].deleteRule(r)
+		document.styleSheets[0].disabled = false
+		break
+	}
+	//if (s[r].selectorText && s[r].cssText.indexOf('button') > -1) console.log(s[r])
+}
+*/
+</script>
 </body>
 </html>

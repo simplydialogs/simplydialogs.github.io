@@ -5,7 +5,7 @@ const Test = (function(window, document, SimplyDialogs) {
 
 	const rf = function(f) { 
 		setTimeout(() => {
-			f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight) + 10) + 'px'
+			f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight) - 10) + 'px'
 		}, 200)
 	}
 
@@ -13,14 +13,30 @@ const Test = (function(window, document, SimplyDialogs) {
 		const a = document.querySelector('aside')
 		const m = document.querySelector('main')
 		const aresize = function() { 
-			console.log(m.offsetLeft - 210)
-			if ((m.offsetLeft - 210) > 20) {
-				a.style.left = (m.offsetLeft - 210) + 'px' 
+			if ((m.offsetLeft - 215) > 20) {
+				a.style.left = (m.offsetLeft - 215) + 'px' 
 			} else {
+				const ul = a.querySelector('ul.root')
+				ul.style.display = 'none'
+				const bm = document.createElement('a')
+				bm.innerText = '☰'
+				bm.id = 'burger-menu'
+				bm.href = '#'
+				bm.style.cssText = `
+					color: #222;
+					font-size: xx-large;
+					margin-right: 10px;
+					position: relative;
+					top: -3px;
+					text-decoration: none;
+				`
+				bm.addEventListener('click', (e) => {
+					ul.style.display = ul.style.display === 'none' ? 'inline-block' : 'none'
+				})
+				a.prepend(bm)
 				a.style.left = 'unset'
-				a.style.right = '140px'
+				a.style.right = '0px'
 				a.style.top = '-5px'
-				a.style.direction = 'rtl'
 			}
 		}
 		window.addEventListener('resize', () => aresize())
@@ -30,7 +46,6 @@ const Test = (function(window, document, SimplyDialogs) {
 				offset: 30,
 				reflow: true,
 				nested: false,
-				XXnestedClass: 'active-parent',
 				nestedClass: ''
 			})
 			document.querySelector('html').classList.remove('wait')
