@@ -8,7 +8,7 @@ dialog {
   max-width: 50vw;
 	position: fixed;
 	margin: auto auto;
-	margin-top: 9% !important;
+	margin-top: 9vh !important;
 	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 	line-height: 1.5;
 }

@@ -8,10 +8,11 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="../dialogs/dialogs.js"></script>
 <link rel="stylesheet" type="text/css" href="../dialogs/dialogs.css">
-<script src="../rainbow/dist/rainbow.min.js"></script>
-<script src="../rainbow/src/language/generic.js"></script>
-<script src="../rainbow/src/language/javascript.js"></script>
-<link rel="stylesheet" type="text/css" href="../rainbow/themes/css/github.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css">
+<style>
+</style>
 </head>
 <body>
 <p>Dialog buttons get the <code>btn</code>-class; default unicode icons are replaced with Materialize' icons (Google Material Icons) <code>medium material-icons</code>-name (cannot say if this according to the material-concept are the right icons / colors to use) :</p>
@@ -23,25 +24,22 @@
 <button class="btn" id="basic-wait">Wait</button>
 <button class="btn" id="basic-input">Input</button>
 <p>
-<pre><code data-language="javascript">Dlg.DEFAULTS.buttons.classes = {
+<pre><code class="javascript">Dlg.DEFAULTS.buttons.classes = {
   ok: 'btn',
   cancel: 'btn',
   yes: 'btn',
   no: 'btn'
 }
 Dlg.DEFAULTS.icons = {
-  alert: '<i class="medium material-icons blue-text">report_problem</i>',
-  information: '<i class="medium material-icons blue-text">info</i>',
-  confirm: '<i class="bi-question-circle-fill text-primary"></i>',
-  bell: '<i class="medium material-icons yellow-text">notifications</i>',
-  error: '<i class="medium material-icons red-text">block</i>',
-  wait: '<i class="small material-icons blue-text">build</i>',
+  alert: '&lt;i class="medium material-icons blue-text">report_problem&lt;/i>',
+  information: '&lt;i class="medium material-icons blue-text">info&lt;/i>',
+  confirm: '&lt;i class="medium material-icons blue-text">question_answer&lt;/i>',
+  bell: '&lt;i class="medium material-icons orange-text">notifications&lt;/i>',
+  error: '&lt;i class="medium material-icons red-text">block&lt;/i>',
+  wait: '&lt;i class="small material-icons blue-text">build&lt;/i>',
   input: '', 
 }
 Dlg.DEFAULTS.input.classes.label = 'hide'
-for (const h in Dlg.DEFAULTS.headers) {
-  if (typeof Dlg.DEFAULTS.headers[h] === 'string') Dlg.DEFAULTS.headers[h] = Dlg.DEFAULTS.headers[h].toUpperCase()
-}
 </code></pre>
 </p>
 <script>
@@ -59,16 +57,17 @@ const Test = (function(window, document) {
 		alert: '<i class="medium material-icons orange-text">report_problem</i>',
 		information: '<i class="medium material-icons blue-text">info</i>',
 		confirm: '<i class="medium material-icons blue-text">question_answer</i>',
-		bell: '<i class="medium material-icons yellow-text">notifications</i>',
+		bell: '<i class="medium material-icons orange-text">notifications</i>',
 		error: '<i class="medium material-icons red-text">info</i>',
 		wait: '<i class="small material-icons blue-text">build</i>',
 		input: '',
 	}
 	Dlg.DEFAULTS.input.classes.label = 'hide'
+/*
 	for (const h in Dlg.DEFAULTS.headers) {
 		if (typeof Dlg.DEFAULTS.headers[h] === 'string') Dlg.DEFAULTS.headers[h] = Dlg.DEFAULTS.headers[h].toUpperCase()
 	}
-
+*/
 	const basic = function() {
 		gebi('basic-alert').onclick = function() {
 			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('materialize alert', answer) })
@@ -99,7 +98,9 @@ const Test = (function(window, document) {
 	}
 
 	//
-	basic()		
+	basic()
+	if (hljs) hljs.highlightAll()
+
 })(window, document)
 </script>
 

@@ -3,6 +3,13 @@ const Test = (function(window, document, SimplyDialogs) {
 	const gebi = (id) => { return document.getElementById(id) }
 	const Dlg = SimplyDialogs
 
+	if (hljs)	{
+		hljs.configure({
+			ignoreUnescapedHTML: false
+		})
+		hljs.highlightAll()
+	}
+
 	const rf = function(f) { 
 		setTimeout(() => {
 			f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight) - 10) + 'px'
@@ -78,7 +85,7 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 		gebi('basic-input').onclick = function() {
 			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(function(input) {
-				console.log('result', input)
+				console.log('input', input)
 			})
 		}
 	}
@@ -125,25 +132,6 @@ const Test = (function(window, document, SimplyDialogs) {
 			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
 		}
 
-/*
-		gebi('backdrop-yingyang').onclick = function() {
-			const o = {
-				backdrop: `background: radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 50px 0,
-								radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 50px 0,
-								radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 0 50px,
-								radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 0 50px,
-								radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%),
-								radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%),
-								radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%) 50px 50px,
-								radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%) 50px 50px;
-								background-color:#fff; 
-								opacity: 0.4;
-								background-size:100px 100px;`
-			}
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
-		}
-*/
-
 		gebi('backdrop-stairs').onclick = function() {
 			const o = {
 				backdrop: `background:
@@ -169,6 +157,7 @@ const Test = (function(window, document, SimplyDialogs) {
 								radial-gradient(circle closest-side at 40% 22%, #d35 45%, rgba(221,51,85,0) 46%) 50px 50px,
 								radial-gradient(circle closest-side at 60% 22%, #d35 45%, rgba(221,51,85,0) 46%) 50px 50px,
 								radial-gradient(circle closest-side at 50% 35%, #d35 30%, rgba(221,51,85,0) 31%) 50px 50px;
+								opacity: 0.4;
 								background-color:#b03;
 								background-size:100px 100px;`
 			}
@@ -177,6 +166,11 @@ const Test = (function(window, document, SimplyDialogs) {
 	}
 
 	const options = function() {
+
+		gebi('options-alert-no-icon').onclick = function() {
+			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', { icons: { alert: null }} )
+		}
+
 		gebi('options-complex-example').onclick = function() {
 				const options = {
 				classes: 'x-mas',
@@ -258,7 +252,7 @@ const Test = (function(window, document, SimplyDialogs) {
 			    inputs: [
 						{ type: 'input', inputType: 'image', label: 'Preview', name: 'preview', alt: 'No image yet', disabled: 'disabled',
 							src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>',
-							style: 'min-height:200px; max-height:300px; border: 1px solid #dadada; object-fit: contain;' },
+							style: 'min-height: 20vh; max-height: 50vh; border: 1px solid #dadada; object-fit: contain;' },
 						{ type: 'input', inputType: 'file', label: 'Image', name: 'file', accept: 'image/png, image/gif, image/jpeg' }
 			    ],
 					callback: function(state, dialog) {

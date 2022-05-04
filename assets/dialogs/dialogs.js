@@ -96,8 +96,8 @@ const SimplyDialogs = (function(document) {
 				const c = new MouseEvent('click', { 'view': window, 'bubbles': true, 'cancelable': false })
 				if (dialog.querySelector('.dialog-ok')) dialog.querySelector('.dialog-ok').dispatchEvent(c)
 				if (dialog.querySelector('.dialog-yes')) dialog.querySelector('.dialog-yes').dispatchEvent(c)
+				e.preventDefault() 
 			}
-			e.preventDefault() 
 		})
 		return use
 	}

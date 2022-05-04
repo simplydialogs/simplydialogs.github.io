@@ -1,28 +1,18 @@
-<!--
-      _                 _           _ _       _                        _ _   _           _      _       
-     (_)               | |         | (_)     | |                      (_) | | |         | |    (_)      
-  ___ _ _ __ ___  _ __ | |_   _  __| |_  __ _| | ___   __ _ ___   __ _ _| |_| |__  _   _| |__   _  ___  
- / __| | '_ ` _ \| '_ \| | | | |/ _` | |/ _` | |/ _ \ / _` / __| / _` | | __| '_ \| | | | '_ \ | |/ _ \ 
- \__ \ | | | | | | |_) | | |_| | (_| | | (_| | | (_) | (_| \__ \| (_| | | |_| | | | |_| | |_) || | (_) |
- |___/_|_| |_| |_| .__/|_|\__, |\__,_|_|\__,_|_|\___/ \__, |___(_)__, |_|\__|_| |_|\__,_|_.__(_)_|\___/ 
-                 | |       __/ |                       __/ |      __/ |                                 
-                 |_|      |___/                       |___/      |___/                                  
--->
 <!doctype html>
 <html lang="en" class="wait">
 <head>
 <meta charset="utf-8">
 <title>SimplyDialogs - test and documentation</title>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 <meta name="description" content="SimlyDialogs is a set of common dialogs, using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
-<script src="assets/rainbow/dist/rainbow.min.js"></script>
-<script src="assets/rainbow/src/language/generic.js"></script>
-<script src="assets/rainbow/src/language/javascript.js"></script>
-<script src="assets/dialogs/dialogs.js"></script>
-<script src="assets/gumshoe.min.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/style.css">
+<script src="assets/dialogs/dialogs.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
-<link rel="stylesheet" type="text/css" href="assets/rainbow/themes/css/github.css">
+<script src="assets/gumshoe.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" rel="stylesheet" >
 <style>
 html.wait, html.wait * { 
 	cursor: wait !important; 
@@ -56,13 +46,12 @@ aside ul.root {
 }
 aside li {
 	color: #212529;
-	XXmargin-bottom: 2px;
 }
 aside li:hover {
 	color: #000;
 }
 aside li.active {
-	color: blue !important;
+	color: #000;
 	text-decoration: none;
 	font-weight: bolder;
 }
@@ -77,8 +66,13 @@ aside li a:active {
 section {
 	margin-bottom: 1rem;
 }
-details:not([open]) {
-	cursor: pointer;
+table td img {
+	width: 250px;
+	height: auto;
+}
+/* special, to show unicode icons more nice */
+pre code.force-unicode .hljs-string {
+	font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', Consolas, "Liberation Mono", Courier, monospace;
 }
 /* options complex example */
 dialog.x-mas {
@@ -120,7 +114,8 @@ dialog.x-mas button {
 </a>
 <ul class="root">
 	<li><a href="#introduction">Introduction</a></li>
-	<li><a href="#basic-samples">Basic samples</a></li>
+	<li><a href="#summary">Summary</a></li>
+	<li><a href="#basic-samples">Samples</a></li>
 	<li><a href="#global-settings">Global settings</a>
 		<ul>
 			<li><a href="#defaults">DEFAULTS</a></li>
@@ -131,7 +126,12 @@ dialog.x-mas button {
 			<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
 			<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
 			<li><a href="#integration-materialize">Materialize CSS</a></li>
-			<li><a href="#complex-example">Complex example</a></li>
+		</ul>
+	<li><a href="#options">Options</a>
+		<ul>
+			<li><a href="#options-subset">Subset of DEFAULTS</a></li>
+			<li><a href="#options-examples">Examples</a></li>
+			<li><a href="#options-xmas-card">Xmas dialog</a></li>
 		</ul>
 	</li>
 	<li><a href="#advanced-inputs">Advanced inputs</a>
@@ -139,7 +139,7 @@ dialog.x-mas button {
 			<li><a href="#ai-input-inputs">Input options</a></li>
 			<li><a href="#ai-input-radio-select">Radios, select</a></li>
 			<li><a href="#ai-input-callback">Callback</a></li>
-			<li><a href="#ai-input-file">File input</a></li>
+			<li><a href="#ai-input-file">Image upload example</a></li>
 			<li><a href="#ai-handling-result">Handling result</a></li>
 		</ul>
 	</li>
@@ -153,7 +153,7 @@ a range of common dialogs, all highly customizeable - comes with no dependencies
 <ul>
 	<li>No dependencies; using native &lt;dialog> element and unicode</li>
 	<li>Truly blocking interaction with background	</li>
-	<li> Stays in center of viewport, adjusted to message size, stays in focus while scrolling</li>
+	<li>Stays in center of viewport, adjusted to message size, stays in focus while scrolling</li>
 	<li>Returns promises</li>
 	<li>Support keyboard / mouse the right way</li>
 	<li>Customizeable</li>
@@ -163,14 +163,80 @@ a range of common dialogs, all highly customizeable - comes with no dependencies
 </ul>
 </section>
 
-<details>
-	<summary>Table of dialogs</summary>
-xxcxxxzxczxc
-</details>
-
+<section id="summary">
+<h2>Summary</h2>
+<table>
+<tr>
+<th>Type</th>
+<th>Sample</th>
+<th>Remarks</th>
+</tr>
+<tr>
+<td><code>alert()</code></td>
+<td><img src="assets/images/alert.png" width="438" height="217" alt="alert() sample"></td>
+<td><pre><code class="javascript">Dlg.alert('Lorem ipsum ...')
+Dlg.alert('Lorem ipsum ...', options)
+</code></pre>Returns promise, ex: <pre><code class="javascript">Dlg.alert('Lorem ipsum ...').then(answer => { 
+  console.log(answer) //true except when cancelled (ESC)
+})
+</code></pre></td>
+</tr>
+<tr>
+<td><code>information()</code><br><code>info()</code></td>
+<td><img src="assets/images/information.png" width="438" height="208" alt="info() sample"></td>
+<td>Same as <code>alert()</code></td>
+</tr>
+<tr>
+<td><code>confirm()</code></td>
+<td><img src="assets/images/confirm.png" width="435" height="211" alt="confirm() sample"></td>
+<td><pre><code class="javascript">Dlg.confirm('Lorem ipsum ...').then(answer => { 
+  console.log(answer) //true or false
+})
+</code></pre>
+</td>
+</tr>
+<tr>
+<td><code>error()</code></td>
+<td><img src="assets/images/error.png" width="438" height="209" alt="error() sample"></td>
+<td>Same as <code>alert()</code></td>
+</tr>
+<tr>
+<td><code>bell()</code>
+</td>
+<td><img src="assets/images/bell.png" width="432" height="213" alt="bell() sample"></td>
+<td>Same as <code>alert()</code>. Produces a "beep".  
+</td>
+</tr>
+<tr>
+<td><code>wait()</code></td>
+<td><img src="assets/images/wait.png" width="438" height="128" alt="wait() sample"></td>
+<td>Does not return a promise, but a function you can close the wait dialog with : 
+<pre><code class="javascript">const wait = Dlg.wait('Lorem ipsum ...')
+//do something
+wait.close()
+</code></pre>
+</td>
+</tr>
+<tr>
+<td><code>input()</code>
+</td>
+<td><img src="assets/images/input.png" width="432" height="205" alt="input() sample"></td>
+<td>Return promise holding the form state, i.e <code>{ firstname: 'Arthur', age: 42 }</code>
+<pre><code class="javascript">Dlg.input('Lorem ipsum ...', options).then(state) => {
+ ... 
+})</code></pre>
+You can define a callback in options or <code>DEFAULTS</code>, to determine if the user can submit :
+<pre><code class="javascript">callback: function(state, dialog) { 
+  return state.firstname !== '' 
+})</code></pre>	
+</td>
+</tr>
+</table>
+</section>
 
 <section id="basic-samples">
-<p>Samples:  
+<h2>Basic usage</h2>
+<p>
 <button id="basic-alert">Alert</button>
 <button id="basic-info">Info</button>
 <button id="basic-confirm">Confirm</button>
@@ -179,7 +245,7 @@ xxcxxxzxczxc
 <button id="basic-wait">Wait</button>
 <button id="basic-input">Input</button>
 </p>
-<pre><code data-language="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	
+<pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	
   console.log('alert', answer) 
 })
 
@@ -213,7 +279,7 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
 <section id="defaults">
 <h3>DEFAULTS</h3>
 <p>Simplydialogs uses internally a <code>defaults</code> literal, which is accessible through the <code>.DEFAULTS</code> property :</p>
-<pre><code data-language="javascript">let defaults = {
+<pre><code class="javascript force-unicode">let defaults = {
   backdrop: undefined,
   classes: '',
   enterSubmit: true,
@@ -270,7 +336,7 @@ Changes to <code>DEFAULTS</code> are global, but you can still pass alternative 
 <h3>Language</h3>
 <p>There is no such thing as "language" in SimplyDialogs, but most people would like to adjust their basic dialogs to the lingo or language they use. 
 You can use <code>DEFAULTS</code> to change the dialogs into "spanish" as default by :</p>
-<pre><code data-language="javascript">const Dlg = SimplyDialogs
+<pre><code class="javascript">const Dlg = SimplyDialogs
 Dlg.DEFAULTS.buttons.captions = {
   ok: 'Ok',	
   yes: 'Aceptar',
@@ -291,14 +357,14 @@ Dlg.DEFAULTS.headers = {
 <section id="defaults-icons">
 <h3>Icons</h3>
 <p>Icons can be replaced the same way; either individually or as a whole :</p>
-<pre><code data-language="javascript">Dlg.DEFAULTS.icons.alert = '🚀' //unicode rocket</code></pre>
+<pre><code class="javascript">Dlg.DEFAULTS.icons.alert = '🚀' //unicode rocket</code></pre>
 <iframe src="assets/frames/fa.html" scrolling="no" onload="Test.rf(this)" title="Font Awesome example"></iframe>
 </section>
 
 <section id="defaults-backdrop">
 <h3>::backdrop</h3>
 <p>The native <code>::backdrop</code> more or less look like this across the browsers:</p>
-<pre><code data-language="css">dialog::backdrop {
+<pre><code class="css">dialog::backdrop {
   position: fixed;
   top: 0px;
   right: 0px;
@@ -308,14 +374,13 @@ Dlg.DEFAULTS.headers = {
 }
 </code></pre>
 <p>You can change <code>DEFAULTS.backdrop</code> in order to change the background of the dialogs. You can specify the <code>background</code> style itself by passing a valid CSS class-definition. Here are some examples:</p>
-<p><button id="backdrop-none">No backdrop (reset)</button>
-<pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0);'</code></pre>
-<p><button id="backdrop-darker">Darker backdrop</button>
-<pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0.5);'</code></pre>
-<p><button id="backdrop-carbon">A "carbon" backdrop</button> 
-<button id="backdrop-stairs">A "stair-style" backdrop</button> 
-<button id="backdrop-heart">Because I love You</button></p>
-<pre><code data-language="javascript">&lt;instance>.DEFAULTS.backdrop = `background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+<p><button id="backdrop-none">No backdrop (reset)</button> <button id="backdrop-darker">Darker backdrop</button></p>
+<pre><code class="javascript">Dlg.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0);'
+Dlg.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0.5);'
+</code></pre>
+<p>Or get more inspiration at <a href="https://projects.verou.me/css3patterns/">https://projects.verou.me/css3patterns/</a>, where the ideas below are taken from :</p>
+<p><button id="backdrop-carbon">A "carbon" backdrop</button> <button id="backdrop-stairs">A "stair-style" backdrop</button> <button id="backdrop-heart">Because I love You</button></p>
+<pre><code class="javascript">Dlg.DEFAULTS.backdrop = `background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
   linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
   linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
   linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
@@ -325,27 +390,24 @@ Dlg.DEFAULTS.headers = {
   opacity: 0.4;
   background-size: 20px 20px;`
 
-&lt;instance>.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
+Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
   linear-gradient(63deg, transparent 74%, #999 78%),
   linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444;
   opacity: 0.4;
   background-size: 16px 48px;
 </code></pre>
-<p>Thanks to and get more inspiration at <a href="https://projects.verou.me/css3patterns/">https://projects.verou.me/css3patterns/</a>, where
-the above ideas are taken from 
-</p>
 </section>
 
 <section id="defaults-classes">
 <h3>.classes</h3>
 <p>You can specify default classes for the <code>&lt;dialog</code> element itself. Either static through <code>.DEFAULTS</code> or on the fly via <code>options</code> :</p>
-<pre><code data-language="javascript">Dlg.DEFAULTS.classes = 'my dialog classes'</code></pre>
+<pre><code class="javascript">Dlg.DEFAULTS.classes = 'my dialog classes'</code></pre>
 </section>
 
 <section id="defaults-buttons-classes">
 <h3>buttons.classes</h3>
 <p>You can specify default classes for each button, your own layout or adopting the style of a framework. </p>
-<pre><code data-language="javascript">Dlg.DEFAULTS.buttons.classes = {
+<pre><code class="javascript">Dlg.DEFAULTS.buttons.classes = {
   ok: '',
   cancel: '',
   yes: '',
@@ -364,11 +426,32 @@ the above ideas are taken from
 	<iframe src="assets/frames/materialize.html" scrolling="no" onload="Test.rf(this)" title="Materialize CSS Example"></iframe>
 </section>
 
-<section id="complex-example">
-<h3>Complex example</h3>
+
+<!-- options -->
+<section id="options">
+<h2>Options</h2>
+<p>All the dialogs can also be customized by passing an <code>options</code> param : </p>
+<pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', { icons: { alert: null }})</code></pre>
+<p><button id="options-alert-no-icon">Check it out</button> </p>
+</section>
+
+<section id="options-subset">
+<h3>Subset of <code style="font-size:inherit; color: inherit;">DEFAULTS</code></h3>
+<p><code>options</code> should be an object literal with the same structure as <code>DEFAULTS</code>. But you only need to pass the changes 
+you want for the particular dialog. Examples:
+<pre><code class="javascript"></code></pre>
+
+
+no the entire need Obvious you not need to pass an entire 
+copy of the default </p>
+<pre><code class="javascript"></code></pre>
+</section>
+
+<section id="options-xmas-card">
+<h3>Xmas dialog</h3>
 <p>Here is an example passing <code>options</code> to a simple alert, demonstrating how to manipulate most of all the settings. The demonstration
 is a kind of "Merry Christmas"-alert. First some X-mas-like CSS :</p>
-<pre><code data-language="css">dialog.x-mas {
+<pre><code class="css">dialog.x-mas {
   border-radius: 0;
   border: 1mm ridge #34a65f !important;
   background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
@@ -398,7 +481,7 @@ dialog.x-mas button {
 }
 </code></pre>
 <p>Then activate the dialog in code like this :</p>
-<pre><code data-language="javascript">const options = {
+<pre><code class="javascript">const options = {
   classes: 'x-mas',
   headers: { alert: 'Merry Christmas ...' },
   icons: { alert : '🎄' },
@@ -412,9 +495,9 @@ Dlg.alert(msg, options)
 
 <!-- inputs -->
 <section id="advanced-inputs">
-<h3>Advanced inputs</h3>
+<h2>Advanced inputs</h2>
 <p>You can alter the input form either by changing <code>DEFAULTS</code> or by passing an options literal to <code>input()</code> : </p>
-<pre><code data-language="javascript">const options = {
+<pre><code class="javascript">const options = {
   input: { 
     callback: undefined,
     inputs: [ ... ],
@@ -429,7 +512,7 @@ Dlg.alert(msg, options)
 
 <section id="ai-input-inputs">
 <p><code>inputs</code> is an array of objects defining each input for the form :</p>
-<pre><code data-language="javascript">const options = {
+<pre><code class="javascript">const options = {
   input: {
     inputs: [
       { type: 'input', inputType: 'text', label: 'input', name: 'input', placeholder: 'Hey, I am a placeholder' },
@@ -441,7 +524,7 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
 </code></pre><p><button role="button" id="ai-btn-input-textarea">Check it out</button></p>
 <p>For <code>&lt;input></code>'s you specify the type throgh <code>inputType</code>. 
 If the browser support the input type it can be shown. Pass special properties by their name, i.e <code>value</code>, <code>min</code>, <code>placeholder</code> :
-<pre><code data-language="javascript">const options = {
+<pre><code class="javascript">const options = {
   input: {
     inputs: [
       { type: 'input', inputType: 'text', label: 'Text', name: 'input', spellcheck: false },
@@ -450,7 +533,7 @@ If the browser support the input type it can be shown. Pass special properties b
       { type: 'input', inputType: 'password', label: 'Password', name: 'password', style: 'color:maroon;' },
       { type: 'input', inputType: 'date', label: 'Date', name: 'date' },
       { type: 'input', inputType: 'file', label: 'File', name: 'file' },
-      { type: 'input', inputType: 'range', label: 'Range', name: 'range', value:25, max: 100 }
+      { type: 'input', inputType: 'range', label: 'Range', name: 'range', value: 25, max: 100 }
     ]
   }
 }
@@ -464,7 +547,7 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
 <section id="ai-input-radio-select">
 <h3>Radios and selects</h3>
 <p>Radios are "paired" inputs and selects have child options, so those need a extended definition :</p>
-<pre><code data-language="javascript">const options = { 
+<pre><code class="javascript">const options = { 
   input: { 
     inputs [
       { type: 'radio', label: 'radio', name: 'radio',
@@ -495,7 +578,7 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
 <h3>Callback</h3>
 <p>Use a callback if you want to validate the form before submit. The callback is triggered anytime one of the inputs change state. 
 If the callback return <code>true</code>, the OK-button is enabled. The callback passes two params : </p>
-<pre><code data-language="javascript">callback: function(state, dialog) {
+<pre><code class="javascript">callback: function(state, dialog) {
   ...
 }
 </code></pre>
@@ -508,16 +591,25 @@ If the callback return <code>true</code>, the OK-button is enabled. The callback
 <h3>File input with preview</h3>
 <p>You kan combine a <code>image</code> type input with a <code>file</code> type input, and by that create an
 image-upload-dialog with preview. It takes a little more options-tweaks than the prior examples: </p>
-<pre><code data-language="javascript">const options = {
+<pre><code class="javascript">const options = {
   headers: { input: 'Upload Image' },
   icons: { input: '🖼' },
   input: {
     inputs: [
-      { type: 'input', inputType: 'image', label: 'Preview', name: 'preview', alt: 'No image yet', disabled: 'disabled',
-        src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>',
-        style: 'min-height:200px; max-height:300px; border: 1px solid #dadada; object-fit: contain;' 
+      { type: 'input', 
+        inputType: 'image', 
+        label: 'Preview', 
+        name: 'preview', 
+        alt: 'No image yet', 
+        disabled: 'disabled',
+        src: 'data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg"/>',
+        style: 'min-height: 30vh; max-height: 50vh; border: 1px solid #dadada; object-fit: contain;' 
       }, { 
-        type: 'input', inputType: 'file', label: 'Image', name: 'file', accept: 'image/png, image/gif, image/jpeg' 
+        type: 'input', 
+        inputType: 'file', 
+        label: 'Image', 
+        name: 'file', 
+        accept: 'image/png, image/gif, image/jpeg' 
       }
     ],
     callback: function(state, dialog) {
@@ -528,7 +620,7 @@ image-upload-dialog with preview. It takes a little more options-tweaks than the
     }
   }
 }
-Dlg.input('Select image file <br><sup>(PNG, GIF, PNG supported)</sup>', options).then(function(input) {
+Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, PNG supported)&lt;/sup>', options).then(function(input) {
   console.log('image upload', input)
 })
 </code></pre>
@@ -537,15 +629,14 @@ Dlg.input('Select image file <br><sup>(PNG, GIF, PNG supported)</sup>', options)
 
 <section id="credits">
 <h2>Credits</h2>
-<p>This site was very easy to make, thanks to :</p>
+<p>This site was easy to produce, thanks to :</p>
 <ul>
   <li>GitHub, for <a href="https://pages.github.com/">github pages</a></li>
-	<li>Primer CSS, for <a href="https://primer.style/css/">page reset</a></li>
-	<li>Chris Ferdinandi, for the <a href="https://github.com/cferdinandi/gumshoe">Scroll spy</a></li>
-	<li>Craig Campbell, for <a href="https://github.com/ccampbell/rainbow">Rainbow</a></li>
+	<li><a href="https://gist.github.com/dashed/6714393">Github-pandoc.css</a>, modified where needed</li>
+	<li>Chris Ferdinandi, for the <a href="https://github.com/cferdinandi/gumshoe">Gumshoe</a> scroll spy</li>
+	<li><a href="https://highlightjs.org/">highlight.js</a> and contributors</li>
 </ul>
 </section>
-
 
 </main>
 
@@ -555,21 +646,5 @@ Dlg.input('Select image file <br><sup>(PNG, GIF, PNG supported)</sup>', options)
 
 <script src="assets/script.js"></script>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Mountains+of+Christmas">
-<script>
-/*
-document.styleSheets[0].disabled = true
-const s = document.styleSheets[0].cssRules;
-for (let r in s) {
-	//console.log(s[r])
-	if (s[r].selectorText && s[r].selectorText === 'button, html [type="button"], [type="reset"], [type="submit"]') {
-		console.log('ok', r)
-		document.styleSheets[0].deleteRule(r)
-		document.styleSheets[0].disabled = false
-		break
-	}
-	//if (s[r].selectorText && s[r].cssText.indexOf('button') > -1) console.log(s[r])
-}
-*/
-</script>
 </body>
 </html>

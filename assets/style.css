@@ -19,7 +19,7 @@ p {
 	margin:1em 0
 }
 a {
-	color:#4183c4;
+	color: #3179c1; /* #4183c4;*/
 	text-decoration:none
 }
 body { 
@@ -191,9 +191,11 @@ table tr {
 table tr:nth-child(2n) {
     background-color: #f8f8f8;
 }
+/*
 img {
     max-width: 100%;
 }
+*/
 code,
 tt {
     margin: 0 2px;
@@ -227,7 +229,7 @@ pre {
     border: 1px solid #ccc;
     font-size: 13px;
     line-height: 19px;
-    overflow: auto;
+/*    overflow: auto;*/
     padding: 6px 10px;
     border-radius: 3px;
 }

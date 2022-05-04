@@ -7,11 +7,11 @@
 <link rel="stylesheet" type="text/css" href="../style.css">
 <script src="../dialogs/dialogs.js"></script>
 <link rel="stylesheet" type="text/css" href="../dialogs/dialogs.css">
-<script src="../rainbow/dist/rainbow.min.js"></script>
-<script src="../rainbow/src/language/generic.js"></script>
-<script src="../rainbow/src/language/javascript.js"></script>
-<link rel="stylesheet" type="text/css" href="../rainbow/themes/css/github.css">
 <link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css">
 </head>
 <body>
 <p>Example: Use Font Awesome-icons instead of the default unicode symbols :</p>
@@ -23,14 +23,14 @@
 <button id="basic-wait">Wait</button>
 <button id="basic-input">Input</button>
 </p>
-<pre><code data-language="javascript">Dlg.DEFAULTS.icons = {
-  alert: '<i class="fa fa-warning" color="navy"></i>',
-  information: '<i class="fa fa-info-circle"></i>',
-  confirm: '<i class="fa fa-question-circle-o"></i>',
-  bell: '<i class="fa fa-bell-o"></i>',
-  error: '<i class="fa fa-times-circle-o"></i>',
-  wait: '<i class="fa fa-gear">build</i>',
-  input: '<i class="fa fa-pencil">info</i>'
+<pre><code class="javascript">Dlg.DEFAULTS.icons = {
+  alert: '&lt;i class="fa fa-warning" color="navy">&lt;/i>',
+  information: '&lt;i class="fa fa-info-circle">&lt;/i>',
+  confirm: '&lt;i class="fa fa-question-circle-o">&lt;/i>',
+  bell: '&lt;i class="fa fa-bell-o">&lt;/i>',
+  error: '&lt;i class="fa fa-times-circle-o">&lt;/i>',
+  wait: '&lt;i class="fa fa-gear">build&lt;/i>',
+  input: '&lt;i class="fa fa-pencil">info&lt;/i>'
 }
 </code></pre>
 <script>
@@ -78,7 +78,9 @@ const Test = (function(window, document) {
 	}
 
 	//
-	basic()		
+	basic()
+	if (hljs) hljs.highlightAll()
+
 })(window, document)
 </script>
 
