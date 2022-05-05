@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="../dialogs/dialogs.js"></script>
-<link rel="stylesheet" type="text/css" href="../dialogs/dialogs.css">
+<script src="../../simplydialogs/src/dialogs.js"></script>
+<link rel="stylesheet" type="text/css" href="../../simplydialogs/src/dialogs.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css">
@@ -63,11 +63,6 @@ const Test = (function(window, document) {
 		input: '',
 	}
 	Dlg.DEFAULTS.input.classes.label = 'hide'
-/*
-	for (const h in Dlg.DEFAULTS.headers) {
-		if (typeof Dlg.DEFAULTS.headers[h] === 'string') Dlg.DEFAULTS.headers[h] = Dlg.DEFAULTS.headers[h].toUpperCase()
-	}
-*/
 	const basic = function() {
 		gebi('basic-alert').onclick = function() {
 			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('materialize alert', answer) })

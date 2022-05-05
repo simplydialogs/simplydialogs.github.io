@@ -3,18 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-<link rel="stylesheet" type="text/css" href="../normalize.css">
 <link rel="stylesheet" type="text/css" href="../style.css">
-<script src="../dialogs/dialogs.js"></script>
-<link rel="stylesheet" type="text/css" href="../dialogs/dialogs.css">
+<script src="../../simplydialogs/src/dialogs.js"></script>
+<link rel="stylesheet" type="text/css" href="../../simplydialogs/src/dialogs.css">
 <link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css">
+<style>
+body {
+	margin: 0;
+	padding: 0;
+}
+</style>
 </head>
 <body>
-<p>Example: Use Font Awesome-icons instead of the default unicode symbols :</p>
 <button id="basic-alert" >Alert</button>
 <button id="basic-info">Info</button>
 <button id="basic-confirm">Confirm</button>
@@ -22,15 +26,14 @@
 <button id="basic-error">Error</button>
 <button id="basic-wait">Wait</button>
 <button id="basic-input">Input</button>
-</p>
 <pre><code class="javascript">Dlg.DEFAULTS.icons = {
-  alert: '&lt;i class="fa fa-warning" color="navy">&lt;/i>',
-  information: '&lt;i class="fa fa-info-circle">&lt;/i>',
-  confirm: '&lt;i class="fa fa-question-circle-o">&lt;/i>',
-  bell: '&lt;i class="fa fa-bell-o">&lt;/i>',
-  error: '&lt;i class="fa fa-times-circle-o">&lt;/i>',
-  wait: '&lt;i class="fa fa-gear">build&lt;/i>',
-  input: '&lt;i class="fa fa-pencil">info&lt;/i>'
+  alert: '&lt;i class="fa fa-warning" style="color:fuchsia;">&lt;/i>',
+  information: '&lt;i class="fa fa-info-circle" style="color:royalblue;">&lt;/i>',
+  confirm: '&lt;i class="fa fa-question-circle" style="color:forestgreen;">&lt;/i>',
+  bell: '&lt;i class="fa fa-bell" style="color:orange;">&lt;/i>',
+  error: '&lt;i class="fa fa-times-circle-o" style="color:red;">&lt;/i>',
+  input: '&lt;i class="fa fa-pencil" style="color:navy;">&lt;/i>',
+  wait: '&lt;i class="fa fa-gear" style="color:gray;">&lt;/i>'
 }
 </code></pre>
 <script>
@@ -39,10 +42,10 @@ const Test = (function(window, document) {
 	const Dlg = SimplyDialogs
 
 	Dlg.DEFAULTS.icons = {
-	  alert: '<i class="fa fa-warning" style="color:navy;"></i>',
-	  information: '<i class="fa fa-info-circle" style="color:blue;"></i>',
-	  confirm: '<i class="fa fa-question-circle-o" style="color:forestgreen;"></i>',
-	  bell: '<i class="fa fa-bell" style="color:gold;"></i>',
+	  alert: '<i class="fa fa-warning" style="color:fuchsia;"></i>',
+	  information: '<i class="fa fa-info-circle" style="color:royalblue;"></i>',
+	  confirm: '<i class="fa fa-question-circle" style="color:forestgreen;"></i>',
+	  bell: '<i class="fa fa-bell" style="color:orange;"></i>',
 	  error: '<i class="fa fa-times-circle-o" style="color:red;"></i>',
 	  input: '<i class="fa fa-pencil" style="color:navy;"></i>',
 	  wait: '<i class="fa fa-gear" style="color:gray;"></i>'

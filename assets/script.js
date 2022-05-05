@@ -86,6 +86,47 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 	}
 
+	const es = function() {
+		const options = {
+			headers: {
+				alert: 'Alerta', 
+				error: 'Error',
+				confirm: 'Confirmar',
+				information: 'Información',
+				bell: 'Nota',
+				input: 'Input'
+			},
+			buttons: {
+				captions: {
+					ok: 'Ok',	
+					yes: 'Aceptar',
+					no: 'Salir',
+					cancel: 'Cancelar'
+				}
+			}
+		}
+		gebi('basic-alert-es').onclick = function() {
+			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(answer => {	console.log('alert', answer) })
+		}
+		gebi('basic-confirm-es').onclick = function() {
+			Dlg.confirm('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(answer => {	console.log('confirm', answer) })
+		}
+		gebi('basic-info-es').onclick = function() {
+			Dlg.information('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(answer => {	console.log('info', answer) })
+		}
+		gebi('basic-bell-es').onclick = function() {	
+			Dlg.bell('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(answer => { console.log('bell', answer) })
+		}
+		gebi('basic-error-es').onclick = function() {
+			Dlg.error('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(answer => {	console.log('error', answer) })
+		}
+		gebi('basic-input-es').onclick = function() {
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(input => {
+				console.log('input', input)
+			})
+		}
+	}
+
 	const longTexts = function() {
 		const lt = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 		gebi('basic-alert-long-text').onclick = function() { Dlg.alert(lt).then(answer => { console.log('long text alert', answer) })	}
@@ -303,6 +344,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	basic()
 	longTexts()
 	options()
+	es()
 	advancedInputs()
 	backdrop()
 

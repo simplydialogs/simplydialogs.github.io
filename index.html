@@ -11,15 +11,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" rel="stylesheet" >
+<script src="simplydialogs/src/dialogs.js"></script>
+<link rel="stylesheet" type="text/css" href="simplydialogs/src/dialogs.css">
 
-
-
-<script src="assets/dialogs/dialogs.js"></script>
-<link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
-<!--
-<script src="../simplydialogs/src/dialogs.js"></script>
-<link rel="stylesheet" type="text/css" href="../simplydialogs/src/dialogs.css">
--->
 <style>
 html.wait, html.wait * { 
 	cursor: wait !important; 
@@ -156,7 +150,7 @@ dialog.x-mas button {
 		<li><a href="#options">Options</a>
 			<ul>
 				<li><a href="#options-subset">Subset of DEFAULTS</a></li>
-				<li><a href="#options-pyramids">Pyramids of Giza</a></li>
+				<li><a href="#options-pyramids">Google map</a></li>
 				<li><a href="#options-xmas-card">Xmas dialog</a></li>
 			</ul>
 		</li>
@@ -166,7 +160,7 @@ dialog.x-mas button {
 				<li><a href="#input-radio-select">Radios, select</a></li>
 				<li><a href="#input-callback">Callback</a></li>
 				<li><a href="#input-login-dialog">Login dialog</a></li>
-				<li><a href="#input-file">Image upload example</a></li>
+				<li><a href="#input-file">Image upload dialog</a></li>
 				<li><a href="#handling-result">Handling result</a></li>
 			</ul>
 		</li>
@@ -360,7 +354,7 @@ Changes to <code>DEFAULTS</code> are global, but you can still pass alternative 
 </section>
 
 <section id="defaults-lang">
-<h3>Language</h3>
+<h3>Captions, language-settings</h3>
 <p>There is no such thing as "language" in SimplyDialogs, but most people would like to adjust their basic dialogs to the lingo or language they use. 
 You can use <code>DEFAULTS</code> to change the dialogs into "spanish" as default by :</p>
 <pre><code class="javascript">const Dlg = SimplyDialogs
@@ -379,18 +373,28 @@ Dlg.DEFAULTS.headers = {
   input: 'Input'
 }
 </code></pre>
+<p>
+<button id="basic-alert-es">Alert</button>
+<button id="basic-info-es">Info</button>
+<button id="basic-confirm-es">Confirm</button>
+<button id="basic-bell-es">Bell</button>
+<button id="basic-error-es">Error</button>
+<button id="basic-input-es">Input</button>
+</p>
+<p>If a <code>button.caption</code> is <code>''</code>, <code>undefined</code> or similar, the button will be hidden.</p>
 </section>
 
 <section id="defaults-icons">
 <h3>Icons</h3>
-<p>Icons can be replaced the same way; either individually or as a whole :</p>
+<p>Icons can be replaced the same way; either individually or as a whole
 <pre><code class="javascript">Dlg.DEFAULTS.icons.alert = '🚀' //unicode rocket</code></pre>
+<p>Example: Use <strong>Font Awesome</strong>-icons instead of the default unicode symbols :</p>
 <iframe src="assets/frames/fa.html" scrolling="no" onload="Test.rf(this)" title="Font Awesome example"></iframe>
 </section>
 
 <section id="defaults-backdrop">
 <h3>::backdrop</h3>
-<p>The native <code>::backdrop</code> more or less look like this across the browsers:</p>
+<p>Across the browsers, the default <code>::backdrop</code> more or less look like this :</p>
 <pre><code class="css">dialog::backdrop {
   position: fixed;
   top: 0px;
@@ -445,7 +449,7 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 
 <section id="integration-bootstrap5">
 	<h3>Example, Bootstrap 5</h3>
-	<iframe src="assets/frames/bs5.html" scrolling="no" onload="Test.rf(this)" title="Boostrap 5 example"></iframe>
+	<iframe src="assets/frames/bs5.html" scrolling="no" onload="Test.rf(this)" title="Bootstrap 5 example"></iframe>
 </section>
 
 <section id="integration-materialize">
@@ -535,11 +539,11 @@ Dlg.alert(msg, options)
 <!-- inputs ---------------------------------------->
 <section id="advanced-inputs">
 <h2>Advanced inputs</h2>
-<p>You can alter the input form either by changing <code>DEFAULTS</code> or by passing an options literal to <code>input()</code> : </p>
+<p>You can alter the input form either by changing <code>DEFAULTS</code> or by passing an options literal to <code>input(msg, options)</code> : </p>
 <pre><code class="javascript">const options = {
   input: { 
     callback: undefined,
-    inputs: [ ... ],
+    inputs: [ {…}, ... ],
     classes: {
       label: '',
       input: ''
