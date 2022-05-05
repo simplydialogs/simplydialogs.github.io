@@ -7,6 +7,7 @@ module.exports = {
 		"root": true,
     "extends": "eslint:recommended",
     "globals": {
+        "hljs": "readonly",
         "Gumshoe": "readonly",
         "SimplyDialogs": "readonly"
     },

@@ -5,14 +5,20 @@
 <title>SimplyDialogs - test and documentation</title>
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-<meta name="description" content="SimlyDialogs is a set of common dialogs, using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
+<meta name="description" content="SimlyDialogs is a set of generic dialogs using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
 <link rel="stylesheet" type="text/css" href="assets/style.css">
-<script src="assets/dialogs/dialogs.js"></script>
-<link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
 <script src="assets/gumshoe.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" rel="stylesheet" >
+
+<!--
+<script src="assets/dialogs/dialogs.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
+-->
+<script src="../simplydialogs/src/dialogs.js"></script>
+<link rel="stylesheet" type="text/css" href="../simplydialogs/src/dialogs.css">
+
 <style>
 html.wait, html.wait * { 
 	cursor: wait !important; 
@@ -33,13 +39,29 @@ aside {
 	padding: 10px;
 	border: 1px solid #dadada;
 	z-index: 25;
-	opacity: 0.8;
+	opacity: 0.9;
+	background: #fff;
+}
+aside .nav {
+	width: auto;
+	display: block;
+	float: right;
+}
+a#burger-menu {
+	display: none;
+	color: #222;
+	font-size: xx-large;
+	margin-right: 10px;
+	position: relative;
+	top: -3px;
+	text-decoration: none;
 }
 aside ul {
 	margin-left: 1rem;
 	list-style-type: none;
 	margin-block-start: 0px;
 	padding-inline-start: 0px;
+	background: #fff;
 }
 aside ul.root {
 	margin-left: 0;
@@ -109,41 +131,45 @@ dialog.x-mas button {
 </head>
 <body>
 <aside style="display:none;">
-<a href="https://github.com/davidkonrad/simplydialogs" title="View on GitHub" id="view-on-github">
-	<img src="assets/GitHub-Mark-32px.png" alt="View on GitHub" width="32" height="32">
-</a>
-<ul class="root">
-	<li><a href="#introduction">Introduction</a></li>
-	<li><a href="#summary">Summary</a></li>
-	<li><a href="#basic-samples">Samples</a></li>
-	<li><a href="#global-settings">Global settings</a>
-		<ul>
-			<li><a href="#defaults">DEFAULTS</a></li>
-			<li><a href="#defaults-lang">Language</a></li>
-			<li><a href="#defaults-icons">Icons</a></li>
-			<li><a href="#defaults-backdrop">::backdrop</a></li>
-			<li><a href="#defaults-classes">classes</a></li>
-			<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
-			<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
-			<li><a href="#integration-materialize">Materialize CSS</a></li>
-		</ul>
-	<li><a href="#options">Options</a>
-		<ul>
-			<li><a href="#options-subset">Subset of DEFAULTS</a></li>
-			<li><a href="#options-examples">Examples</a></li>
-			<li><a href="#options-xmas-card">Xmas dialog</a></li>
-		</ul>
-	</li>
-	<li><a href="#advanced-inputs">Advanced inputs</a>
-		<ul>
-			<li><a href="#ai-input-inputs">Input options</a></li>
-			<li><a href="#ai-input-radio-select">Radios, select</a></li>
-			<li><a href="#ai-input-callback">Callback</a></li>
-			<li><a href="#ai-input-file">Image upload example</a></li>
-			<li><a href="#ai-handling-result">Handling result</a></li>
-		</ul>
-	</li>
-</ul>
+	<div class="nav">
+		<a id="burger-menu" href="#">☰</a>
+		<a href="https://github.com/davidkonrad/simplydialogs" title="View on GitHub" id="view-on-github">
+			<img src="assets/GitHub-Mark-32px.png" alt="View on GitHub" width="32" height="32">
+		</a>
+	</div>
+	<ul class="root">
+		<li><a href="#introduction">Introduction</a></li>
+		<li><a href="#summary">Summary</a></li>
+		<li><a href="#basic-samples">Samples</a></li>
+		<li><a href="#global-settings">Global settings</a>
+			<ul>
+				<li><a href="#defaults">DEFAULTS</a></li>
+				<li><a href="#defaults-lang">Language</a></li>
+				<li><a href="#defaults-icons">Icons</a></li>
+				<li><a href="#defaults-backdrop">::backdrop</a></li>
+				<li><a href="#defaults-classes">classes</a></li>
+				<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
+				<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
+				<li><a href="#integration-materialize">Materialize CSS</a></li>
+			</ul>
+		<li><a href="#options">Options</a>
+			<ul>
+				<li><a href="#options-subset">Subset of DEFAULTS</a></li>
+				<li><a href="#options-examples">Examples</a></li>
+				<li><a href="#options-xmas-card">Xmas dialog</a></li>
+			</ul>
+		</li>
+		<li><a href="#advanced-inputs">Advanced inputs</a>
+			<ul>
+				<li><a href="#input-inputs">Input options</a></li>
+				<li><a href="#input-radio-select">Radios, select</a></li>
+				<li><a href="#input-callback">Callback</a></li>
+				<li><a href="#input-login-dialog">Login dialog</a></li>
+				<li><a href="#input-file">Image upload example</a></li>
+				<li><a href="#handling-result">Handling result</a></li>
+			</ul>
+		</li>
+	</ul>
 </aside>
 <main>
 <section id="introduction">
@@ -408,7 +434,7 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 <h3>buttons.classes</h3>
 <p>You can specify default classes for each button, your own layout or adopting the style of a framework. </p>
 <pre><code class="javascript">Dlg.DEFAULTS.buttons.classes = {
-  ok: '',
+  ok: 'my btn classes',
   cancel: '',
   yes: '',
   no: ''
@@ -432,7 +458,7 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 <h2>Options</h2>
 <p>All the dialogs can also be customized by passing an <code>options</code> param : </p>
 <pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', { icons: { alert: null }})</code></pre>
-<p><button id="options-alert-no-icon">Check it out</button> </p>
+<p><button id="options-alert-no-icon">Test alert no icon</button> </p>
 </section>
 
 <section id="options-subset">
@@ -490,7 +516,7 @@ dialog.x-mas button {
 const msg = '🎀 🎁 Frohe Weihnachten, メリークリスマス, Joyeux Noël, Feliz Navidad, 聖誕快樂, Buon Natale, Glædelig Jul ...!'
 Dlg.alert(msg, options)
 </code></pre>
-<p><button role="button" id="options-complex-example">Check it out</button></p>
+<p><button role="button" id="options-complex-example">X-mas card</button></p>
 </section>
 
 <!-- inputs -->
@@ -510,18 +536,18 @@ Dlg.alert(msg, options)
 </code></pre>
 </section>
 
-<section id="ai-input-inputs">
+<section id="input-inputs">
 <p><code>inputs</code> is an array of objects defining each input for the form :</p>
 <pre><code class="javascript">const options = {
   input: {
     inputs: [
-      { type: 'input', inputType: 'text', label: 'input', name: 'input', placeholder: 'Hey, I am a placeholder' },
-      { type: 'textarea', label: 'textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 80 }
+      { type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed' },
+      { type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50 }
     ]
   }
 }
 Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
-</code></pre><p><button role="button" id="ai-btn-input-textarea">Check it out</button></p>
+</code></pre><p><button role="button" id="btn-input-textarea">Test input, textarea</button></p>
 <p>For <code>&lt;input></code>'s you specify the type throgh <code>inputType</code>. 
 If the browser support the input type it can be shown. Pass special properties by their name, i.e <code>value</code>, <code>min</code>, <code>placeholder</code> :
 <pre><code class="javascript">const options = {
@@ -530,10 +556,13 @@ If the browser support the input type it can be shown. Pass special properties b
       { type: 'input', inputType: 'text', label: 'Text', name: 'input', spellcheck: false },
       { type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
       { type: 'input', inputType: 'color', label: 'Color', name: 'color', value: '#123456' },
+      { type: 'input', inputType: 'number', label: 'Number', name: 'number', value: 42 },
       { type: 'input', inputType: 'password', label: 'Password', name: 'password', style: 'color:maroon;' },
       { type: 'input', inputType: 'date', label: 'Date', name: 'date' },
       { type: 'input', inputType: 'file', label: 'File', name: 'file' },
-      { type: 'input', inputType: 'range', label: 'Range', name: 'range', value: 25, max: 100 }
+      { type: 'input', inputType: 'url', label: 'Url', name: 'url' },
+      { type: 'input', inputType: 'range', label: 'Range', name: 'range', value: 25, max: 100 },
+      { type: 'input', inputType: 'hidden', label: '', name: 'hidden', value: 'You can pass extra values to the form via hidden inputs' }
     ]
   }
 }
@@ -541,10 +570,10 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
   console.log('result', input)
 })
 </code></pre>
-<p><button id="ai-btn-input-all">Check it out</button>. </p>
+<p><button id="btn-input-all">Test many types of input</button> </p>
 </section>
 
-<section id="ai-input-radio-select">
+<section id="input-radio-select">
 <h3>Radios and selects</h3>
 <p>Radios are "paired" inputs and selects have child options, so those need a extended definition :</p>
 <pre><code class="javascript">const options = { 
@@ -571,10 +600,10 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
   }
 }	
 </code></pre>
-<p><button id="ai-btn-radio-select">Check it out</button>. </p>
+<p><button id="btn-input-radio-select">Test radios and select</button> </p>
 </section>
 
-<section id="ai-input-callback">
+<section id="input-callback">
 <h3>Callback</h3>
 <p>Use a callback if you want to validate the form before submit. The callback is triggered anytime one of the inputs change state. 
 If the callback return <code>true</code>, the OK-button is enabled. The callback passes two params : </p>
@@ -587,7 +616,31 @@ If the callback return <code>true</code>, the OK-button is enabled. The callback
 <p>Note: If callback is defined the submit-button will be disabled by default. Otherwise it will be enabled also on empty inputs / form</p>
 </section>
 
-<section id="ai-input-file">
+<section id="input-login-dialog">
+<h3>Login Dialog</h3>
+<p>Here is an example of how to show a modal login-dialog :</p>
+<pre><code class="javascript">const options = {
+  headers: { input: 'Login' },
+  icons: { input: '🔑' },
+  input: {
+    inputs: [	
+      { type: 'input', inputType: 'text', label: 'Username', name: 'username' },
+      { type: 'input', inputType: 'password', label: 'Password', name: 'password' }  
+    ],
+    callback: function(state) {
+      return state.username.length > 0 && state.password.length > 0
+    }
+  }
+}
+Dlg.input('', options).then(input => {
+  console.log('login', input)
+  // { username: '...', password: '...' }
+})
+</code></pre>
+<p><button id="btn-input-login-dialog">Test login dialog</button>. </p>
+</section>
+
+<section id="input-file">
 <h3>File input with preview</h3>
 <p>You kan combine a <code>image</code> type input with a <code>file</code> type input, and by that create an
 image-upload-dialog with preview. It takes a little more options-tweaks than the prior examples: </p>
@@ -624,7 +677,7 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, PNG supported)&lt;/sup>',
   console.log('image upload', input)
 })
 </code></pre>
-<p><button id="ai-btn-input-file">Check it out</button>. </p>
+<p><button id="btn-input-file">Test image upload</button>. </p>
 </section>
 
 <section id="credits">

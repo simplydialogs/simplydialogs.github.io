@@ -25,27 +25,23 @@ const Test = (function(window, document, SimplyDialogs) {
 			} else {
 				const ul = a.querySelector('ul.root')
 				ul.style.display = 'none'
-				const bm = document.createElement('a')
-				bm.innerText = '☰'
-				bm.id = 'burger-menu'
-				bm.href = '#'
-				bm.style.cssText = `
-					color: #222;
-					font-size: xx-large;
-					margin-right: 10px;
-					position: relative;
-					top: -3px;
-					text-decoration: none;
-				`
-				bm.addEventListener('click', (e) => {
+				ul.style.marginLeft = '5px'
+				ul.style.top = '-20px'
+				ul.style.position = 'relative'
+				const bm = gebi('burger-menu')
+				bm.style.display = 'inline'
+				bm.addEventListener('click', () => {
 					ul.style.display = ul.style.display === 'none' ? 'inline-block' : 'none'
 				})
-				a.prepend(bm)
 				a.style.left = 'unset'
+				a.style.border = 'none'
 				a.style.right = '0px'
 				a.style.top = '-5px'
+				a.style.paddingBottom = '2px'
 			}
 		}
+		screen.orientation.addEventListener('change', () => resize())
+		window.addEventListener('orientationchange', () => aresize())
 		window.addEventListener('resize', () => aresize())
 		window.addEventListener('load', () => {
 			aresize()
@@ -183,13 +179,13 @@ const Test = (function(window, document, SimplyDialogs) {
 	}
 
 	const advancedInputs = function() {
-		gebi('ai-btn-input-textarea').onclick = function() {
+		gebi('btn-input-textarea').onclick = function() {
 			const options = {
-			  input: {
-			    inputs: [
-			      { type: 'input', inputType: 'text', label: 'input', name: 'input', placeholder: 'Hey, I am a placeholder' },
-			      { type: 'textarea', label: 'textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 80 }
-			    ]
+				input: {
+					inputs: [
+						{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed' },
+						{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50 }
+					]
 				}
 			}
 			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(function(input) {
@@ -197,18 +193,21 @@ const Test = (function(window, document, SimplyDialogs) {
 			})
 		}
 
-		gebi('ai-btn-input-all').onclick = function() {
+		gebi('btn-input-all').onclick = function() {
 			const options = {
-			  input: {
-			    inputs: [
-			      { type: 'input', inputType: 'text', label: 'Text', name: 'input', spellcheck: false },
+				input: {
+					inputs: [
+						{ type: 'input', inputType: 'text', label: 'Text', name: 'input', spellcheck: false },
 						{ type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
 						{ type: 'input', inputType: 'color', label: 'Color', name: 'color', value: '#123456' },
+						{ type: 'input', inputType: 'number', label: 'Number', name: 'number', value: 42 },
 						{ type: 'input', inputType: 'password', label: 'Password', name: 'password', style: 'color:maroon;' },
 						{ type: 'input', inputType: 'date', label: 'Date', name: 'date' },
 						{ type: 'input', inputType: 'file', label: 'File', name: 'file' },
-						{ type: 'input', inputType: 'range', label: 'Range', name: 'range', value:25, max: 100 }
-			    ]
+						{ type: 'input', inputType: 'url', label: 'Url', name: 'url' },
+						{ type: 'input', inputType: 'range', label: 'Range', name: 'range', value:25, max: 100 },
+						{ type: 'input', inputType: 'hidden', label: '', name: 'hidden', value: 'You can pass extra values to the form via hidden inputs' }
+					]
 				}
 			}
 			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(function(input) {
@@ -216,24 +215,24 @@ const Test = (function(window, document, SimplyDialogs) {
 			})
 		}
 
-		gebi('ai-btn-radio-select').onclick = function() {
+		gebi('btn-input-radio-select').onclick = function() {
 			const options = { 
 				input: { 
-			    inputs: [
-			      { type: 'radio', label: 'radio', name: 'radio',
-			          options: [
-			            { label: 'option1', value: 'option1' },
-			            { label: 'option2', value: 'option2' },
-			            { label: 'option3', value: 'option3' }
-			          ]
-			      },
-			      { type: 'select', label: 'select', name: 'select', selectedIndex: 2,
-			          options: [
-			            { label: 'option1', value: 'option1' },
-			            { label: 'option2', value: 'option2' }
-			          ]
-				    }
-			    ],
+					inputs: [
+						{ type: 'radio', label: 'radio', name: 'radio',
+							options: [
+									{ label: 'option1', value: 'option1' },
+									{ label: 'option2', value: 'option2' },
+									{ label: 'option3', value: 'option3' }
+								]
+						},
+						{ type: 'select', label: 'select', name: 'select', selectedIndex: 2,
+								options: [
+									{ label: 'option1', value: 'option1' },
+									{ label: 'option2', value: 'option2' }
+								]
+						}
+					],
           callback: function(state) {
             return state.radio !== '' && state.select !== ''
           }
@@ -244,17 +243,17 @@ const Test = (function(window, document, SimplyDialogs) {
 			})
 		}
 
-		gebi('ai-btn-input-file').onclick = function() {
+		gebi('btn-input-file').onclick = function() {
 			const options = {
 				headers: { input: 'Upload Image' },
 				icons: { input: '🖼' },
-			  input: {
-			    inputs: [
+				input: {
+					inputs: [
 						{ type: 'input', inputType: 'image', label: 'Preview', name: 'preview', alt: 'No image yet', disabled: 'disabled',
 							src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>',
 							style: 'min-height: 20vh; max-height: 50vh; border: 1px solid #dadada; object-fit: contain;' },
 						{ type: 'input', inputType: 'file', label: 'Image', name: 'file', accept: 'image/png, image/gif, image/jpeg' }
-			    ],
+					],
 					callback: function(state, dialog) {
 						if (state.file) {
 							dialog.querySelector('input[type="image"]').src = URL.createObjectURL(state.file)
@@ -268,6 +267,27 @@ const Test = (function(window, document, SimplyDialogs) {
 			})
 		}
 	}
+
+	gebi('btn-input-login-dialog').onclick = function() {
+		const options = {
+			headers: { input: 'Login' },
+			icons: { input: '🔑' },
+			input: {
+				inputs: [	
+					{ type: 'input', inputType: 'text', label: 'Username', name: 'username' },
+					{ type: 'input', inputType: 'password', label: 'Password', name: 'password' }  
+				],
+				callback: function(state) {
+					return state.username.length > 0 && state.password.length > 0
+				}
+			}
+		}
+		Dlg.input('', options).then(input => {
+			console.log('login', input)
+		})
+	}
+
+
 
 	//
 	aside()
