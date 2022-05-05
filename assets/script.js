@@ -167,6 +167,15 @@ const Test = (function(window, document, SimplyDialogs) {
 			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', { icons: { alert: null }} )
 		}
 
+		gebi('btn-options-pyramids').onclick = function() {
+			const msg = 'The Great Pyramid of Giza is the largest Egyptian pyramid and tomb of<br> Fourth Dynasty pharaoh Khufu. Built in the 26th century BC during a<br> period of around 27 years. '
+			const html = '<div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=the%20great%20pyramids&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.whatismyip-address.com"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://www.embedgooglemap.net">embedgooglemap.net</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>'
+			const options = {
+				headers: { information: 'The Great Pyramid of Giza' }
+			}
+			Dlg.information(msg + html, options)
+		}
+
 		gebi('options-complex-example').onclick = function() {
 				const options = {
 				classes: 'x-mas',
