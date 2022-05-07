@@ -86,6 +86,20 @@ table td img {
 	width: 250px;
 	height: auto;
 }
+h1, h2, h3 {
+	margin: 30px 0 10px;
+}
+h2, h3 {
+	border-bottom: 1px solid #ccc;
+}
+h4, h5 {
+	margin: 10px 0 5px;
+}
+h4 {
+	font-size: 15px;
+}
+
+
 /* special, to show unicode icons more nice */
 pre code.force-unicode .hljs-string {
 	font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', Consolas, "Liberation Mono", Courier, monospace;
@@ -149,10 +163,10 @@ dialog.x-mas button {
 		<li><a href="#options">Options</a>
 			<ul>
 				<li><a href="#options-subset">Subset of DEFAULTS</a></li>
-				<li><a href="#options-pyramids">Google map</a></li>
-				<li><a href="#options-xmas-card">Xmas dialog</a></li>
+				<li><a href="#options-pyramids">Embedded Map</a></li>
 			</ul>
 		</li>
+		<li><a href="#styling">Additional styling</a></li>
 		<li><a href="#advanced-inputs">Advanced inputs</a>
 			<ul>
 				<li><a href="#input-inputs">Input options</a></li>
@@ -493,10 +507,22 @@ Dlg.information(msg + html, options)
 <p><button role="button" id="btn-options-pyramids">Show Pyramids of Giza info-card</button></p>
 </section>
 
-<section id="options-xmas-card">
-<h3>Xmas dialog</h3>
-<p>Here is an example passing <code>options</code> to a simple alert, demonstrating how to manipulate most of all the settings. The demonstration
-is a kind of "Merry Christmas"-alert. First some X-mas-like CSS :</p>
+<section id="styling">
+<h3>Additional styling</h3>
+<p>SimplyDialogs comes with diminutive styling - the very basics like <code>position</code>, <code>max-width</code> and so on - and you are supposed to want to change that styling. There are two ways :</p>
+<h4>1. Override defaults</h4>
+<p>Simply override the few CSS3 rules found in <code>dialogs.css</code> (must be declared <em>after</em>) :</p>
+<pre><code class="css">dialog {
+  border-radius: 0;
+}
+dialog h4 {
+  font-size: medium;
+}
+</code></pre>
+<p>etc. That will obvious inflict on all dialogs.</p>
+<h4>2. Attach a named CSS class to .classes</h4>
+<p>More suitable if you want to style a certain dialog differently. Here is an example with a kind of "Merry X-mas dialog", that overrule many of 
+the default styles :
 <pre><code class="css">dialog.x-mas {
   border-radius: 0;
   border: 1mm ridge #34a65f !important;
@@ -536,7 +562,7 @@ dialog.x-mas button {
 const msg = '🎀 🎁 Frohe Weihnachten, メリークリスマス, Joyeux Noël, Feliz Navidad, 聖誕快樂, Buon Natale, Glædelig Jul ...!'
 Dlg.alert(msg, options)
 </code></pre>
-<p><button role="button" id="options-complex-example">X-mas card</button></p>
+<p><button role="button" id="options-complex-example">X-mas dialog</button></p>
 </section>
 
 <!-- inputs ---------------------------------------->
@@ -657,7 +683,7 @@ Dlg.input('', options).then(input => {
   // { username: '...', password: '...' }
 })
 </code></pre>
-<p><button id="btn-input-login-dialog">Test login dialog</button>. </p>
+<p><button id="btn-input-login-dialog">Test login dialog</button> </p>
 </section>
 
 <section id="input-file">
@@ -697,7 +723,7 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, JPG supported)&lt;/sup>',
   console.log('image upload', input)
 })
 </code></pre>
-<p><button id="btn-input-file">Test image upload</button>. </p>
+<p><button id="btn-input-file">Test image upload</button> </p>
 </section>
 
 <section id="credits">
