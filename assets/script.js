@@ -226,6 +226,17 @@ const Test = (function(window, document, SimplyDialogs) {
 			}
 			Dlg.alert('🎀 🎁 Frohe Weihnachten, メリークリスマス, Feliz Navidad, 聖誕快樂, Glædelig Jul ...!', options)
 		}
+
+		gebi('btn-options-image-viewer').onclick = function() {
+			const msg = '<img src="https://www.nasa.gov/sites/default/files/images/297755main_GPN-2001-000009_full.jpg" style="max-height:75vh;">'
+			const options = {
+				headers: { bell: '' },
+				icons: { bell: '' },
+				buttons: { captions: { ok: null }}
+			}
+			Dlg.bell(msg, options)
+		}
+
 	}
 
 	const advancedInputs = function() {
@@ -336,8 +347,6 @@ const Test = (function(window, document, SimplyDialogs) {
 			console.log('login', input)
 		})
 	}
-
-
 
 	//
 	aside()

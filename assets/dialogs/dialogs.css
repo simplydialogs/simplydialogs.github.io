@@ -71,6 +71,8 @@ dialog .dialog-actions {
 dialog .dialog-message {
 	overflow-wrap: anywhere;
 	white-space: break-spaces;
+	margin-block-start: 0;
+	margin-block-end: 0;
 	margin-bottom: 1em;
 	float: none;
 	margin-top: 1em !important;
