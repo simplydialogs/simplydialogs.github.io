@@ -193,13 +193,15 @@ dialog.x-mas button {
 		<li><a href="#advanced-inputs">Advanced inputs</a>
 			<ul>
 				<li><a href="#input-inputs">Input options</a></li>
+				<li><a href="#input-form-layout">.formLayout</a></li>
+				<li><a href="#input-input-type">.inputType</a></li>
 				<li><a href="#input-radio-select">Radios, select</a></li>
 				<li><a href="#input-callback">Callback</a></li>
 				<li><a href="#input-login-dialog">Login dialog</a></li>
 				<li><a href="#input-file">Image upload dialog</a></li>
-				<li><a href="#handling-result">Handling result</a></li>
 			</ul>
 		</li>
+		<li><a href="#credits">Credits</a></li>
 	</ul>
 </aside>
 <main>
@@ -372,6 +374,7 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
     }
   },
   input: {
+    formLayout: 'left full-width',
     classes: {
       label: '',
       input: ''
@@ -601,11 +604,16 @@ Dlg.alert(msg, options)
 <!-- inputs ---------------------------------------->
 <section id="advanced-inputs">
 <h2>Advanced inputs</h2>
+</section>
+
+<section id="input-options">
+<h3>Passing options literal</h3>
 <p>You can alter the input form either by changing <code>DEFAULTS</code> or by passing an options literal to <code>input(msg, options)</code> : </p>
 <pre><code class="javascript">const options = {
   input: { 
-    callback: undefined,
     inputs: [ {…}, ... ],
+    callback: undefined,
+    formLayout: '',
     classes: {
       label: '',
       input: ''
@@ -613,9 +621,13 @@ Dlg.alert(msg, options)
   }
 }
 </code></pre>
+<p>Just pass the attributes you need, if not set <code>.DEFAULTS</code> are used. The elements in the form is positioned by a 
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid" title="CSS grid on MDN">CSS grid</a>, via <code>.formLayout</code>
+<code>top</code>|<code>left</code> you can specify the label positions. </p>
 </section>
 
 <section id="input-inputs">
+<h3>Define inputs</h3>
 <p><code>inputs</code> is an array of objects defining each input for the form :</p>
 <pre><code class="javascript">const options = {
   input: {
@@ -627,6 +639,24 @@ Dlg.alert(msg, options)
 }
 Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
 </code></pre><p><button role="button" id="btn-input-textarea">Test input, textarea</button></p>
+</section>
+
+<section id="input-form-layout">
+<h3>.formLayout</h3>
+<p><code>formLayout</code> can contain <code>left</code>/<code>top</code> and <code>full-width</code>. The basic layout have huge 
+importance of the look of the dialog. Here all the combinations along with the input/textarea example above :</p>
+<p>
+<button id="btn-input-form-layout-default">Default</button>
+<button id="btn-input-form-layout-top">top</button>
+<button id="btn-input-form-layout-top-full-width">top full-width</button>
+<button id="btn-input-form-layout-left">left</button>
+<button id="btn-input-form-layout-left-full-width">left full-width</button>
+<button id="btn-input-form-layout-none">none (empty, undefined)</button>
+</p>
+</section>
+
+<section id="input-input-type">
+<h3>.inputType</h3>
 <p>For <code>&lt;input></code>'s you specify the type throgh <code>inputType</code>. 
 If the browser support the input type it can be shown. Pass special properties by their name, i.e <code>value</code>, <code>min</code>, <code>placeholder</code> :
 <pre><code class="javascript">const options = {
@@ -770,10 +800,12 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, JPG supported)&lt;/sup>',
 </ul>
 </section>
 
+<!--
 <section id="lighthouse">
 <h3>Lighthouse Audit</h3>
 <p><img src="assets/images/lighthouse.png" alt="Lighthouse 4x100 audit" width="419" height="142"></p>
 </section>
+-->
 
 </main>
 

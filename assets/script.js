@@ -46,7 +46,7 @@ const Test = (function(window, document, SimplyDialogs) {
 		window.addEventListener('load', () => {
 			aresize()
 			new Gumshoe('ul.root a', {
-				offset: 30,
+				offset: 20,
 				reflow: true,
 				nested: false,
 				nestedClass: ''
@@ -57,6 +57,7 @@ const Test = (function(window, document, SimplyDialogs) {
 		a.style.position = 'fixed'
 	}
 
+//basic
 	const basic = function() {
 		gebi('basic-alert').onclick = function() {
 			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('alert', answer) })
@@ -86,6 +87,7 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 	}
 
+//es
 	const es = function() {
 		const options = {
 			headers: {
@@ -127,6 +129,7 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 	}
 
+//longTexts
 	const longTexts = function() {
 		const lt = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 		gebi('basic-alert-long-text').onclick = function() { Dlg.alert(lt).then(answer => { console.log('long text alert', answer) })	}
@@ -141,6 +144,7 @@ const Test = (function(window, document, SimplyDialogs) {
 		gebi('basic-input-long-text').onclick = function() { Dlg.input(lt).then(answer => { console.log('long text input', answer) }) }
 	}
 
+//backdrop
 	const backdrop = function() {
 		gebi('backdrop-none').onclick = function() {
 			const o = {
@@ -202,6 +206,46 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 	}
 
+//formLayout
+	const formLayout = function() {
+		const options = {
+			input: {
+				inputs: [
+					{ type: 'input', inputType: 'text', label: 'Input', name: 'input' },
+					{	type: 'textarea', inputType: 'text', label: 'Textarea', name: 'textarea' }
+				],
+				callback: function(state) {
+					return state.input.length > 3
+				}
+			}
+		}
+		gebi('btn-input-form-layout-default').onclick = function() {
+			options.input.formLayout = 'left full-width'
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+		}
+		gebi('btn-input-form-layout-top').onclick = function() {
+			options.input.formLayout = 'top'
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+		}
+		gebi('btn-input-form-layout-top-full-width').onclick = function() {
+			options.input.formLayout = 'top full-width'
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+		}
+		gebi('btn-input-form-layout-left').onclick = function() {
+			options.input.formLayout = 'left'
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+		}
+		gebi('btn-input-form-layout-left-full-width').onclick = function() {
+			options.input.formLayout = 'left full-width'
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+		}
+		gebi('btn-input-form-layout-none').onclick = function() {
+			options.input.formLayout = ''
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+		}
+	}
+
+//options
 	const options = function() {
 
 		gebi('options-alert-no-icon').onclick = function() {
@@ -352,6 +396,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	aside()
 	basic()
 	longTexts()
+	formLayout()
 	options()
 	es()
 	advancedInputs()
