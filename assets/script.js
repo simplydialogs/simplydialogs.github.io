@@ -323,7 +323,7 @@ const Test = (function(window, document, SimplyDialogs) {
 					}
 				}
 			}
-			Dlg.input('Select image file <br><sup>(PNG, GIF, PNG supported)</sup>', options).then(function(input) {
+			Dlg.input('Select image file <br><sup>(PNG, GIF, JPG supported)</sup>', options).then(function(input) {
 				console.log('result', input)
 			})
 		}
