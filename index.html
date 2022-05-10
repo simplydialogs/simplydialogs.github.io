@@ -200,9 +200,10 @@ dialog.x-mas button {
 			<ul>
 				<li><a href="#input-inputs">Input options</a></li>
 				<li><a href="#input-form-layout">.formLayout</a></li>
+				<li><a href="#input-enter-submit">.enterSubmit</a></li>
 				<li><a href="#input-input-type">.inputType</a></li>
 				<li><a href="#input-radio-select">Radios, select</a></li>
-				<li><a href="#input-callback">Callback</a></li>
+				<li><a href="#input-callback">.callback</a></li>
 				<li><a href="#input-login-dialog">Login dialog</a></li>
 				<li><a href="#input-file">Image upload dialog</a></li>
 			</ul>
@@ -503,7 +504,7 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 </section>
 
 
-<!-- options ------------------------------------->
+<!-- options -->
 <section id="options">
 <h2>Options</h2>
 <p>All the dialogs can also be customized by passing an <code>options</code> param : </p>
@@ -514,11 +515,7 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 <section id="options-subset">
 <h3>Subset of <code style="font-size:inherit; color: inherit;">DEFAULTS</code></h3>
 <p><code>options</code> should be an object literal with the same structure as <code>DEFAULTS</code>. But you only need to pass the changes 
-you want for the particular dialog. Examples:
-<pre><code class="javascript"></code></pre>
-no the entire need Obvious you not need to pass an entire 
-copy of the default </p>
-<pre><code class="javascript"></code></pre>
+you want for the particular dialog.</p>
 </section>
 
 <section id="options-image-viewer">
@@ -607,23 +604,23 @@ Dlg.alert(msg, options)
 <p><button role="button" id="options-complex-example">X-mas dialog</button></p>
 </section>
 
-<!-- inputs ---------------------------------------->
+<!-- inputs -->
 <section id="advanced-inputs">
 <h2>Advanced inputs</h2>
 </section>
 
 <section id="input-options">
 <h3>Passing options literal</h3>
-<p>You can alter the input form either by changing <code>DEFAULTS</code> or by passing an options literal to <code>input(msg, options)</code> : </p>
+<p>You can alter the input form either by changing <code>DEFAULTS</code> or by passing an options literal to <code>input(msg, options)</code> (what you should do) : </p>
 <pre><code class="javascript">const options = {
   input: { 
-    inputs: [ {…}, ... ],
-    callback: undefined,
     formLayout: '',
     classes: {
       label: '',
       input: ''
-    }
+    },
+    inputs: [ {…}, ... ],
+    callback: undefined
   }
 }
 </code></pre>
@@ -638,8 +635,8 @@ Dlg.alert(msg, options)
 <pre><code class="javascript">const options = {
   input: {
     inputs: [
-      { type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed' },
-      { type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50 }
+      { type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required' },
+      { type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4 }
     ]
   }
 }
@@ -651,6 +648,15 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
 <h3>.formLayout</h3>
 <p><code>formLayout</code> can contain <code>left</code>/<code>top</code> and <code>full-width</code>. The basic layout have huge 
 importance of the look of the dialog. Here all the combinations along with the input/textarea example above :</p>
+<pre><code class="javascript">const options = {
+  input: {
+    formLayout: (not set | top | top full-width | left | left full-width | '')
+    inputs: [
+      ...
+    ]
+  }
+}
+</code></pre>
 <p>
 <button id="btn-input-form-layout-default">Default</button>
 <button id="btn-input-form-layout-top">top</button>
@@ -661,10 +667,30 @@ importance of the look of the dialog. Here all the combinations along with the i
 </p>
 </section>
 
+<section id="input-enter-submit">
+<h3>.enterSubmit</h3>
+<p><code>enterSubmit</code> allows the dialog to be submitted on keyboard enter. You can turn <code>enterSubmit</code> on and off for all type
+of dialogs (except <code>wait</code>) but is mostly useful for the <code>input()</code>-dialog. Note: If set to <code>true</code> 
+you can still enter returns / line breaks in textareas, but anywhere else it will submit the dialog (i.e the form). </p>
+<pre><code class="javascript">const options = {
+  input: {
+    enterSubmit: (true | false),
+    inputs: [
+      ...
+    ]
+  }
+}
+</code></pre>
+<p>
+<button id="btn-input-enter-submit-true">.enterSubmit true (default)</button>
+<button id="btn-input-enter-submit-false">.enterSubmit false</button>
+</p>
+</section>
+
 <section id="input-input-type">
 <h3>.inputType</h3>
-<p>For <code>&lt;input></code>'s you specify the type throgh <code>inputType</code>. 
-If the browser support the input type it can be shown. Pass special properties by their name, i.e <code>value</code>, <code>min</code>, <code>placeholder</code> :
+<p>For <code>&lt;input></code>'s you specify the type throgh <code>inputType</code>. If the browser support the input type it can be shown. 
+Pass special properties by their name, i.e <code>value</code>, <code>min</code>, <code>placeholder</code> :</p>
 <pre><code class="javascript">const options = {
   input: {
     inputs: [
@@ -719,7 +745,7 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
 </section>
 
 <section id="input-callback">
-<h3>Callback</h3>
+<h3>.callback</h3>
 <p>Use a callback if you want to validate the form before submit. The callback is triggered anytime one of the inputs change state. 
 If the callback return <code>true</code>, the OK-button is enabled. The callback passes two params : </p>
 <pre><code class="javascript">callback: function(state, dialog) {

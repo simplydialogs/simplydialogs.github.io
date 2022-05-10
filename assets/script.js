@@ -13,7 +13,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	const rf = function(f) { 
 		setTimeout(() => {
 			f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight) - 10) + 'px'
-		}, 200)
+		}, 100)
 	}
 
 	const aside = function() {
@@ -46,7 +46,7 @@ const Test = (function(window, document, SimplyDialogs) {
 		window.addEventListener('load', () => {
 			aresize()
 			new Gumshoe('ul.root a', {
-				offset: 20,
+				offset: '290px',
 				reflow: true,
 				nested: false,
 				nestedClass: ''
@@ -211,8 +211,8 @@ const Test = (function(window, document, SimplyDialogs) {
 		const options = {
 			input: {
 				inputs: [
-					{ type: 'input', inputType: 'text', label: 'Input', name: 'input' },
-					{	type: 'textarea', inputType: 'text', label: 'Textarea', name: 'textarea' }
+					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required' },
+					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4 }
 				],
 				callback: function(state) {
 					return state.input.length > 3
@@ -242,6 +242,34 @@ const Test = (function(window, document, SimplyDialogs) {
 		gebi('btn-input-form-layout-none').onclick = function() {
 			options.input.formLayout = ''
 			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+		}
+	}
+
+//enterSubmit
+	const enterSubmit = function() {
+		const options = {
+			input: {
+				inputs: [
+					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required' },
+					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4 }
+				],
+				callback: function(state) {
+					return state.input.length > 3
+				}
+			}
+
+		}
+		gebi('btn-input-enter-submit-true').onclick = function() {
+			options.enterSubmit = true
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(fs => {
+				console.log('enterSubmit', fs)
+			})
+		}
+		gebi('btn-input-enter-submit-false').onclick = function() {
+			options.enterSubmit = false
+			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(fs => {
+				console.log('enterSubmit', fs)
+			})
 		}
 	}
 
@@ -397,6 +425,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	basic()
 	longTexts()
 	formLayout()
+	enterSubmit()
 	options()
 	es()
 	advancedInputs()
