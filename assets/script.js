@@ -1,6 +1,4 @@
 
-import 'dialogs/dialogs.js';
-
 const Test = (function(window, document, SimplyDialogs) {
 	const gebi = (id) => { return document.getElementById(id) }
 	const Dlg = SimplyDialogs
