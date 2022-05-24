@@ -1,4 +1,6 @@
 
+import 'dialogs/dialogs.js';
+
 const Test = (function(window, document, SimplyDialogs) {
 	const gebi = (id) => { return document.getElementById(id) }
 	const Dlg = SimplyDialogs
@@ -17,6 +19,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	}
 
 	const aside = function() {
+		if (document.hidden) return
 		const a = document.querySelector('aside')
 		const m = document.querySelector('main')
 		const aresize = function() { 
@@ -60,7 +63,7 @@ const Test = (function(window, document, SimplyDialogs) {
 //basic
 	const basic = function() {
 		gebi('basic-alert').onclick = function() {
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('alert', answer) })
+			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('alert', answer) }) 
 		}
 		gebi('basic-confirm').onclick = function() {
 			Dlg.confirm('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('confirm', answer) })
