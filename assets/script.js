@@ -2,6 +2,8 @@
 const Test = (function(window, document, SimplyDialogs) {
 	const gebi = (id) => { return document.getElementById(id) }
 	const Dlg = SimplyDialogs
+	const shortText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+	const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 
 	if (hljs)	{
 		hljs.configure({
@@ -61,28 +63,28 @@ const Test = (function(window, document, SimplyDialogs) {
 //basic
 	const basic = function() {
 		gebi('basic-alert').onclick = function() {
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('alert', answer) }) 
+			Dlg.alert(shortText).then(answer => {	console.log('alert', answer) }) 
 		}
 		gebi('basic-confirm').onclick = function() {
-			Dlg.confirm('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('confirm', answer) })
+			Dlg.confirm(shortText).then(answer => {	console.log('confirm', answer) })
 		}
 		gebi('basic-info').onclick = function() {
-			Dlg.information('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('info', answer) })
+			Dlg.information(shortText).then(answer => {	console.log('info', answer) })
 		}
 		gebi('basic-bell').onclick = function() {	
-			Dlg.bell('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => { console.log('bell', answer) })
+			Dlg.bell(shortText).then(answer => { console.log('bell', answer) })
 		}
 		gebi('basic-error').onclick = function() {
-			Dlg.error('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	console.log('error', answer) })
+			Dlg.error(shortText).then(answer => {	console.log('error', answer) })
 		}
 		gebi('basic-wait').onclick = function() {
-			const wait = Dlg.wait('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+			const wait = Dlg.wait(shortText)
 			setTimeout(function() {
 				wait.close()
 			}, 1500)
 		}
 		gebi('basic-input').onclick = function() {
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(function(input) {
+			Dlg.input(shortText).then(function(input) {
 				console.log('input', input)
 			})
 		}
@@ -109,22 +111,22 @@ const Test = (function(window, document, SimplyDialogs) {
 			}
 		}
 		gebi('basic-alert-es').onclick = function() {
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(answer => {	console.log('alert', answer) })
+			Dlg.alert(shortText, options).then(answer => {	console.log('alert', answer) })
 		}
 		gebi('basic-confirm-es').onclick = function() {
-			Dlg.confirm('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(answer => {	console.log('confirm', answer) })
+			Dlg.confirm(shortText, options).then(answer => {	console.log('confirm', answer) })
 		}
 		gebi('basic-info-es').onclick = function() {
-			Dlg.information('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(answer => {	console.log('info', answer) })
+			Dlg.information(shortText, options).then(answer => {	console.log('info', answer) })
 		}
 		gebi('basic-bell-es').onclick = function() {	
-			Dlg.bell('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(answer => { console.log('bell', answer) })
+			Dlg.bell(shortText, options).then(answer => { console.log('bell', answer) })
 		}
 		gebi('basic-error-es').onclick = function() {
-			Dlg.error('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(answer => {	console.log('error', answer) })
+			Dlg.error(shortText, options).then(answer => {	console.log('error', answer) })
 		}
 		gebi('basic-input-es').onclick = function() {
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(input => {
+			Dlg.input(shortText, options).then(input => {
 				console.log('input', input)
 			})
 		}
@@ -151,13 +153,13 @@ const Test = (function(window, document, SimplyDialogs) {
 			const o = {
 				backdrop: 'background: rgba(0, 0, 0, 0);'
 			}
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
+			Dlg.alert(shortText, o).then(answer => {	console.log('alert-backdrop-none', answer) })
 		}
 		gebi('backdrop-darker').onclick = function() {
 			const o = {
 				backdrop: 'background: rgba(0, 0, 0, 0.5);'
 			}
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
+			Dlg.alert(shortText, o).then(answer => {	console.log('alert-backdrop-none', answer) })
 		}
 		gebi('backdrop-carbon').onclick = function() {
 			const o = {
@@ -171,7 +173,7 @@ const Test = (function(window, document, SimplyDialogs) {
 									opacity: 0.4;
 									background-size: 20px 20px;`
 			}
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
+			Dlg.alert(shortText, o).then(answer => {	console.log('alert-backdrop-none', answer) })
 		}
 
 		gebi('backdrop-stairs').onclick = function() {
@@ -183,7 +185,7 @@ const Test = (function(window, document, SimplyDialogs) {
 								opacity: 0.4;
 								background-size: 16px 48px;`
 			}
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
+			Dlg.alert(shortText, o).then(answer => {	console.log('alert-backdrop-none', answer) })
 		}
 
 		gebi('backdrop-heart').onclick = function() {
@@ -203,7 +205,7 @@ const Test = (function(window, document, SimplyDialogs) {
 								background-color:#b03;
 								background-size:100px 100px;`
 			}
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', o).then(answer => {	console.log('alert-backdrop-none', answer) })
+			Dlg.alert(shortText, o).then(answer => {	console.log('alert-backdrop-none', answer) })
 		}
 	}
 
@@ -222,27 +224,27 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 		gebi('btn-input-form-layout-default').onclick = function() {
 			options.input.formLayout = 'left full-width'
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+			Dlg.input(shortText, options)
 		}
 		gebi('btn-input-form-layout-top').onclick = function() {
 			options.input.formLayout = 'top'
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+			Dlg.input(shortText, options)
 		}
 		gebi('btn-input-form-layout-top-full-width').onclick = function() {
 			options.input.formLayout = 'top full-width'
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+			Dlg.input(shortText, options)
 		}
 		gebi('btn-input-form-layout-left').onclick = function() {
 			options.input.formLayout = 'left'
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+			Dlg.input(shortText, options)
 		}
 		gebi('btn-input-form-layout-left-full-width').onclick = function() {
 			options.input.formLayout = 'left full-width'
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+			Dlg.input(shortText, options)
 		}
 		gebi('btn-input-form-layout-none').onclick = function() {
 			options.input.formLayout = ''
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+			Dlg.input(shortText, options)
 		}
 	}
 
@@ -262,13 +264,13 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 		gebi('btn-input-enter-submit-true').onclick = function() {
 			options.enterSubmit = true
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(fs => {
+			Dlg.input(shortText, options).then(fs => {
 				console.log('enterSubmit', fs)
 			})
 		}
 		gebi('btn-input-enter-submit-false').onclick = function() {
 			options.enterSubmit = false
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(fs => {
+			Dlg.input(shortText, options).then(fs => {
 				console.log('enterSubmit', fs)
 			})
 		}
@@ -278,7 +280,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	const options = function() {
 
 		gebi('options-alert-no-icon').onclick = function() {
-			Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', { icons: { alert: null }} )
+			Dlg.alert(shortText, { icons: { alert: null }} )
 		}
 
 		gebi('btn-options-pyramids').onclick = function() {
@@ -310,6 +312,34 @@ const Test = (function(window, document, SimplyDialogs) {
 			Dlg.bell(msg, options)
 		}
 
+		gebi('btn-options-sizing-xs').onclick = function() {
+			Dlg.info('some text ...', { classes: 'xs' })
+		}
+		gebi('btn-options-sizing-sm').onclick = function() {
+			Dlg.alert(shortText, { classes: 'sm' })
+		}
+		gebi('btn-options-sizing-md').onclick = function() {
+			Dlg.error(longText, { classes: 'md' })
+		}
+		gebi('btn-options-sizing-lg').onclick = function() {
+			Dlg.confirm(longText, { classes: 'lg' })
+		}
+		gebi('btn-options-sizing-sm-overflow').onclick = function() {
+			Dlg.info(longText, { classes: 'sm' })
+		}
+		gebi('btn-options-sizing-xs-width').onclick = function() {
+			Dlg.info(longText, { classes: 'xs-width' })
+		}
+		gebi('btn-options-sizing-sm-height').onclick = function() {
+			Dlg.info(longText, { classes: 'sm-height' })
+		}
+		gebi('btn-options-sizing-md-width').onclick = function() {
+			Dlg.info(longText, { classes: 'md-width' })
+		}
+		gebi('btn-options-sizing-fullsize').onclick = function() {
+			Dlg.error(longText, { classes: 'fullsize' })
+		}
+
 	}
 
 	const advancedInputs = function() {
@@ -322,7 +352,7 @@ const Test = (function(window, document, SimplyDialogs) {
 					]
 				}
 			}
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(function(input) {
+			Dlg.input(shortText, options).then(function(input) {
 				console.log('result', input)
 			})
 		}
@@ -344,7 +374,7 @@ const Test = (function(window, document, SimplyDialogs) {
 					]
 				}
 			}
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(function(input) {
+			Dlg.input(shortText, options).then(function(input) {
 				console.log('result', input)
 			})
 		}
@@ -372,7 +402,7 @@ const Test = (function(window, document, SimplyDialogs) {
           }
         }
       }
-			Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(function(input) {
+			Dlg.input(shortText, options).then(function(input) {
 				console.log('radio select', input)
 			})
 		}

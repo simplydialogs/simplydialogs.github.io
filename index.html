@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>SimplyDialogs - test and documentation</title>
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
+<link rel="shortcut icon" href="#">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="pinterest" content="nopin">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -13,8 +14,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" rel="stylesheet" >
+
+<!--
 <script src="assets/dialogs/dialogs.js"></script>
+-->
+<script src="../simplydialogs/src/dialogs.js"></script>
+
+<!--
 <link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
+-->
+<link rel="stylesheet" type="text/css" href="../simplydialogs/src/dialogs.css">
+
 <meta name="publisher" content="SimplyDialogs">
 <meta property="og:url" content="https://simplydialogs.github.io">
 <meta property="og:type" content="article">
@@ -181,6 +191,7 @@ dialog.x-mas button {
 				<li><a href="#defaults-icons">Icons</a></li>
 				<li><a href="#defaults-backdrop">::backdrop</a></li>
 				<li><a href="#defaults-classes">classes</a></li>
+				<li><a href="#sizing">Sizing</a></li>
 				<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
 				<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
 				<li><a href="#integration-materialize">Materialize CSS</a></li>
@@ -188,6 +199,7 @@ dialog.x-mas button {
 		<li><a href="#options">Options</a>
 			<ul>
 				<li><a href="#options-subset">Subset of DEFAULTS</a></li>
+				<li><a href="#options-sizing">Sizing on the fly</a></li>
 				<li><a href="#options-image-viewer">Image viewer</a></li>
 				<li><a href="#options-pyramids">Embedded Map</a></li>
 			</ul>
@@ -467,6 +479,21 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 <pre><code class="javascript">Dlg.DEFAULTS.classes = 'my dialog classes'</code></pre>
 </section>
 
+<section id="sizing">
+<h3>Sizing</h3>
+<p>You can show static sized dialogs by using the sizing classes : <code>xs</code>,<code>xsmall</code>,<code>sm</code>,<code>small</code>,
+<code>md</code>,<code>medium</code>,<code>lg</code>,<code>large</code> : </p>
+<pre><code class="javascript">Dlg.DEFAULTS.classes = 'small'</code></pre>
+<p>Will force any dialog into type small. Using explicit sizing classes have two advantages : 
+<ul>
+	<li>Overflow content are always hidden</li>
+	<li>Buttons or <code>.dialog-actions</code> are always placed near the bottom right</li>
+</ul>
+<p>If you are not sure about the size of the content, but sure about how large the dialog should be, you can use <code>*-height</code> and <code>*-width</code> classes.</p>
+<pre><code class="javascript">Dlg.DEFAULTS.classes = 'md-width'</code></pre>
+<p>All dialogs will have the width of a md dialog, but growth in height according to the content.</p>
+</section>
+
 <section id="defaults-buttons-classes">
 <h3>buttons.classes</h3>
 <p>You can specify default classes for each button, your own layout or adopting the style of a framework. </p>
@@ -478,6 +505,19 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 }
 </code></pre>
 </section>
+
+<section id="defaults-buttons-classes">
+<h3>buttons.classes</h3>
+<p>You can specify default classes for each button, your own layout or adopting the style of a framework. </p>
+<pre><code class="javascript">Dlg.DEFAULTS.buttons.classes = {
+  ok: 'my btn classes',
+  cancel: '',
+  yes: '',
+  no: ''
+}
+</code></pre>
+</section>
+
 
 <section id="integration-bootstrap5">
 	<h3>Example, Bootstrap 5</h3>
@@ -503,6 +543,32 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 <p><code>options</code> should be an object literal with the same structure as <code>DEFAULTS</code>. But you only need to pass the changes 
 you want for the particular dialog.</p>
 </section>
+
+<section id="options-sizing">
+<h3>Sizing on the fly</h3>
+<p>Use the <code>classes</code> option to set a static size on the dialog. The builyin classes are : </p>
+<small><table>
+	<tr><td><code>xs</code> / <code>xsmall</code></td><td>18vw / 15vh</td><td><code>xs-width</code> / <code>xs-height</code></td></tr>
+	<tr><td><code>sm</code> / <code>small</code></td><td>22vw / 18vh</td><td><code>sm-width</code> / <code>sm-height</code></td></tr>
+	<tr><td><code>md</code> / <code>medium</code></td><td>34vw / 31vh</td><td><code>md-width</code> / <code>md-height</code></td></tr>
+	<tr><td><code>lg</code> / <code>large</code></td><td>55vw / 52vh</td><td><code>lg-width</code> / <code>lg-height</code></td></tr>
+	<tr><td><code>fullsize</code></td><td>100vw / 100vh</td><td><code></code></td></tr>
+</table></small>
+<p>Example, show a medium sized information-dialog :</p>
+<pre><code class="javascript">Dlg.info('some text ...', { classes: 'xs' }).then(..)</code></pre>
+<p>
+	<button role="button" id="btn-options-sizing-xs">As above</button>
+	<button role="button" id="btn-options-sizing-sm">Alert sm</button>
+	<button role="button" id="btn-options-sizing-md">Error md</button>
+	<button role="button" id="btn-options-sizing-lg">Confirm lg</button>
+	<button role="button" id="btn-options-sizing-sm-overflow">Info sm overflow</button>
+	<button role="button" id="btn-options-sizing-xs-width">Alert xs-width</button>
+	<button role="button" id="btn-options-sizing-sm-height">Alert sm-height</button>
+	<button role="button" id="btn-options-sizing-md-width">Alert md-height</button>
+	<button role="button" id="btn-options-sizing-fullsize">Error fullsize</button>
+</p>
+</section>
+
 
 <section id="options-image-viewer">
 <h3>Image Viewer</h3>
@@ -817,13 +883,6 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, JPG supported)&lt;/sup>',
 	<li><a href="https://highlightjs.org/">highlight.js</a> and contributors</li>
 </ul>
 </section>
-
-<!--
-<section id="lighthouse">
-<h3>Lighthouse Audit</h3>
-<p><img src="assets/images/lighthouse.png" alt="Lighthouse 4x100 audit" width="419" height="142"></p>
-</section>
--->
 
 </main>
 
