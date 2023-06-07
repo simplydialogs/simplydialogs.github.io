@@ -430,25 +430,46 @@ const Test = (function(window, document, SimplyDialogs) {
 				console.log('result', input)
 			})
 		}
-	}
 
-	gebi('btn-input-login-dialog').onclick = function() {
-		const options = {
-			headers: { input: 'Login' },
-			icons: { input: '🔑' },
-			input: {
-				inputs: [	
-					{ type: 'input', inputType: 'text', label: 'Username', name: 'username' },
-					{ type: 'input', inputType: 'password', label: 'Password', name: 'password' }  
-				],
-				callback: function(state) {
-					return state.username.length > 0 && state.password.length > 0
+		gebi('btn-input-login-dialog').onclick = function() {
+			const options = {
+				headers: { input: 'Login' },
+				icons: { input: '🔑' },
+				classes: 'sm',
+				input: {
+					inputs: [	
+						{ type: 'input', inputType: 'text', label: 'Username', name: 'username' },
+						{ type: 'input', inputType: 'password', label: 'Password', name: 'password' }  
+					],
+					callback: function(state) {
+						return state.username.length > 0 && state.password.length > 0
+					}
 				}
 			}
+			Dlg.input('', options).then(input => {
+				console.log('login', input)
+			})
 		}
-		Dlg.input('', options).then(input => {
-			console.log('login', input)
-		})
+
+		gebi('btn-input-form-validation-test').onclick = function() {
+			const options = {
+				headers: { input: 'What is 42 with inflation?' },
+				icons: { input: null },
+				input: {
+					inputs: [	
+						{ type: 'input', inputType: 'text', label: 'Secret number', name: 'star-trek-number' }
+					],
+					callback: function(state) {
+						return parseInt(state['star-trek-number']) == 47
+					}
+				}
+			}
+			Dlg.input(null, options).then(input => {
+				console.log(input)
+			})
+		}
+
+
 	}
 
 	//

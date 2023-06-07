@@ -9,6 +9,7 @@
 <meta name="pinterest" content="nopin">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 <meta name="description" content="SimplyDialogs is a set of generic dialogs using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
+<link rel="stylesheet" type="text/css" href="assets/normalize.css">
 <link rel="stylesheet" type="text/css" href="assets/style.css">
 <script src="assets/gumshoe.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
@@ -125,13 +126,13 @@ h4, h5 {
 	margin: 10px 0 5px;
 }
 h1 {
-	font-size: 32px;
+	font-size: 36px;
 }
 h3 {
-	font-size: 17px;
+	font-size: 20px;
 }
 h4 {
-	font-size: 15px;
+	font-size: 14px;
 }
 /* special, to show unicode icons more nice */
 pre code.force-unicode .hljs-string {
@@ -210,12 +211,12 @@ dialog.x-mas button {
 				<li><a href="#input-enter-submit">.enterSubmit</a></li>
 				<li><a href="#input-input-type">.inputType</a></li>
 				<li><a href="#input-radio-select">Radios, select</a></li>
-				<li><a href="#input-callback">.callback</a></li>
+				<li><a href="#input-form-validation">Form validation</a></li>
 				<li><a href="#input-login-dialog">Login dialog</a></li>
 				<li><a href="#input-file">Image upload dialog</a></li>
 			</ul>
 		</li>
-		<li><a href="#credits">Credits</a></li>
+		<li style="margin-top:1rem;"><a href="#credits">Credits</a></li>
 	</ul>
 </aside>
 <main>
@@ -544,7 +545,7 @@ you want for the particular dialog.</p>
 
 <section id="options-sizing">
 <h3>Sizing on the fly</h3>
-<p>Use the <code>classes</code> option to set a static size on the dialog. The builyin classes are : </p>
+<p>Use the <code>classes</code> option to set a static size on the dialog. The builtin classes are : </p>
 <small><table>
 	<tr><td><code>xs</code> / <code>xsmall</code></td><td>18vw / 15vh</td><td><code>xs-width</code> / <code>xs-height</code></td></tr>
 	<tr><td><code>sm</code> / <code>small</code></td><td>22vw / 18vh</td><td><code>sm-width</code> / <code>sm-height</code></td></tr>
@@ -794,17 +795,36 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
 <p><button id="btn-input-radio-select">Test radios and select</button> </p>
 </section>
 
-<section id="input-callback">
-<h3>.callback</h3>
-<p>Use a callback if you want to validate the form before submit. The callback is triggered anytime one of the inputs change state. 
-If the callback return <code>true</code>, the OK-button is enabled. The callback passes two params : </p>
+<section id="input-form-validation">
+<h3>Form validation</h3>
+<p>Use <code>input.callback</code> if you want to validate the form before allowing submit. The callback is triggered anytime one of the inputs 
+changes state. If the callback return <code>true</code>, the OK-button is enabled. The callback passes two params : </p>
 <pre><code class="javascript">callback: function(state, dialog) {
-  ...
+  return true || false
 }
 </code></pre>
-<p><code>state</code> is an object literal containing <code>{ name: value }</code> for all inputs.</p>
-<p><code>dialog</code> is the dialog's actual <code>HTMLDialogElement</code>, which can be used to manipulate input fields on the form.</p>
-<p>Note: If callback is defined the submit-button will be disabled by default. Otherwise it will be enabled also on empty inputs / form</p>
+<ul>
+	<li><code>state</code> is an object literal containing <code>{ name: value }</code> for all inputs.</li>
+	<li><code>dialog</code> is the dialog's actual <code>HTMLDialogElement</code>, which can be used to manipulate input fields on the form.</li>
+</ul>
+<p>Note: If callback is defined the submit-button will be disabled by default. Otherwise it will be enabled also on empty inputs / forms!</p>
+<p>Example: You are not allowed to submit before you have entered the secret number 47 :</p>
+<pre><code class="javascript">const options = {
+  headers: { input: 'What is 42 with inflation?' },
+  icons: { input: null },
+  input: {
+    inputs: [	
+      { type: 'input', inputType: 'text', label: 'Secret number', name: 'star-trek-number' }
+    ],
+    callback: function(state) {
+      return parseInt(state['star-trek-number']) == 47
+    }
+  }
+}
+Dlg.input(null, options).then(input => {
+  console.log(input)
+})</code></pre>
+<p><button id="btn-input-form-validation-test">Try it out</button> </p>
 </section>
 
 <section id="input-login-dialog">
