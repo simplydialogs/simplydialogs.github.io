@@ -88,14 +88,14 @@ const Test = (function(window, document, SimplyDialogs) {
 				console.log('input', input)
 			})
 		}
-
+/*
 		const stackClick = function() {
 			Dlg.confirm('Open a new dialog?').then(function(answer) {
 				if (answer) stackClick()
 			})
 		}
 		gebi('basic-stack').onclick = stackClick
-
+*/
 	}
 
 //es
@@ -402,6 +402,35 @@ const Test = (function(window, document, SimplyDialogs) {
 			const options = { 
 				input: { 
 					inputs: [
+						{ type: 'radio', label: 'radio', name: 'radio', value: 'option2',
+							options: [
+									{ label: 'option1', value: 'option1' },
+									{ label: 'option2', value: 'option2' },
+									{ label: 'option3', value: 'option3' }
+								]
+						},
+						{ type: 'select', label: 'select', name: 'select', value: 'option3',
+								options: [
+									{ label: 'option1', value: 'option1' },
+									{ label: 'option2', value: 'option2' },
+									{ label: 'option3', value: 'option3' }
+								]
+						}
+					],
+          callback: function(state) {
+            return state.radio !== '' && state.select !== ''
+          }
+        }
+      }
+			Dlg.input(shortText, options).then(function(input) {
+				console.log('radio select', input)
+			})
+		}
+
+		gebi('btn-input-radio-select-no-value').onclick = function() {
+			const options = { 
+				input: { 
+					inputs: [
 						{ type: 'radio', label: 'radio', name: 'radio',
 							options: [
 									{ label: 'option1', value: 'option1' },
@@ -409,10 +438,11 @@ const Test = (function(window, document, SimplyDialogs) {
 									{ label: 'option3', value: 'option3' }
 								]
 						},
-						{ type: 'select', label: 'select', name: 'select', selectedIndex: 2,
+						{ type: 'select', label: 'select', name: 'select', 
 								options: [
 									{ label: 'option1', value: 'option1' },
-									{ label: 'option2', value: 'option2' }
+									{ label: 'option2', value: 'option2' },
+									{ label: 'option3', value: 'option3' }
 								]
 						}
 					],

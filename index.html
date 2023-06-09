@@ -346,7 +346,10 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
 <button id="basic-wait-long-text">Wait</button>
 <button id="basic-input-long-text">Input</button>
 </p>
+<!--
+are not stacable! Must refactor ...
 <p>The dialogs can be stacked upon each other endlessly: <button id="basic-stack">Show a dialog?</button></p>
+-->
 </section>
 
 <section id="global-settings">
@@ -812,18 +815,18 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
 
 <section id="input-radio-select">
 <h3>Radios and selects</h3>
-<p>Radios are "paired" inputs and selects have child options, so those need a extended definition :</p>
+<p>Radios are "paired" inputs and selects have child options, so those need a extended definition. Notice the use of <code>value</code> :</p>
 <pre><code class="javascript">const options = { 
   input: { 
     inputs [
-      { type: 'radio', label: 'radio', name: 'radio',
+      { type: 'radio', label: 'radio', name: 'radio', value: 'option2',
           options: [
             { label: 'option1', value: 'option1' },
             { label: 'option2', value: 'option2' },
             { label: 'option3', value: 'option3' }
           ]
       },
-      { type: 'select', label: 'select', name: 'select', selectedIndex: 2,
+      { type: 'select', label: 'select', name: 'select', value: 'option3',
           options: [
             { label: 'option1', value: 'option1' },
             { label: 'option2', value: 'option2' },
@@ -837,7 +840,7 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
   }
 }	
 </code></pre>
-<p><button id="btn-input-radio-select">Test radios and select</button> </p>
+<p><button id="btn-input-radio-select">Test radios and select</button> <button id="btn-input-radio-select-no-value">Same, without using value</button> </p>
 </section>
 
 <section id="input-form-validation">
@@ -942,16 +945,12 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, JPG supported)&lt;/sup>',
 
 <section id="integration-bootstrap5">
 	<h3>Example, Bootstrap 5</h3>
-<!--
 	<iframe src="assets/frames/bs5.html" onload="Test.rf(this)" title="Bootstrap 5 example"></iframe>
--->
 </section>
 
 <section id="integration-materialize">
 	<h3>Example, Materialize CSS</h3>
-<!--
 	<iframe src="assets/frames/materialize.html" onload="Test.rf(this)" title="Materialize CSS Example"></iframe>
--->
 </section>
 
 </section>
