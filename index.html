@@ -5,6 +5,9 @@
 <title>SimplyDialogs - test and documentation</title>
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
 <link rel="shortcut icon" href="#">
+<!--
+<link rel="stylesheet" type="text/css" href="assets/modern-normalize.css">
+-->
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="pinterest" content="nopin">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -14,7 +17,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" rel="stylesheet" >
-
+<link rel="stylesheet" type="text/css" href="assets/font-awesome/css/font-awesome.min.css">
 <script src="assets/dialogs/dialogs.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
 
@@ -37,6 +40,7 @@
 <meta name="twitter:title" content="SimplyDialogs">
 <meta name="twitter:description" content="SimplyDialogs is a set of generic dialogs using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
 <meta name="twitter:image" content="/assets/images/simplydialogs-official.png">
+
 <style>
 html.wait, html.wait * { 
 	cursor: wait !important; 
@@ -168,6 +172,13 @@ dialog.x-mas button {
 	padding-right: 20px;
 	text-shadow: 1px 1px #fff;
 }
+dialog.nasa-earth {
+	background: url(https://www.nasa.gov/sites/default/files/images/297755main_GPN-2001-000009_full.jpg);
+	background-size: cover;
+	color: lime;
+	min-height: 45vh;
+	font-size: large;
+}
 </style>
 </head>
 <body>
@@ -191,13 +202,11 @@ dialog.x-mas button {
 				<li><a href="#defaults-classes">classes</a></li>
 				<li><a href="#sizing">Sizing</a></li>
 				<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
-				<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
-				<li><a href="#integration-materialize">Materialize CSS</a></li>
 			</ul>
 		<li><a href="#options">Options</a>
 			<ul>
-				<li><a href="#options-subset">Subset of DEFAULTS</a></li>
 				<li><a href="#options-sizing">Sizing on the fly</a></li>
+				<li><a href="#options-complex">Complex options</a></li>
 				<li><a href="#options-image-viewer">Image viewer</a></li>
 				<li><a href="#options-pyramids">Embedded Map</a></li>
 			</ul>
@@ -215,14 +224,19 @@ dialog.x-mas button {
 				<li><a href="#input-file">Image upload dialog</a></li>
 			</ul>
 		</li>
+		<li><a href="#integration">Integration</a></li>
+			<ul>
+				<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
+				<li><a href="#integration-materialize">Materialize CSS</a></li>
+			</ul>
 		<li style="margin-top:1rem;"><a href="#credits">Credits</a></li>
 	</ul>
 </aside>
 <main>
 <section id="introduction">
 <h1>SimplyDialogs</h1>
-<p>This is demonstration / test page for <a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a>. Simplydialogs offers 
-a range of common dialogs, all highly customizeable - comes with no dependencies and a really small footprint.</p>
+<p>This is demonstration / test page for <a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a>. Latest release <a href="https://github.com/davidkonrad/simplydialogs/releases"><strong>v1.0.7</strong></a>.</p>
+<p>Simplydialogs offers a range of common dialogs, all highly customizeable. Comes with no dependencies and a <em>really</em> small footprint.</p>
 </section>
 
 <section id="summary">
@@ -332,6 +346,7 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
 <button id="basic-wait-long-text">Wait</button>
 <button id="basic-input-long-text">Input</button>
 </p>
+<p>The dialogs can be stacked upon each other endlessly: <button id="basic-stack">Show a dialog?</button></p>
 </section>
 
 <section id="global-settings">
@@ -428,10 +443,30 @@ Dlg.DEFAULTS.headers = {
 
 <section id="defaults-icons">
 <h3>Icons</h3>
-<p>Icons can be replaced the same way; either individually or as a whole
-<pre><code class="javascript">Dlg.DEFAULTS.icons.alert = '🚀' //unicode rocket</code></pre>
-<p>Example: Use <strong>Font Awesome</strong>-icons instead of the default unicode symbols :</p>
+<p>Icons can be replaced the same way; either individually or as a whole. For example, use another standard <a href="https://unicode.org/emoji/charts/full-emoji-list.html" target=_blank referrer="noreferrer" title="Full Emoji List, v15.0">unicode emoji</a> :
+<pre><code class="javascript">Dlg.DEFAULTS.icons.alert = '💥' //U+1F4A5, collision</code></pre>
+<p>See also the <a href="#integration">integration</a> section. Here an example using Font Awesome icons :</p>
+<pre><code class="javascript">Dlg.DEFAULTS.icons = {
+  alert: '&lt;i class="fa fa-warning" style="color:fuchsia;">&lt;/i>',
+  information: '&lt;i class="fa fa-info-circle" style="color:royalblue;">&lt;/i>',
+  confirm: '&lt;i class="fa fa-question-circle" style="color:forestgreen;">&lt;/i>',
+  bell: '&lt;i class="fa fa-bell" style="color:orange;">&lt;/i>',
+  error: '&lt;i class="fa fa-times-circle-o" style="color:maroon;">&lt;/i>',
+  input: '&lt;i class="fa fa-pencil" style="color:navy;">&lt;/i>',
+  wait: '&lt;i class="fa fa-gear" style="color:gray;">&lt;/i>'
+}
+</code></pre>
+<p><button id="btn-fa-alert" >fa Alert</button>
+<button id="btn-fa-info">fa Info</button>
+<button id="btn-fa-confirm">fa Confirm</button>
+<button id="btn-fa-bell">fa Bell</button>
+<button id="btn-fa-error">fa Error</button>
+<button id="btn-fa-wait">fa Wait</button>
+<button id="btn-fa-input">fa Input</button>
+</p>
+<!--
 <iframe src="assets/frames/fa.html" scrolling="no" onload="Test.rf(this)" title="Font Awesome example"></iframe>
+-->
 </section>
 
 <section id="defaults-backdrop">
@@ -467,7 +502,7 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
   linear-gradient(63deg, transparent 74%, #999 78%),
   linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444;
   opacity: 0.4;
-  background-size: 16px 48px;
+  background-size: 16px 48px;`
 </code></pre>
 </section>
 
@@ -504,42 +539,14 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 </code></pre>
 </section>
 
-<section id="defaults-buttons-classes">
-<h3>buttons.classes</h3>
-<p>You can specify default classes for each button, your own layout or adopting the style of a framework. </p>
-<pre><code class="javascript">Dlg.DEFAULTS.buttons.classes = {
-  ok: 'my btn classes',
-  cancel: '',
-  yes: '',
-  no: ''
-}
-</code></pre>
-</section>
-
-
-<section id="integration-bootstrap5">
-	<h3>Example, Bootstrap 5</h3>
-	<iframe src="assets/frames/bs5.html" scrolling="no" onload="Test.rf(this)" title="Bootstrap 5 example"></iframe>
-</section>
-
-<section id="integration-materialize">
-	<h3>Example, Materialize CSS</h3>
-	<iframe src="assets/frames/materialize.html" scrolling="no" onload="Test.rf(this)" title="Materialize CSS Example"></iframe>
-</section>
-
 
 <!-- options -->
 <section id="options">
 <h2>Options</h2>
-<p>All the dialogs can also be customized by passing an <code>options</code> param : </p>
+<p>Any of the <code>DEFAULTS</code> settings can be overruled by passing an <code>options</code> literal as second parameter. 
+The structure of the options argument should follow the same format as <code>DEFAULTS</code> : 
 <pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', { icons: { alert: null }})</code></pre>
-<p><button id="options-alert-no-icon">Test alert no icon</button> </p>
-</section>
-
-<section id="options-subset">
-<h3>Subset of <code style="font-size:inherit; color: inherit;">DEFAULTS</code></h3>
-<p><code>options</code> should be an object literal with the same structure as <code>DEFAULTS</code>. But you only need to pass the changes 
-you want for the particular dialog.</p>
+<p><button id="options-alert-no-icon">Test alert no icon</button></p>
 </section>
 
 <section id="options-sizing">
@@ -552,9 +559,9 @@ you want for the particular dialog.</p>
 	<tr><td><code>lg</code> / <code>large</code></td><td>55vw / 52vh</td><td><code>lg-width</code> / <code>lg-height</code></td></tr>
 	<tr><td><code>fullsize</code></td><td>100vw / 100vh</td><td><code></code></td></tr>
 </table></small>
-<p>Example, show a medium sized information-dialog :</p>
+<p>Example, show a xsmall sized information-dialog :</p>
 <pre><code class="javascript">Dlg.info('some text ...', { classes: 'xs' }).then(..)</code></pre>
-<p>
+<p style="margin-bottom:1px;">
 	<button role="button" id="btn-options-sizing-xs">As above</button>
 	<button role="button" id="btn-options-sizing-sm">Alert sm</button>
 	<button role="button" id="btn-options-sizing-md">Error md</button>
@@ -565,8 +572,47 @@ you want for the particular dialog.</p>
 	<button role="button" id="btn-options-sizing-md-width">Alert md-height</button>
 	<button role="button" id="btn-options-sizing-fullsize">Error fullsize</button>
 </p>
+<small style="color:gray;">Note: The examples show dimensions, they are not meant to fit</small>
 </section>
 
+<section id="options-complex">
+<h3>Complex options</h3>
+<p>As reference, the layout of the options-literal look like this: </p>
+<pre><code class="javascript">{
+  backdrop: ,
+  classes: ,
+  enterSubmit: ,
+  headers: {},
+  icons: {},
+  buttons: {
+    captions: {},
+    classes: {},
+  },
+  input: {
+    formLayout: ,
+    classes: { label: , input: , }
+    inputs: [],
+    callback: ,
+  }
+}
+</code></pre>
+<p>As example, define the following CSS-class and pass the literal : </p>
+<pre><code class="css">dialog.nasa-earth {
+  background: url(https://www.nasa.gov/sites/default/files/images/297755main_GPN-2001-000009_full.jpg);
+  background-size: cover;
+  color: lime;
+  min-height: 40vh;
+}</code></pre>
+<pre><code class="javascript">const options = {
+  classes: 'nasa-earth sm-width',
+  icons: { confirm: '👽' },
+  headers: { confirm: null },
+  buttons: { captions: { yes: 'No', no: 'Defently no!' }}
+}
+Dlg.confirm('Are There Any Chance of Intelligent Life in The Universe, anywhere?', options)
+</code></pre>
+<p><button id="options-complex-example-1">Try it out</button> ;- it is hard to figure out examples, or maybe I am just stoned.</p>
+</section>
 
 <section id="options-image-viewer">
 <h3>Image Viewer</h3>
@@ -597,7 +643,7 @@ Dlg.information(msg + html, options)
 </section>
 
 <section id="styling">
-<h3>Additional styling</h3>
+<h2>Additional styling</h2>
 <p>SimplyDialogs comes with diminutive styling - the very basics like <code>position</code>, <code>max-width</code> and so on - and you are supposed to want to change that styling. There are two ways :</p>
 <h4>1. Override defaults</h4>
 <p>Simply override the few CSS3 rules found in <code>dialogs.css</code> (must be declared <em>after</em>) :</p>
@@ -651,7 +697,7 @@ dialog.x-mas button {
 const msg = '🎀 🎁 Frohe Weihnachten, メリークリスマス, Joyeux Noël, Feliz Navidad, 聖誕快樂, Buon Natale, Glædelig Jul ...!'
 Dlg.alert(msg, options)
 </code></pre>
-<p><button role="button" id="options-complex-example">X-mas dialog</button></p>
+<p><button role="button" id="options-complex-example-2">X-mas dialog</button></p>
 </section>
 
 <!-- inputs -->
@@ -810,13 +856,13 @@ changes state. If the callback return <code>true</code>, the OK-button is enable
 <p>Example: You are not allowed to submit before you have entered the secret number 47 :</p>
 <pre><code class="javascript">const options = {
   headers: { input: 'What is 42 with inflation?' },
-  icons: { input: null },
+  icons: { input: '🖖' },
   input: {
     inputs: [	
-      { type: 'input', inputType: 'text', label: 'Secret number', name: 'star-trek-number' }
+      { type: 'input', inputType: 'password', label: '', name: 'star-trek-number' }
     ],
     callback: function(state) {
-      return parseInt(state['star-trek-number']) == 47
+      return parseInt(state['star-trek-number']) === 47
     }
   }
 }
@@ -828,13 +874,13 @@ Dlg.input(null, options).then(input => {
 
 <section id="input-login-dialog">
 <h3>Login Dialog</h3>
-<p>Here is an example of how to show a modal login-dialog :</p>
+<p>Here is an example of how to show a modal login-dialog. Notice the use of <code>autocomplete: off</code> which turns off annoying auto suggestions : </p>
 <pre><code class="javascript">const options = {
   headers: { input: 'Login' },
   icons: { input: '🔑' },
   input: {
     inputs: [	
-      { type: 'input', inputType: 'text', label: 'Username', name: 'username' },
+      { type: 'input', inputType: 'text', label: 'Username', name: 'username', autocomplete: 'off' },
       { type: 'input', inputType: 'password', label: 'Password', name: 'password' }  
     ],
     callback: function(state) {
@@ -890,6 +936,27 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, JPG supported)&lt;/sup>',
 <p><button id="btn-input-file">Test image upload</button> </p>
 </section>
 
+
+<section id="integration">
+<h2>Integration</h2>
+
+<section id="integration-bootstrap5">
+	<h3>Example, Bootstrap 5</h3>
+<!--
+	<iframe src="assets/frames/bs5.html" onload="Test.rf(this)" title="Bootstrap 5 example"></iframe>
+-->
+</section>
+
+<section id="integration-materialize">
+	<h3>Example, Materialize CSS</h3>
+<!--
+	<iframe src="assets/frames/materialize.html" onload="Test.rf(this)" title="Materialize CSS Example"></iframe>
+-->
+</section>
+
+</section>
+
+
 <section id="credits">
 <h2>Credits</h2>
 <p>This site was easy to produce, thanks to :</p>
@@ -904,7 +971,7 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, JPG supported)&lt;/sup>',
 </main>
 
 <footer>
-&copy; David Konrad, 2022, davidkonrad at gmail. <a href="https://github.com/simplydialogs/simplydialogs.github.io">This site on GitHub</a>.
+&copy; David Konrad, 2022- present, davidkonrad at gmail. <a href="https://github.com/simplydialogs/simplydialogs.github.io">This site on GitHub</a>.
 </footer>
 
 <script src="assets/script.js"></script>

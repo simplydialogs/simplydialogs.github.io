@@ -14,7 +14,7 @@ const Test = (function(window, document, SimplyDialogs) {
 
 	const rf = function(f) { 
 		setTimeout(() => {
-			f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight) - 10) + 'px'
+			f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight) + 10) + 'px'
 		}, 100)
 	}
 
@@ -88,6 +88,14 @@ const Test = (function(window, document, SimplyDialogs) {
 				console.log('input', input)
 			})
 		}
+
+		const stackClick = function() {
+			Dlg.confirm('Open a new dialog?').then(function(answer) {
+				if (answer) stackClick()
+			})
+		}
+		gebi('basic-stack').onclick = stackClick
+
 	}
 
 //es
@@ -292,14 +300,24 @@ const Test = (function(window, document, SimplyDialogs) {
 			Dlg.information(msg + html, options)
 		}
 
-		gebi('options-complex-example').onclick = function() {
-				const options = {
+		gebi('options-complex-example-2').onclick = function() {
+			const options = {
 				classes: 'x-mas',
 				headers: { alert: 'Merry Christmas ...' },
 				icons: { alert : '🎄' },
 				buttons: { captions: { ok: '✨ Ok ✨' }}
 			}
 			Dlg.alert('🎀 🎁 Frohe Weihnachten, メリークリスマス, Feliz Navidad, 聖誕快樂, Glædelig Jul ...!', options)
+		}
+
+		gebi('options-complex-example-1').onclick = function() {
+			const options = {
+				classes: 'nasa-earth sm-width',
+				icons: { confirm: '👽' },
+				headers: { confirm: null },
+				buttons: { captions: { yes: 'No', no: 'Defently no!' }}
+			}
+			Dlg.confirm('Are There Any Chance of Intelligent Life in The Universe, anywhere?', options)
 		}
 
 		gebi('btn-options-image-viewer').onclick = function() {
@@ -342,6 +360,7 @@ const Test = (function(window, document, SimplyDialogs) {
 
 	}
 
+//advancedInputs
 	const advancedInputs = function() {
 		gebi('btn-input-textarea').onclick = function() {
 			const options = {
@@ -438,7 +457,7 @@ const Test = (function(window, document, SimplyDialogs) {
 				classes: 'sm',
 				input: {
 					inputs: [	
-						{ type: 'input', inputType: 'text', label: 'Username', name: 'username' },
+						{ type: 'input', inputType: 'text', label: 'Username', name: 'username', autocomplete: 'off' },
 						{ type: 'input', inputType: 'password', label: 'Password', name: 'password' }  
 					],
 					callback: function(state) {
@@ -454,13 +473,13 @@ const Test = (function(window, document, SimplyDialogs) {
 		gebi('btn-input-form-validation-test').onclick = function() {
 			const options = {
 				headers: { input: 'What is 42 with inflation?' },
-				icons: { input: null },
+				icons: { input: '🖖' },
 				input: {
 					inputs: [	
-						{ type: 'input', inputType: 'text', label: 'Secret number', name: 'star-trek-number' }
+						{ type: 'input', inputType: 'password', label: '', name: 'star-trek-number' }
 					],
 					callback: function(state) {
-						return parseInt(state['star-trek-number']) == 47
+						return parseInt(state['star-trek-number']) === 47
 					}
 				}
 			}
@@ -468,9 +487,70 @@ const Test = (function(window, document, SimplyDialogs) {
 				console.log(input)
 			})
 		}
+	}
 
+//font awesome
+	const fontAwesome = function() {
+		gebi('btn-fa-alert').onclick = function() {
+			const options = {
+				icons: { alert: '<i class="fa fa-warning" style="color:brown;"></i>' }
+			}
+			Dlg.alert(shortText, options).then(function(answer) {
+				console.log(answer)
+			})
+		}
+		gebi('btn-fa-info').onclick = function() {
+			const options = {
+				icons: { information: '<i class="fa fa-info-circle" style="color:royalblue;"></i>' }
+			}
+			Dlg.info(shortText, options).then(function(answer) {
+				console.log(answer)
+			})
+		}
+		gebi('btn-fa-confirm').onclick = function() {
+			const options = {
+				icons: { confirm: '<i class="fa fa-question-circle" style="color:forestgreen;"></i>' }
+			}
+			Dlg.confirm(shortText, options).then(function(answer) {
+				console.log(answer)
+			})
+		}
+		gebi('btn-fa-bell').onclick = function() {
+			const options = {
+				icons: { bell: '<i class="fa fa-bell" style="color:orange;"></i>' }
+			}
+			Dlg.bell(shortText, options).then(function(answer) {
+				console.log(answer)
+			})
+		}
+		gebi('btn-fa-error').onclick = function() {
+			const options = {
+				icons: { error: '<i class="fa fa-times-circle-o" style="color:crimson;"></i>' }
+			}
+			Dlg.error(shortText, options).then(function(answer) {
+				console.log(answer)
+			})
+		}
+		gebi('btn-fa-input').onclick = function() {
+			const options = {
+				icons: { input: '<i class="fa fa-pencil" style="color:gray;"></i>' }
+			}
+			Dlg.input(shortText, options).then(function(answer) {
+				console.log(answer)
+			})
+		}
+		gebi('btn-fa-wait').onclick = function() {
+			const options = {
+				icons: { wait: '<i class="fa fa-gear" style="color:gray;"></i>' }
+			}
+			const wait = Dlg.wait(shortText, options)
+			setTimeout(function() {
+				wait.close()
+			}, 3000)
+		}
 
 	}
+
 
 	//
 	aside()
@@ -482,6 +562,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	es()
 	advancedInputs()
 	backdrop()
+	fontAwesome()
 
 	return {
 		rf

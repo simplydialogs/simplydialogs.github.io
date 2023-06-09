@@ -563,4 +563,6 @@ sub {
     color: #a31515;
 }
 
-
+iframe {
+	overflow-y: hidden !important;
+}
