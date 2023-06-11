@@ -88,14 +88,21 @@ const Test = (function(window, document, SimplyDialogs) {
 				console.log('input', input)
 			})
 		}
-/*
+
 		const stackClick = function() {
-			Dlg.confirm('Open a new dialog?').then(function(answer) {
-				if (answer) stackClick()
-			})
+			Dlg.info('Info ...', { classes: 'lg' }).then(function(answer) {	console.log(answer)	})
+			setTimeout(function() {
+				Dlg.confirm('Confirm ...', { classes: 'md' }).then(function(answer) {	console.log(answer)	})
+			}, 100)
+			setTimeout(function() {
+				Dlg.alert('Alert ...', { classes: 'sm' }).then(function(answer) {	console.log(answer)	})
+			}, 250)
+			setTimeout(function() {
+				Dlg.bell('Bell ...', { classes: 'xs' }).then(function(answer) {	console.log(answer)	})
+			}, 400)
 		}
 		gebi('basic-stack').onclick = stackClick
-*/
+
 	}
 
 //es
