@@ -6,11 +6,31 @@ dialog {
 	box-shadow: 0 0 40px rgba(0,0,0,0.1), 0 0 10px rgba(0,0,0,0.25);
 	min-width: 20vw;
 	max-width: 50vw;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+	line-height: 1.5;
+}
+
+dialog.default {
 	position: fixed;
 	margin: auto auto;
 	margin-top: 9vh;
-	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-	line-height: 1.5;
+}
+dialog.top {
+	margin-top: 5vh;
+}
+dialog.bottom {
+	margin-bottom: 5vh !important;
+}
+dialog.middle {
+  transform: translateY(-50%) !important;
+}
+dialog.left {
+	margin-left: 4vw;
+}
+dialog.right {
+	margin-right: 4vw;
+}
+dialog.center {
 }
 
 @keyframes explode { 
@@ -72,7 +92,7 @@ dialog #dialog-message {
 	white-space: break-spaces;
 	margin-bottom: 1em;
 	float: none;
-	margin-top: 1em !important;
+	margin-top: 1em;
 	width: auto;
 	height: auto;	
 }
@@ -116,94 +136,94 @@ dialog .dialog-input.full-width div select {
 }
 
 dialog.xsmall, dialog.xs {
-	width: 18vw !important;
-	min-width: 18vw !important;
-	max-width: 18vw !important;
-	height: 15vh !important;
-	min-height: 15vh !important;
-	max-height: 15vh !important;
+	width: 18vw;
+	min-width: 18vw;
+	max-width: 18vw;
+	height: 15vh;
+	min-height: 15vh;
+	max-height: 15vh;
 	overflow: hidden;
 }
 dialog.xsmall-width, dialog.xs-width {
-	width: 18vw !important;
-	min-width: 18vw !important;
-	max-width: 18vw !important;
+	width: 18vw;
+	min-width: 18vw;
+	max-width: 18vw;
 }
 dialog.xsmall-height, dialog.xs-height {
-	height: 15vh !important;
-	min-height: 15vh !important;
-	max-height: 15vh !important;
+	height: 15vh;
+	min-height: 15vh;
+	max-height: 15vh;
 }
 
 dialog.small, dialog.sm {
-	width: 22vw !important;
-	min-width: 22vw !important;
-	max-width: 22vw !important;
-	height: 18vh !important;
-	min-height: 18vh !important;
-	max-height: 18vh !important;
+	width: 22vw;
+	min-width: 22vw;
+	max-width: 22vw;
+	height: 18vh;
+	min-height: 18vh;
+	max-height: 18vh;
 	overflow: hidden;
 }
 dialog.small-height, dialog.sm-height {
-	height: 18vh !important;
-	min-height: 18vh !important;
-	max-height: 18vh !important;
+	height: 18vh;
+	min-height: 18vh;
+	max-height: 18vh;
 }
 
 dialog.small-width, dialog.sm-width {
-	width: 22vw !important;
-	min-width: 22vw !important;
-	max-width: 22vw !important;
+	width: 22vw;
+	min-width: 22vw;
+	max-width: 22vw;
 }
 
 dialog.medium, dialog.md {
-	width: 34vw !important;
-	min-width: 34vw !important;
-	max-width: 34vw !important;
-	height: 31vh !important;
-	min-height: 31vh !important;
-	max-height: 31vh !important;
+	width: 34vw;
+	min-width: 34vw;
+	max-width: 34vw;
+	height: 31vh;
+	min-height: 31vh;
+	max-height: 31vh;
 	overflow: hidden;
 }
 dialog.medium-height, dialog.md-height {
-	height: 31vh !important;
-	min-height: 31vh !important;
-	max-height: 31vh !important;
+	height: 31vh;
+	min-height: 31vh;
+	max-height: 31vh;
 }
 dialog.medium-width, dialog.md-width {
-	width: 34vw !important;
-	min-width: 34vw !important;
-	max-width: 34vw !important;
+	width: 34vw;
+	min-width: 34vw;
+	max-width: 34vw;
 }
 
 dialog.large, dialog.lg {
-	width: 55vw !important;
-	min-width: 55vw !important;
-	max-width: 55vw !important;
-	height: 52vh !important;
-	min-height: 52vh !important;
-	max-height: 52vh !important;
+	width: 55vw;
+	min-width: 55vw;
+	max-width: 55vw;
+	height: 52vh;
+	min-height: 52vh;
+	max-height: 52vh;
 	overflow: hidden;
 }
 dialog.large-height, dialog.lg-height {
-	height: 52vh !important;
-	min-height: 52vh !important;
-	max-height: 52vh !important;
+	height: 52vh;
+	min-height: 52vh;
+	max-height: 52vh;
 }
 dialog.large-width, dialog.lg-width {
-	width: 55vw !important;
-	min-width: 55vw !important;
-	max-width: 55vw !important;
+	width: 55vw;
+	min-width: 55vw;
+	max-width: 55vw;
 }
 
 dialog.fullsize {
 	margin-top: 0;
-	width: 100vw !important;
-	min-width: 100vw !important;
-	max-width: 100vw !important;
-	height: 100vh !important;
-	min-height: 100vh !important;
-	max-height: 100vh !important;
+	width: 100vw;
+	min-width: 100vw;
+	max-width: 100vw;
+	height: 100vh;
+	min-height: 100vh;
+	max-height: 100vh;
 	overflow: hidden;
 }
 

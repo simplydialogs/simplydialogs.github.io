@@ -89,19 +89,24 @@ const Test = (function(window, document, SimplyDialogs) {
 			})
 		}
 
-		const stackClick = function() {
-			Dlg.info('Info ...', { classes: 'lg' }).then(function(answer) {	console.log(answer)	})
+		const stackClick = function(cls) {
+			cls = typeof cls === 'string' ? cls : ''
+			Dlg.info('Info ...', { classes: 'lg'+cls }).then(function(answer) {	console.log(answer)	})
 			setTimeout(function() {
-				Dlg.confirm('Confirm ...', { classes: 'md' }).then(function(answer) {	console.log(answer)	})
+				Dlg.confirm('Confirm ...', { classes: 'md'+cls }).then(function(answer) {	console.log(answer)	})
 			}, 100)
 			setTimeout(function() {
-				Dlg.alert('Alert ...', { classes: 'sm' }).then(function(answer) {	console.log(answer)	})
+				Dlg.alert('Alert ...', { classes: 'sm'+cls }).then(function(answer) {	console.log(answer)	})
 			}, 250)
 			setTimeout(function() {
-				Dlg.bell('Bell ...', { classes: 'xs' }).then(function(answer) {	console.log(answer)	})
+				Dlg.bell('Bell ...', { classes: 'xs'+cls }).then(function(answer) {	console.log(answer)	})
 			}, 400)
 		}
 		gebi('basic-stack').onclick = stackClick
+
+		gebi('basic-stack-middle-positioning').onclick = function() {
+			stackClick(' bottom right')
+		}
 
 	}
 

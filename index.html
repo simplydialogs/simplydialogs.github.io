@@ -20,12 +20,6 @@
 <link rel="stylesheet" type="text/css" href="assets/font-awesome/css/font-awesome.min.css">
 <script src="assets/dialogs/dialogs.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
-
-<!--
-<script src="../simplydialogs/src/dialogs.js"></script>
-<link rel="stylesheet" type="text/css" href="../simplydialogs/src/dialogs.css">
--->
-
 <meta name="publisher" content="SimplyDialogs">
 <meta property="og:url" content="https://simplydialogs.github.io">
 <meta property="og:type" content="article">
@@ -192,7 +186,11 @@ dialog.nasa-earth {
 	<ul class="root">
 		<li><a href="#introduction">Introduction</a></li>
 		<li><a href="#summary">Summary</a></li>
-		<li><a href="#basic-samples">Samples</a></li>
+		<li><a href="#basic-samples">Samples</a>
+			<ul>
+				<li><a href="#stackable">Stackable</a></li>
+			</ul>
+		</li>
 		<li><a href="#global-settings">Global settings</a>
 			<ul>
 				<li><a href="#defaults">DEFAULTS</a></li>
@@ -201,6 +199,7 @@ dialog.nasa-earth {
 				<li><a href="#defaults-backdrop">::backdrop</a></li>
 				<li><a href="#defaults-classes">classes</a></li>
 				<li><a href="#sizing">Sizing</a></li>
+				<li><a href="#positioning">Positioning</a></li>
 				<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
 			</ul>
 		<li><a href="#options">Options</a>
@@ -235,7 +234,7 @@ dialog.nasa-earth {
 <main>
 <section id="introduction">
 <h1>SimplyDialogs</h1>
-<p>This is demonstration / test page for <a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a>. Latest release <a href="https://github.com/davidkonrad/simplydialogs/releases"><strong>v1.0.7</strong></a>.</p>
+<p>This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.0.9</a></strong> <sup>(06.26.2023)</sup>.</p>
 <p>Simplydialogs offers a range of common dialogs, all highly customizeable. Comes with no dependencies and a <em>really</em> small footprint.</p>
 </section>
 
@@ -350,7 +349,9 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
 
 <section id="stackable">
 <h3>Stackable</h3>
-<p>SimplyDialogs can be stacked upon each other endlessly <button id="basic-stack">Show some dialogs</button> (with forced delay effect)</p>
+<p>SimplyDialogs can be stacked upon each other endlessly :</p>
+<p><button id="basic-stack">Show some dialogs</button> (with forced delay effect).</p>
+<p><button id="basic-stack-middle-positioning">Show some more dialogs</button> (with forced right bottom positioning)</p>
 </section>
 
 <section id="global-settings">
@@ -511,6 +512,7 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 <h3>.classes</h3>
 <p>You can specify default classes for the <code>&lt;dialog</code> element itself. Either static through <code>.DEFAULTS</code> or on the fly via <code>options</code> :</p>
 <pre><code class="javascript">Dlg.DEFAULTS.classes = 'my dialog classes'</code></pre>
+<p>SimplyDialogs have some predefined classes you can use to control the size and the position of the dialog : </p>
 </section>
 
 <section id="sizing">
@@ -526,6 +528,12 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 <p>If you are not sure about the size of the content, but sure about how large the dialog should be, you can use <code>*-height</code> and <code>*-width</code> classes.</p>
 <pre><code class="javascript">Dlg.DEFAULTS.classes = 'md-width'</code></pre>
 <p>All dialogs will have the width of a md dialog, but growth in height according to the content.</p>
+</section>
+
+<section id="positioning">
+<h3>Positioning</h3>
+<p>Per default all dialogs are shown in the center of the viewscreen, and vertically centerered between middle and top. You can force the position
+by using the <code>top</code>, <code>bottom</code>, <code>middle</code>, <code>left</code>, <code>right</code>, <code>center</code> classes, in any combination. 
 </section>
 
 <section id="defaults-buttons-classes">

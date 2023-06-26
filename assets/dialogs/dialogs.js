@@ -100,7 +100,11 @@ const SimplyDialogs = (function(document) {
 		if (type !== 'wait') dialog.querySelector('.dialog-header').innerHTML = use.headers[type]
 		dialog.querySelector('.dialog-icon').innerHTML = use.icons[type] || ''
 		;['ok', 'cancel', 'yes', 'no'].forEach((name) => popBtn(name))
-		if (use.classes && typeof use.classes === 'string') dialog.classList.add(...use.classes.split(' '))
+		if (use.classes && typeof use.classes === 'string') {
+			dialog.classList.add(...use.classes.split(' '))
+		} else {
+			dialog.classList.add('default')
+		}
 		if (use.backdrop) {
 			dialog.backdrop = document.createElement('style')
 			dialog.backdrop.id = 'simplydialogs_' + Math.random()
@@ -228,17 +232,17 @@ const SimplyDialogs = (function(document) {
 
 //wait
 	const waitHTML = `
-		<dialog id="dialog-wait" role="dialog" aria-labelledby="dialog-message">
+		<dialog class="dialog-template" role="dialog" aria-labelledby="dialog-message">
 			<span class="dialog-icon dialog-spinner"></span>
-		  <p id="dialog-message"></p>
+		  <p class="dialog-message"></p>
 		</dialog>
 	`;
 
 	const wait = function(message, options) {
 		const cnt = getCnt(waitHTML)
-		const dialog = gebi('dialog-wait')
+		const dialog = cnt.querySelector('.dialog-template')
 		initDialog(dialog, 'wait', options)		
-		dialog.querySelector('#dialog-message').innerHTML = message
+		dialog.querySelector('.dialog-message').innerHTML = message
 		dialog.addEventListener('cancel', (e) => { e.preventDefault() })
 		dialog.showModal()
 		return { 
