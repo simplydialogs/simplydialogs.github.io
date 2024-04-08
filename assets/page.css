@@ -129,10 +129,13 @@ dialog.x-mas button {
 	text-shadow: 1px 1px #fff;
 }
 dialog.nasa-earth {
-	background: url(https://explorer1.jpl.nasa.gov/assets/images/galleries/1972_BlueMarble_115334main_image_feature_329_ys_full.jpg);
+	background: url(../assets/images/nasa-bluemarble-reduced.webp);
 	background-size: cover;
-	color: #fff;
-	min-height: 45vh;
-	font-size: large;
+	color: yellow;
+	min-height: 50vh;
+	font-size: xx-large;
+}
+dialog.nasa-earth .dialog-message  {
+	text-shadow: 1px 1px 2px lime;
 }
 

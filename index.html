@@ -521,14 +521,15 @@ to click on either OK or cancel.</p>
 <pre><code class="css">dialog.nasa-earth {
   background: url(https://explorer1.jpl.nasa.gov/assets/images/galleries/1972_BlueMarble_115334main_image_feature_329_ys_full.jpg);
   background-size: cover;
-  color: #fff;
-  min-height: 45vh;
+  color: yellow;
+  min-height: 50vh;
+  font-size: x-large;
 }</code></pre>
 <pre><code class="javascript">const options = {
-  classes: 'nasa-earth lg-width',
+  classes: 'nasa-earth lg-height sm-width',
   icons: { confirm: '👽' },
   headers: { confirm: null },
-  buttons: { captions: { yes: 'No', no: 'Defently no!' }}
+  buttons: { captions: { yes: 'No', no: 'Defently not!' }}
 }
 Dlg.confirm('Are There Any Chance of Intelligent Life in The Universe, anywhere?', options)
 </code></pre>

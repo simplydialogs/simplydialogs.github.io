@@ -392,16 +392,16 @@ const Test = (function(window, document, SimplyDialogs) {
 
 		gebi('options-complex-example-1').onclick = function() {
 			const options = {
-				classes: 'nasa-earth sm-width',
+				classes: 'nasa-earth lg-height sm-width',
 				icons: { confirm: '👽' },
 				headers: { confirm: null },
-				buttons: { captions: { yes: 'No', no: 'Defently no!' }}
+				buttons: { captions: { yes: 'No', no: 'Defently not!' }}
 			}
 			Dlg.confirm('Are There Any Chance of Intelligent Life in The Universe, anywhere?', options)
 		}
 
 		gebi('btn-options-image-viewer').onclick = function() {
-			const msg = '<img src="assets/nasa-bluemarble-reduced.webp" style="max-height:75vh;">'
+			const msg = '<img src="assets/images/nasa-bluemarble-reduced.webp" style="max-height:75vh;">'
 			const options = {
 				headers: { bell: '' },
 				icons: { bell: '' },
