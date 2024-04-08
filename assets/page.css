@@ -1,0 +1,138 @@
+html.wait, html.wait * { 
+	cursor: wait !important; 
+}
+main {
+	margin: auto auto;
+	margin-top: 10px;
+	width: 900px;
+}
+footer {
+	margin-top: 2rem;
+	padding-top: 1rem;
+	vertical-align: middle;
+}
+iframe {
+	border: none;
+	width: 100%;
+}
+aside {
+	width: 170px;
+	top: 20px;
+	left: -300px;
+	padding: 10px;
+	border: 1px solid #dadada;
+	z-index: 25;
+	opacity: 0.9;
+	background: #fff;
+}
+aside .nav {
+	width: auto;
+	display: block;
+	float: right;
+}
+a#burger-menu {
+	display: none;
+	color: #222;
+	font-size: xx-large;
+	margin-right: 10px;
+	position: relative;
+	top: -3px;
+	text-decoration: none;
+}
+aside ul {
+	margin-left: 1rem;
+	list-style-type: none;
+	margin-block-start: 0px;
+	padding-inline-start: 0px;
+	background: #fff;
+}
+aside ul.root {
+	margin-left: 0;
+}
+aside li {
+	color: #212529;
+}
+aside li:hover {
+	color: #000;
+}
+aside li.active {
+	color: #000;
+	text-decoration: none;
+	font-weight: bolder;
+}
+aside li.active li {
+	font-weight: normal;
+}
+aside li a,
+aside li a:active {
+	color: inherit;
+	text-decoration: none;
+}
+section {
+	margin-bottom: 1rem;
+}
+table td img {
+	width: 250px;
+	height: auto;
+}
+h1, h2, h3 {
+	margin: 30px 0 10px;
+}
+h2 {
+	border-bottom: none;
+}
+h4, h5 {
+	margin: 10px 0 5px;
+}
+h1 {
+	font-size: 36px;
+}
+h3 {
+	font-size: 20px;
+}
+h4 {
+	font-size: 14px;
+}
+/* special, to show unicode icons more nice */
+pre code.force-unicode .hljs-string {
+	font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', Consolas, "Liberation Mono", Courier, monospace;
+}
+/* x-mas dialog styling example */
+dialog.x-mas {
+	border-radius: 0;
+	max-width: 650px;
+	border: 1mm ridge #34a65f !important;
+	background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+}
+dialog.x-mas h4 {
+	font-size: xxx-large;
+	font-family: 'Mountains of Christmas';
+	font-weight: 900;
+	color: #cc231e;
+  text-shadow: 1px 1px #34A65F;
+}
+dialog.x-mas .dialog-message {
+	font-size: x-large;
+	font-family: cursive;
+	color: #cc231e;
+  text-shadow: -1px -1px gold;
+}
+dialog.x-mas button {
+	background-color: #0f8a5f;
+	font-size: x-large;
+	font-weight: bold;
+	padding: 7px;
+	color: gold;
+	border-color: gold;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-shadow: 1px 1px #fff;
+}
+dialog.nasa-earth {
+	background: url(https://explorer1.jpl.nasa.gov/assets/images/galleries/1972_BlueMarble_115334main_image_feature_329_ys_full.jpg);
+	background-size: cover;
+	color: #fff;
+	min-height: 45vh;
+	font-size: large;
+}
+

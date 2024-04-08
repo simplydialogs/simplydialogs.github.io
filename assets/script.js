@@ -593,7 +593,6 @@ const Test = (function(window, document, SimplyDialogs) {
 
 	}
 
-
 	//
 	aside()
 	basic()
