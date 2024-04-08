@@ -331,6 +331,39 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 	}
 
+//wait
+	const wait = function() {
+		gebi('btn-wait-settext').onclick = function() {
+			let counter = 0
+			let interval = undefined
+			const wait = Dlg.wait(shortText)
+			const add = function() {
+				counter ++
+				wait.setText(`text or message changed ${counter} time(s)`)
+				if (counter>5) {
+					clearInterval(interval)
+					wait.close()
+				}
+			}
+			interval = setInterval(add, 1000)
+		}
+		gebi('btn-wait-addtext').onclick = function() {
+			let counter = 0
+			let interval = undefined
+			const wait = Dlg.wait(shortText)
+			const add = function() {
+				counter ++
+				wait.addText(`<br>${counter} line(s) added to message`)
+				if (counter>5) {
+					clearInterval(interval)
+					wait.close()
+				}
+			}
+			interval = setInterval(add, 1000)
+		}
+	}
+
+
 //options
 	const options = function() {
 
@@ -635,6 +668,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	formLayout()
 	enterSubmit()
 	escape()
+	wait()
 	options()
 	es()
 	advancedInputs()

@@ -74,6 +74,12 @@
 			</ul>
 		</li>
 		<li><a href="#styling">Additional styling</a></li>
+		<li><a href="#wait">Wait</a></li>
+			<ul>
+				<li><a href="#wait-settext">setText</a></li>
+				<li><a href="#wait-addtext">addText</a></li>
+			</ul>
+		</li>
 		<li><a href="#advanced-inputs">Advanced inputs</a>
 			<ul>
 				<li><a href="#input-inputs">Input options</a></li>
@@ -613,6 +619,52 @@ const msg = '🎀 🎁 Frohe Weihnachten, メリークリスマス, Joyeux Noël
 Dlg.alert(msg, options)
 </code></pre>
 <p><button role="button" id="options-complex-example-2">X-mas dialog</button></p>
+</section>
+
+<!-- wait -->
+<section id="wait">
+<h2>wait</h2>
+<p>When using the <code>wait</code>-dialog, it can be convenient to update the dialog for details about progress or 
+whatever there is going on. <code>wait</code> has two special functions for updating the msessage, <code>setText</code> and <code>addText</code>. 
+Both takes a string as argument, that can be plain text or HTML.</p>
+</section>
+
+<section id="wait-settext">
+<h3>setText</h3>
+<p><code>setText</code> replaces the message with new content. Consider this mockup :</p>
+<pre><code class="javascript">let counter = 0
+let interval = undefined
+const wait = Dlg.wait('Lorem ipsum ...')
+const replace = function() {
+  counter ++
+  wait.setText(`text or message changed ${counter} time(s)`)
+  if (counter > 5) {
+    clearInterval(interval)
+    wait.close()
+  }
+}
+interval = setInterval(replace, 1000)
+</code></pre>
+<p><button role="button" id="btn-wait-settext">setText mockup sample</button></p>
+</section>
+
+<section id="wait-addtext">
+<h3>addText</h3>
+<p><code>addText</code> appends something to the already existing text/message. The content can be plain text or HTML. Consider this mockup :</p>
+<pre><code class="javascript">let counter = 0
+let interval = undefined
+const wait = Dlg.wait('Lorem ipsum ...')
+const append = function() {
+  counter ++
+  wait.addText(`&lt;br>${counter} line(s) added to message`)
+  if (counter > 5) {
+    clearInterval(interval)
+    wait.close()
+  }
+}
+interval = setInterval(append, 1000)
+</code></pre>
+<p><button role="button" id="btn-wait-addtext">addText mockup sample</button></p>
 </section>
 
 <!-- inputs -->
