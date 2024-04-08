@@ -7,10 +7,11 @@
 
 "use strict";
 
-const SimplyDialogs = (function(document) {
+const SimplyDialogs = (function(document) { // eslint-disable-line no-unused-vars
 	
 	const defaults = {
 		enterSubmit: true,
+		escape: true,
 		backdrop: undefined,
 		classes: '',
 		headers: {
@@ -150,7 +151,7 @@ const SimplyDialogs = (function(document) {
 		return new Promise(function(resolve) {
 			const cnt = getCnt(genericHTML)
 			const dialog = cnt.querySelector('.dialog-template')
-			initDialog(dialog, type, options)		
+			options = initDialog(dialog, type, options)		
 			dialog.querySelector('.dialog-message').innerHTML = message
 			dialog.showModal()
 			const ret = function(val) {
@@ -159,7 +160,13 @@ const SimplyDialogs = (function(document) {
 			}
 			dialog.querySelector('.dialog-ok').onclick = () => { ret(true) }
 			dialog.addEventListener('close', () => { ret(true) })
-			dialog.addEventListener('cancel', () => { ret(false) })
+			dialog.addEventListener('cancel', (e) => { 
+				if (!options.escape) {
+					e.preventDefault()
+				} else {
+					ret(false) 
+				}
+			})
 		})
 	}
 
@@ -195,7 +202,13 @@ const SimplyDialogs = (function(document) {
 			}
 			dialog.querySelector('.dialog-ok').onclick = () => { ret(true) }
 			dialog.addEventListener('close', () => { ret(true) })
-			dialog.addEventListener('cancel', () => { ret(false) })
+			dialog.addEventListener('cancel', (e) => { 
+				if (!options.escape) {
+					e.preventDefault()
+				} else {
+					ret(false) 
+				}
+			})
 		})
 	}
 
@@ -216,7 +229,7 @@ const SimplyDialogs = (function(document) {
 		return new Promise(function(resolve) {
 			const cnt = getCnt(confirmHTML)
 			const dialog = cnt.querySelector('.dialog-template')
-			initDialog(dialog, 'confirm', options)
+			options = initDialog(dialog, 'confirm', options)
 			dialog.querySelector('.dialog-message').innerHTML = message
 			dialog.showModal()
 			const ret = function(val) {
@@ -226,7 +239,13 @@ const SimplyDialogs = (function(document) {
 			dialog.querySelector('.dialog-yes').onclick = () => { ret(true) }
 			dialog.querySelector('.dialog-no').onclick = () => { ret(false) }
 			dialog.addEventListener('close', () => { ret(true) })
-			dialog.addEventListener('cancel', () => { ret(false) })
+			dialog.addEventListener('cancel', (e) => { 
+				if (!options.escape) {
+					e.preventDefault()
+				} else {
+					ret(false) 
+				}
+			})
 		})
 	}
 
@@ -241,13 +260,20 @@ const SimplyDialogs = (function(document) {
 	const wait = function(message, options) {
 		const cnt = getCnt(waitHTML)
 		const dialog = cnt.querySelector('.dialog-template')
+		const msg = dialog.querySelector('.dialog-message')
 		initDialog(dialog, 'wait', options)		
-		dialog.querySelector('.dialog-message').innerHTML = message
-		dialog.addEventListener('cancel', (e) => { e.preventDefault() })
+		msg.innerHTML = message
+		dialog.addEventListener('cancel', (e) => { e.preventDefault() }) //wait are always not cancelable by ESC
 		dialog.showModal()
 		return { 
 			close: function() {
 				closeDialog(dialog, cnt)
+			},
+			addText: function(html) {
+				msg.innerHTML += html
+			},
+			setText: function(html) {
+				msg.innerHTML = html
 			}
 		}				
 	}
@@ -346,8 +372,11 @@ const SimplyDialogs = (function(document) {
 		}
 
 		const createTextarea = function(label, name, callback, opt) {
+			const value = opt.value 
+			delete opt.value;
 			const t = createFormTag('textarea', name, label, opt)
 			if (callback) t.f.querySelector('textarea').addEventListener('input', cb)
+			if (value) t.f.querySelector('textarea').textContent = value
 			dialog.querySelector('.dialog-input').append(t.l, t.f)
 		}
 
@@ -408,7 +437,13 @@ const SimplyDialogs = (function(document) {
 			dialog.querySelector('.dialog-ok').onclick = () => { ret(true) }
 			dialog.querySelector('.dialog-cancel').onclick = () => { ret(false) }
 			dialog.addEventListener('close', () => { ret(true) })
-			dialog.addEventListener('cancel', () => { ret(false) })
+			dialog.addEventListener('cancel', (e) => { 
+				if (!options.escape) {
+					e.preventDefault()
+				} else {
+					ret(false) 
+				}
+			})
 		})
 	}
 	

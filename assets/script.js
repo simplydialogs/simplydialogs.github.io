@@ -273,22 +273,22 @@ const Test = (function(window, document, SimplyDialogs) {
 		const options = {
 			input: {
 				inputs: [
-					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required' },
-					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4 }
+					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required', spellcheck: false },
+					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4, spellcheck: false }
 				],
 				callback: function(state) {
-					return state.input.length > 3
+					return state.input.length > 2
 				}
 			}
 
 		}
-		gebi('btn-input-enter-submit-true').onclick = function() {
+		gebi('btn-options-enter-submit-true').onclick = function() {
 			options.enterSubmit = true
 			Dlg.input(shortText, options).then(fs => {
 				console.log('enterSubmit', fs)
 			})
 		}
-		gebi('btn-input-enter-submit-false').onclick = function() {
+		gebi('btn-options-enter-submit-false').onclick = function() {
 			options.enterSubmit = false
 			Dlg.input(shortText, options).then(fs => {
 				console.log('enterSubmit', fs)

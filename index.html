@@ -65,6 +65,8 @@
 			</ul>
 		<li><a href="#options">Options</a>
 			<ul>
+				<li><a href="#options-entersubmit">enterSubmit</a></li>
+				<li><a href="#options-escape">escape</a></li>
 				<li><a href="#options-sizing">Sizing on the fly</a></li>
 				<li><a href="#options-complex">Complex options</a></li>
 				<li><a href="#options-image-viewer">Image viewer</a></li>
@@ -76,7 +78,6 @@
 			<ul>
 				<li><a href="#input-inputs">Input options</a></li>
 				<li><a href="#input-form-layout">.formLayout</a></li>
-				<li><a href="#input-enter-submit">.enterSubmit</a></li>
 				<li><a href="#input-input-type">.inputType</a></li>
 				<li><a href="#input-radio-select">Radios, select</a></li>
 				<li><a href="#input-form-validation">Form validation</a></li>
@@ -95,7 +96,7 @@
 <main>
 <section id="introduction">
 <h1>SimplyDialogs</h1>
-<p>This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.0.9</a></strong> <sup>(06.26.2023)</sup>.</p>
+<p>This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.0.10</a></strong> <sup>(08.04.2024)</sup>.</p>
 <p>Simplydialogs offers a range of common dialogs, all highly customizeable. Comes with no dependencies and a <em>really</em> small footprint.</p>
 </section>
 
@@ -223,9 +224,10 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
 <h3>DEFAULTS</h3>
 <p>Simplydialogs uses internally a <code>defaults</code> literal, which is accessible through the <code>.DEFAULTS</code> property :</p>
 <pre><code class="javascript force-unicode">let defaults = {
+  enterSubmit: true,
+  escape: true,
   backdrop: undefined,
   classes: '',
-  enterSubmit: true,
   headers: {
     alert: 'Alert', 
     error: 'Error',
@@ -418,6 +420,42 @@ The structure of the options argument should follow the same format as <code>DEF
 <pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', { icons: { alert: null }})</code></pre>
 <p><button id="options-alert-no-icon">Test alert no icon</button></p>
 </section>
+
+<section id="options-entersubmit">
+<h3>enterSubmit</h3>
+<p><code>enterSubmit</code> allows the dialog to be submitted on keyboard enter. You can turn <code>enterSubmit</code> on and off for all type
+of dialogs (except <code>wait</code>) but is mostly useful for the <code>input()</code>-dialog. Note: If set to <code>true</code> 
+you can still enter returns / line breaks in textareas, but anywhere else it will submit the dialog (i.e the form). </p>
+<pre><code class="javascript">const options = {
+  enterSubmit: (true | false),
+  input: {
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'Input', name: 'input', spellcheck: false },
+      {	type: 'textarea', label: 'Textarea', name: 'textarea', spellcheck: false }
+    ],
+    callback: function(state) {
+      return state.input.length > 2
+    }
+  }
+}
+</code></pre>
+<p>This produces a form where you need to enter at least 3 characters to the <code>&lt;input></code> field, and also have an optional <code>&lt:textarea></code>. 
+In the first sample you can hit enter and submit the form, in the second you'll need to click on OK.</p>
+<p>
+<button id="btn-options-enter-submit-true">enterSubmit true (default)</button>
+<button id="btn-options-enter-submit-false">enterSubmit false</button>
+</p>
+</section>
+
+
+<section id="options-escape">
+<h3>escape</h3>
+<p>Response to keyboard-strokes are managed by the <code>enterSubmit</code> and <code>escape</code> options. Both are <code>true</code> by default, 
+except for the <code>wait</code>-dialog, which always overrules these settings to <code>false</code>.
+</p>
+
+</section>
+
 
 <section id="options-sizing">
 <h3>Sizing on the fly</h3>
@@ -630,26 +668,6 @@ importance of the look of the dialog. Here all the combinations along with the i
 <button id="btn-input-form-layout-left">left</button>
 <button id="btn-input-form-layout-left-full-width">left full-width</button>
 <button id="btn-input-form-layout-none">none (empty, undefined)</button>
-</p>
-</section>
-
-<section id="input-enter-submit">
-<h3>.enterSubmit</h3>
-<p><code>enterSubmit</code> allows the dialog to be submitted on keyboard enter. You can turn <code>enterSubmit</code> on and off for all type
-of dialogs (except <code>wait</code>) but is mostly useful for the <code>input()</code>-dialog. Note: If set to <code>true</code> 
-you can still enter returns / line breaks in textareas, but anywhere else it will submit the dialog (i.e the form). </p>
-<pre><code class="javascript">const options = {
-  input: {
-    enterSubmit: (true | false),
-    inputs: [
-      ...
-    ]
-  }
-}
-</code></pre>
-<p>
-<button id="btn-input-enter-submit-true">.enterSubmit true (default)</button>
-<button id="btn-input-enter-submit-false">.enterSubmit false</button>
 </p>
 </section>
 
