@@ -296,6 +296,41 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 	}
 
+//escape
+	const escape = function() {
+		const options = {
+			input: {
+				inputs: [
+					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required', spellcheck: false },
+					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4, spellcheck: false }
+				],
+				callback: function(state) {
+					return state.input.length > 2
+				}
+			}
+
+		}
+		gebi('btn-options-escape-true').onclick = function() {
+			options.escape = true
+			Dlg.input(shortText, options).then(fs => {
+				console.log('escape', fs)
+			})
+		}
+		gebi('btn-options-escape-false').onclick = function() {
+			options.escape = false
+			Dlg.input(shortText, options).then(fs => {
+				console.log('escape', fs)
+			})
+		}
+		gebi('btn-options-escape-entersubmit-false').onclick = function() {
+			options.escape = false
+			options.enterSubmit = false
+			Dlg.input(shortText, options).then(fs => {
+				console.log('escape', fs)
+			})
+		}
+	}
+
 //options
 	const options = function() {
 
@@ -599,6 +634,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	longTexts()
 	formLayout()
 	enterSubmit()
+	escape()
 	options()
 	es()
 	advancedInputs()

@@ -450,10 +450,16 @@ In the first sample you can hit enter and submit the form, in the second you'll 
 
 <section id="options-escape">
 <h3>escape</h3>
-<p>Response to keyboard-strokes are managed by the <code>enterSubmit</code> and <code>escape</code> options. Both are <code>true</code> by default, 
-except for the <code>wait</code>-dialog, which always overrules these settings to <code>false</code>.
+<p>Use the <code>escape</code>-option to manage hits on ESC. If <code>false</code> the user cannot cancel the dialog by presseing ESC. The default value 
+is <code>true</code>, except for the <code>wait</code>-dialog, which always overrules both <code>enterSubmit</code> and <code>escape</code>.
 </p>
-
+<p>As example, the same dialog as above for <code>enterSubmit</code>. Default settings, ESC turned off and both ESC and enter turned off, so the user need 
+to click on either OK or cancel.</p>
+<p>
+<button id="btn-options-escape-true">escape true (default)</button>
+<button id="btn-options-escape-false">escape false</button>
+<button id="btn-options-escape-entersubmit-false">escape and enterSubmit false</button>
+</p>
 </section>
 
 
@@ -487,9 +493,10 @@ except for the <code>wait</code>-dialog, which always overrules these settings t
 <h3>Complex options</h3>
 <p>As reference, the layout of the options-literal look like this: </p>
 <pre><code class="javascript">{
+  enterSubmit: ,
+  escape: ,
   backdrop: ,
   classes: ,
-  enterSubmit: ,
   headers: {},
   icons: {},
   buttons: {
