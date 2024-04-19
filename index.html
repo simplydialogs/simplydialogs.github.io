@@ -5,9 +5,6 @@
 <title>SimplyDialogs - test and documentation</title>
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
 <link rel="shortcut icon" href="#">
-<meta http-equiv='cache-control' content='no-cache'> 
-<meta http-equiv='expires' content='0'> 
-<meta http-equiv='pragma' content='no-cache'>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="pinterest" content="nopin">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -74,7 +71,7 @@
 			</ul>
 		</li>
 		<li><a href="#styling">Additional styling</a></li>
-		<li><a href="#wait">Wait</a></li>
+		<li><a href="#wait">Wait</a>
 			<ul>
 				<li><a href="#wait-settext">setText</a></li>
 				<li><a href="#wait-addtext">addText</a></li>
@@ -91,18 +88,19 @@
 				<li><a href="#input-file">Image upload dialog</a></li>
 			</ul>
 		</li>
-		<li><a href="#integration">Integration</a></li>
+		<li><a href="#integration">Integration</a>
 			<ul>
 				<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
 				<li><a href="#integration-materialize">Materialize CSS</a></li>
 			</ul>
+		</li>
 		<li style="margin-top:1rem;"><a href="#credits">Credits</a></li>
 	</ul>
 </aside>
 <main>
 <section id="introduction">
 <h1>SimplyDialogs</h1>
-<p>This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.0.10</a></strong> <sup>(08.04.2024)</sup>.</p>
+<p>This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.0.11</a></strong> <sup>(17.04.2024)</sup>.</p>
 <p>Simplydialogs offers a range of common dialogs, all highly customizeable. Comes with no dependencies and a <em>really</em> small footprint.</p>
 </section>
 
@@ -317,7 +315,7 @@ Dlg.DEFAULTS.headers = {
 
 <section id="defaults-icons">
 <h3>Icons</h3>
-<p>Icons can be replaced the same way; either individually or as a whole. For example, use another standard <a href="https://unicode.org/emoji/charts/full-emoji-list.html" target=_blank referrer="noreferrer" title="Full Emoji List, v15.0">unicode emoji</a> :
+<p>Icons can be replaced the same way; either individually or as a whole. For example, use another standard <a href="https://unicode.org/emoji/charts/full-emoji-list.html" target=_blank title="Full Emoji List, v15.0">unicode emoji</a> :
 <pre><code class="javascript">Dlg.DEFAULTS.icons.alert = '💥' //U+1F4A5, collision</code></pre>
 <p>See also the <a href="#integration">integration</a> section. Here an example using Font Awesome icons :</p>
 <pre><code class="javascript">Dlg.DEFAULTS.icons = {
@@ -445,7 +443,7 @@ you can still enter returns / line breaks in textareas, but anywhere else it wil
   }
 }
 </code></pre>
-<p>This produces a form where you need to enter at least 3 characters to the <code>&lt;input></code> field, and also have an optional <code>&lt:textarea></code>. 
+<p>This produces a form where you need to enter at least 3 characters to the <code>&lt;input></code> field, and also have an optional <code>&lt;textarea></code>. 
 In the first sample you can hit enter and submit the form, in the second you'll need to click on OK.</p>
 <p>
 <button id="btn-options-enter-submit-true">enterSubmit true (default)</button>
@@ -472,25 +470,25 @@ to click on either OK or cancel.</p>
 <section id="options-sizing">
 <h3>Sizing on the fly</h3>
 <p>Use the <code>classes</code> option to set a static size on the dialog. The builtin classes are : </p>
-<small><table>
+<table>
 	<tr><td><code>xs</code> / <code>xsmall</code></td><td>18vw / 15vh</td><td><code>xs-width</code> / <code>xs-height</code></td></tr>
 	<tr><td><code>sm</code> / <code>small</code></td><td>22vw / 18vh</td><td><code>sm-width</code> / <code>sm-height</code></td></tr>
 	<tr><td><code>md</code> / <code>medium</code></td><td>34vw / 31vh</td><td><code>md-width</code> / <code>md-height</code></td></tr>
 	<tr><td><code>lg</code> / <code>large</code></td><td>55vw / 52vh</td><td><code>lg-width</code> / <code>lg-height</code></td></tr>
 	<tr><td><code>fullsize</code></td><td>100vw / 100vh</td><td><code></code></td></tr>
-</table></small>
+</table>
 <p>Example, show a xsmall sized information-dialog :</p>
 <pre><code class="javascript">Dlg.info('some text ...', { classes: 'xs' }).then(..)</code></pre>
 <p style="margin-bottom:1px;">
-	<button role="button" id="btn-options-sizing-xs">As above</button>
-	<button role="button" id="btn-options-sizing-sm">Alert sm</button>
-	<button role="button" id="btn-options-sizing-md">Error md</button>
-	<button role="button" id="btn-options-sizing-lg">Confirm lg</button>
-	<button role="button" id="btn-options-sizing-sm-overflow">Info sm overflow</button>
-	<button role="button" id="btn-options-sizing-xs-width">Alert xs-width</button>
-	<button role="button" id="btn-options-sizing-sm-height">Alert sm-height</button>
-	<button role="button" id="btn-options-sizing-md-width">Alert md-height</button>
-	<button role="button" id="btn-options-sizing-fullsize">Error fullsize</button>
+	<button id="btn-options-sizing-xs">As above</button>
+	<button id="btn-options-sizing-sm">Alert sm</button>
+	<button id="btn-options-sizing-md">Error md</button>
+	<button id="btn-options-sizing-lg">Confirm lg</button>
+	<button id="btn-options-sizing-sm-overflow">Info sm overflow</button>
+	<button id="btn-options-sizing-xs-width">Alert xs-width</button>
+	<button id="btn-options-sizing-sm-height">Alert sm-height</button>
+	<button id="btn-options-sizing-md-width">Alert md-height</button>
+	<button id="btn-options-sizing-fullsize">Error fullsize</button>
 </p>
 <small style="color:gray;">Note: The examples show dimensions, they are not meant to fit</small>
 </section>
@@ -547,7 +545,7 @@ const options = {
 }
 Dlg.bell(msg, options)
 </code></pre>
-<p><button role="button" id="btn-options-image-viewer">As external image viewer</button></p>
+<p><button id="btn-options-image-viewer">As external image viewer</button></p>
 </section>
 
 <section id="options-pyramids">
@@ -561,7 +559,7 @@ const options = {
 }
 Dlg.information(msg + html, options)
 </code></pre>
-<p><button role="button" id="btn-options-pyramids">Show Pyramids of Giza info-card</button></p>
+<p><button id="btn-options-pyramids">Show Pyramids of Giza info-card</button></p>
 </section>
 
 <section id="styling">
@@ -619,7 +617,7 @@ dialog.x-mas button {
 const msg = '🎀 🎁 Frohe Weihnachten, メリークリスマス, Joyeux Noël, Feliz Navidad, 聖誕快樂, Buon Natale, Glædelig Jul ...!'
 Dlg.alert(msg, options)
 </code></pre>
-<p><button role="button" id="options-complex-example-2">X-mas dialog</button></p>
+<p><button id="options-complex-example-2">X-mas dialog</button></p>
 </section>
 
 <!-- wait -->
@@ -646,7 +644,7 @@ const replace = function() {
 }
 interval = setInterval(replace, 1000)
 </code></pre>
-<p><button role="button" id="btn-wait-settext">setText mockup sample</button></p>
+<p><button id="btn-wait-settext">setText mockup sample</button></p>
 </section>
 
 <section id="wait-addtext">
@@ -665,7 +663,7 @@ const append = function() {
 }
 interval = setInterval(append, 1000)
 </code></pre>
-<p><button role="button" id="btn-wait-addtext">addText mockup sample</button></p>
+<p><button id="btn-wait-addtext">addText mockup sample</button></p>
 </section>
 
 <!-- inputs -->
@@ -705,7 +703,7 @@ interval = setInterval(append, 1000)
   }
 }
 Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
-</code></pre><p><button role="button" id="btn-input-textarea">Test input, textarea</button></p>
+</code></pre><p><button id="btn-input-textarea">Test input, textarea</button></p>
 </section>
 
 <section id="input-form-layout">
