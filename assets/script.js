@@ -43,7 +43,7 @@ const Test = (function(window, document, SimplyDialogs) {
 				a.style.paddingBottom = '2px'
 			}
 		}
-		screen.orientation.addEventListener('change', () => resize())
+		//screen.orientation.addEventListener('change', () => resize())
 		window.addEventListener('orientationchange', () => aresize())
 		window.addEventListener('resize', () => aresize())
 		window.addEventListener('load', () => {
@@ -580,7 +580,8 @@ const Test = (function(window, document, SimplyDialogs) {
 			})
 		}
 
-		gebi('btn-input-form-validation-test').onclick = function() {
+//validation
+		gebi('btn-input-validation-callback').onclick = function() {
 			const options = {
 				headers: { input: 'What is 42 with inflation?' },
 				icons: { input: '🖖' },
@@ -594,6 +595,31 @@ const Test = (function(window, document, SimplyDialogs) {
 				}
 			}
 			Dlg.input(null, options).then(input => {
+				console.log(input)
+			})
+		}
+
+		gebi('btn-input-validation-promise').onclick = function() {
+			const options = {
+				headers: { input: 'Enter user name' },
+				icons: { input: '' },
+				input: {
+					inputs: [	
+						{ type: 'input', inputType: 'text', label: '', name: 'username' }
+					],
+					promise: function(state) {
+						return new Promise(function(resolve) {
+							if (state.username.length < 5) return resolve(false)
+							const letters = /^[0-9a-zA-Z]+$/
+							if (!letters.test(state.username)) return resolve(false)
+							setTimeout(function() {
+								resolve(true)
+							}, 1000)
+						})
+					}
+				}
+			}
+			Dlg.input('Must be at least 5 characters long and may only contain letters and numbers', options).then(input => {
 				console.log(input)
 			})
 		}

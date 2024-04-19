@@ -7,8 +7,11 @@ main {
 	width: 900px;
 }
 footer {
-	margin-top: 2rem;
-	padding-top: 1rem;
+	clear: both;
+	display: block;
+	padding-top: 4rem;
+	margin-bottom: 1rem;
+	text-align: center;
 	vertical-align: middle;
 }
 iframe {

@@ -16,8 +16,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" rel="stylesheet" >
 <link rel="stylesheet" type="text/css" href="assets/font-awesome/css/font-awesome.min.css">
-<script src="assets/dialogs/dialogs.js"></script>
-<link rel="stylesheet" type="text/css" href="assets/dialogs/dialogs.css">
+<script src="assets/dialogs/SimplyDialogs.min.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/dialogs/SimplyDialogs.min.css">
 <meta name="publisher" content="SimplyDialogs">
 <meta property="og:url" content="https://simplydialogs.github.io">
 <meta property="og:type" content="article">
@@ -83,7 +83,12 @@
 				<li><a href="#input-form-layout">.formLayout</a></li>
 				<li><a href="#input-input-type">.inputType</a></li>
 				<li><a href="#input-radio-select">Radios, select</a></li>
-				<li><a href="#input-form-validation">Form validation</a></li>
+				<li><a href="#input-form-validation">Form validation</a>
+					<ul>
+						<li><a href="#input-callback">callback</a></li>
+						<li><a href="#input-promise">promise</a></li>
+					</ul>
+				</li>
 				<li><a href="#input-login-dialog">Login dialog</a></li>
 				<li><a href="#input-file">Image upload dialog</a></li>
 			</ul>
@@ -274,7 +279,8 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
     ],
     callback: function(state) {
       return state.input && state.input.length > 1
-    }
+    },
+    promise: undefined
   }
 }
 </code></pre>
@@ -512,6 +518,7 @@ to click on either OK or cancel.</p>
     classes: { label: , input: , }
     inputs: [],
     callback: ,
+    promise: ,
   }
 }
 </code></pre>
@@ -788,17 +795,22 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).th
 
 <section id="input-form-validation">
 <h3>Form validation</h3>
-<p>Use <code>input.callback</code> if you want to validate the form before allowing submit. The callback is triggered anytime one of the inputs 
-changes state. If the callback return <code>true</code>, the OK-button is enabled. The callback passes two params : </p>
+<p>There are two ways to validate form input: <code>input.callback</code> and <code>input.promise</code>. </p>
+<p>If (and only if) you specify a callback (or a promise), the submit-button is disabled and the callback will determine when it should be enabled. 
+Callbacks are triggered whenever any of the inputs changes state, and the result will be handled as a boolean; i.e if you return <code>true</code> 
+the submit-button will be enabled. The callback passes two params : </p>
 <pre><code class="javascript">callback: function(state, dialog) {
   return true || false
 }
 </code></pre>
 <ul>
 	<li><code>state</code> is an object literal containing <code>{ name: value }</code> for all inputs.</li>
-	<li><code>dialog</code> is the dialog's actual <code>HTMLDialogElement</code>, which can be used to manipulate input fields on the form.</li>
+	<li><code>dialog</code> is the dialog's actual <code>HTMLDialogElement</code>, which can be used to manipulate input fields on the form (or anything else).</li>
 </ul>
-<p>Note: If callback is defined the submit-button will be disabled by default. Otherwise it will be enabled also on empty inputs / forms!</p>
+</section>
+
+<section id="input-callback">
+<h4>callback</h4>
 <p>Example: You are not allowed to submit before you have entered the secret number 47 :</p>
 <pre><code class="javascript">const options = {
   headers: { input: 'What is 42 with inflation?' },
@@ -815,7 +827,36 @@ changes state. If the callback return <code>true</code>, the OK-button is enable
 Dlg.input(null, options).then(input => {
   console.log(input)
 })</code></pre>
-<p><button id="btn-input-form-validation-test">Try it out</button> </p>
+<p><button id="btn-input-validation-callback">Try callback example</button> </p>
+</section>
+
+<section id="input-promise">
+<h4>promise</h4>
+<p>A promise should be used when you have more complex / time consuming validation schemes. For example, if you need to lookup an
+username in your backend, to test if it is already in use. In the below we just mimick a server-side call by using a timeout :</p>
+<pre><code class="javascript">const options = {
+  headers: { input: 'Enter user name' },
+  icons: { input: '' },
+  input: {
+    inputs: [	
+      { type: 'input', inputType: 'text', label: '', name: 'username' }
+    ],
+    promise: function(state) {
+      return new Promise(function(resolve) {
+        if (state.username.length &lt; 5) return resolve(false)
+        const letters = /^[0-9a-zA-Z]+$/
+        if (!letters.test(state.username)) return resolve(false)
+        setTimeout(function() {
+          resolve(true)
+        }, 1000)
+      })
+    }
+  }
+}
+Dlg.input('Must be at least 5 characters long and may only contain letters and numbers', options).then(input => {
+  console.log(input)
+})</code></pre>
+<p><button id="btn-input-validation-promise">Try promise example</button> </p>
 </section>
 
 <section id="input-login-dialog">
