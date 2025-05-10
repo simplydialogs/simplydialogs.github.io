@@ -16,8 +16,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" rel="stylesheet" >
 <link rel="stylesheet" type="text/css" href="assets/font-awesome/css/font-awesome.min.css">
-<script src="assets/dialogs/SimplyDialogs.min.js"></script>
-<link rel="stylesheet" type="text/css" href="assets/dialogs/SimplyDialogs.min.css">
+<script src="src/SimplyDialogs.min.js"></script>
+<link rel="stylesheet" type="text/css" href="src/SimplyDialogs.min.css">
 <meta name="publisher" content="SimplyDialogs">
 <meta property="og:url" content="https://simplydialogs.github.io">
 <meta property="og:type" content="article">
@@ -66,8 +66,12 @@
 				<li><a href="#options-escape">escape</a></li>
 				<li><a href="#options-sizing">Sizing on the fly</a></li>
 				<li><a href="#options-complex">Complex options</a></li>
-				<li><a href="#options-image-viewer">Image viewer</a></li>
-				<li><a href="#options-pyramids">Embedded Map</a></li>
+				<li><a href="#options-examples">Examples</a>
+					<ul>
+						<li><a href="#options-image-viewer">Image viewer</a></li>
+						<li><a href="#options-pyramids">Embedded Map</a></li>
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li><a href="#styling">Additional styling</a></li>
@@ -79,7 +83,13 @@
 		</li>
 		<li><a href="#advanced-inputs">Advanced inputs</a>
 			<ul>
-				<li><a href="#input-inputs">Input options</a></li>
+				<li><a href="#input-inputs">Input options</a>
+					<ul>
+						<li><a href="#input-autofocus">autofocus</a></li>
+						<li><a href="#input-spellcheck">spellcheck</a></li>
+						<li><a href="#input-autocomplete">autocomplete</a></li>
+					</ul>
+				</li>
 				<li><a href="#input-form-layout">.formLayout</a></li>
 				<li><a href="#input-input-type">.inputType</a></li>
 				<li><a href="#input-radio-select">Radios, select</a></li>
@@ -89,8 +99,12 @@
 						<li><a href="#input-promise">promise</a></li>
 					</ul>
 				</li>
-				<li><a href="#input-login-dialog">Login dialog</a></li>
-				<li><a href="#input-file">Image upload dialog</a></li>
+				<li><a href="#input-form-examples">Examples</a>
+					<ul>
+						<li><a href="#input-login-dialog">Login dialog</a></li>
+						<li><a href="#input-file">Image upload dialog</a></li>
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li><a href="#integration">Integration</a>
@@ -105,7 +119,7 @@
 <main>
 <section id="introduction">
 <h1>SimplyDialogs</h1>
-<p>This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.0.11</a></strong> <sup>(17.04.2024)</sup>.</p>
+<p>This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.0.12</a></strong> <sup>(10.05.2025)</sup>.</p>
 <p>Simplydialogs offers a range of common dialogs, all highly customizeable. Comes with no dependencies and a <em>really</em> small footprint.</p>
 </section>
 
@@ -712,6 +726,24 @@ interval = setInterval(append, 1000)
 Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
 </code></pre><p><button id="btn-input-textarea">Test input, textarea</button></p>
 </section>
+
+<h3 id="input-autofocus">autofocus</h3>
+<p>If you set <code class="javascript">autofocus: true</code>, then the input (or textarea, select)
+will be focused when the dialog is shown</p>
+<p><button id="btn-input-textarea-autofocus">Test input, textarea focused</button></p>
+
+<h3 id="input-spellcheck">spellcheck</h3>
+<p>Browser <code>spellcheck</code> is disabled per default and therefore <em>opt-in</em>; 
+Use <code class="javascript">spellcheck: true</code> to enable spellcheck
+</p>
+<p><button id="btn-input-textarea-spellcheck">Test input, textarea spellcheck</button></p>
+
+<h3 id="input-autocomplete">autocomplete</h3>
+<p>Built-in browser <code>autocomplete</code> is <em>opt-in</em> as well; 
+Use <code class="javascript">autocomplete: 'on'</code> to enable autocomplete (input elements only)
+</p>
+<p><button id="btn-input-autocomplete-textarea">Test input autocomplete, textarea</button></p>
+
 
 <section id="input-form-layout">
 <h3>.formLayout</h3>

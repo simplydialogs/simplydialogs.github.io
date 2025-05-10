@@ -456,6 +456,48 @@ const Test = (function(window, document, SimplyDialogs) {
 			})
 		}
 
+		gebi('btn-input-textarea-autofocus').onclick = function() {
+			const options = {
+				input: {
+					inputs: [
+						{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed' },
+						{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50, autofocus: true }
+					]
+				}
+			}
+			Dlg.input(shortText, options).then(function(input) {
+				console.log('result', input)
+			})
+		}
+
+		gebi('btn-input-textarea-spellcheck').onclick = function() {
+			const options = {
+				input: {
+					inputs: [
+						{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed' },
+						{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50, spellcheck: true }
+					]
+				}
+			}
+			Dlg.input(shortText, options).then(function(input) {
+				console.log('result', input)
+			})
+		}
+
+		gebi('btn-input-autocomplete-textarea').onclick = function() {
+			const options = {
+				input: {
+					inputs: [
+						{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed', autocomplete: 'on' },
+						{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50 }
+					]
+				}
+			}
+			Dlg.input(shortText, options).then(function(input) {
+				console.log('result', input)
+			})
+		}
+
 		gebi('btn-input-all').onclick = function() {
 			const options = {
 				input: {
