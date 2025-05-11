@@ -57,7 +57,11 @@ const Test = (function(window, document, SimplyDialogs) {
 			document.querySelector('html').classList.remove('wait')
 		})
 		a.style.display = 'block'
-		a.style.position = 'fixed'
+		a.style.position = 'sticky'
+		m.style.top = '-' + a.scrollHeight + 'px'
+		console.log(a.scrollHeight, m.style)
+		//a.style.overflow = 'visible'
+		//a.style.height = 'auto'
 	}
 
 //basic
