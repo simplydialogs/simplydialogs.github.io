@@ -1,9 +1,18 @@
 
+import { BasicUsage } from './lib/basicusage.js'
+import { Captions } from './lib/captions.js'
+import { Progress } from './lib/progress.js'
+import { Wait } from './lib/wait.js'
+import { Stacked } from './lib/stacked.js'
+import { SimplyDialogs } from './../SimplyDialogs/SimplyDialogs.min.mjs'
+
 const Test = (function(window, document, SimplyDialogs) {
 	const gebi = (id) => { return document.getElementById(id) }
 	const Dlg = SimplyDialogs
+/*
 	const shortText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
 	const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+*/
 
 	if (hljs)	{
 		hljs.configure({
@@ -59,11 +68,9 @@ const Test = (function(window, document, SimplyDialogs) {
 		a.style.display = 'block'
 		a.style.position = 'sticky'
 		m.style.top = '-' + a.scrollHeight + 'px'
-		console.log(a.scrollHeight, m.style)
-		//a.style.overflow = 'visible'
-		//a.style.height = 'auto'
 	}
 
+/*
 //basic
 	const basic = function() {
 		gebi('basic-alert').onclick = function() {
@@ -85,7 +92,19 @@ const Test = (function(window, document, SimplyDialogs) {
 			const wait = Dlg.wait(shortText)
 			setTimeout(function() {
 				wait.close()
-			}, 1500)
+			}, 1000)
+		}
+		gebi('basic-progress').onclick = function() {
+			const progress = Dlg.progress(shortText, { progress: { value: 0, max: 100 }})
+			let value = 0
+			const interval = setInterval(function() {
+				value++
+				progress.setValue(value)
+				if (value === 100) {
+					progress.close()
+					clearInterval(interval)
+				}
+			}, 10)
 		}
 		gebi('basic-input').onclick = function() {
 			Dlg.input(shortText).then(function(input) {
@@ -113,8 +132,10 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 
 	}
+*/
 
 //es
+/*
 	const es = function() {
 		const options = {
 			headers: {
@@ -155,8 +176,9 @@ const Test = (function(window, document, SimplyDialogs) {
 			})
 		}
 	}
-
+*/
 //longTexts
+/*
 	const longTexts = function() {
 		const lt = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 		gebi('basic-alert-long-text').onclick = function() { Dlg.alert(lt).then(answer => { console.log('long text alert', answer) })	}
@@ -170,6 +192,7 @@ const Test = (function(window, document, SimplyDialogs) {
 		}
 		gebi('basic-input-long-text').onclick = function() { Dlg.input(lt).then(answer => { console.log('long text input', answer) }) }
 	}
+*/
 
 //backdrop
 	const backdrop = function() {
@@ -336,6 +359,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	}
 
 //wait
+/*
 	const wait = function() {
 		gebi('btn-wait-settext').onclick = function() {
 			let counter = 0
@@ -366,14 +390,16 @@ const Test = (function(window, document, SimplyDialogs) {
 			interval = setInterval(add, 1000)
 		}
 	}
-
+*/
 
 //options
 	const options = function() {
 
-		gebi('options-alert-no-icon').onclick = function() {
-			Dlg.alert(shortText, { icons: { alert: null }} )
+/*
+		gebi('options-alert-header-icon-shorthand').onclick = function() {
+			Dlg.alert(shortText, { icon: '🔥', header: 'Danger!' })
 		}
+*/
 
 		gebi('btn-options-pyramids').onclick = function() {
 			const msg = 'The Great Pyramid of Giza is the largest Egyptian pyramid and tomb of<br> Fourth Dynasty pharaoh Khufu. Built in the 26th century BC during a<br> period of around 27 years. '
@@ -735,14 +761,14 @@ const Test = (function(window, document, SimplyDialogs) {
 
 	//
 	aside()
-	basic()
-	longTexts()
+	//basic()
+	//longTexts()
 	formLayout()
 	enterSubmit()
 	escape()
-	wait()
+	//wait()
 	options()
-	es()
+	//es()
 	advancedInputs()
 	backdrop()
 	fontAwesome()

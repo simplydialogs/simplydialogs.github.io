@@ -19,7 +19,7 @@ p {
 	margin:1em 0
 }
 a {
-	color: #3179c1; /* #4183c4;*/
+	color: #3179c1; 
 	text-decoration:none
 }
 body { 
@@ -191,11 +191,6 @@ table tr {
 table tr:nth-child(2n) {
     background-color: #f8f8f8;
 }
-/*
-img {
-    max-width: 100%;
-}
-*/
 code,
 tt {
     margin: 0 2px;
@@ -205,7 +200,7 @@ tt {
     background-color: #f8f8f8;
     border-radius: 3px;
     font-family: Consolas, "Liberation Mono", Courier, monospace;
-    font-size: 12px;
+    font-size: 13px;
     color: #333;
 }
 pre > code {
@@ -226,12 +221,11 @@ pre > code {
 }
 pre {
     background-color: #f8f8f8;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     font-size: 13px;
     line-height: 19px;
-/*    overflow: auto;*/
-    padding: 6px 10px;
-    border-radius: 3px;
+    Xpadding: 6px 10px;
+    Xborder-radius: 3px;
 }
 pre code,
 pre tt {

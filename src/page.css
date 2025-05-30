@@ -6,6 +6,10 @@ main {
 	margin-top: 10px;
 	width: 900px;
 }
+button {
+	font-size: medium;
+}
+
 footer {
 	clear: both;
 	display: block;
@@ -80,9 +84,6 @@ table td img {
 }
 h1, h2, h3 {
 	margin: 30px 0 10px;
-}
-h2 {
-	border-bottom: none;
 }
 h4, h5 {
 	margin: 10px 0 5px;

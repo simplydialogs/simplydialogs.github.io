@@ -9,15 +9,21 @@
 <meta name="pinterest" content="nopin">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 <meta name="description" content="SimplyDialogs is a set of generic dialogs using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
-<link rel="stylesheet" type="text/css" href="assets/style.css">
-<link rel="stylesheet" type="text/css" href="assets/page.css">
-<script src="assets/gumshoe.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" rel="stylesheet" >
+<link rel="stylesheet" type="text/css" href="src/style.css">
+<link rel="stylesheet" type="text/css" href="src/page.css">
+<script src="src/gumshoe.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script> <!-- 11.5.1 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/javascript.min.js"></script>
+<!--
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" rel="stylesheet" > 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/stackoverflow-light.min.css" rel="stylesheet" > 
+-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/xcode.min.css" rel="stylesheet" > 
 <link rel="stylesheet" type="text/css" href="assets/font-awesome/css/font-awesome.min.css">
+<!--
 <script src="src/SimplyDialogs.min.js"></script>
-<link rel="stylesheet" type="text/css" href="src/SimplyDialogs.min.css">
+-->
+<link rel="stylesheet" type="text/css" href="SimplyDialogs/SimplyDialogs.min.css">
 <meta name="publisher" content="SimplyDialogs">
 <meta property="og:url" content="https://simplydialogs.github.io">
 <meta property="og:type" content="article">
@@ -42,15 +48,21 @@
 		</a>
 	</div>
 	<ul class="root">
+<!--
 		<li><a href="#introduction">Introduction</a></li>
+-->
 		<li><a href="#summary">Summary</a></li>
-		<li><a href="#basic-samples">Samples</a>
+		<li><a href="#basic-usage">Basic usage</a>
+<!--
 			<ul>
 				<li><a href="#stackable">Stackable</a></li>
 			</ul>
 		</li>
+-->
+<!--
 		<li><a href="#global-settings">Global settings</a>
 			<ul>
+-->
 				<li><a href="#defaults">DEFAULTS</a></li>
 				<li><a href="#defaults-lang">Language</a></li>
 				<li><a href="#defaults-icons">Icons</a></li>
@@ -58,13 +70,13 @@
 				<li><a href="#defaults-classes">classes</a></li>
 				<li><a href="#sizing">Sizing</a></li>
 				<li><a href="#positioning">Positioning</a></li>
+				<li><a href="#keyboard">Keyboard</a></li>
 				<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
+<!--
 			</ul>
-		<li><a href="#options">Options</a>
+-->
+		<li><a href="#options">Passing options</a>
 			<ul>
-				<li><a href="#options-entersubmit">enterSubmit</a></li>
-				<li><a href="#options-escape">escape</a></li>
-				<li><a href="#options-sizing">Sizing on the fly</a></li>
 				<li><a href="#options-complex">Complex options</a></li>
 				<li><a href="#options-examples">Examples</a>
 					<ul>
@@ -75,12 +87,8 @@
 			</ul>
 		</li>
 		<li><a href="#styling">Additional styling</a></li>
-		<li><a href="#wait">Wait</a>
-			<ul>
-				<li><a href="#wait-settext">setText</a></li>
-				<li><a href="#wait-addtext">addText</a></li>
-			</ul>
-		</li>
+		<li><a href="#progress">progress</a></li>
+		<li><a href="#wait">wait</a></li>
 		<li><a href="#advanced-inputs">Advanced inputs</a>
 			<ul>
 				<li><a href="#input-inputs">Input options</a>
@@ -119,12 +127,12 @@
 <main style="position:relative;">
 <section id="introduction">
 <h1>SimplyDialogs</h1>
-<p>This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.0.13</a></strong> <sup>(10.05.2025)</sup>.</p>
+<p>This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. 
+Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.1.0</a></strong> <sup>(10.05.2025)</sup>.</p>
 <p>Simplydialogs offers a range of common dialogs, all highly customizeable. Comes with no dependencies and a <em>really</em> small footprint.</p>
 </section>
 
 <section id="summary">
-<h2>Summary</h2>
 <table>
 <tr>
 <th>Type</th>
@@ -164,16 +172,26 @@ Dlg.alert('Lorem ipsum ...', options)
 <td><code>bell()</code>
 </td>
 <td><img src="assets/images/bell.png" width="432" height="213" alt="bell() sample"></td>
-<td>Same as <code>alert()</code>. Produces a "beep".  
+<td>Same as <code>alert()</code>, produces a "beep".  
 </td>
 </tr>
 <tr>
 <td><code>wait()</code></td>
 <td><img src="assets/images/wait.png" width="438" height="128" alt="wait() sample"></td>
-<td>Does not return a promise, but a function you can close the wait dialog with : 
+<td>Does not return a promise, but a method you can close the wait dialog with : 
 <pre><code class="javascript">const wait = Dlg.wait('Lorem ipsum ...')
 //do something
 wait.close()
+</code></pre>
+</td>
+</tr>
+<tr>
+<td><code>progress()</code></td>
+<td><img src="assets/images/progress.png" width="448" height="143" alt="progress() sample"></td>
+<td>Does not return a promise, but a method you can close the progress dialog with : 
+<pre><code class="javascript">const progress = Dlg.progress('Lorem ipsum ...')
+//do something
+progress.close()
 </code></pre>
 </td>
 </tr>
@@ -194,7 +212,7 @@ You can define a callback in options or <code>DEFAULTS</code>, to determine if t
 </table>
 </section>
 
-<section id="basic-samples">
+<section id="basic-usage">
 <h2>Basic usage</h2>
 <p>
 <button id="basic-alert">Alert</button>
@@ -203,21 +221,22 @@ You can define a callback in options or <code>DEFAULTS</code>, to determine if t
 <button id="basic-bell">Bell</button>
 <button id="basic-error">Error</button>
 <button id="basic-wait">Wait</button>
+<button id="basic-progress">Progress</button>
 <button id="basic-input">Input</button>
 </p>
-<pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {	
+<pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet ...').then(answer => {	
   console.log('alert', answer) 
 })
 
-Dlg.confirm('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
-Dlg.information('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
-Dlg.bell('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
-Dlg.error('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(answer => {…})
+Dlg.confirm('Lorem ipsum dolor sit amet').then(answer => {...)
+Dlg.information('Lorem ipsum dolor sit amet').then(answer => {...})
+Dlg.bell('Lorem ipsum dolor sit amet').then(answer => {...})
+Dlg.error('Lorem ipsum dolor sit amet').then(answer => {...})
 
-const wait = Dlg.wait('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+const wait = Dlg.wait('Lorem ipsum dolor sit')
 setTimeout(() => { wait.close() }, 1500)
 
-Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input => {
+Dlg.input('Lorem ipsum dolor sit amet').then(input => {
   console.log('input', input)
 })
 </code></pre>
@@ -237,10 +256,6 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
 <p>SimplyDialogs can be stacked upon each other endlessly :</p>
 <p><button id="basic-stack">Show some dialogs</button> (with forced delay effect).</p>
 <p><button id="basic-stack-middle-positioning">Show some more dialogs</button> (with forced right bottom positioning)</p>
-</section>
-
-<section id="global-settings">
-<h2>Global settings</h2>
 </section>
 
 <section id="defaults">
@@ -282,6 +297,10 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
       no: ''
     }
   },
+  progress: {
+    max: undefined,
+    value: undefined
+  },
   input: {
     formLayout: 'left full-width',
     classes: {
@@ -300,6 +319,17 @@ Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit').then(input 
 </code></pre>
 <p>You can alter those defaults by simple assignment, i.e <code>&lt;instance>.DEFAULTS.icons.alert = '&lt;img src="path/to/image">' </code>. 
 Changes to <code>DEFAULTS</code> are global, but you can still pass alternative options to each dialog (see later).</p>
+
+<p>
+Any of the <code>DEFAULTS</code> settings can be overruled by passing an <code>options</code> literal as second parameter. 
+The structure of the options argument must follow the same format as <code>DEFAULTS</code>.
+</p>
+
+<p>For convenience you can use the shorthand aliases <code>header</code> and <code>icon</code> instead of repeating the convoluted literal :</p>
+<pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet ...', { icon: '🔥', header: 'Danger!' })</code></pre>	
+</p>
+<p><button id="options-alert-header-icon-shorthand">Test alert header, icon</button></p>
+
 </section>
 
 <section id="defaults-lang">
@@ -360,7 +390,7 @@ Dlg.DEFAULTS.headers = {
 
 <section id="defaults-backdrop">
 <h3>::backdrop</h3>
-<p>Across the browsers, the default <code>::backdrop</code> more or less look like this :</p>
+<p>Across the browsers, their computed default <code>::backdrop</code> CSS more or less look like this :</p>
 <pre><code class="css">dialog::backdrop {
   position: fixed;
   top: 0px;
@@ -397,30 +427,92 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 
 <section id="defaults-classes">
 <h3>.classes</h3>
-<p>You can specify default classes for the <code>&lt;dialog</code> element itself. Either static through <code>.DEFAULTS</code> or on the fly via <code>options</code> :</p>
+<p>
+You can specify default classes for the <code>&lt;dialog</code> element itself. 
+Either static through <code>.DEFAULTS</code> or on the fly via <code>options</code> :
+</p>
 <pre><code class="javascript">Dlg.DEFAULTS.classes = 'my dialog classes'</code></pre>
 <p>SimplyDialogs have some predefined classes you can use to control the size and the position of the dialog : </p>
 </section>
 
 <section id="sizing">
 <h3>Sizing</h3>
-<p>You can show static sized dialogs by using the sizing classes : <code>xs</code>,<code>xsmall</code>,<code>sm</code>,<code>small</code>,
-<code>md</code>,<code>medium</code>,<code>lg</code>,<code>large</code> : </p>
+<p>You can use predefined class names to set dialog default size  </p>
 <pre><code class="javascript">Dlg.DEFAULTS.classes = 'small'</code></pre>
-<p>Will force any dialog into type small. Using explicit sizing classes have two advantages : 
-<ul>
-	<li>Overflow content are always hidden</li>
-	<li>Buttons or <code>.dialog-actions</code> are always placed near the bottom right</li>
-</ul>
-<p>If you are not sure about the size of the content, but sure about how large the dialog should be, you can use <code>*-height</code> and <code>*-width</code> classes.</p>
-<pre><code class="javascript">Dlg.DEFAULTS.classes = 'md-width'</code></pre>
-<p>All dialogs will have the width of a md dialog, but growth in height according to the content.</p>
+<table>
+	<tr><td><code>xs</code> / <code>xsmall</code></td><td>18vw / 15vh</td><td><code>xs-width</code> / <code>xs-height</code></td></tr>
+	<tr><td><code>sm</code> / <code>small</code></td><td>22vw / 18vh</td><td><code>sm-width</code> / <code>sm-height</code></td></tr>
+	<tr><td><code>md</code> / <code>medium</code></td><td>34vw / 31vh</td><td><code>md-width</code> / <code>md-height</code></td></tr>
+	<tr><td><code>lg</code> / <code>large</code></td><td>55vw / 52vh</td><td><code>lg-width</code> / <code>lg-height</code></td></tr>
+	<tr><td><code>fullsize</code></td><td>100vw / 100vh</td><td><code></code></td></tr>
+</table>
+<p>You can override the default using options </p>
+<pre><code class="javascript">Dlg.info('some text ...', { classes: 'xs' }).then(..)</code></pre>
+<p style="margin-bottom:1px;">
+	<button id="btn-options-sizing-xs">As above</button>
+	<button id="btn-options-sizing-sm">Alert sm</button>
+	<button id="btn-options-sizing-md">Error md</button>
+	<button id="btn-options-sizing-lg">Confirm lg</button>
+	<button id="btn-options-sizing-sm-overflow">Info sm overflow</button>
+	<button id="btn-options-sizing-xs-width">Alert xs-width</button>
+	<button id="btn-options-sizing-sm-height">Alert sm-height</button>
+	<button id="btn-options-sizing-md-width">Alert md-height</button>
+	<button id="btn-options-sizing-fullsize">Error fullsize</button>
+</p>
+<small style="color:gray;">Note: The examples show dimensions, they are not meant to fit</small>
+
+<!-- positioning -->
+<section id="positioning">
+<h2>Positioning</h2>
+<p>
+Per default all dialogs are shown in the center of the viewscreen, but vertically centered between middle and top. 
+Both the default centered position <em>and</em> position <code>middle</code> are leaning to the top for aesthetic reasons. 
+The default middle is <code>9vh</code> from the top. The <code>left</code>, <code>right</code> margin is <code>4vw</code>;   
+<code>top</code>, <code>bottom</code> has <code>5vh</code> margin. 
+</p>
+<p>You can control the dialog position by using the predefined classes 
+<code>top</code>, <code>middle</code>, <code>bottom></code>, <code>left</code>, <code>center</code>, <code>right</code>
+in any combination. Remember: <code>center</code> is vertical, <code>middle</code> is horizontal. 
+This snippet shows all combinations :</p>
+<pre><code class="javascript">['top left', 'top center', 'top right', 
+ 'middle left', 'middle center', 'middle right', 
+ 'bottom left', 'bottom center', 'bottom right'].forEach(function(position) {
+  Dlg.info(position, { classes: position })
+})
+</code></pre>
+<p><button id="stacked-fan">Try it out</button></p>
 </section>
 
-<section id="positioning">
-<h3>Positioning</h3>
-<p>Per default all dialogs are shown in the center of the viewscreen, and vertically centerered between middle and top. You can force the position
-by using the <code>top</code>, <code>bottom</code>, <code>middle</code>, <code>left</code>, <code>right</code>, <code>center</code> classes, in any combination. 
+<!-- keyboard -->
+<section id="keyboard">
+<h2>Keyboard</h2>
+<p>Specify how to react on keyboard by <code>return</code> and <code>escape</code>.
+You can set both true or false for all type of dialogs, except <code>wait</code> and <code>progress</code>,
+but is mostly useful for the <code>input</code>-dialog. Note: Return / enter are ignored in textareas. 
+</p>
+<pre><code class="javascript">const options = {
+  return: (true | false),
+  escape: (true | false),
+  input: {
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'Input', name: 'input', spellcheck: false },
+      {	type: 'textarea', label: 'Textarea', name: 'textarea', spellcheck: false }
+    ],
+    callback: function(state) {
+      return state.input.length > 2
+    }
+  }
+}
+</code></pre>
+<p>This produces a form where you need to enter at least 3 characters to the <code>&lt;input></code> field, and also have an optional <code>&lt;textarea></code>. 
+In the first sample you can hit enter and submit the form, in the second you'll need to click on OK (and so on).</p>
+<p>
+<button id="btn-options-enter-submit-true">return true (default)</button>
+<button id="btn-options-enter-submit-false">return false</button>
+<button id="btn-options-escape-true">escape true (default)</button>
+<button id="btn-options-escape-false">escape false</button>
+<button id="btn-options-escape-entersubmit-false">Both escape and return false</button>
+</p>
 </section>
 
 <section id="defaults-buttons-classes">
@@ -436,83 +528,7 @@ by using the <code>top</code>, <code>bottom</code>, <code>middle</code>, <code>l
 </section>
 
 
-<!-- options -->
-<section id="options">
-<h2>Options</h2>
-<p>Any of the <code>DEFAULTS</code> settings can be overruled by passing an <code>options</code> literal as second parameter. 
-The structure of the options argument should follow the same format as <code>DEFAULTS</code> : 
-<pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet, consectetur adipiscing elit', { icons: { alert: null }})</code></pre>
-<p><button id="options-alert-no-icon">Test alert no icon</button></p>
-</section>
-
-<section id="options-entersubmit">
-<h3>enterSubmit</h3>
-<p><code>enterSubmit</code> allows the dialog to be submitted on keyboard enter. You can turn <code>enterSubmit</code> on and off for all type
-of dialogs (except <code>wait</code>) but is mostly useful for the <code>input()</code>-dialog. Note: If set to <code>true</code> 
-you can still enter returns / line breaks in textareas, but anywhere else it will submit the dialog (i.e the form). </p>
-<pre><code class="javascript">const options = {
-  enterSubmit: (true | false),
-  input: {
-    inputs: [
-      { type: 'input', inputType: 'text', label: 'Input', name: 'input', spellcheck: false },
-      {	type: 'textarea', label: 'Textarea', name: 'textarea', spellcheck: false }
-    ],
-    callback: function(state) {
-      return state.input.length > 2
-    }
-  }
-}
-</code></pre>
-<p>This produces a form where you need to enter at least 3 characters to the <code>&lt;input></code> field, and also have an optional <code>&lt;textarea></code>. 
-In the first sample you can hit enter and submit the form, in the second you'll need to click on OK.</p>
-<p>
-<button id="btn-options-enter-submit-true">enterSubmit true (default)</button>
-<button id="btn-options-enter-submit-false">enterSubmit false</button>
-</p>
-</section>
-
-
-<section id="options-escape">
-<h3>escape</h3>
-<p>Use the <code>escape</code>-option to manage hits on ESC. If <code>false</code> the user cannot cancel the dialog by presseing ESC. The default value 
-is <code>true</code>, except for the <code>wait</code>-dialog, which always overrules both <code>enterSubmit</code> and <code>escape</code>.
-</p>
-<p>As example, the same dialog as above for <code>enterSubmit</code>. Default settings, ESC turned off and both ESC and enter turned off, so the user need 
-to click on either OK or cancel.</p>
-<p>
-<button id="btn-options-escape-true">escape true (default)</button>
-<button id="btn-options-escape-false">escape false</button>
-<button id="btn-options-escape-entersubmit-false">escape and enterSubmit false</button>
-</p>
-</section>
-
-
-<section id="options-sizing">
-<h3>Sizing on the fly</h3>
-<p>Use the <code>classes</code> option to set a static size on the dialog. The builtin classes are : </p>
-<table>
-	<tr><td><code>xs</code> / <code>xsmall</code></td><td>18vw / 15vh</td><td><code>xs-width</code> / <code>xs-height</code></td></tr>
-	<tr><td><code>sm</code> / <code>small</code></td><td>22vw / 18vh</td><td><code>sm-width</code> / <code>sm-height</code></td></tr>
-	<tr><td><code>md</code> / <code>medium</code></td><td>34vw / 31vh</td><td><code>md-width</code> / <code>md-height</code></td></tr>
-	<tr><td><code>lg</code> / <code>large</code></td><td>55vw / 52vh</td><td><code>lg-width</code> / <code>lg-height</code></td></tr>
-	<tr><td><code>fullsize</code></td><td>100vw / 100vh</td><td><code></code></td></tr>
-</table>
-<p>Example, show a xsmall sized information-dialog :</p>
-<pre><code class="javascript">Dlg.info('some text ...', { classes: 'xs' }).then(..)</code></pre>
-<p style="margin-bottom:1px;">
-	<button id="btn-options-sizing-xs">As above</button>
-	<button id="btn-options-sizing-sm">Alert sm</button>
-	<button id="btn-options-sizing-md">Error md</button>
-	<button id="btn-options-sizing-lg">Confirm lg</button>
-	<button id="btn-options-sizing-sm-overflow">Info sm overflow</button>
-	<button id="btn-options-sizing-xs-width">Alert xs-width</button>
-	<button id="btn-options-sizing-sm-height">Alert sm-height</button>
-	<button id="btn-options-sizing-md-width">Alert md-height</button>
-	<button id="btn-options-sizing-fullsize">Error fullsize</button>
-</p>
-<small style="color:gray;">Note: The examples show dimensions, they are not meant to fit</small>
-</section>
-
+<!-- options-complex -->
 <section id="options-complex">
 <h3>Complex options</h3>
 <p>As reference, the layout of the options-literal look like this: </p>
@@ -642,15 +658,44 @@ Dlg.alert(msg, options)
 </section>
 
 <!-- wait -->
+<section id="progress">
+<h2>progress</h2>
+<p>The progress dialog cannot be closed by the user but must be closed programmatically by using <code>close()</code>.
+By default the <code>&lt;progress></code> element is shown in indeterminate (ongoing with no indication) state
+<pre><code class="javascript">const progress = Dlg.progress('Lorem ipsum ...')
+setTimeout(() => progress.close(), 2000)
+</pre></code>
+<button id="btn-progress-indeterminate">indeterminate</button>
+</p>
+<p>
+To make a progressive progress, specify a <code>max</code> value and use <code>setValue</code> to update the progress 
+
+<pre><code class="javascript">const progress = Dlg.progress('Lorem ipsum ...', { progress: { value: 0, max: 100 }})
+
+//mimick a progressive task
+let interval, value = 0
+const update = function() {
+  value++
+  progress.setValue(value)
+  progress.setText(`progress ${value}%`)
+  if (value > 100) {
+    clearInterval(interval)
+    progress.close()
+  }
+}
+interval = setInterval(update, 20)
+</pre></code>
+<button id="btn-progress-progress">progress mockup</button>
+</section>
+
+<!-- wait -->
 <section id="wait">
 <h2>wait</h2>
 <p>When using the <code>wait</code>-dialog, it can be convenient to update the dialog for details about progress or 
-whatever there is going on. <code>wait</code> has two special functions for updating the msessage, <code>setText</code> and <code>addText</code>. 
+whatever there is going on. <code>wait</code> has two special methods for updating the message, <code>setText</code> and <code>addText</code>. 
 Both takes a string as argument, that can be plain text or HTML.</p>
-</section>
 
-<section id="wait-settext">
-<h3>setText</h3>
+<h4>setText</h4>
 <p><code>setText</code> replaces the message with new content. Consider this mockup :</p>
 <pre><code class="javascript">let counter = 0
 let interval = undefined
@@ -666,10 +711,8 @@ const replace = function() {
 interval = setInterval(replace, 1000)
 </code></pre>
 <p><button id="btn-wait-settext">setText mockup sample</button></p>
-</section>
 
-<section id="wait-addtext">
-<h3>addText</h3>
+<h4>addText</h4>
 <p><code>addText</code> appends something to the already existing text/message. The content can be plain text or HTML. Consider this mockup :</p>
 <pre><code class="javascript">let counter = 0
 let interval = undefined
@@ -959,15 +1002,17 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, JPG supported)&lt;/sup>',
 <section id="integration">
 <h2>Integration</h2>
 
+<!--
 <section id="integration-bootstrap5">
 	<h3>Example, Bootstrap 5</h3>
-	<iframe src="assets/frames/bs5.html" onload="Test.rf(this)" title="Bootstrap 5 example"></iframe>
+	<iframe src="assets/frames/bs5.html" XXonload="Test.rf(this)" title="Bootstrap 5 example"></iframe>
 </section>
 
 <section id="integration-materialize">
 	<h3>Example, Materialize CSS</h3>
-	<iframe src="assets/frames/materialize.html" onload="Test.rf(this)" title="Materialize CSS Example"></iframe>
+	<iframe src="assets/frames/materialize.html" XXonload="Test.rf(this)" title="Materialize CSS Example"></iframe>
 </section>
+-->
 
 </section>
 
@@ -989,7 +1034,7 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, JPG supported)&lt;/sup>',
 &copy; David Konrad, 2022- present, davidkonrad at gmail. <a href="https://github.com/simplydialogs/simplydialogs.github.io">This site on GitHub</a>.
 </footer>
 
-<script src="assets/script.js"></script>
+<script src="src/script.js" type="module"></script>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Mountains+of+Christmas">
 </body>
 </html>
