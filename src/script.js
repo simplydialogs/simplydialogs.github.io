@@ -1,6 +1,7 @@
 
 import { BasicUsage } from './lib/basicusage.js'
 import { Captions } from './lib/captions.js'
+import { Sizing } from './lib/sizing.js'
 import { Progress } from './lib/progress.js'
 import { Wait } from './lib/wait.js'
 import { Stacked } from './lib/stacked.js'
@@ -13,6 +14,52 @@ const Test = (function(window, document, SimplyDialogs) {
 	const shortText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
 	const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 */
+
+	const isElementInViewport = function(e) {
+		const rect = e.getBoundingClientRect()
+		return (rect.y > -rect.height) && (rect.y < document.documentElement.clientHeight/2)
+	}
+
+/*
+	const input_sections = [
+		gebi('advanced-inputs'),
+		gebi('input-inputs'),
+		gebi('input-autocomplete'),
+		gebi('input-form-layout'),
+		gebi('input-input-type'),
+		gebi('input-radio-select'),
+		gebi('input-form-validation'),
+		gebi('input-callback'),
+		gebi('input-promise'),
+		gebi('input-login-dialog'),
+		gebi('input-file'),
+	]
+	const input_details = gebi('input-details')
+	window.addEventListener('scroll', function() {
+		let visible = false
+		for (const section of input_sections) {
+			if (isElementInViewport(section)) {
+				console.log(section.id)
+				visible = true
+			}
+		}
+		if (visible) {
+			if (input_details.style.display !== 'block') input_details.style.display = 'block'
+		} else {
+			if (input_details.style.display !== 'none') input_details.style.display = 'none'
+		}
+	})
+*/
+	const input_details = gebi('input-details')
+	window.addEventListener('scroll', function() {
+		if (isElementInViewport(gebi('advanced-inputs'))) {
+			console.log('true')
+			if (input_details.style.display !== 'block') input_details.style.display = 'block'
+		} else {
+			console.log('false	')
+			if (input_details.style.display !== 'none') input_details.style.display = 'none'
+		}
+	})
 
 	if (hljs)	{
 		hljs.configure({
@@ -439,7 +486,7 @@ const Test = (function(window, document, SimplyDialogs) {
 			}
 			Dlg.bell(msg, options)
 		}
-
+/*
 		gebi('btn-options-sizing-xs').onclick = function() {
 			Dlg.info('some text ...', { classes: 'xs' })
 		}
@@ -467,7 +514,7 @@ const Test = (function(window, document, SimplyDialogs) {
 		gebi('btn-options-sizing-fullsize').onclick = function() {
 			Dlg.error(longText, { classes: 'fullsize' })
 		}
-
+*/
 	}
 
 //advancedInputs

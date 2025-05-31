@@ -20,6 +20,11 @@ const Captions = (function() {
 				no: 'Salir',
 				cancel: 'Cancelar'
 			}
+		},
+		input: {
+			inputs: [
+				{ type: 'input', inputType: 'text', label: 'Input ', name: 'input', placeholder: 'Introducir texto ..' },
+			],
 		}
 	}
 

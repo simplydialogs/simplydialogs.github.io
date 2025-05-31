@@ -8,6 +8,7 @@ main {
 }
 button {
 	font-size: medium;
+	margin-bottom: .2rem;
 }
 
 footer {

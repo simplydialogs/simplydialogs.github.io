@@ -76,6 +76,7 @@
 			</ul>
 -->
 		<li><a href="#options">Passing options</a>
+<!--
 			<ul>
 				<li><a href="#options-complex">Complex options</a></li>
 				<li><a href="#options-examples">Examples</a>
@@ -85,12 +86,13 @@
 					</ul>
 				</li>
 			</ul>
+-->
 		</li>
 		<li><a href="#styling">Additional styling</a></li>
 		<li><a href="#progress">progress</a></li>
 		<li><a href="#wait">wait</a></li>
 		<li><a href="#advanced-inputs">Advanced inputs</a>
-			<ul>
+			<ul id="input-details">
 				<li><a href="#input-inputs">Input options</a>
 					<ul>
 						<li><a href="#input-autofocus">autofocus</a></li>
@@ -115,6 +117,7 @@
 				</li>
 			</ul>
 		</li>
+		<li><a href="#examples">Examples</a>
 		<li><a href="#integration">Integration</a>
 			<ul>
 				<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
@@ -327,9 +330,7 @@ The structure of the options argument must follow the same format as <code>DEFAU
 
 <p>For convenience you can use the shorthand aliases <code>header</code> and <code>icon</code> instead of repeating the convoluted literal :</p>
 <pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet ...', { icon: '🔥', header: 'Danger!' })</code></pre>	
-</p>
 <p><button id="options-alert-header-icon-shorthand">Test alert header, icon</button></p>
-
 </section>
 
 <section id="defaults-lang">
@@ -351,6 +352,9 @@ Dlg.DEFAULTS.headers = {
   bell: 'Nota',
   input: 'Input'
 }
+
+//change placeholder for the default input dialog as well
+Dlg.DEFAULTS.input.inputs[0].placeholder = 'Introducir texto ..'
 </code></pre>
 <p>
 <button id="basic-alert-es">Alert</button>
@@ -435,8 +439,9 @@ Either static through <code>.DEFAULTS</code> or on the fly via <code>options</co
 <p>SimplyDialogs have some predefined classes you can use to control the size and the position of the dialog : </p>
 </section>
 
+<!-- sizing -->
 <section id="sizing">
-<h3>Sizing</h3>
+<h2>Sizing</h2>
 <p>You can use predefined class names to set dialog default size  </p>
 <pre><code class="javascript">Dlg.DEFAULTS.classes = 'small'</code></pre>
 <table>
@@ -460,6 +465,8 @@ Either static through <code>.DEFAULTS</code> or on the fly via <code>options</co
 	<button id="btn-options-sizing-fullsize">Error fullsize</button>
 </p>
 <small style="color:gray;">Note: The examples show dimensions, they are not meant to fit</small>
+</section>
+
 
 <!-- positioning -->
 <section id="positioning">
@@ -531,72 +538,6 @@ In the first sample you can hit enter and submit the form, in the second you'll 
 <!-- options-complex -->
 <section id="options-complex">
 <h3>Complex options</h3>
-<p>As reference, the layout of the options-literal look like this: </p>
-<pre><code class="javascript">{
-  enterSubmit: ,
-  escape: ,
-  backdrop: ,
-  classes: ,
-  headers: {},
-  icons: {},
-  buttons: {
-    captions: {},
-    classes: {},
-  },
-  input: {
-    formLayout: ,
-    classes: { label: , input: , }
-    inputs: [],
-    callback: ,
-    promise: ,
-  }
-}
-</code></pre>
-<p>As example, define the following CSS-class and pass the literal : </p>
-<pre><code class="css">dialog.nasa-earth {
-  background: url(https://explorer1.jpl.nasa.gov/assets/images/galleries/1972_BlueMarble_115334main_image_feature_329_ys_full.jpg);
-  background-size: cover;
-  color: yellow;
-  min-height: 50vh;
-  font-size: x-large;
-}</code></pre>
-<pre><code class="javascript">const options = {
-  classes: 'nasa-earth lg-height sm-width',
-  icons: { confirm: '👽' },
-  headers: { confirm: null },
-  buttons: { captions: { yes: 'No', no: 'Defently not!' }}
-}
-Dlg.confirm('Are There Any Chance of Intelligent Life in The Universe, anywhere?', options)
-</code></pre>
-<p><button id="options-complex-example-1">Try it out</button> ;- it is hard to figure out examples, or maybe I am just stoned.</p>
-</section>
-
-<section id="options-image-viewer">
-<h3>Image Viewer</h3>
-<p>Reset button-captions and the header :</p>
-<pre><code class="javascript">const msg = '&lt;img src="https://explorer1.jpl.nasa.gov/assets/images/galleries/1972_BlueMarble_115334main_image_feature_329_ys_full.jpg" style="max-height:75vh;">'
-const options = {
-  headers: { bell: '' },
-  icons: { bell: '' },
-  buttons: { captions: { ok: null }}
-}
-Dlg.bell(msg, options)
-</code></pre>
-<p><button id="btn-options-image-viewer">As external image viewer</button></p>
-</section>
-
-<section id="options-pyramids">
-<h3>Maps example</h3>
-<p>You can use HTML in headers, buttons and the dialog message itself. Here the <code>informtion()</code>
-dialog showing a Google Maps destination :</p>
-<pre><code class="javascript">const msg = 'The Great Pyramid of Giza is the largest Egyptian pyramid and tomb of&lt;br> Fourth Dynasty pharaoh Khufu. Built in the 26th century BC during a&lt;br> period of around 27 years. '
-const html = '&lt;div class="mapouter">&lt;div class="gmap_canvas">&lt;iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=the%20great%20pyramids&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">&lt;/iframe>&lt;a href="https://www.whatismyip-address.com">&lt;/a>&lt;br>&lt;style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}&lt;/style>&lt;a href="https://www.embedgooglemap.net">embedgooglemap.net&lt;/a>&lt;style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}&lt;/style>&lt;/div>&lt;/div>'
-const options = {
-  headers: { information: 'The Great Pyramid of Giza' }
-}
-Dlg.information(msg + html, options)
-</code></pre>
-<p><button id="btn-options-pyramids">Show Pyramids of Giza info-card</button></p>
 </section>
 
 <section id="styling">
@@ -613,63 +554,23 @@ dialog h4 {
 </code></pre>
 <p>etc. That will obvious inflict on all dialogs.</p>
 <h4>2. Attach a named CSS class to .classes</h4>
-<p>More suitable if you want to style a certain dialog differently. Here is an example with a kind of "Merry X-mas dialog", that overrule many of 
-the default styles :
-<pre><code class="css">dialog.x-mas {
-  border-radius: 0;
-  border: 1mm ridge #34a65f !important;
-  background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-}
-dialog.x-mas h4 {
-  font-size: xxx-large;
-  font-family: 'Mountains of Christmas';
-  font-weight: 900;
-  color: #cc231e;
-  text-shadow: 1px 1px #34A65F;
-}
-dialog.x-mas .dialog-message {
-  font-size: medium;
-  font-family: cursive;
-  color: #cc231e;
-  text-shadow: -1px -1px gold;
-}
-dialog.x-mas button {
-  background-color: #0f8a5f;
-  font-size: x-large;
-  font-weight: bold;
-  padding: 7px;
-  color: gold;
-  border-color: gold;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-</code></pre>
-<p>Then activate the dialog in code like this :</p>
-<pre><code class="javascript">const options = {
-  classes: 'x-mas',
-  headers: { alert: 'Merry Christmas ...' },
-  icons: { alert : '🎄' },
-  buttons: { captions: { ok: '✨ Ok ✨' }}
-}
-const msg = '🎀 🎁 Frohe Weihnachten, メリークリスマス, Joyeux Noël, Feliz Navidad, 聖誕快樂, Buon Natale, Glædelig Jul ...!'
-Dlg.alert(msg, options)
-</code></pre>
-<p><button id="options-complex-example-2">X-mas dialog</button></p>
 </section>
 
 <!-- wait -->
 <section id="progress">
 <h2>progress</h2>
-<p>The progress dialog cannot be closed by the user but must be closed programmatically by using <code>close()</code>.
-By default the <code>&lt;progress></code> element is shown in indeterminate (ongoing with no indication) state
+<p>The progress dialog cannot be closed or cancelled by the user, but must be closed programmatically by using the <code>close()</code> method.
+By default the <code>&lt;progress></code> element is shown in indeterminate state (ongoing with no indication)</p>
 <pre><code class="javascript">const progress = Dlg.progress('Lorem ipsum ...')
 setTimeout(() => progress.close(), 2000)
-</pre></code>
+</code></pre>
+<p>
 <button id="btn-progress-indeterminate">indeterminate</button>
+<button id="btn-progress-fixed">fixed { value: 75, max: 100 }</button>
 </p>
 <p>
 To make a progressive progress, specify a <code>max</code> value and use <code>setValue</code> to update the progress 
-
+</p>
 <pre><code class="javascript">const progress = Dlg.progress('Lorem ipsum ...', { progress: { value: 0, max: 100 }})
 
 //mimick a progressive task
@@ -684,8 +585,8 @@ const update = function() {
   }
 }
 interval = setInterval(update, 20)
-</pre></code>
-<button id="btn-progress-progress">progress mockup</button>
+</code></pre>
+<p><button id="btn-progress-progress">progress mockup</button></p>
 </section>
 
 <!-- wait -->
@@ -733,7 +634,9 @@ interval = setInterval(append, 1000)
 <!-- inputs -->
 <section id="advanced-inputs">
 <h2>Advanced inputs</h2>
+<!---
 </section>
+--->
 
 <section id="input-options">
 <h3>Passing options literal</h3>
@@ -996,6 +899,100 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, JPG supported)&lt;/sup>',
 })
 </code></pre>
 <p><button id="btn-input-file">Test image upload</button> </p>
+</section>
+</section> <!-- advanced-input -->
+
+
+<!-- examples -->
+<section id="examples">
+<h2>Further examples</h2>
+
+<p>As example, define the following CSS-class and pass the literal : </p>
+<pre><code class="css">dialog.nasa-earth {
+  background: url(https://explorer1.jpl.nasa.gov/assets/images/galleries/1972_BlueMarble_115334main_image_feature_329_ys_full.jpg);
+  background-size: cover;
+  color: yellow;
+  min-height: 50vh;
+  font-size: x-large;
+}</code></pre>
+<pre><code class="javascript">const options = {
+  classes: 'nasa-earth lg-height sm-width',
+  icons: { confirm: '👽' },
+  headers: { confirm: null },
+  buttons: { captions: { yes: 'No', no: 'Defently not!' }}
+}
+Dlg.confirm('Are There Any Chance of Intelligent Life in The Universe, anywhere?', options)
+</code></pre>
+<p><button id="options-complex-example-1">Try it out</button> ;- it is hard to figure out examples, or maybe I am just stoned.</p>
+
+<h3>Image Viewer</h3>
+<p>Reset button-captions and the header :</p>
+<pre><code class="javascript">const msg = '&lt;img src="https://explorer1.jpl.nasa.gov/assets/images/galleries/1972_BlueMarble_115334main_image_feature_329_ys_full.jpg" style="max-height:75vh;">'
+const options = {
+  headers: { bell: '' },
+  icons: { bell: '' },
+  buttons: { captions: { ok: null }}
+}
+Dlg.bell(msg, options)
+</code></pre>
+<p><button id="btn-options-image-viewer">As external image viewer</button></p>
+
+<h3>Maps example</h3>
+<p>You can use HTML in headers, buttons and the dialog message itself. Here the <code>informtion()</code>
+dialog showing a Google Maps destination :</p>
+<pre><code class="javascript">const msg = 'The Great Pyramid of Giza is the largest Egyptian pyramid and tomb of&lt;br> Fourth Dynasty pharaoh Khufu. Built in the 26th century BC during a&lt;br> period of around 27 years. '
+const html = '&lt;div class="mapouter">&lt;div class="gmap_canvas">&lt;iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=the%20great%20pyramids&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">&lt;/iframe>&lt;a href="https://www.whatismyip-address.com">&lt;/a>&lt;br>&lt;style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}&lt;/style>&lt;a href="https://www.embedgooglemap.net">embedgooglemap.net&lt;/a>&lt;style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}&lt;/style>&lt;/div>&lt;/div>'
+const options = {
+  headers: { information: 'The Great Pyramid of Giza' }
+}
+Dlg.information(msg + html, options)
+</code></pre>
+<p><button id="btn-options-pyramids">Show Pyramids of Giza info-card</button></p>
+
+<h3>X-mas</h3>
+<p>More suitable if you want to style a certain dialog differently. Here is an example with a kind of "Merry X-mas dialog", that overrule many of 
+the default styles :
+<pre><code class="css">dialog.x-mas {
+  border-radius: 0;
+  border: 1mm ridge #34a65f !important;
+  background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+}
+dialog.x-mas h4 {
+  font-size: xxx-large;
+  font-family: 'Mountains of Christmas';
+  font-weight: 900;
+  color: #cc231e;
+  text-shadow: 1px 1px #34A65F;
+}
+dialog.x-mas .dialog-message {
+  font-size: medium;
+  font-family: cursive;
+  color: #cc231e;
+  text-shadow: -1px -1px gold;
+}
+dialog.x-mas button {
+  background-color: #0f8a5f;
+  font-size: x-large;
+  font-weight: bold;
+  padding: 7px;
+  color: gold;
+  border-color: gold;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+</code></pre>
+<p>Then activate the dialog in code like this :</p>
+<pre><code class="javascript">const options = {
+  classes: 'x-mas',
+  headers: { alert: 'Merry Christmas ...' },
+  icons: { alert : '🎄' },
+  buttons: { captions: { ok: '✨ Ok ✨' }}
+}
+const msg = '🎀 🎁 Frohe Weihnachten, メリークリスマス, Joyeux Noël, Feliz Navidad, 聖誕快樂, Buon Natale, Glædelig Jul ...!'
+Dlg.alert(msg, options)
+</code></pre>
+<p><button id="options-complex-example-2">X-mas dialog</button></p>
+
 </section>
 
 

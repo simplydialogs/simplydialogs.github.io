@@ -9,6 +9,11 @@ const Progress = (function() {
 		setTimeout(() => progress.close(), 2000)
 	}
 
+	gebi('btn-progress-fixed').onclick = function() {
+		const progress = Dlg.progress(shortText, { progress: { value: 50, max: 100 }})
+		setTimeout(() => progress.close(), 2000)
+	}
+
 	gebi('btn-progress-progress').onclick = function() {
 		const progress = Dlg.progress(shortText, { progress: { value: 0, max: 100 }})
 
