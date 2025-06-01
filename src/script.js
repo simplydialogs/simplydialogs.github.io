@@ -2,64 +2,51 @@
 import { BasicUsage } from './lib/basicusage.js'
 import { Captions } from './lib/captions.js'
 import { Sizing } from './lib/sizing.js'
+import { Keyboard } from './lib/keyboard.js'
 import { Progress } from './lib/progress.js'
 import { Wait } from './lib/wait.js'
 import { Stacked } from './lib/stacked.js'
-import { SimplyDialogs } from './../SimplyDialogs/SimplyDialogs.min.mjs'
+import { Input } from './lib/input.js'
+import { SimplyDialogs as Dlg } from './../SimplyDialogs/SimplyDialogs.min.mjs'
 
-const Test = (function(window, document, SimplyDialogs) {
+const Test = (function(window, document, Dlg) {
 	const gebi = (id) => { return document.getElementById(id) }
-	const Dlg = SimplyDialogs
-/*
-	const shortText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-	const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-*/
 
 	const isElementInViewport = function(e) {
 		const rect = e.getBoundingClientRect()
 		return (rect.y > -rect.height) && (rect.y < document.documentElement.clientHeight/2)
 	}
 
-/*
-	const input_sections = [
-		gebi('advanced-inputs'),
-		gebi('input-inputs'),
-		gebi('input-autocomplete'),
-		gebi('input-form-layout'),
-		gebi('input-input-type'),
-		gebi('input-radio-select'),
-		gebi('input-form-validation'),
-		gebi('input-callback'),
-		gebi('input-promise'),
-		gebi('input-login-dialog'),
-		gebi('input-file'),
-	]
-	const input_details = gebi('input-details')
-	window.addEventListener('scroll', function() {
-		let visible = false
-		for (const section of input_sections) {
-			if (isElementInViewport(section)) {
-				console.log(section.id)
-				visible = true
-			}
-		}
-		if (visible) {
-			if (input_details.style.display !== 'block') input_details.style.display = 'block'
-		} else {
-			if (input_details.style.display !== 'none') input_details.style.display = 'none'
-		}
-	})
-*/
 	const input_details = gebi('input-details')
 	window.addEventListener('scroll', function() {
 		if (isElementInViewport(gebi('advanced-inputs'))) {
-			console.log('true')
 			if (input_details.style.display !== 'block') input_details.style.display = 'block'
 		} else {
-			console.log('false	')
 			if (input_details.style.display !== 'none') input_details.style.display = 'none'
 		}
 	})
+
+	const initSyntaxHl = function() {
+		const hl = [
+			'xcode',
+			'stackoverflow-light',
+			'stackoverflow-dark',
+			'vs',
+			'github',
+			'github-dark',
+			'atom-one-dark', 
+		]
+		const select = gebi('select-syntax-hl')
+		hl.forEach(function(s) {
+			const o = document.createElement('OPTION')
+			o.value = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/' + s + '.min.css'
+			o.innerText = s
+			select.append(o)
+		})
+		select.onchange = function() {
+			gebi('link-highlight').setAttribute('href', this.value)
+		}
+	}
 
 	if (hljs)	{
 		hljs.configure({
@@ -105,7 +92,8 @@ const Test = (function(window, document, SimplyDialogs) {
 		window.addEventListener('load', () => {
 			aresize()
 			new Gumshoe('ul.root a', {
-				offset: '290px',
+				//offset: '290px',
+				offset: '125px',
 				reflow: true,
 				nested: false,
 				nestedClass: ''
@@ -114,7 +102,10 @@ const Test = (function(window, document, SimplyDialogs) {
 		})
 		a.style.display = 'block'
 		a.style.position = 'sticky'
-		m.style.top = '-' + a.scrollHeight + 'px'
+		//console.log(a.scrollHeight)
+		setTimeout(function() {
+			m.style.top = '-' + ((a.scrollHeight-280) + 'px')
+		})
 	}
 
 /*
@@ -304,6 +295,7 @@ const Test = (function(window, document, SimplyDialogs) {
 	}
 
 //formLayout
+/*
 	const formLayout = function() {
 		const options = {
 			input: {
@@ -341,69 +333,8 @@ const Test = (function(window, document, SimplyDialogs) {
 			Dlg.input(shortText, options)
 		}
 	}
+*/
 
-//enterSubmit
-	const enterSubmit = function() {
-		const options = {
-			input: {
-				inputs: [
-					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required', spellcheck: false },
-					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4, spellcheck: false }
-				],
-				callback: function(state) {
-					return state.input.length > 2
-				}
-			}
-
-		}
-		gebi('btn-options-enter-submit-true').onclick = function() {
-			options.enterSubmit = true
-			Dlg.input(shortText, options).then(fs => {
-				console.log('enterSubmit', fs)
-			})
-		}
-		gebi('btn-options-enter-submit-false').onclick = function() {
-			options.enterSubmit = false
-			Dlg.input(shortText, options).then(fs => {
-				console.log('enterSubmit', fs)
-			})
-		}
-	}
-
-//escape
-	const escape = function() {
-		const options = {
-			input: {
-				inputs: [
-					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required', spellcheck: false },
-					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4, spellcheck: false }
-				],
-				callback: function(state) {
-					return state.input.length > 2
-				}
-			}
-
-		}
-		gebi('btn-options-escape-true').onclick = function() {
-			options.escape = true
-			Dlg.input(shortText, options).then(fs => {
-				console.log('escape', fs)
-			})
-		}
-		gebi('btn-options-escape-false').onclick = function() {
-			options.escape = false
-			Dlg.input(shortText, options).then(fs => {
-				console.log('escape', fs)
-			})
-		}
-		gebi('btn-options-escape-entersubmit-false').onclick = function() {
-			options.escape = false
-			options.enterSubmit = false
-			Dlg.input(shortText, options).then(fs => {
-				console.log('escape', fs)
-			})
-		}
-	}
 
 //wait
 /*
@@ -441,13 +372,6 @@ const Test = (function(window, document, SimplyDialogs) {
 
 //options
 	const options = function() {
-
-/*
-		gebi('options-alert-header-icon-shorthand').onclick = function() {
-			Dlg.alert(shortText, { icon: '🔥', header: 'Danger!' })
-		}
-*/
-
 		gebi('btn-options-pyramids').onclick = function() {
 			const msg = 'The Great Pyramid of Giza is the largest Egyptian pyramid and tomb of<br> Fourth Dynasty pharaoh Khufu. Built in the 26th century BC during a<br> period of around 27 years. '
 			const html = '<div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=the%20great%20pyramids&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.whatismyip-address.com"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://www.embedgooglemap.net">embedgooglemap.net</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>'
@@ -517,232 +441,6 @@ const Test = (function(window, document, SimplyDialogs) {
 */
 	}
 
-//advancedInputs
-	const advancedInputs = function() {
-		gebi('btn-input-textarea').onclick = function() {
-			const options = {
-				input: {
-					inputs: [
-						{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed' },
-						{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50 }
-					]
-				}
-			}
-			Dlg.input(shortText, options).then(function(input) {
-				console.log('result', input)
-			})
-		}
-
-		gebi('btn-input-textarea-autofocus').onclick = function() {
-			const options = {
-				input: {
-					inputs: [
-						{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed' },
-						{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50, autofocus: true }
-					]
-				}
-			}
-			Dlg.input(shortText, options).then(function(input) {
-				console.log('result', input)
-			})
-		}
-
-		gebi('btn-input-textarea-spellcheck').onclick = function() {
-			const options = {
-				input: {
-					inputs: [
-						{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed' },
-						{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50, spellcheck: true }
-					]
-				}
-			}
-			Dlg.input(shortText, options).then(function(input) {
-				console.log('result', input)
-			})
-		}
-
-		gebi('btn-input-autocomplete-textarea').onclick = function() {
-			const options = {
-				input: {
-					inputs: [
-						{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed', autocomplete: 'on' },
-						{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50 }
-					]
-				}
-			}
-			Dlg.input(shortText, options).then(function(input) {
-				console.log('result', input)
-			})
-		}
-
-		gebi('btn-input-all').onclick = function() {
-			const options = {
-				input: {
-					inputs: [
-						{ type: 'input', inputType: 'text', label: 'Text', name: 'input', spellcheck: false },
-						{ type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
-						{ type: 'input', inputType: 'color', label: 'Color', name: 'color', value: '#123456' },
-						{ type: 'input', inputType: 'number', label: 'Number', name: 'number', value: 42 },
-						{ type: 'input', inputType: 'password', label: 'Password', name: 'password', style: 'color:maroon;' },
-						{ type: 'input', inputType: 'date', label: 'Date', name: 'date' },
-						{ type: 'input', inputType: 'file', label: 'File', name: 'file' },
-						{ type: 'input', inputType: 'url', label: 'Url', name: 'url' },
-						{ type: 'input', inputType: 'range', label: 'Range', name: 'range', value:25, max: 100 },
-						{ type: 'input', inputType: 'hidden', label: '', name: 'hidden', value: 'You can pass extra values to the form via hidden inputs' }
-					]
-				}
-			}
-			Dlg.input(shortText, options).then(function(input) {
-				console.log('result', input)
-			})
-		}
-
-		gebi('btn-input-radio-select').onclick = function() {
-			const options = { 
-				input: { 
-					inputs: [
-						{ type: 'radio', label: 'radio', name: 'radio', value: 'option2',
-							options: [
-									{ label: 'option1', value: 'option1' },
-									{ label: 'option2', value: 'option2' },
-									{ label: 'option3', value: 'option3' }
-								]
-						},
-						{ type: 'select', label: 'select', name: 'select', value: 'option3',
-								options: [
-									{ label: 'option1', value: 'option1' },
-									{ label: 'option2', value: 'option2' },
-									{ label: 'option3', value: 'option3' }
-								]
-						}
-					],
-          callback: function(state) {
-            return state.radio !== '' && state.select !== ''
-          }
-        }
-      }
-			Dlg.input(shortText, options).then(function(input) {
-				console.log('radio select', input)
-			})
-		}
-
-		gebi('btn-input-radio-select-no-value').onclick = function() {
-			const options = { 
-				input: { 
-					inputs: [
-						{ type: 'radio', label: 'radio', name: 'radio',
-							options: [
-									{ label: 'option1', value: 'option1' },
-									{ label: 'option2', value: 'option2' },
-									{ label: 'option3', value: 'option3' }
-								]
-						},
-						{ type: 'select', label: 'select', name: 'select', 
-								options: [
-									{ label: 'option1', value: 'option1' },
-									{ label: 'option2', value: 'option2' },
-									{ label: 'option3', value: 'option3' }
-								]
-						}
-					],
-          callback: function(state) {
-            return state.radio !== '' && state.select !== ''
-          }
-        }
-      }
-			Dlg.input(shortText, options).then(function(input) {
-				console.log('radio select', input)
-			})
-		}
-
-		gebi('btn-input-file').onclick = function() {
-			const options = {
-				headers: { input: 'Upload Image' },
-				icons: { input: '🖼' },
-				input: {
-					inputs: [
-						{ type: 'input', inputType: 'image', label: 'Preview', name: 'preview', alt: 'No image yet', disabled: 'disabled',
-							src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>',
-							style: 'min-height: 20vh; max-height: 50vh; border: 1px solid #dadada; object-fit: contain;' },
-						{ type: 'input', inputType: 'file', label: 'Image', name: 'file', accept: 'image/png, image/gif, image/jpeg' }
-					],
-					callback: function(state, dialog) {
-						if (state.file) {
-							dialog.querySelector('input[type="image"]').src = URL.createObjectURL(state.file)
-							return true
-						}
-					}
-				}
-			}
-			Dlg.input('Select image file <br><sup>(PNG, GIF, JPG supported)</sup>', options).then(function(input) {
-				console.log('result', input)
-			})
-		}
-
-		gebi('btn-input-login-dialog').onclick = function() {
-			const options = {
-				headers: { input: 'Login' },
-				icons: { input: '🔑' },
-				classes: 'sm',
-				input: {
-					inputs: [	
-						{ type: 'input', inputType: 'text', label: 'Username', name: 'username', autocomplete: 'off' },
-						{ type: 'input', inputType: 'password', label: 'Password', name: 'password' }  
-					],
-					callback: function(state) {
-						return state.username.length > 0 && state.password.length > 0
-					}
-				}
-			}
-			Dlg.input('', options).then(input => {
-				console.log('login', input)
-			})
-		}
-
-//validation
-		gebi('btn-input-validation-callback').onclick = function() {
-			const options = {
-				headers: { input: 'What is 42 with inflation?' },
-				icons: { input: '🖖' },
-				input: {
-					inputs: [	
-						{ type: 'input', inputType: 'password', label: '', name: 'star-trek-number' }
-					],
-					callback: function(state) {
-						return parseInt(state['star-trek-number']) === 47
-					}
-				}
-			}
-			Dlg.input(null, options).then(input => {
-				console.log(input)
-			})
-		}
-
-		gebi('btn-input-validation-promise').onclick = function() {
-			const options = {
-				headers: { input: 'Enter user name' },
-				icons: { input: '' },
-				input: {
-					inputs: [	
-						{ type: 'input', inputType: 'text', label: '', name: 'username' }
-					],
-					promise: function(state) {
-						return new Promise(function(resolve) {
-							if (state.username.length < 5) return resolve(false)
-							const letters = /^[0-9a-zA-Z]+$/
-							if (!letters.test(state.username)) return resolve(false)
-							setTimeout(function() {
-								resolve(true)
-							}, 1000)
-						})
-					}
-				}
-			}
-			Dlg.input('Must be at least 5 characters long and may only contain letters and numbers', options).then(input => {
-				console.log(input)
-			})
-		}
-	}
 
 //font awesome
 	const fontAwesome = function() {
@@ -808,20 +506,20 @@ const Test = (function(window, document, SimplyDialogs) {
 
 	//
 	aside()
+	initSyntaxHl()
 	//basic()
 	//longTexts()
-	formLayout()
-	enterSubmit()
-	escape()
+	//formLayout()
+	//enterSubmit()
+	//escape()
 	//wait()
 	options()
 	//es()
-	advancedInputs()
 	backdrop()
 	fontAwesome()
 
 	return {
 		rf
 	}		
-})(window, document, SimplyDialogs);
+})(window, document, Dlg);
 

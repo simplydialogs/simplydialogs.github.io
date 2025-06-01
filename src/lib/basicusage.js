@@ -91,6 +91,11 @@ const BasicUsage = (function() {
 		setTimeout(() => { wait.close() }, 1500)
 	}
 
+	//defaults
+	gebi('options-alert-header-icon-shorthand').onclick = function() {
+		Dlg.alert(shortText, { icon: '🔥', header: 'Danger!' })
+	}
+
 
 })()
 

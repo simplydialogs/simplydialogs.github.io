@@ -14,16 +14,23 @@
 <script src="src/gumshoe.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script> <!-- 11.5.1 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/javascript.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/xcode.min.css" rel="stylesheet" id="link-highlight"> 
+
 <!--
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" rel="stylesheet" > 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/stackoverflow-light.min.css" rel="stylesheet" > 
 -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/xcode.min.css" rel="stylesheet" > 
+<!--
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" rel="stylesheet" > 
+-->
 <link rel="stylesheet" type="text/css" href="assets/font-awesome/css/font-awesome.min.css">
 <!--
 <script src="src/SimplyDialogs.min.js"></script>
 -->
+<!--
 <link rel="stylesheet" type="text/css" href="SimplyDialogs/SimplyDialogs.min.css">
+-->
+<link rel="stylesheet" type="text/css" href="../SimplyDialogs/src/SimplyDialogs.css">
+
 <meta name="publisher" content="SimplyDialogs">
 <meta property="og:url" content="https://simplydialogs.github.io">
 <meta property="og:type" content="article">
@@ -38,6 +45,16 @@
 <meta name="twitter:title" content="SimplyDialogs">
 <meta name="twitter:description" content="SimplyDialogs is a set of generic dialogs using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
 <meta name="twitter:image" content="/assets/images/simplydialogs-official.png">
+<style>
+pre.inline-hl {
+	display: inline-block;
+	position: relative;
+	top: .7rem;
+}
+pre.inline-hl code {
+	padding: .3rem;
+}
+</style>
 </head>
 <body>
 <aside style="display:none;">
@@ -64,9 +81,8 @@
 			<ul>
 -->
 				<li><a href="#defaults">DEFAULTS</a></li>
-				<li><a href="#defaults-lang">Language</a></li>
-				<li><a href="#defaults-icons">Icons</a></li>
-				<li><a href="#defaults-backdrop">::backdrop</a></li>
+				<li><a href="#defaults-lang">captions</a></li>
+				<li><a href="#defaults-icons">icons</a></li>
 				<li><a href="#defaults-classes">classes</a></li>
 				<li><a href="#sizing">Sizing</a></li>
 				<li><a href="#positioning">Positioning</a></li>
@@ -91,6 +107,7 @@
 		<li><a href="#styling">Additional styling</a></li>
 		<li><a href="#progress">progress</a></li>
 		<li><a href="#wait">wait</a></li>
+		<li><a href="#defaults-backdrop">::backdrop</a></li>
 		<li><a href="#advanced-inputs">Advanced inputs</a>
 			<ul id="input-details">
 				<li><a href="#input-inputs">Input options</a>
@@ -126,16 +143,16 @@
 		</li>
 		<li style="margin-top:1rem;"><a href="#credits">Credits</a></li>
 	</ul>
+	<hr>
+	<select id="select-syntax-hl" style="display:block;margin:0 auto;filter:brightness(160%);border-radius:3px;" title="syntax highlight"></select>
 </aside>
 <main style="position:relative;">
-<section id="introduction">
+<section id="summary">
 <h1>SimplyDialogs</h1>
 <p>This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. 
 Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.1.0</a></strong> <sup>(10.05.2025)</sup>.</p>
 <p>Simplydialogs offers a range of common dialogs, all highly customizeable. Comes with no dependencies and a <em>really</em> small footprint.</p>
-</section>
 
-<section id="summary">
 <table>
 <tr>
 <th>Type</th>
@@ -155,7 +172,7 @@ Dlg.alert('Lorem ipsum ...', options)
 <tr>
 <td><code>information()</code><br><code>info()</code></td>
 <td><img src="assets/images/information.png" width="438" height="208" alt="info() sample"></td>
-<td>Same as <code>alert()</code></td>
+<td>Same as <pre class="inline-hl"><code class="javascript">alert()</code></pre></td>
 </tr>
 <tr>
 <td><code>confirm()</code></td>
@@ -169,19 +186,19 @@ Dlg.alert('Lorem ipsum ...', options)
 <tr>
 <td><code>error()</code></td>
 <td><img src="assets/images/error.png" width="438" height="209" alt="error() sample"></td>
-<td>Same as <code>alert()</code></td>
+<td>Same as <pre class="inline-hl"><code class="javascript">alert()</code></pre></td>
 </tr>
 <tr>
 <td><code>bell()</code>
 </td>
 <td><img src="assets/images/bell.png" width="432" height="213" alt="bell() sample"></td>
-<td>Same as <code>alert()</code>, produces a "beep".  
+<td>Same as <pre class="inline-hl"><code class="javascript">alert()</code></pre>, produces a <q>beep</q>.  
 </td>
 </tr>
 <tr>
 <td><code>wait()</code></td>
 <td><img src="assets/images/wait.png" width="438" height="128" alt="wait() sample"></td>
-<td>Does not return a promise, but a method you can close the wait dialog with : 
+<td>Does not return a promise but a few methods to interact with the dialog, such as close it :
 <pre><code class="javascript">const wait = Dlg.wait('Lorem ipsum ...')
 //do something
 wait.close()
@@ -191,7 +208,7 @@ wait.close()
 <tr>
 <td><code>progress()</code></td>
 <td><img src="assets/images/progress.png" width="448" height="143" alt="progress() sample"></td>
-<td>Does not return a promise, but a method you can close the progress dialog with : 
+<td>Does not return a promise but a few methods to interact with the dialog, such as close it :
 <pre><code class="javascript">const progress = Dlg.progress('Lorem ipsum ...')
 //do something
 progress.close()
@@ -202,11 +219,11 @@ progress.close()
 <td><code>input()</code>
 </td>
 <td><img src="assets/images/input.png" width="432" height="205" alt="input() sample"></td>
-<td>Return promise holding the form state, i.e <code>{ firstname: 'Arthur', age: 42 }</code>
+<td>Returns a promise with the form state, a <code>name</code>,<code>value</code> literal of form elements (input, select, etc)
 <pre><code class="javascript">Dlg.input('Lorem ipsum ...', options).then(state) => {
  ... 
 })</code></pre>
-You can define a callback in options or <code>DEFAULTS</code>, to determine if the user can submit :
+If you want form validation you can specify a callback, return <code>true</code> means the form can be submitted
 <pre><code class="javascript">callback: function(state, dialog) { 
   return state.firstname !== '' 
 })</code></pre>	
@@ -265,7 +282,7 @@ Dlg.input('Lorem ipsum dolor sit amet').then(input => {
 <h3>DEFAULTS</h3>
 <p>Simplydialogs uses internally a <code>defaults</code> literal, which is accessible through the <code>.DEFAULTS</code> property :</p>
 <pre><code class="javascript force-unicode">let defaults = {
-  enterSubmit: true,
+  return: true,
   escape: true,
   backdrop: undefined,
   classes: '',
@@ -392,43 +409,7 @@ Dlg.DEFAULTS.input.inputs[0].placeholder = 'Introducir texto ..'
 </p>
 </section>
 
-<section id="defaults-backdrop">
-<h3>::backdrop</h3>
-<p>Across the browsers, their computed default <code>::backdrop</code> CSS more or less look like this :</p>
-<pre><code class="css">dialog::backdrop {
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  background: rgba(0, 0, 0, 0.1);
-}
-</code></pre>
-<p>You can change <code>DEFAULTS.backdrop</code> in order to change the background of the dialogs. You can specify the <code>background</code> style itself by passing a valid CSS class-definition. Here are some examples:</p>
-<p><button id="backdrop-none">No backdrop (reset)</button> <button id="backdrop-darker">Darker backdrop</button></p>
-<pre><code class="javascript">Dlg.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0);'
-Dlg.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0.5);'
-</code></pre>
-<p>Or get more inspiration at <a href="https://projects.verou.me/css3patterns/">https://projects.verou.me/css3patterns/</a>, where the ideas below are taken from :</p>
-<p><button id="backdrop-carbon">A "carbon" backdrop</button> <button id="backdrop-stairs">A "stair-style" backdrop</button> <button id="backdrop-heart">Because I love You</button></p>
-<pre><code class="javascript">Dlg.DEFAULTS.backdrop = `background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
-  linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
-  linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
-  linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
-  linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
-  linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
-  background-color: #131313;
-  opacity: 0.4;
-  background-size: 20px 20px;`
-
-Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
-  linear-gradient(63deg, transparent 74%, #999 78%),
-  linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444;
-  opacity: 0.4;
-  background-size: 16px 48px;`
-</code></pre>
-</section>
-
+<!-- classes -->
 <section id="defaults-classes">
 <h3>.classes</h3>
 <p>
@@ -518,7 +499,7 @@ In the first sample you can hit enter and submit the form, in the second you'll 
 <button id="btn-options-enter-submit-false">return false</button>
 <button id="btn-options-escape-true">escape true (default)</button>
 <button id="btn-options-escape-false">escape false</button>
-<button id="btn-options-escape-entersubmit-false">Both escape and return false</button>
+<button id="btn-options-escape-return-false">Both escape and return false</button>
 </p>
 </section>
 
@@ -629,6 +610,44 @@ const append = function() {
 interval = setInterval(append, 1000)
 </code></pre>
 <p><button id="btn-wait-addtext">addText mockup sample</button></p>
+</section>
+
+<!-- backdrop -->
+<section id="defaults-backdrop">
+<h3>::backdrop</h3>
+<p>Across the browsers, their computed default <code>::backdrop</code> CSS more or less look like this :</p>
+<pre><code class="css">dialog::backdrop {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.1);
+}
+</code></pre>
+<p>You can change <code>DEFAULTS.backdrop</code> in order to change the background of the dialogs. You can specify the <code>background</code> style itself by passing a valid CSS class-definition. Here are some examples:</p>
+<p><button id="backdrop-none">No backdrop (reset)</button> <button id="backdrop-darker">Darker backdrop</button></p>
+<pre><code class="javascript">Dlg.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0);'
+Dlg.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0.5);'
+</code></pre>
+<p>Or get more inspiration at <a href="https://projects.verou.me/css3patterns/">https://projects.verou.me/css3patterns/</a>, where the ideas below are taken from :</p>
+<p><button id="backdrop-carbon">A "carbon" backdrop</button> <button id="backdrop-stairs">A "stair-style" backdrop</button> <button id="backdrop-heart">Because I love You</button></p>
+<pre><code class="javascript">Dlg.DEFAULTS.backdrop = `background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+  linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+  linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+  linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+  linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+  linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+  background-color: #131313;
+  opacity: 0.4;
+  background-size: 20px 20px;`
+
+Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
+  linear-gradient(63deg, transparent 74%, #999 78%),
+  linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444;
+  opacity: 0.4;
+  background-size: 16px 48px;`
+</code></pre>
 </section>
 
 <!-- inputs -->
