@@ -10,7 +10,7 @@ const Progress = (function() {
 	}
 
 	gebi('btn-progress-fixed').onclick = function() {
-		const progress = Dlg.progress(shortText, { progress: { value: 50, max: 100 }})
+		const progress = Dlg.progress(shortText, { progress: { value: 75, max: 100 }})
 		setTimeout(() => progress.close(), 2000)
 	}
 
@@ -31,21 +31,6 @@ const Progress = (function() {
 	}
 
 /*
-
-		let counter = 0
-		let interval = undefined
-		const wait = Dlg.wait('text or message not changed')
-		const add = function() {
-			counter ++
-			wait.setText(`text or message changed ${counter} time(s)`)
-			if (counter>5) {
-				clearInterval(interval)
-				wait.close()
-			}
-		}
-		interval = setInterval(add, 1000)
-	}
-
 	gebi('btn-progress-setvalue').onclick = function() {
 		let counter = 0
 		let interval = undefined

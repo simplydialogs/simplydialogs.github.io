@@ -1,16 +1,17 @@
 
+import { gebi, qall } from './lib/util.js'
 import { BasicUsage } from './lib/basicusage.js'
 import { Captions } from './lib/captions.js'
 import { Sizing } from './lib/sizing.js'
+import { Positioning } from './lib/positioning.js'
 import { Keyboard } from './lib/keyboard.js'
 import { Progress } from './lib/progress.js'
 import { Wait } from './lib/wait.js'
-import { Stacked } from './lib/stacked.js'
+import { Backdrop } from './lib/backdrop.js'
 import { Input } from './lib/input.js'
 import { SimplyDialogs as Dlg } from './../SimplyDialogs/SimplyDialogs.min.mjs'
 
 const Test = (function(window, document, Dlg) {
-	const gebi = (id) => { return document.getElementById(id) }
 
 	const isElementInViewport = function(e) {
 		const rect = e.getBoundingClientRect()
@@ -20,9 +21,13 @@ const Test = (function(window, document, Dlg) {
 	const input_details = gebi('input-details')
 	window.addEventListener('scroll', function() {
 		if (isElementInViewport(gebi('advanced-inputs'))) {
-			if (input_details.style.display !== 'block') input_details.style.display = 'block'
+			if (input_details.style.display !== 'block') {
+				input_details.style.display = 'block'
+			}
 		} else {
-			if (input_details.style.display !== 'none') input_details.style.display = 'none'
+			if (input_details.style.display !== 'none') {
+				input_details.style.display = 'none'
+			}
 		}
 	})
 
@@ -60,6 +65,9 @@ const Test = (function(window, document, Dlg) {
 			f.style.height = (parseInt(f.contentWindow.document.documentElement.scrollHeight) + 10) + 'px'
 		}, 100)
 	}
+	qall('iframe').forEach(function(f) {
+		f.onload = () => rf(f)
+	})
 
 	const aside = function() {
 		if (document.hidden) return
@@ -107,268 +115,6 @@ const Test = (function(window, document, Dlg) {
 			m.style.top = '-' + ((a.scrollHeight-280) + 'px')
 		})
 	}
-
-/*
-//basic
-	const basic = function() {
-		gebi('basic-alert').onclick = function() {
-			Dlg.alert(shortText).then(answer => {	console.log('alert', answer) }) 
-		}
-		gebi('basic-confirm').onclick = function() {
-			Dlg.confirm(shortText).then(answer => {	console.log('confirm', answer) })
-		}
-		gebi('basic-info').onclick = function() {
-			Dlg.information(shortText).then(answer => {	console.log('info', answer) })
-		}
-		gebi('basic-bell').onclick = function() {	
-			Dlg.bell(shortText).then(answer => { console.log('bell', answer) })
-		}
-		gebi('basic-error').onclick = function() {
-			Dlg.error(shortText).then(answer => {	console.log('error', answer) })
-		}
-		gebi('basic-wait').onclick = function() {
-			const wait = Dlg.wait(shortText)
-			setTimeout(function() {
-				wait.close()
-			}, 1000)
-		}
-		gebi('basic-progress').onclick = function() {
-			const progress = Dlg.progress(shortText, { progress: { value: 0, max: 100 }})
-			let value = 0
-			const interval = setInterval(function() {
-				value++
-				progress.setValue(value)
-				if (value === 100) {
-					progress.close()
-					clearInterval(interval)
-				}
-			}, 10)
-		}
-		gebi('basic-input').onclick = function() {
-			Dlg.input(shortText).then(function(input) {
-				console.log('input', input)
-			})
-		}
-
-		const stackClick = function(cls) {
-			cls = typeof cls === 'string' ? cls : ''
-			Dlg.info('Info ...', { classes: 'lg'+cls }).then(function(answer) {	console.log(answer)	})
-			setTimeout(function() {
-				Dlg.confirm('Confirm ...', { classes: 'md'+cls }).then(function(answer) {	console.log(answer)	})
-			}, 100)
-			setTimeout(function() {
-				Dlg.alert('Alert ...', { classes: 'sm'+cls }).then(function(answer) {	console.log(answer)	})
-			}, 250)
-			setTimeout(function() {
-				Dlg.bell('Bell ...', { classes: 'xs'+cls }).then(function(answer) {	console.log(answer)	})
-			}, 400)
-		}
-		gebi('basic-stack').onclick = stackClick
-
-		gebi('basic-stack-middle-positioning').onclick = function() {
-			stackClick(' bottom right')
-		}
-
-	}
-*/
-
-//es
-/*
-	const es = function() {
-		const options = {
-			headers: {
-				alert: 'Alerta', 
-				error: 'Error',
-				confirm: 'Confirmar',
-				information: 'Información',
-				bell: 'Nota',
-				input: 'Input'
-			},
-			buttons: {
-				captions: {
-					ok: 'Ok',	
-					yes: 'Aceptar',
-					no: 'Salir',
-					cancel: 'Cancelar'
-				}
-			}
-		}
-		gebi('basic-alert-es').onclick = function() {
-			Dlg.alert(shortText, options).then(answer => {	console.log('alert', answer) })
-		}
-		gebi('basic-confirm-es').onclick = function() {
-			Dlg.confirm(shortText, options).then(answer => {	console.log('confirm', answer) })
-		}
-		gebi('basic-info-es').onclick = function() {
-			Dlg.information(shortText, options).then(answer => {	console.log('info', answer) })
-		}
-		gebi('basic-bell-es').onclick = function() {	
-			Dlg.bell(shortText, options).then(answer => { console.log('bell', answer) })
-		}
-		gebi('basic-error-es').onclick = function() {
-			Dlg.error(shortText, options).then(answer => {	console.log('error', answer) })
-		}
-		gebi('basic-input-es').onclick = function() {
-			Dlg.input(shortText, options).then(input => {
-				console.log('input', input)
-			})
-		}
-	}
-*/
-//longTexts
-/*
-	const longTexts = function() {
-		const lt = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-		gebi('basic-alert-long-text').onclick = function() { Dlg.alert(lt).then(answer => { console.log('long text alert', answer) })	}
-		gebi('basic-info-long-text').onclick = function() {	Dlg.information(lt).then(answer => { console.log('long text info', answer) }) }
-		gebi('basic-confirm-long-text').onclick = function() { Dlg.confirm(lt).then(answer => { console.log('long text confirm', answer) }) }
-		gebi('basic-error-long-text').onclick = function() { Dlg.error(lt).then(answer => { console.log('long text error', answer) }) }
-		gebi('basic-bell-long-text').onclick = function() { Dlg.bell(lt).then(answer => { console.log('long text bell', answer) }) }
-		gebi('basic-wait-long-text').onclick = function() { 
-			const wait = Dlg.wait(lt)
-			setTimeout(() => { wait.close() }, 1500)
-		}
-		gebi('basic-input-long-text').onclick = function() { Dlg.input(lt).then(answer => { console.log('long text input', answer) }) }
-	}
-*/
-
-//backdrop
-	const backdrop = function() {
-		gebi('backdrop-none').onclick = function() {
-			const o = {
-				backdrop: 'background: rgba(0, 0, 0, 0);'
-			}
-			Dlg.alert(shortText, o).then(answer => {	console.log('alert-backdrop-none', answer) })
-		}
-		gebi('backdrop-darker').onclick = function() {
-			const o = {
-				backdrop: 'background: rgba(0, 0, 0, 0.5);'
-			}
-			Dlg.alert(shortText, o).then(answer => {	console.log('alert-backdrop-none', answer) })
-		}
-		gebi('backdrop-carbon').onclick = function() {
-			const o = {
-				backdrop: `background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
-									linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
-									linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
-									linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
-									linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
-									linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
-									background-color: #131313;
-									opacity: 0.4;
-									background-size: 20px 20px;`
-			}
-			Dlg.alert(shortText, o).then(answer => {	console.log('alert-backdrop-none', answer) })
-		}
-
-		gebi('backdrop-stairs').onclick = function() {
-			const o = {
-				backdrop: `background:
-								linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
-								linear-gradient(63deg, transparent 74%, #999 78%),
-								linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444;
-								opacity: 0.4;
-								background-size: 16px 48px;`
-			}
-			Dlg.alert(shortText, o).then(answer => {	console.log('alert-backdrop-none', answer) })
-		}
-
-		gebi('backdrop-heart').onclick = function() {
-			const o = {
-				backdrop: `background:
-								radial-gradient(circle closest-side at 60% 43%, #b03 26%, rgba(187,0,51,0) 27%),
-								radial-gradient(circle closest-side at 40% 43%, #b03 26%, rgba(187,0,51,0) 27%),
-								radial-gradient(circle closest-side at 40% 22%, #d35 45%, rgba(221,51,85,0) 46%),
-								radial-gradient(circle closest-side at 60% 22%, #d35 45%, rgba(221,51,85,0) 46%),
-								radial-gradient(circle closest-side at 50% 35%, #d35 30%, rgba(221,51,85,0) 31%),
-								radial-gradient(circle closest-side at 60% 43%, #b03 26%, rgba(187,0,51,0) 27%) 50px 50px,
-								radial-gradient(circle closest-side at 40% 43%, #b03 26%, rgba(187,0,51,0) 27%) 50px 50px,
-								radial-gradient(circle closest-side at 40% 22%, #d35 45%, rgba(221,51,85,0) 46%) 50px 50px,
-								radial-gradient(circle closest-side at 60% 22%, #d35 45%, rgba(221,51,85,0) 46%) 50px 50px,
-								radial-gradient(circle closest-side at 50% 35%, #d35 30%, rgba(221,51,85,0) 31%) 50px 50px;
-								opacity: 0.4;
-								background-color:#b03;
-								background-size:100px 100px;`
-			}
-			Dlg.alert(shortText, o).then(answer => {	console.log('alert-backdrop-none', answer) })
-		}
-	}
-
-//formLayout
-/*
-	const formLayout = function() {
-		const options = {
-			input: {
-				inputs: [
-					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required' },
-					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4 }
-				],
-				callback: function(state) {
-					return state.input.length > 3
-				}
-			}
-		}
-		gebi('btn-input-form-layout-default').onclick = function() {
-			options.input.formLayout = 'left full-width'
-			Dlg.input(shortText, options)
-		}
-		gebi('btn-input-form-layout-top').onclick = function() {
-			options.input.formLayout = 'top'
-			Dlg.input(shortText, options)
-		}
-		gebi('btn-input-form-layout-top-full-width').onclick = function() {
-			options.input.formLayout = 'top full-width'
-			Dlg.input(shortText, options)
-		}
-		gebi('btn-input-form-layout-left').onclick = function() {
-			options.input.formLayout = 'left'
-			Dlg.input(shortText, options)
-		}
-		gebi('btn-input-form-layout-left-full-width').onclick = function() {
-			options.input.formLayout = 'left full-width'
-			Dlg.input(shortText, options)
-		}
-		gebi('btn-input-form-layout-none').onclick = function() {
-			options.input.formLayout = ''
-			Dlg.input(shortText, options)
-		}
-	}
-*/
-
-
-//wait
-/*
-	const wait = function() {
-		gebi('btn-wait-settext').onclick = function() {
-			let counter = 0
-			let interval = undefined
-			const wait = Dlg.wait(shortText)
-			const add = function() {
-				counter ++
-				wait.setText(`text or message changed ${counter} time(s)`)
-				if (counter>5) {
-					clearInterval(interval)
-					wait.close()
-				}
-			}
-			interval = setInterval(add, 1000)
-		}
-		gebi('btn-wait-addtext').onclick = function() {
-			let counter = 0
-			let interval = undefined
-			const wait = Dlg.wait(shortText)
-			const add = function() {
-				counter ++
-				wait.addText(`<br>${counter} line(s) added to message`)
-				if (counter>5) {
-					clearInterval(interval)
-					wait.close()
-				}
-			}
-			interval = setInterval(add, 1000)
-		}
-	}
-*/
 
 //options
 	const options = function() {
@@ -514,12 +260,12 @@ const Test = (function(window, document, Dlg) {
 	//escape()
 	//wait()
 	options()
-	//es()
-	backdrop()
 	fontAwesome()
 
+/*
 	return {
 		rf
 	}		
+*/
 })(window, document, Dlg);
 

@@ -168,7 +168,7 @@ const Input = (function() {
 			const options = {
 				headers: { input: 'Login' },
 				icons: { input: '🔑' },
-				classes: 'sm-height xs-width',
+				classes: 'md-height sm-width',
 				input: {
 					formLayout: 'left fullwidth',
 					inputs: [	

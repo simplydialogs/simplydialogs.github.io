@@ -76,7 +76,7 @@ const BasicUsage = (function() {
 		gebi('basic-stack').onclick = stackClick
 
 		gebi('basic-stack-middle-positioning').onclick = function() {
-			stackClick(' bottom right')
+			stackClick(' top right')
 		}
 
 	//long text

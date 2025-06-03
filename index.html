@@ -15,17 +15,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script> <!-- 11.5.1 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/javascript.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/xcode.min.css" rel="stylesheet" id="link-highlight"> 
-
-<!--
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" rel="stylesheet" > 
--->
-<!--
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" rel="stylesheet" > 
--->
 <link rel="stylesheet" type="text/css" href="assets/font-awesome/css/font-awesome.min.css">
-<!--
-<script src="src/SimplyDialogs.min.js"></script>
--->
 <!--
 <link rel="stylesheet" type="text/css" href="SimplyDialogs/SimplyDialogs.min.css">
 -->
@@ -54,6 +44,13 @@ pre.inline-hl {
 pre.inline-hl code {
 	padding: .3rem;
 }
+/*
+li .arrow:before {
+	content: '⤷';
+	display: inline-block;
+	margin-left: -14px;
+}
+*/
 </style>
 </head>
 <body>
@@ -107,8 +104,8 @@ pre.inline-hl code {
 		<li><a href="#styling">Additional styling</a></li>
 		<li><a href="#progress">progress</a></li>
 		<li><a href="#wait">wait</a></li>
-		<li><a href="#defaults-backdrop">::backdrop</a></li>
-		<li><a href="#advanced-inputs">Advanced inputs</a>
+		<li><a href="#defaults-backdrop">backdrop</a></li>
+		<li><a href="#advanced-inputs" class="arrow">Advanced inputs</a> <!-- ⤷ -->
 			<ul id="input-details">
 				<li><a href="#input-inputs">Input options</a>
 					<ul>
@@ -234,6 +231,23 @@ If you want form validation you can specify a callback, return <code>true</code>
 
 <section id="basic-usage">
 <h2>Basic usage</h2>
+<p>Basically call the dialog with the message or text that need to be shown :</p>
+<pre><code class="javascript">Dlg.alert('Lorem ipsum ..').then(answer => {	
+  console.log('alert', answer) 
+})
+
+Dlg.confirm('Lorem ipsum ..').then(answer => {...)
+Dlg.information('Lorem ipsum ..').then(answer => {...})
+Dlg.bell('Lorem ipsum ..').then(answer => {...})
+Dlg.error('Lorem ipsum ..').then(answer => {...})
+
+const wait = Dlg.wait('Lorem ipsum ..')
+setTimeout(() => { wait.close() }, 1500)
+
+Dlg.input('Lorem ipsum ..').then(input => {
+  console.log('input', input)
+})
+</code></pre>
 <p>
 <button id="basic-alert">Alert</button>
 <button id="basic-info">Info</button>
@@ -244,23 +258,8 @@ If you want form validation you can specify a callback, return <code>true</code>
 <button id="basic-progress">Progress</button>
 <button id="basic-input">Input</button>
 </p>
-<pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet ...').then(answer => {	
-  console.log('alert', answer) 
-})
 
-Dlg.confirm('Lorem ipsum dolor sit amet').then(answer => {...)
-Dlg.information('Lorem ipsum dolor sit amet').then(answer => {...})
-Dlg.bell('Lorem ipsum dolor sit amet').then(answer => {...})
-Dlg.error('Lorem ipsum dolor sit amet').then(answer => {...})
-
-const wait = Dlg.wait('Lorem ipsum dolor sit')
-setTimeout(() => { wait.close() }, 1500)
-
-Dlg.input('Lorem ipsum dolor sit amet').then(input => {
-  console.log('input', input)
-})
-</code></pre>
-<p>Long text samples:  
+<p>Long text samples (unstyled)&nbsp; 
 <button id="basic-alert-long-text">Alert</button>
 <button id="basic-info-long-text">Info</button>
 <button id="basic-confirm-long-text">Confirm</button>
@@ -269,17 +268,21 @@ Dlg.input('Lorem ipsum dolor sit amet').then(input => {
 <button id="basic-wait-long-text">Wait</button>
 <button id="basic-input-long-text">Input</button>
 </p>
-</section>
-
-<section id="stackable">
-<h3>Stackable</h3>
-<p>SimplyDialogs can be stacked upon each other endlessly :</p>
-<p><button id="basic-stack">Show some dialogs</button> (with forced delay effect).</p>
-<p><button id="basic-stack-middle-positioning">Show some more dialogs</button> (with forced right bottom positioning)</p>
+<p>SimplyDialogs can be stacked upon each other endlessly 
+<button id="basic-stack">Stacked dialogs</button>
+<button id="basic-stack-middle-positioning">Stacked dialogs, positioned</button>
+</p>
+<p>
+You can customise the dialog by passing an extra options argument
+</p>
+<pre><code class="javascript">Dlg.confirm('Lorem ipsum ..', options).then(answer => {...})</code></pre>
+<p>
+options should follow the same structure as the DEFAULTS literal discussed below.
+</p>
 </section>
 
 <section id="defaults">
-<h3>DEFAULTS</h3>
+<h2>DEFAULTS</h2>
 <p>Simplydialogs uses internally a <code>defaults</code> literal, which is accessible through the <code>.DEFAULTS</code> property :</p>
 <pre><code class="javascript force-unicode">let defaults = {
   return: true,
@@ -460,15 +463,24 @@ The default middle is <code>9vh</code> from the top. The <code>left</code>, <cod
 </p>
 <p>You can control the dialog position by using the predefined classes 
 <code>top</code>, <code>middle</code>, <code>bottom></code>, <code>left</code>, <code>center</code>, <code>right</code>
-in any combination. Remember: <code>center</code> is vertical, <code>middle</code> is horizontal. 
-This snippet shows all combinations :</p>
+in any meaningful combination. Remember: <code>center</code> is vertical, <code>middle</code> is horizontal. </p>
+<p>
+<button id="btn-positioning-top">top</button>
+<button id="btn-positioning-middle">middle</button>
+<button id="btn-positioning-bottom">bottom</button><br>
+<button id="btn-positioning-left">left</button>
+<button id="btn-positioning-center">center</button>
+<button id="btn-positioning-right">right</button>
+</p>
+
+This snippet show all combinations stacked upon each other :</p>
 <pre><code class="javascript">['top left', 'top center', 'top right', 
  'middle left', 'middle center', 'middle right', 
  'bottom left', 'bottom center', 'bottom right'].forEach(function(position) {
   Dlg.info(position, { classes: position })
 })
 </code></pre>
-<p><button id="stacked-fan">Try it out</button></p>
+<p><button id="btn-positioning-all-stacked">Try it out</button></p>
 </section>
 
 <!-- keyboard -->
@@ -516,11 +528,7 @@ In the first sample you can hit enter and submit the form, in the second you'll 
 </section>
 
 
-<!-- options-complex -->
-<section id="options-complex">
-<h3>Complex options</h3>
-</section>
-
+<!-- styling -->
 <section id="styling">
 <h2>Additional styling</h2>
 <p>SimplyDialogs comes with diminutive styling - the very basics like <code>position</code>, <code>max-width</code> and so on - and you are supposed to want to change that styling. There are two ways :</p>
@@ -614,7 +622,7 @@ interval = setInterval(append, 1000)
 
 <!-- backdrop -->
 <section id="defaults-backdrop">
-<h3>::backdrop</h3>
+<h2>backdrop</h2>
 <p>Across the browsers, their computed default <code>::backdrop</code> CSS more or less look like this :</p>
 <pre><code class="css">dialog::backdrop {
   position: fixed;
@@ -1018,17 +1026,15 @@ Dlg.alert(msg, options)
 <section id="integration">
 <h2>Integration</h2>
 
-<!--
 <section id="integration-bootstrap5">
 	<h3>Example, Bootstrap 5</h3>
-	<iframe src="assets/frames/bs5.html" XXonload="Test.rf(this)" title="Bootstrap 5 example"></iframe>
+	<iframe src="assets/frames/bs5.html" XXXonload="Test.rf(this)" title="Bootstrap 5 example"></iframe>
 </section>
 
 <section id="integration-materialize">
 	<h3>Example, Materialize CSS</h3>
-	<iframe src="assets/frames/materialize.html" XXonload="Test.rf(this)" title="Materialize CSS Example"></iframe>
+	<iframe src="assets/frames/materialize.html" XXXonload="Test.rf(this)" title="Materialize CSS Example"></iframe>
 </section>
--->
 
 </section>
 
