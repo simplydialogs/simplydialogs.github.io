@@ -3,7 +3,8 @@ import { gebi, shortText, longText } from './util.js'
 import { SimplyDialogs as Dlg } from './../../SimplyDialogs/SimplyDialogs.min.mjs'
 
 const BasicUsage = (function() {
-	
+	if (!gebi('basic-alert')) return
+
 	gebi('basic-alert').onclick = function() {
 		Dlg.alert(shortText).then(answer => {	console.log('alert', answer) }) 
 	}

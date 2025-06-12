@@ -4,19 +4,19 @@ import { SimplyDialogs as Dlg } from './../../SimplyDialogs/SimplyDialogs.min.mj
 
 const Input = (function() {
 
-		gebi('btn-input-textarea').onclick = function() {
-			const options = {
-				input: {
-					inputs: [
-						{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed' },
-						{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50 }
-					]
-				}
+	gebi('btn-input-textarea').onclick = function() {
+		const options = {
+			input: {
+				inputs: [
+					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input needed' },
+					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Enter some tekst', rows: 5, cols: 50 }
+				]
 			}
-			Dlg.input(shortText, options).then(function(input) {
-				console.log('result', input)
-			})
 		}
+		Dlg.input(shortText, options).then(function(input) {
+			console.log('result', input)
+		})
+	}
 
 		gebi('btn-input-textarea-autofocus').onclick = function() {
 			const options = {
@@ -186,6 +186,36 @@ const Input = (function() {
 		}
 
 //validation
+	gebi('btn-validation-required-email').onclick = function() {
+		const options = {
+			header: 'Enter valid email',
+			icon: '📧',
+			input: {
+				inputs: [	
+					{ type: 'input', inputType: 'email', name: 'email', required: true, spellcheck: false },
+			]}
+		}
+		Dlg.input('', options).then(input => {
+			console.log('email', input)
+		})
+	}
+
+	gebi('btn-validation-required-danish-phone-number').onclick = function() {
+		const options = {
+			header: 'Phone number',
+			icon: null, 
+			input: {
+				inputs: [	
+					{ type: 'input', inputType: 'text', label: '+45', name: 'phone', required: true, pattern: '[0-9]{8}' },
+			]}
+		}
+		Dlg.input('Enter 8 digit number, regional code implied', options).then(input => {
+			console.log('phone', input)
+		})
+	}
+
+
+
 		gebi('btn-input-validation-callback').onclick = function() {
 			const options = {
 				headers: { input: 'What is 42 with inflation?' },

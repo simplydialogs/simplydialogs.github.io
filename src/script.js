@@ -112,7 +112,7 @@ const Test = (function(window, document, Dlg) {
 		a.style.position = 'sticky'
 		//console.log(a.scrollHeight)
 		setTimeout(function() {
-			m.style.top = '-' + ((a.scrollHeight-280) + 'px')
+			m.style.top = '-' + ((a.scrollHeight-330) + 'px')
 		})
 	}
 

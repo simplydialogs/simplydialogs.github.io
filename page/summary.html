@@ -1,0 +1,77 @@
+<style>
+img.summary-image {
+	height: 6rem;
+	cursor: pointer;
+}
+</style>
+
+<section id="summary">
+<h1>SimplyDialogs</h1>
+<p>
+This is demonstration / test page for <strong><a href="https://github.com/davidkonrad/simplydialogs">github.com/davidkonrad/simplydialogs</a></strong>. 
+Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/releases">v1.1.0</a></strong> <sup>(10.05.2025)</sup>.</p>
+<p>
+SimplyDialogs offers a range of common dialogs, all highly customizeable. Comes with no dependencies and a <em>really</em> small footprint.
+</p>
+<p>
+<img id="basic-alert" class="summary-image" src="assets/images/alert.png" alt="alert() sample">
+<img id="basic-info" class="summary-image" src="assets/images/information.png" alt="info() sample">
+<img id="basic-confirm" class="summary-image" src="assets/images/confirm.png" alt="confirm() sample">
+<img id="basic-error" class="summary-image" src="assets/images/error.png" alt="error() sample">
+<img id="basic-bell" class="summary-image" src="assets/images/bell.png" alt="bell() sample">
+<img id="basic-wait" class="summary-image" src="assets/images/wait.png" alt="wait() sample">
+<img id="basic-progress" class="summary-image" src="assets/images/progress.png" alt="progress() sample">
+<img id="basic-input" class="summary-image" src="assets/images/input.png" alt="input() sample">
+</p>
+
+</section>
+
+<section id="basic-usage">
+<h2>Basic usage</h2>
+<p>Basically call the dialog with the message or text that need to be shown :</p>
+<pre><code class="javascript">Dlg.alert('Lorem ipsum ..').then(answer => {	
+  console.log('alert', answer) 
+})
+
+Dlg.confirm('Lorem ipsum ..').then(answer => {...)
+Dlg.information('Lorem ipsum ..').then(answer => {...})
+Dlg.bell('Lorem ipsum ..').then(answer => {...})
+Dlg.error('Lorem ipsum ..').then(answer => {...})
+
+const wait = Dlg.wait('Lorem ipsum ..')
+setTimeout(() => { wait.close() }, 1500)
+
+Dlg.input('Lorem ipsum ..').then(input => {
+  console.log('input', input)
+})
+</code></pre>
+<p>
+<button >Bell</button>
+<button >Error</button>
+<button id="basic-wait">Wait</button>
+<button id="basic-progress">Progress</button>
+<button id="basic-input">Input</button>
+</p>
+
+<p>Long text samples (unstyled)&nbsp; 
+<button id="basic-alert-long-text">Alert</button>
+<button id="basic-info-long-text">Info</button>
+<button id="basic-confirm-long-text">Confirm</button>
+<button id="basic-bell-long-text">Bell</button>
+<button id="basic-error-long-text">Error</button>
+<button id="basic-wait-long-text">Wait</button>
+<button id="basic-input-long-text">Input</button>
+</p>
+<p>SimplyDialogs can be stacked upon each other endlessly 
+<button id="basic-stack">Stacked dialogs</button>
+<button id="basic-stack-middle-positioning">Stacked dialogs, positioned</button>
+</p>
+<p>
+You can customise the dialog by passing an extra options argument
+</p>
+<pre><code class="javascript">Dlg.confirm('Lorem ipsum ..', options).then(answer => {...})</code></pre>
+<p>
+options should follow the same structure as the DEFAULTS literal discussed below.
+</p>
+</section>
+
