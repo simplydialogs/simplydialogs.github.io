@@ -2,6 +2,8 @@
 import { gebi, qall } from './lib/util.js'
 import { BasicUsage } from './lib/basicusage.js'
 import { Captions } from './lib/captions.js'
+import { Icons } from './lib/icons.js'
+import { Classes } from './lib/classes.js'
 import { Sizing } from './lib/sizing.js'
 import { Positioning } from './lib/positioning.js'
 import { Keyboard } from './lib/keyboard.js'
@@ -9,6 +11,7 @@ import { Progress } from './lib/progress.js'
 import { Wait } from './lib/wait.js'
 import { Backdrop } from './lib/backdrop.js'
 import { Input } from './lib/input.js'
+import { Examples } from './lib/examples.js'
 import { SimplyDialogs as Dlg } from './../SimplyDialogs/SimplyDialogs.min.mjs'
 
 const Test = (function(window, document, Dlg) {
@@ -19,6 +22,7 @@ const Test = (function(window, document, Dlg) {
 	}
 
 	const input_details = gebi('input-details')
+
 	window.addEventListener('scroll', function() {
 		if (isElementInViewport(gebi('advanced-inputs'))) {
 			if (input_details.style.display !== 'block') {
@@ -69,6 +73,18 @@ const Test = (function(window, document, Dlg) {
 		f.onload = () => rf(f)
 	})
 
+		window.addEventListener('load', () => {
+			new Gumshoe('ul.root a', {
+				//offset: '290px',
+				offset: '125px',
+				reflow: true,
+				nested: false,
+				nestedClass: ''
+			})
+			document.querySelector('html').classList.remove('wait')
+		})
+
+/*
 	const aside = function() {
 		if (document.hidden) return
 		const a = document.querySelector('aside')
@@ -115,6 +131,7 @@ const Test = (function(window, document, Dlg) {
 			m.style.top = '-' + ((a.scrollHeight-330) + 'px')
 		})
 	}
+*/
 
 //options
 	const options = function() {
@@ -147,15 +164,6 @@ const Test = (function(window, document, Dlg) {
 			Dlg.confirm('Are There Any Chance of Intelligent Life in The Universe, anywhere?', options)
 		}
 
-		gebi('btn-options-image-viewer').onclick = function() {
-			const msg = '<img src="assets/images/nasa-bluemarble-reduced.webp" style="max-height:75vh;">'
-			const options = {
-				headers: { bell: '' },
-				icons: { bell: '' },
-				buttons: { captions: { ok: null }}
-			}
-			Dlg.bell(msg, options)
-		}
 /*
 		gebi('btn-options-sizing-xs').onclick = function() {
 			Dlg.info('some text ...', { classes: 'xs' })
@@ -187,80 +195,8 @@ const Test = (function(window, document, Dlg) {
 */
 	}
 
-
-//font awesome
-	const fontAwesome = function() {
-		gebi('btn-fa-alert').onclick = function() {
-			const options = {
-				icons: { alert: '<i class="fa fa-warning" style="color:brown;"></i>' }
-			}
-			Dlg.alert(shortText, options).then(function(answer) {
-				console.log(answer)
-			})
-		}
-		gebi('btn-fa-info').onclick = function() {
-			const options = {
-				icons: { information: '<i class="fa fa-info-circle" style="color:royalblue;"></i>' }
-			}
-			Dlg.info(shortText, options).then(function(answer) {
-				console.log(answer)
-			})
-		}
-		gebi('btn-fa-confirm').onclick = function() {
-			const options = {
-				icons: { confirm: '<i class="fa fa-question-circle" style="color:forestgreen;"></i>' }
-			}
-			Dlg.confirm(shortText, options).then(function(answer) {
-				console.log(answer)
-			})
-		}
-		gebi('btn-fa-bell').onclick = function() {
-			const options = {
-				icons: { bell: '<i class="fa fa-bell" style="color:orange;"></i>' }
-			}
-			Dlg.bell(shortText, options).then(function(answer) {
-				console.log(answer)
-			})
-		}
-		gebi('btn-fa-error').onclick = function() {
-			const options = {
-				icons: { error: '<i class="fa fa-times-circle-o" style="color:crimson;"></i>' }
-			}
-			Dlg.error(shortText, options).then(function(answer) {
-				console.log(answer)
-			})
-		}
-		gebi('btn-fa-input').onclick = function() {
-			const options = {
-				icons: { input: '<i class="fa fa-pencil" style="color:gray;"></i>' }
-			}
-			Dlg.input(shortText, options).then(function(answer) {
-				console.log(answer)
-			})
-		}
-		gebi('btn-fa-wait').onclick = function() {
-			const options = {
-				icons: { wait: '<i class="fa fa-gear" style="color:gray;"></i>' }
-			}
-			const wait = Dlg.wait(shortText, options)
-			setTimeout(function() {
-				wait.close()
-			}, 3000)
-		}
-
-	}
-
-	//
-	aside()
 	initSyntaxHl()
-	//basic()
-	//longTexts()
-	//formLayout()
-	//enterSubmit()
-	//escape()
-	//wait()
 	options()
-	fontAwesome()
 
 /*
 	return {

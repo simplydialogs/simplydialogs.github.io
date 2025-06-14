@@ -1,10 +1,27 @@
 html.wait, html.wait * { 
 	cursor: wait !important; 
 }
+
+body {
+	Xdisplay: flex;
+  Xflex-direction: column;
+	padding-left: 180px;
+}
+
+/*
+.page-wrapper {
+	position: block;
+	margin: auto auto;	
+	max-width: 100px;
+}
+*/
+
 main {
-	margin: auto auto;
-	margin-top: 10px;
+	Xmargin: auto auto;
+	Xmargin-top: 10px;
+	margin-left: 220px;
 	width: 900px;
+	Xflex-grow: 1;
 }
 button {
 	font-size: medium;
@@ -24,14 +41,17 @@ iframe {
 	width: 100%;
 }
 aside {
+	display: inline-block;
+	position: fixed;
 	width: 170px;
 	top: 20px;
-	left: -300px;
+	XXleft: -300px;
 	padding: 10px;
 	border: 1px solid #dadada;
 	z-index: 25;
 	opacity: 0.9;
 	background: #fff;
+	XXflex-grow: 1;
 }
 aside .nav {
 	width: auto;
@@ -79,10 +99,12 @@ aside li a:active {
 section {
 	margin-bottom: 1rem;
 }
+/*
 table td img {
 	width: 250px;
 	height: auto;
 }
+*/
 h1, h2, h3 {
 	margin: 30px 0 10px;
 }

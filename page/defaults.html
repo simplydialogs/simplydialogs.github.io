@@ -1,0 +1,73 @@
+<section id="defaults">
+<h2>DEFAULTS</h2>
+<p>Simplydialogs uses internally a <code>defaults</code> literal, which is accessible through the <code>.DEFAULTS</code> property :</p>
+<pre><code class="javascript force-unicode">let defaults = {
+  return: true,
+  escape: true,
+  backdrop: undefined,
+  classes: '',
+  headers: {
+    alert: 'Alert', 
+    error: 'Error',
+    confirm: 'Confirm',
+    information: 'Information',
+    bell: 'Notice',
+    input: ''
+  },
+  icons: {
+    alert: '⚠', 
+    error: '⛔',
+    confirm: '✔️',
+    information: '💡',
+    bell: '🔔',
+    wait: '⚙️',
+    input: '✏️'
+  },
+  buttons: {
+    captions: {
+      ok: 'Ok',
+      cancel: 'Cancel',
+      yes: 'Yes',
+      no: 'No'
+    },
+    classes: {
+      ok: '',
+      cancel: '',
+      yes: '',
+      no: ''
+    }
+  },
+  progress: {
+    max: undefined,
+    value: undefined
+  },
+  input: {
+    formLayout: 'left full-width',
+    classes: {
+      label: '',
+      input: ''
+    },
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'Input ', name: 'input', placeholder: 'Enter text ..' },
+    ],
+    callback: function(state) {
+      return state.input && state.input.length > 1
+    },
+    promise: undefined
+  }
+}
+</code></pre>
+<p>You can alter those defaults by simple assignment, i.e <code>&lt;instance>.DEFAULTS.icons.alert = '&lt;img src="path/to/image">' </code>. 
+Changes to <code>DEFAULTS</code> are global, but you can still pass alternative options to each dialog (see later).</p>
+
+<p>
+Any of the <code>DEFAULTS</code> settings can be overruled by passing an <code>options</code> literal as second parameter. 
+The structure of the options argument must follow the same format as <code>DEFAULTS</code>.
+</p>
+
+<p>For convenience you can use the shorthand aliases <code>header</code> and <code>icon</code> instead of repeating the convoluted literal :</p>
+<pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet ...', { icon: '🔥', header: 'Danger!' })</code></pre>	
+<p><button id="options-alert-header-icon-shorthand">Test alert header, icon</button></p>
+</section>
+
+

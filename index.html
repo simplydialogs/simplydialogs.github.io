@@ -51,11 +51,22 @@ li .arrow:before {
 	margin-left: -14px;
 }
 */
+dialog.image-viewer {
+	padding: 0;
+}
+dialog.image-viewer .dialog-actions,
+dialog.image-viewer h4,
+dialog.image-viewer p {
+	margin: 0;
+	padding: 0;
+}
 </style>
 </head>
 <body>
+<div class="page-wrapper">
 
-<aside style="display:none;">
+
+<aside XXstyle="display:none;">
 	<div class="nav">
 		<a id="burger-menu" href="#">☰</a>
 		<a href="https://github.com/davidkonrad/simplydialogs" title="View on GitHub" id="view-on-github">
@@ -63,50 +74,21 @@ li .arrow:before {
 		</a>
 	</div>
 	<ul class="root">
-<!--
-		<li><a href="#introduction">Introduction</a></li>
--->
 		<li><a href="#summary">Summary</a></li>
-		<li><a href="#basic-usage">Basic usage</a>
-<!--
-			<ul>
-				<li><a href="#stackable">Stackable</a></li>
-			</ul>
-		</li>
--->
-<!--
-		<li><a href="#global-settings">Global settings</a>
-			<ul>
--->
-				<li><a href="#defaults">DEFAULTS</a></li>
-				<li><a href="#defaults-lang">captions</a></li>
-				<li><a href="#defaults-icons">icons</a></li>
-				<li><a href="#defaults-classes">classes</a></li>
-				<li><a href="#sizing">Sizing</a></li>
-				<li><a href="#positioning">Positioning</a></li>
-				<li><a href="#keyboard">Keyboard</a></li>
-				<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
-<!--
-			</ul>
--->
-		<li><a href="#options">Passing options</a>
-<!--
-			<ul>
-				<li><a href="#options-complex">Complex options</a></li>
-				<li><a href="#options-examples">Examples</a>
-					<ul>
-						<li><a href="#options-image-viewer">Image viewer</a></li>
-						<li><a href="#options-pyramids">Embedded Map</a></li>
-					</ul>
-				</li>
-			</ul>
--->
-		</li>
+		<li><a href="#defaults">DEFAULTS</a></li>
+		<li><a href="#captions">captions</a></li>
+		<li><a href="#icons">icons</a></li>
+		<li><a href="#classes">classes</a></li>
+		<li><a href="#sizing">Sizing</a></li>
+		<li><a href="#positioning">Positioning</a></li>
+		<li><a href="#keyboard">Keyboard</a></li>
+		<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
+		<li><a href="#options">Passing options</a></li>
 		<li><a href="#styling">Additional styling</a></li>
 		<li><a href="#progress">progress</a></li>
 		<li><a href="#wait">wait</a></li>
 		<li><a href="#defaults-backdrop">backdrop</a></li>
-		<li><a href="#advanced-inputs" class="arrow">Advanced inputs</a> <!-- ⤷ -->
+		<li><a href="#advanced-inputs" class="arrow">Advanced inputs</a> 
 			<ul id="input-details">
 				<li><a href="#input-inputs">Input options</a>
 					<ul>
@@ -135,6 +117,11 @@ li .arrow:before {
 			</ul>
 		</li>
 		<li><a href="#examples">Examples</a>
+			<ul id="examples-details">
+				<li><a href="#examples-image-viewer">Image viewer</a></li>
+				<li><a href="#input-login-dialog">Login dialog</a></li>
+			</ul>
+		</li>
 		<li><a href="#integration">Integration</a>
 			<ul>
 				<li><a href="#integration-bootstrap5">Bootstrap 5</a></li>
@@ -146,7 +133,7 @@ li .arrow:before {
 	<hr>
 	<select id="select-syntax-hl" style="display:block;margin:0 auto;filter:brightness(160%);border-radius:3px;" title="syntax highlight"></select>
 </aside>
-<main style="position:relative;">
+<main>
 
 <style>
 img.summary-image {
@@ -164,29 +151,29 @@ Latest release <strong><a href="https://github.com/davidkonrad/simplydialogs/rel
 SimplyDialogs offers a range of common dialogs, all highly customizeable. Comes with no dependencies and a <em>really</em> small footprint.
 </p>
 <p>
-<img id="basic-alert" class="summary-image" src="assets/images/alert.png" alt="alert() sample">
-<img id="basic-info" class="summary-image" src="assets/images/information.png" alt="info() sample">
-<img id="basic-confirm" class="summary-image" src="assets/images/confirm.png" alt="confirm() sample">
-<img id="basic-error" class="summary-image" src="assets/images/error.png" alt="error() sample">
-<img id="basic-bell" class="summary-image" src="assets/images/bell.png" alt="bell() sample">
-<img id="basic-wait" class="summary-image" src="assets/images/wait.png" alt="wait() sample">
-<img id="basic-progress" class="summary-image" src="assets/images/progress.png" alt="progress() sample">
-<img id="basic-input" class="summary-image" src="assets/images/input.png" alt="input() sample">
+<img id="basic-alert" class="summary-image" src="assets/images/alert.png" alt="alert() sample" title="Click to see dialog">
+<img id="basic-info" class="summary-image" src="assets/images/information.png" alt="info() sample" title="Click to see dialog">
+<img id="basic-confirm" class="summary-image" src="assets/images/confirm.png" alt="confirm() sample" title="Click to see dialog">
+<img id="basic-error" class="summary-image" src="assets/images/error.png" alt="error() sample" title="Click to see dialog">
+<img id="basic-bell" class="summary-image" src="assets/images/bell.png" alt="bell() sample" title="Click to see dialog">
+<img id="basic-wait" class="summary-image" src="assets/images/wait.png" alt="wait() sample" title="Click to see dialog">
+<img id="basic-progress" class="summary-image" src="assets/images/progress.png" alt="progress() sample" title="Click to see dialog">
+<img id="basic-input" class="summary-image" src="assets/images/input.png" alt="input() sample" title="Click to see dialog">
 </p>
+<p>
+The <code>input</code> dialog can be used to create rather large forms with validation, see <a href="#advanced-inputs">advanced inputs</a>.
+</p>
+<p>Basic usage, assuming you have installed / included <code>SimplyDialogs</code> : </p>
+<pre><code class="javascript">const Dlg = SimplyDialogs
 
-</section>
+Dlg.alert('Lorem ipsum ..')
+Dlg.information('Lorem ipsum ..')
+Dlg.bell('Lorem ipsum ..')
+Dlg.error('Lorem ipsum ..')
 
-<section id="basic-usage">
-<h2>Basic usage</h2>
-<p>Basically call the dialog with the message or text that need to be shown :</p>
-<pre><code class="javascript">Dlg.alert('Lorem ipsum ..').then(answer => {	
-  console.log('alert', answer) 
+Dlg.confirm('Lorem ipsum ..').then(answer => {
+  console.log(answer)
 })
-
-Dlg.confirm('Lorem ipsum ..').then(answer => {...)
-Dlg.information('Lorem ipsum ..').then(answer => {...})
-Dlg.bell('Lorem ipsum ..').then(answer => {...})
-Dlg.error('Lorem ipsum ..').then(answer => {...})
 
 const wait = Dlg.wait('Lorem ipsum ..')
 setTimeout(() => { wait.close() }, 1500)
@@ -195,23 +182,6 @@ Dlg.input('Lorem ipsum ..').then(input => {
   console.log('input', input)
 })
 </code></pre>
-<p>
-<button >Bell</button>
-<button >Error</button>
-<button id="basic-wait">Wait</button>
-<button id="basic-progress">Progress</button>
-<button id="basic-input">Input</button>
-</p>
-
-<p>Long text samples (unstyled)&nbsp; 
-<button id="basic-alert-long-text">Alert</button>
-<button id="basic-info-long-text">Info</button>
-<button id="basic-confirm-long-text">Confirm</button>
-<button id="basic-bell-long-text">Bell</button>
-<button id="basic-error-long-text">Error</button>
-<button id="basic-wait-long-text">Wait</button>
-<button id="basic-input-long-text">Input</button>
-</p>
 <p>SimplyDialogs can be stacked upon each other endlessly 
 <button id="basic-stack">Stacked dialogs</button>
 <button id="basic-stack-middle-positioning">Stacked dialogs, positioned</button>
@@ -224,7 +194,6 @@ You can customise the dialog by passing an extra options argument
 options should follow the same structure as the DEFAULTS literal discussed below.
 </p>
 </section>
-
 
 <section id="defaults">
 <h2>DEFAULTS</h2>
@@ -298,7 +267,8 @@ The structure of the options argument must follow the same format as <code>DEFAU
 <p><button id="options-alert-header-icon-shorthand">Test alert header, icon</button></p>
 </section>
 
-<section id="defaults-lang">
+
+<section id="captions">
 <h3>Captions, language-settings</h3>
 <p>There is no such thing as "language" in SimplyDialogs, but most people would like to adjust their basic dialogs to the lingo or language they use. 
 You can use <code>DEFAULTS</code> to change the dialogs into "spanish" as default by :</p>
@@ -332,8 +302,8 @@ Dlg.DEFAULTS.input.inputs[0].placeholder = 'Introducir texto ..'
 <p>If a <code>button.caption</code> is <code>''</code>, <code>undefined</code> or similar, the button will be hidden.</p>
 </section>
 
-<section id="defaults-icons">
-<h3>Icons</h3>
+<section id="icons">
+<h2>Icons</h2>
 <p>Icons can be replaced the same way; either individually or as a whole. For example, use another standard <a href="https://unicode.org/emoji/charts/full-emoji-list.html" target=_blank title="Full Emoji List, v15.0">unicode emoji</a> :
 <pre><code class="javascript">Dlg.DEFAULTS.icons.alert = '💥' //U+1F4A5, collision</code></pre>
 <p>See also the <a href="#integration">integration</a> section. Here an example using Font Awesome icons :</p>
@@ -347,26 +317,42 @@ Dlg.DEFAULTS.input.inputs[0].placeholder = 'Introducir texto ..'
   wait: '&lt;i class="fa fa-gear" style="color:gray;">&lt;/i>'
 }
 </code></pre>
-<p><button id="btn-fa-alert" >fa Alert</button>
-<button id="btn-fa-info">fa Info</button>
-<button id="btn-fa-confirm">fa Confirm</button>
-<button id="btn-fa-bell">fa Bell</button>
-<button id="btn-fa-error">fa Error</button>
-<button id="btn-fa-wait">fa Wait</button>
-<button id="btn-fa-input">fa Input</button>
+<p><button id="btn-classes-fa-alert" >fa Alert</button>
+<button id="btn-classes-fa-info">fa Info</button>
+<button id="btn-classes-fa-confirm">fa Confirm</button>
+<button id="btn-classes-fa-bell">fa Bell</button>
+<button id="btn-classes-fa-error">fa Error</button>
+<button id="btn-classes-fa-wait">fa Wait</button>
+<button id="btn-classes-fa-input">fa Input</button>
 </p>
 </section>
-
-<!-- classes -->
-<section id="defaults-classes">
-<h3>.classes</h3>
+<section id="classes">
+<h2>classes</h2>
 <p>
-You can specify default classes for the <code>&lt;dialog</code> element itself. 
+You can specify custom classes for the <code>&lt;dialog</code> element itself. 
 Either static through <code>.DEFAULTS</code> or on the fly via <code>options</code> :
 </p>
-<pre><code class="javascript">Dlg.DEFAULTS.classes = 'my dialog classes'</code></pre>
-<p>SimplyDialogs have some predefined classes you can use to control the size and the position of the dialog : </p>
+<pre><code class="javascript">Dlg.DEFAULTS.classes = 'my dialog classes'
+
+Dlg.alert('Lorem ipsum ..', { classes: 'my dialog classes'}).then(answer => 
+</code></pre>
+<p>
+However, the main purpose with <code>classes</code> is to specify the dialog size and position, which is discussed in separate sections below. 
+Besides that, a few extra builtin classes might occasionally be useful :</p>
+<table>
+	<tr><td><code>no-padding</code></td><td><button id="btn-classes-no-padding">test</button></td></tr>
+	<tr><td><code>no-shadow</code></td><td><button id="btn-classes-no-shadow">test</button></td></tr>
+	<tr><td><code>no-backdrop</code></td><td><button id="btn-classes-no-backdrop">test</button></td></tr>
+	<tr><td><code>dark-backdrop</code></td><td><button id="btn-classes-dark-backdrop">test</button></td></tr>
+</table>
+<p>
+SimplyDialogs comes with some useful builtin classes which occosinal offers has some useful 
+But the main purpose with <code>classes</code> is to specify Also use Use classesSimplyDialogs has some 
+But the main purpose 
+SimplyDialogs have some predefined classes you can use to control the size and the position of the dialog : </p>
 </section>
+
+
 
 <!-- sizing -->
 <section id="sizing">
@@ -933,6 +919,7 @@ Dlg.input('Select image file &lt;br>&lt;sup>(PNG, GIF, JPG supported)&lt;/sup>',
 </section> <!-- advanced-input -->
 
 
+
 <!-- examples -->
 <section id="examples">
 <h2>Further examples</h2>
@@ -955,6 +942,7 @@ Dlg.confirm('Are There Any Chance of Intelligent Life in The Universe, anywhere?
 </code></pre>
 <p><button id="options-complex-example-1">Try it out</button> ;- it is hard to figure out examples, or maybe I am just stoned.</p>
 
+<section id="examples-image-viewer">
 <h3>Image Viewer</h3>
 <p>Reset button-captions and the header :</p>
 <pre><code class="javascript">const msg = '&lt;img src="https://explorer1.jpl.nasa.gov/assets/images/galleries/1972_BlueMarble_115334main_image_feature_329_ys_full.jpg" style="max-height:75vh;">'
@@ -965,7 +953,8 @@ const options = {
 }
 Dlg.bell(msg, options)
 </code></pre>
-<p><button id="btn-options-image-viewer">As external image viewer</button></p>
+<p><button id="btn-examples-image-viewer">As external image viewer</button></p>
+</section>
 
 <h3>Maps example</h3>
 <p>You can use HTML in headers, buttons and the dialog message itself. Here the <code>informtion()</code>
@@ -1024,7 +1013,6 @@ Dlg.alert(msg, options)
 <p><button id="options-complex-example-2">X-mas dialog</button></p>
 
 </section>
-
 
 <section id="integration">
 <h2>Integration</h2>

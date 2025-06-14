@@ -1,0 +1,24 @@
+<section id="icons">
+<h2>Icons</h2>
+<p>Icons can be replaced the same way; either individually or as a whole. For example, use another standard <a href="https://unicode.org/emoji/charts/full-emoji-list.html" target=_blank title="Full Emoji List, v15.0">unicode emoji</a> :
+<pre><code class="javascript">Dlg.DEFAULTS.icons.alert = '💥' //U+1F4A5, collision</code></pre>
+<p>See also the <a href="#integration">integration</a> section. Here an example using Font Awesome icons :</p>
+<pre><code class="javascript">Dlg.DEFAULTS.icons = {
+  alert: '&lt;i class="fa fa-warning" style="color:fuchsia;">&lt;/i>',
+  information: '&lt;i class="fa fa-info-circle" style="color:royalblue;">&lt;/i>',
+  confirm: '&lt;i class="fa fa-question-circle" style="color:forestgreen;">&lt;/i>',
+  bell: '&lt;i class="fa fa-bell" style="color:orange;">&lt;/i>',
+  error: '&lt;i class="fa fa-times-circle-o" style="color:maroon;">&lt;/i>',
+  input: '&lt;i class="fa fa-pencil" style="color:navy;">&lt;/i>',
+  wait: '&lt;i class="fa fa-gear" style="color:gray;">&lt;/i>'
+}
+</code></pre>
+<p><button id="btn-classes-fa-alert" >fa Alert</button>
+<button id="btn-classes-fa-info">fa Info</button>
+<button id="btn-classes-fa-confirm">fa Confirm</button>
+<button id="btn-classes-fa-bell">fa Bell</button>
+<button id="btn-classes-fa-error">fa Error</button>
+<button id="btn-classes-fa-wait">fa Wait</button>
+<button id="btn-classes-fa-input">fa Input</button>
+</p>
+</section>

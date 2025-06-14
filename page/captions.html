@@ -1,0 +1,34 @@
+<section id="captions">
+<h3>Captions, language-settings</h3>
+<p>There is no such thing as "language" in SimplyDialogs, but most people would like to adjust their basic dialogs to the lingo or language they use. 
+You can use <code>DEFAULTS</code> to change the dialogs into "spanish" as default by :</p>
+<pre><code class="javascript">const Dlg = SimplyDialogs
+Dlg.DEFAULTS.buttons.captions = {
+  ok: 'Ok',	
+  yes: 'Aceptar',
+  no: 'Salir',
+  cancel: 'Cancelar'
+}
+Dlg.DEFAULTS.headers = {
+  alert: 'Alerta', 
+  error: 'Error',
+  confirm: 'Confirmar',
+  information: 'Información',
+  bell: 'Nota',
+  input: 'Input'
+}
+
+//change placeholder for the default input dialog as well
+Dlg.DEFAULTS.input.inputs[0].placeholder = 'Introducir texto ..'
+</code></pre>
+<p>
+<button id="basic-alert-es">Alert</button>
+<button id="basic-info-es">Info</button>
+<button id="basic-confirm-es">Confirm</button>
+<button id="basic-bell-es">Bell</button>
+<button id="basic-error-es">Error</button>
+<button id="basic-input-es">Input</button>
+</p>
+<p>If a <code>button.caption</code> is <code>''</code>, <code>undefined</code> or similar, the button will be hidden.</p>
+</section>
+

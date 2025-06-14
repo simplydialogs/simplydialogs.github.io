@@ -26,10 +26,11 @@ const BasicUsage = (function() {
 	}
 
 	gebi('basic-wait').onclick = function() {
-		const wait = Dlg.wait(shortText)
+		const icon = '<img src="assets/ying-yang.png" style="height:50px;">';
+		const wait = Dlg.wait(shortText, { icon: icon })
 		setTimeout(function() {
 			wait.close()
-		}, 1500)
+		}, 15000)
 	}
 
 	gebi('basic-progress').onclick = function() {
@@ -81,6 +82,7 @@ const BasicUsage = (function() {
 		}
 
 	//long text
+/*
 	gebi('basic-alert-long-text').onclick = function() { Dlg.alert(longText).then(answer => { console.log('long text alert', answer) })	}
 	gebi('basic-info-long-text').onclick = function() {	Dlg.information(longText).then(answer => { console.log('long text info', answer) }) }
 	gebi('basic-confirm-long-text').onclick = function() { Dlg.confirm(longText).then(answer => { console.log('long text confirm', answer) }) }
@@ -91,6 +93,7 @@ const BasicUsage = (function() {
 		const wait = Dlg.wait(longText)
 		setTimeout(() => { wait.close() }, 1500)
 	}
+*/
 
 	//defaults
 	gebi('options-alert-header-icon-shorthand').onclick = function() {
