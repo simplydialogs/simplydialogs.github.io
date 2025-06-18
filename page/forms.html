@@ -1,0 +1,87 @@
+<section id="forms">
+<h2>Forms</h2>
+<p>SimplyDialogs are designed for handling advanced inputs (or forms). With built-in form validation, customiseable by
+callbacks (or promises), and taking care of spellcheck and autocomplete, you can show rather complex forms just by a few lines of code. 
+First remember the <code class="javascript">input</code> section of 
+the <code>DEFAULTS</code> literal :</p> 
+<pre><code class="javascript">const options = {
+  ...
+  input: { 
+    formLayout: '',
+    classes: {
+      label: '',
+      input: ''
+    },
+    inputs: [
+      { .. }, 
+      { .. }, //&lt;- define form controls here
+    ],
+    callback: undefined,
+    promise: undefined
+  }
+}
+</code></pre>
+<p>Basically you show a form by passing a list to <code class="javascript">input.inputs</code>, specifying which inputs/form controls
+that should go into the form, along with their properties/settings. 
+</p>
+<p>
+Here is an example with a simple login form, demonstrating some of the basic features :</p>
+<pre><code class="javascript">const options = {
+  header: 'Login',
+  icon: '🔑',
+  input: {
+    inputs: [{ 
+      type: 'input', 
+      inputType: 'text', 
+      label: 'Username', 
+      name: 'username',
+      required: true,
+      minlength: 3,
+      //autocomplete: true, 
+      //spellcheck: true,
+      //classes: 'required'
+    }, { 
+      type: 'input', 
+      inputType: 'password', 
+      label: 'Password', 
+      name: 'password',
+      required: true,
+      minlength: 3,
+      //autocomplete: true, 
+      //classes: 'required'
+    }]
+  }
+}
+Dlg.input('', options).then(input => console.log('login', input))
+</code></pre>
+<p>
+<button id="btn-input-simple-login">Try simple login</button>
+<button id="btn-input-simple-login-autocomplete">with autocomplete</button>
+<button id="btn-input-simple-login-spellcheck">with spellcheck</button>
+<button id="btn-input-simple-login-classes-required">with required class</button>
+</p>
+<p>
+Notice the use of <code class="javascript">required</code> and <code>minlength</code>. The submit button is disabled until <em>all</em> required criterias are fulfilled.
+Also notice the absence of browser-enforced <code>spellcheck</code> and <code>autocomplete</code>, those features are opt-in. 
+If the predefined <code>required</code> class is added to <code>classes</code>, the form control is outlined according to its validation status.
+</p>
+
+<h2>Form controls</h2>
+<p>
+Use the type property to specify the type of form control. You should also at least specify a <code>name</code> for each control, 
+if not the control is given an anonymous name like <code>select_1</code>. 
+</p>
+<pre><code class="javascript">const options = {
+  input: {
+    inputs: [
+      { 
+        type: 'input' || 'textarea' || 'select' || 'radio',
+        name: 'name',
+        ... //control specific properties
+      },
+    ]
+  }
+}
+</code></pre>
+<p>Each <code>type</code> is discussed below :</p>
+</section>

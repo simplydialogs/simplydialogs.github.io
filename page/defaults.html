@@ -57,7 +57,7 @@
   }
 }
 </code></pre>
-<p>You can alter those defaults by simple assignment, i.e <code>&lt;instance>.DEFAULTS.icons.alert = '&lt;img src="path/to/image">' </code>. 
+<p>You can alter those defaults by simple assignment, i.e <code class="javascript">&lt;instance>.DEFAULTS.icons.alert = '&lt;img src="path/to/image">' </code>. 
 Changes to <code>DEFAULTS</code> are global, but you can still pass alternative options to each dialog (see later).</p>
 
 <p>
@@ -65,7 +65,7 @@ Any of the <code>DEFAULTS</code> settings can be overruled by passing an <code>o
 The structure of the options argument must follow the same format as <code>DEFAULTS</code>.
 </p>
 
-<p>For convenience you can use the shorthand aliases <code>header</code> and <code>icon</code> instead of repeating the convoluted literal :</p>
+<p>For convenience you can use the shorthand aliases <code class="javascript">header</code> and <code class="javascript">icon</code> instead of repeating the convoluted literal :</p>
 <pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet ...', { icon: '🔥', header: 'Danger!' })</code></pre>	
 <p><button id="options-alert-header-icon-shorthand">Test alert header, icon</button></p>
 </section>

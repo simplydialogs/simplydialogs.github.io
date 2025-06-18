@@ -1,0 +1,38 @@
+
+<section id="defaults-backdrop">
+<h2>backdrop</h2>
+<p>Across the browsers, their computed default <code>::backdrop</code> CSS more or less look like this :</p>
+<pre><code class="css">dialog::backdrop {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.1);
+}
+</code></pre>
+<p>You can change <code>DEFAULTS.backdrop</code> in order to change the background of the dialogs. You can specify the <code>background</code> style itself by passing a valid CSS class-definition. Here are some examples:</p>
+<p><button id="backdrop-none">No backdrop (reset)</button> <button id="backdrop-darker">Darker backdrop</button></p>
+<pre><code class="javascript">Dlg.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0);'
+Dlg.DEFAULTS.backdrop = 'background: rgba(0, 0, 0, 0.5);'
+</code></pre>
+<p>Or get more inspiration at <a href="https://projects.verou.me/css3patterns/">https://projects.verou.me/css3patterns/</a>, where the ideas below are taken from :</p>
+<p><button id="backdrop-carbon">A "carbon" backdrop</button> <button id="backdrop-stairs">A "stair-style" backdrop</button> <button id="backdrop-heart">Because I love You</button></p>
+<pre><code class="javascript">Dlg.DEFAULTS.backdrop = `background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+  linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+  linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+  linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+  linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+  linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+  background-color: #131313;
+  opacity: 0.4;
+  background-size: 20px 20px;`
+
+Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
+  linear-gradient(63deg, transparent 74%, #999 78%),
+  linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444;
+  opacity: 0.4;
+  background-size: 16px 48px;`
+</code></pre>
+</section>
+

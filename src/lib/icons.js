@@ -54,7 +54,7 @@ const Icons = (function() {
 		}
 		gebi('btn-classes-fa-wait').onclick = function() {
 			const options = {
-				icons: { wait: '<i class="fa fa-gear" style="color:gray;"></i>' }
+				icons: { wait: '<i class="fa fa-gear fa-fw" style="color:gray;"></i>' }
 			}
 			const wait = Dlg.wait(shortText, options)
 			setTimeout(function() {

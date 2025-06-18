@@ -1,0 +1,43 @@
+
+<section id="wait">
+<h2>wait</h2>
+<p>When using the <code>wait</code>-dialog, it can be convenient to update the dialog for details about progress or 
+whatever there is going on. <code>wait</code> has two special methods for updating the message, <code>setText</code> and <code>addText</code>. 
+Both takes a string as argument, that can be plain text or HTML.</p>
+
+<h4>setText</h4>
+<p><code>setText</code> replaces the message with new content. Consider this mockup :</p>
+<pre><code class="javascript">let counter = 0
+let interval = undefined
+const wait = Dlg.wait('Lorem ipsum ...')
+const replace = function() {
+  counter ++
+  wait.setText(`text or message changed ${counter} time(s)`)
+  if (counter > 5) {
+    clearInterval(interval)
+    wait.close()
+  }
+}
+interval = setInterval(replace, 1000)
+</code></pre>
+<p><button id="btn-wait-settext">setText mockup sample</button></p>
+
+<h4>addText</h4>
+<p><code>addText</code> appends something to the already existing text/message. The content can be plain text or HTML. Consider this mockup :</p>
+<pre><code class="javascript">let counter = 0
+let interval = undefined
+const wait = Dlg.wait('Lorem ipsum ...')
+const append = function() {
+  counter ++
+  wait.addText(`&lt;br>${counter} line(s) added to message`)
+  if (counter > 5) {
+    clearInterval(interval)
+    wait.close()
+  }
+}
+interval = setInterval(append, 1000)
+</code></pre>
+<p><button id="btn-wait-addtext">addText mockup sample</button></p>
+</section>
+
+

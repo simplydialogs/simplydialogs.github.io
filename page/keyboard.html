@@ -1,0 +1,28 @@
+<section id="keyboard">
+<h2>Keyboard</h2>
+<p>Specify how to react on keyboard strokes, <code>return</code> and <code>escape</code>.
+You can set both true or false for all type of dialogs, except <code>wait</code> and <code>progress</code>,
+but is mostly useful for the <code>input</code>-dialog. Note: Return / enter are ignored in textareas. 
+</p>
+<pre><code class="javascript">const options = {
+  return: (true | false),
+  escape: (true | false),
+  input: {
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'Input', name: 'input', required: true, minlength: 3 }, 
+      { type: 'textarea', label: 'Textarea', name: 'textarea', spellcheck: false }
+    ]
+  }
+}
+</code></pre>
+<p>This produces a form where you need to enter at least 3 characters to the <code>&lt;input></code> field, and also have an optional <code>&lt;textarea></code>. 
+In the first sample you can hit enter and submit the form, in the second you'll need to click on OK (and so on).</p>
+<p>
+<button id="btn-options-enter-submit-true">return true (default)</button>
+<button id="btn-options-enter-submit-false">return false</button>
+<button id="btn-options-escape-true">escape true (default)</button>
+<button id="btn-options-escape-false">escape false</button>
+<button id="btn-options-escape-return-false">Both escape and return false</button>
+</p>
+</section>
+

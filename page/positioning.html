@@ -1,0 +1,30 @@
+<section id="positioning">
+<h2>Positioning</h2>
+<p>
+Per default all dialogs are shown in the center of the viewscreen, but vertically centered between middle and top. 
+Both the default centered position <em>and</em> position <code>middle</code> are leaning to the top for aesthetic reasons. 
+The default middle is <code>9vh</code> from the top. The <code class="javascript">left</code>, <code class="javascript">right</code> margin is <code>4vw</code>;   
+<code class="javascript">top</code>, <code class="javascript">bottom</code> has <code class="javascript">5vh</code> margin. 
+</p>
+<p>You can control the dialog position by using the predefined classes 
+<code class="javascript">top</code>, <code>middle</code>, <code class="javascript">bottom></code>, 
+<code class="javascript">left</code>, <code>center</code>, <code class="javascript">right</code>
+in any meaningful combination. Remember: <code>center</code> is vertical, <code>middle</code> is horizontal. </p>
+<p>
+<button id="btn-positioning-top">top</button>
+<button id="btn-positioning-middle">middle</button>
+<button id="btn-positioning-bottom">bottom</button><br>
+<button id="btn-positioning-left">left</button>
+<button id="btn-positioning-center">center</button>
+<button id="btn-positioning-right">right</button>
+</p>
+<p>This snippet show all combinations stacked upon each other :</p>
+<pre><code class="javascript">['top left', 'top center', 'top right', 
+ 'middle left', 'middle center', 'middle right', 
+ 'bottom left', 'bottom center', 'bottom right'].forEach(function(position) {
+  Dlg.info(position, { classes: position })
+})
+</code></pre>
+<p><button id="btn-positioning-all-stacked">Try it out</button></p>
+</section>
+

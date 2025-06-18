@@ -62,7 +62,9 @@ const Input = (function() {
 
 		gebi('btn-input-all').onclick = function() {
 			const options = {
+				header: 'inputType',
 				input: {
+					formLayout: 'left clear-left',
 					inputs: [
 						{ type: 'input', inputType: 'text', label: 'Text', name: 'input', spellcheck: false },
 						{ type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
@@ -70,16 +72,18 @@ const Input = (function() {
 						{ type: 'input', inputType: 'number', label: 'Number', name: 'number', value: 42 },
 						{ type: 'input', inputType: 'password', label: 'Password', name: 'password', style: 'color:maroon;' },
 						{ type: 'input', inputType: 'date', label: 'Date', name: 'date' },
+						{ type: 'input', inputType: 'datetime-local', label: 'Datetime-local', name: 'datetime-local' },
+						{ type: 'input', inputType: 'week', label: 'Week', name: 'week' },
 						{ type: 'input', inputType: 'file', label: 'File', name: 'file' },
 						{ type: 'input', inputType: 'url', label: 'Url', name: 'url' },
+						{ type: 'input', inputType: 'tel', label: 'Tel', name: 'tel' },
+						{ type: 'input', inputType: 'email', label: 'Email', name: 'email' },
 						{ type: 'input', inputType: 'range', label: 'Range', name: 'range', value:25, max: 100 },
 						{ type: 'input', inputType: 'hidden', label: '', name: 'hidden', value: 'You can pass extra values to the form via hidden inputs' }
 					]
 				}
 			}
-			Dlg.input(shortText, options).then(function(input) {
-				console.log('result', input)
-			})
+			Dlg.input(shortText, options).then(input => console.log('result', input))
 		}
 
 		gebi('btn-input-radio-select').onclick = function() {
@@ -184,6 +188,77 @@ const Input = (function() {
 				console.log('login', input)
 			})
 		}
+
+//
+	gebi('btn-input-simple-login').onclick = function() {
+		const options = {
+			header: 'Login',
+			icon: '🔑',
+			input: {
+				inputs: [	
+					{ type: 'input', inputType: 'text', label: 'Username', name: 'username', required: true, minlength: 3 },
+					{ type: 'input', inputType: 'password', label: 'Password', name: 'password', required: true, minlength: 3 }  
+				],
+			}
+		}
+		Dlg.input('', options).then(input => console.log('login', input))
+	}
+
+	gebi('btn-input-simple-login-autocomplete').onclick = function() {
+		const options = {
+			header: 'Login',
+			icon: '🔑',
+			input: {
+				inputs: [	
+					{ type: 'input', inputType: 'text', label: 'Username', name: 'username', required: true, minlength: 3, autocomplete: true },
+					{ type: 'input', inputType: 'password', label: 'Password', name: 'password', required: true, minlength: 3, autocomplete: true }  
+				],
+			}
+		}
+		Dlg.input('', options).then(input => console.log('login', input))
+	}
+
+	gebi('btn-input-simple-login-spellcheck').onclick = function() {
+		const options = {
+			header: 'Login',
+			icon: '🔑',
+			input: {
+				inputs: [	
+					{ type: 'input', inputType: 'text', label: 'Username', name: 'username', required: true, minlength: 3, spellcheck: true },
+					{ type: 'input', inputType: 'password', label: 'Password', name: 'password', required: true, minlength: 3 }  
+				],
+			}
+		}
+		Dlg.input('', options).then(input => console.log('login', input))
+	}
+
+	gebi('btn-input-simple-login-classes-required').onclick = function() {
+		const options = {
+			header: 'Login',
+			icon: '🔑',
+			input: {
+				inputs: [	
+					{ type: 'input', inputType: 'text', label: 'Username', name: 'username', required: true, minlength: 3, classes: 'required' },
+					{ type: 'input', inputType: 'password', label: 'Password', name: 'password', required: true, minlength: 3, classes: 'required' }  
+				],
+			}
+		}
+		Dlg.input('', options).then(input => console.log('login', input))
+	}
+
+	gebi('btn-input-simple-login-required').onclick = function() {
+		const options = {
+			header: 'Login',
+			icon: '🔑',
+			input: {
+				inputs: [	
+					{ type: 'input', inputType: 'text', label: 'Username', name: 'username', required: true, minlength: 3 },
+					{ type: 'input', inputType: 'password', label: 'Password', name: 'password', required: true, minlength: 3 }  
+				],
+			}
+		}
+		Dlg.input('', options).then(input => console.log('login', input))
+	}
 
 //validation
 	gebi('btn-validation-required-email').onclick = function() {

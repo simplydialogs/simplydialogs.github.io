@@ -1,0 +1,30 @@
+<section id="forms-select">
+<h3>Radios and selects</h3>
+<p>Radios are "paired" inputs and selects have child options, so those need a extended definition. Notice the use of <code>value</code> :</p>
+<pre><code class="javascript">const options = { 
+  input: { 
+    inputs [
+      { type: 'radio', label: 'radio', name: 'radio', value: 'option2',
+          options: [
+            { label: 'option1', value: 'option1' },
+            { label: 'option2', value: 'option2' },
+            { label: 'option3', value: 'option3' }
+          ]
+      },
+      { type: 'select', label: 'select', name: 'select', value: 'option3',
+          options: [
+            { label: 'option1', value: 'option1' },
+            { label: 'option2', value: 'option2' },
+            { label: 'option3', value: 'option3' }
+          ]
+      }
+    ],
+    callback: function(state) {
+      return state.radio !== null && state.select !== null
+    }
+  }
+}	
+</code></pre>
+<p><button id="btn-input-radio-select">Test radios and select</button> <button id="btn-input-radio-select-no-value">Same, without using value</button> </p>
+</section>
+

@@ -21,18 +21,27 @@ const Test = (function(window, document, Dlg) {
 		return (rect.y > -rect.height) && (rect.y < document.documentElement.clientHeight/2)
 	}
 
-	const input_details = gebi('input-details')
-
-	window.addEventListener('scroll', function() {
-		if (isElementInViewport(gebi('advanced-inputs'))) {
-			if (input_details.style.display !== 'block') {
-				input_details.style.display = 'block'
-			}
-		} else {
-			if (input_details.style.display !== 'none') {
-				input_details.style.display = 'none'
+	const testCollapse = function(sections, menu) {
+		const ul = gebi(menu)
+		let visible = false
+		for (const [index, section] of sections.entries()) {
+			if (isElementInViewport(gebi(section))) {				
+				visible = true
 			}
 		}
+		if (visible) {
+			if (ul.style.display !== 'block') {
+				ul.style.display = 'block'
+			}
+		} else {
+			if (ul.style.display !== 'none') {
+				ul.style.display = 'none'
+			}
+		}
+	}
+
+	window.addEventListener('scroll', function() {
+		testCollapse(['forms', 'forms-input', 'forms-select'], 'forms-details') 
 	})
 
 	const initSyntaxHl = function() {
@@ -44,6 +53,13 @@ const Test = (function(window, document, Dlg) {
 			'github',
 			'github-dark',
 			'atom-one-dark', 
+			'an-old-hope',
+			'docco',
+			'far',
+			'googlecode',
+			'grayscale',
+			'nnfx-light',
+			'shades-of-purple'
 		]
 		const select = gebi('select-syntax-hl')
 		hl.forEach(function(s) {
@@ -59,7 +75,8 @@ const Test = (function(window, document, Dlg) {
 
 	if (hljs)	{
 		hljs.configure({
-			ignoreUnescapedHTML: false
+			ignoreUnescapedHTML: false,
+			//cssSelector: 'code'
 		})
 		hljs.highlightAll()
 	}

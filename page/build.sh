@@ -10,6 +10,15 @@ defaults.html \
 captions.html \
 icons.html \
 classes.html \
+sizing.html \
+positioning.html \
+keyboard.html \
+progress.html \
+wait.html \
+backdrop.html \
+forms.html \
+forms.input.html \
+forms.select.html \
 index.old \
 examples.html \
 integration.html \

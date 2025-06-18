@@ -9,12 +9,14 @@ const Keyboard = (function() {
 		const options = {
 			input: {
 				inputs: [
-					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required', spellcheck: false },
-					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4, spellcheck: false }
-				],
+					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required', required: true, minlength: 3 },
+					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4 }
+				]
+/*
 				callback: function(state) {
 					return state.input.length > 2
 				}
+*/
 			}
 
 		}

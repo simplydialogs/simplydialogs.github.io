@@ -1,0 +1,28 @@
+<section id="sizing">
+<h2>Sizing</h2>
+<p>You can use predefined class names to set dialog default size  </p>
+<pre><code class="javascript">Dlg.DEFAULTS.classes = 'small'</code></pre>
+<table>
+	<tr><td><code>xs</code> / <code>xsmall</code></td><td>18vw / 15vh</td><td><code>xs-width</code> / <code>xs-height</code></td></tr>
+	<tr><td><code>sm</code> / <code>small</code></td><td>22vw / 18vh</td><td><code>sm-width</code> / <code>sm-height</code></td></tr>
+	<tr><td><code>md</code> / <code>medium</code></td><td>34vw / 31vh</td><td><code>md-width</code> / <code>md-height</code></td></tr>
+	<tr><td><code>lg</code> / <code>large</code></td><td>55vw / 52vh</td><td><code>lg-width</code> / <code>lg-height</code></td></tr>
+	<tr><td><code>fullsize</code></td><td>100vw / 100vh</td><td><code></code></td></tr>
+</table>
+<p>You can override the default using options </p>
+<pre><code class="javascript">Dlg.info('some text ...', { classes: 'xs' }).then(..)</code></pre>
+<p style="margin-bottom:1px;">
+	<button id="btn-options-sizing-xs">As above</button>
+	<button id="btn-options-sizing-sm">Alert sm</button>
+	<button id="btn-options-sizing-md">Error md</button>
+	<button id="btn-options-sizing-lg">Confirm lg</button>
+	<button id="btn-options-sizing-sm-overflow">Info sm overflow</button>
+	<button id="btn-options-sizing-xs-width">Alert xs-width</button>
+	<button id="btn-options-sizing-sm-height">Alert sm-height</button>
+	<button id="btn-options-sizing-md-width">Alert md-height</button>
+	<button id="btn-options-sizing-fullsize">Error fullsize</button>
+</p>
+<small style="color:gray;">Note: The examples show dimensions, they are not meant to fit</small>
+</section>
+
+

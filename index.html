@@ -36,23 +36,21 @@
 <meta name="twitter:description" content="SimplyDialogs is a set of generic dialogs using the <dialog> HTML element. Pure ES6 and CSS3 standards. Comes with no dependencies and a very small footprint">
 <meta name="twitter:image" content="/assets/images/simplydialogs-official.png">
 <style>
-pre.inline-hl {
-	display: inline-block;
-	position: relative;
-	top: .7rem;
+a.text-link {
+	font-weight: bold;
 }
-pre.inline-hl code {
-	padding: .3rem;
+code:not(.hljs) {
+	font-size: 110%;
+	color: #000;
+	padding: 2px 4px;
+	margin-right: 0;
 }
-/*
-li .arrow:before {
-	content: '⤷';
-	display: inline-block;
-	margin-left: -14px;
-}
-*/
+
 dialog.image-viewer {
 	padding: 0;
+}
+code.inline {
+	font-weight: bold;
 }
 dialog.image-viewer .dialog-actions,
 dialog.image-viewer h4,
@@ -60,13 +58,23 @@ dialog.image-viewer p {
 	margin: 0;
 	padding: 0;
 }
+img.summary-image {
+	height: 6rem;
+	cursor: pointer;
+}
+/*
+pre code.hljs {
+	display: block;
+}
+code.hljs {
+	display: inline;
+}
+*/
 </style>
 </head>
 <body>
 <div class="page-wrapper">
-
-
-<aside XXstyle="display:none;">
+<aside>
 	<div class="nav">
 		<a id="burger-menu" href="#">☰</a>
 		<a href="https://github.com/davidkonrad/simplydialogs" title="View on GitHub" id="view-on-github">
@@ -82,14 +90,16 @@ dialog.image-viewer p {
 		<li><a href="#sizing">Sizing</a></li>
 		<li><a href="#positioning">Positioning</a></li>
 		<li><a href="#keyboard">Keyboard</a></li>
-		<li><a href="#defaults-buttons-classes">buttons.classes</a></li>
-		<li><a href="#options">Passing options</a></li>
-		<li><a href="#styling">Additional styling</a></li>
 		<li><a href="#progress">progress</a></li>
 		<li><a href="#wait">wait</a></li>
 		<li><a href="#defaults-backdrop">backdrop</a></li>
-		<li><a href="#advanced-inputs" class="arrow">Advanced inputs</a> 
-			<ul id="input-details">
+		<li><a href="#forms" class="arrow">Forms</a> 
+			<ul id="forms-details">
+				<li><a href="#forms-input">inputs</a></li>
+				<li><a href="#forms-select">select</a></li>
+				<li><a href="#forms-radio">radio</a></li>
+				<li><a href="#forms-textarea">textarea</a></li>
+
 				<li><a href="#input-inputs">Input options</a>
 					<ul>
 						<li><a href="#input-autofocus">autofocus</a></li>
@@ -135,13 +145,6 @@ dialog.image-viewer p {
 </aside>
 <main>
 
-<style>
-img.summary-image {
-	height: 6rem;
-	cursor: pointer;
-}
-</style>
-
 <section id="summary">
 <h1>SimplyDialogs</h1>
 <p>
@@ -161,7 +164,8 @@ SimplyDialogs offers a range of common dialogs, all highly customizeable. Comes 
 <img id="basic-input" class="summary-image" src="assets/images/input.png" alt="input() sample" title="Click to see dialog">
 </p>
 <p>
-The <code>input</code> dialog can be used to create rather large forms with validation, see <a href="#advanced-inputs">advanced inputs</a>.
+The <code class="javascript">input</code> dialog can be used to create rather large forms with validation, 
+see the <a href="#forms">Forms</a> section.
 </p>
 <p>Basic usage, assuming you have installed / included <code>SimplyDialogs</code> : </p>
 <pre><code class="javascript">const Dlg = SimplyDialogs
@@ -254,7 +258,7 @@ options should follow the same structure as the DEFAULTS literal discussed below
   }
 }
 </code></pre>
-<p>You can alter those defaults by simple assignment, i.e <code>&lt;instance>.DEFAULTS.icons.alert = '&lt;img src="path/to/image">' </code>. 
+<p>You can alter those defaults by simple assignment, i.e <code class="javascript">&lt;instance>.DEFAULTS.icons.alert = '&lt;img src="path/to/image">' </code>. 
 Changes to <code>DEFAULTS</code> are global, but you can still pass alternative options to each dialog (see later).</p>
 
 <p>
@@ -262,7 +266,7 @@ Any of the <code>DEFAULTS</code> settings can be overruled by passing an <code>o
 The structure of the options argument must follow the same format as <code>DEFAULTS</code>.
 </p>
 
-<p>For convenience you can use the shorthand aliases <code>header</code> and <code>icon</code> instead of repeating the convoluted literal :</p>
+<p>For convenience you can use the shorthand aliases <code class="javascript">header</code> and <code class="javascript">icon</code> instead of repeating the convoluted literal :</p>
 <pre><code class="javascript">Dlg.alert('Lorem ipsum dolor sit amet ...', { icon: '🔥', header: 'Danger!' })</code></pre>	
 <p><button id="options-alert-header-icon-shorthand">Test alert header, icon</button></p>
 </section>
@@ -337,24 +341,24 @@ Either static through <code>.DEFAULTS</code> or on the fly via <code>options</co
 Dlg.alert('Lorem ipsum ..', { classes: 'my dialog classes'}).then(answer => 
 </code></pre>
 <p>
-However, the main purpose with <code>classes</code> is to specify the dialog size and position, which is discussed in separate sections below. 
-Besides that, a few extra builtin classes might occasionally be useful :</p>
+However, the main purpose with <code>classes</code> is to use predefined classes for specifying size and position for the dialog,
+like <code>top right medium</code> which is discussed in separate sections below. A few additional builtin classes might 
+occasionally be useful :</p>
 <table>
-	<tr><td><code>no-padding</code></td><td><button id="btn-classes-no-padding">test</button></td></tr>
-	<tr><td><code>no-shadow</code></td><td><button id="btn-classes-no-shadow">test</button></td></tr>
-	<tr><td><code>no-backdrop</code></td><td><button id="btn-classes-no-backdrop">test</button></td></tr>
-	<tr><td><code>dark-backdrop</code></td><td><button id="btn-classes-dark-backdrop">test</button></td></tr>
+	<tr><td><code>no-padding</code></td><td>The dialog has no interior padding</td></tr>
+	<tr><td><code>no-shadow</code></td><td>The dialog has no shadow</td></tr>
+	<tr><td><code>no-backdrop</code></td><td>The dialog has no backdrop</td></tr>
+	<tr><td><code>dark-backdrop</code></td><td>The dialog has a darker backdrop</td></tr>
 </table>
 <p>
-SimplyDialogs comes with some useful builtin classes which occosinal offers has some useful 
-But the main purpose with <code>classes</code> is to specify Also use Use classesSimplyDialogs has some 
-But the main purpose 
-SimplyDialogs have some predefined classes you can use to control the size and the position of the dialog : </p>
+<button id="btn-classes-no-padding">no padding</button>
+<button id="btn-classes-no-shadow">no-shadow</button>
+<button id="btn-classes-no-backdrop">no-backdrop</button>
+<button id="btn-classes-dark-backdrop">dark-backdrop</button>
+</p>
 </section>
 
 
-
-<!-- sizing -->
 <section id="sizing">
 <h2>Sizing</h2>
 <p>You can use predefined class names to set dialog default size  </p>
@@ -383,17 +387,17 @@ SimplyDialogs have some predefined classes you can use to control the size and t
 </section>
 
 
-<!-- positioning -->
 <section id="positioning">
 <h2>Positioning</h2>
 <p>
 Per default all dialogs are shown in the center of the viewscreen, but vertically centered between middle and top. 
 Both the default centered position <em>and</em> position <code>middle</code> are leaning to the top for aesthetic reasons. 
-The default middle is <code>9vh</code> from the top. The <code>left</code>, <code>right</code> margin is <code>4vw</code>;   
-<code>top</code>, <code>bottom</code> has <code>5vh</code> margin. 
+The default middle is <code>9vh</code> from the top. The <code class="javascript">left</code>, <code class="javascript">right</code> margin is <code>4vw</code>;   
+<code class="javascript">top</code>, <code class="javascript">bottom</code> has <code class="javascript">5vh</code> margin. 
 </p>
 <p>You can control the dialog position by using the predefined classes 
-<code>top</code>, <code>middle</code>, <code>bottom></code>, <code>left</code>, <code>center</code>, <code>right</code>
+<code class="javascript">top</code>, <code>middle</code>, <code class="javascript">bottom></code>, 
+<code class="javascript">left</code>, <code>center</code>, <code class="javascript">right</code>
 in any meaningful combination. Remember: <code>center</code> is vertical, <code>middle</code> is horizontal. </p>
 <p>
 <button id="btn-positioning-top">top</button>
@@ -403,8 +407,7 @@ in any meaningful combination. Remember: <code>center</code> is vertical, <code>
 <button id="btn-positioning-center">center</button>
 <button id="btn-positioning-right">right</button>
 </p>
-
-This snippet show all combinations stacked upon each other :</p>
+<p>This snippet show all combinations stacked upon each other :</p>
 <pre><code class="javascript">['top left', 'top center', 'top right', 
  'middle left', 'middle center', 'middle right', 
  'bottom left', 'bottom center', 'bottom right'].forEach(function(position) {
@@ -414,10 +417,9 @@ This snippet show all combinations stacked upon each other :</p>
 <p><button id="btn-positioning-all-stacked">Try it out</button></p>
 </section>
 
-<!-- keyboard -->
 <section id="keyboard">
 <h2>Keyboard</h2>
-<p>Specify how to react on keyboard by <code>return</code> and <code>escape</code>.
+<p>Specify how to react on keyboard strokes, <code>return</code> and <code>escape</code>.
 You can set both true or false for all type of dialogs, except <code>wait</code> and <code>progress</code>,
 but is mostly useful for the <code>input</code>-dialog. Note: Return / enter are ignored in textareas. 
 </p>
@@ -426,12 +428,9 @@ but is mostly useful for the <code>input</code>-dialog. Note: Return / enter are
   escape: (true | false),
   input: {
     inputs: [
-      { type: 'input', inputType: 'text', label: 'Input', name: 'input', spellcheck: false },
-      {	type: 'textarea', label: 'Textarea', name: 'textarea', spellcheck: false }
-    ],
-    callback: function(state) {
-      return state.input.length > 2
-    }
+      { type: 'input', inputType: 'text', label: 'Input', name: 'input', required: true, minlength: 3 }, 
+      { type: 'textarea', label: 'Textarea', name: 'textarea', spellcheck: false }
+    ]
   }
 }
 </code></pre>
@@ -446,37 +445,6 @@ In the first sample you can hit enter and submit the form, in the second you'll 
 </p>
 </section>
 
-<section id="defaults-buttons-classes">
-<h3>buttons.classes</h3>
-<p>You can specify default classes for each button, your own layout or adopting the style of a framework. </p>
-<pre><code class="javascript">Dlg.DEFAULTS.buttons.classes = {
-  ok: 'my btn classes',
-  cancel: '',
-  yes: '',
-  no: ''
-}
-</code></pre>
-</section>
-
-
-<!-- styling -->
-<section id="styling">
-<h2>Additional styling</h2>
-<p>SimplyDialogs comes with diminutive styling - the very basics like <code>position</code>, <code>max-width</code> and so on - and you are supposed to want to change that styling. There are two ways :</p>
-<h4>1. Override defaults</h4>
-<p>Simply override the few CSS3 rules found in <code>dialogs.css</code> (must be declared <em>after</em>) :</p>
-<pre><code class="css">dialog {
-  border-radius: 0;
-}
-dialog h4 {
-  font-size: medium;
-}
-</code></pre>
-<p>etc. That will obvious inflict on all dialogs.</p>
-<h4>2. Attach a named CSS class to .classes</h4>
-</section>
-
-<!-- wait -->
 <section id="progress">
 <h2>progress</h2>
 <p>The progress dialog cannot be closed or cancelled by the user, but must be closed programmatically by using the <code>close()</code> method.
@@ -509,7 +477,7 @@ interval = setInterval(update, 20)
 <p><button id="btn-progress-progress">progress mockup</button></p>
 </section>
 
-<!-- wait -->
+
 <section id="wait">
 <h2>wait</h2>
 <p>When using the <code>wait</code>-dialog, it can be convenient to update the dialog for details about progress or 
@@ -551,7 +519,8 @@ interval = setInterval(append, 1000)
 <p><button id="btn-wait-addtext">addText mockup sample</button></p>
 </section>
 
-<!-- backdrop -->
+
+
 <section id="defaults-backdrop">
 <h2>backdrop</h2>
 <p>Across the browsers, their computed default <code>::backdrop</code> CSS more or less look like this :</p>
@@ -589,34 +558,155 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 </code></pre>
 </section>
 
-<!-- inputs -->
-<section id="advanced-inputs">
-<h2>Advanced inputs</h2>
-<!---
-</section>
---->
-
-<section id="input-options">
-<h3>Passing options literal</h3>
-<p>You can alter the input form either by changing <code>DEFAULTS</code> or by passing an options literal to <code>input(msg, options)</code> (what you should do) : </p>
+<section id="forms">
+<h2>Forms</h2>
+<p>SimplyDialogs are designed for handling advanced inputs (or forms). With built-in form validation, customiseable by
+callbacks (or promises), and taking care of spellcheck and autocomplete, you can show rather complex forms just by a few lines of code. 
+First remember the <code class="javascript">input</code> section of 
+the <code>DEFAULTS</code> literal :</p> 
 <pre><code class="javascript">const options = {
+  ...
   input: { 
     formLayout: '',
     classes: {
       label: '',
       input: ''
     },
-    inputs: [ {…}, ... ],
-    callback: undefined
+    inputs: [
+      { .. }, 
+      { .. }, //&lt;- define form controls here
+    ],
+    callback: undefined,
+    promise: undefined
   }
 }
 </code></pre>
-<p>Just pass the attributes you need, if not set <code>.DEFAULTS</code> are used. The elements in the form is positioned by a 
+<p>Basically you show a form by passing a list to <code class="javascript">input.inputs</code>, specifying which inputs/form controls
+that should go into the form, along with their properties/settings. 
+</p>
+<p>
+Here is an example with a simple login form, demonstrating some of the basic features :</p>
+<pre><code class="javascript">const options = {
+  header: 'Login',
+  icon: '🔑',
+  input: {
+    inputs: [{ 
+      type: 'input', 
+      inputType: 'text', 
+      label: 'Username', 
+      name: 'username',
+      required: true,
+      minlength: 3,
+      //autocomplete: true, 
+      //spellcheck: true,
+      //classes: 'required'
+    }, { 
+      type: 'input', 
+      inputType: 'password', 
+      label: 'Password', 
+      name: 'password',
+      required: true,
+      minlength: 3,
+      //autocomplete: true, 
+      //classes: 'required'
+    }]
+  }
+}
+Dlg.input('', options).then(input => console.log('login', input))
+</code></pre>
+<p>
+<button id="btn-input-simple-login">Try simple login</button>
+<button id="btn-input-simple-login-autocomplete">with autocomplete</button>
+<button id="btn-input-simple-login-spellcheck">with spellcheck</button>
+<button id="btn-input-simple-login-classes-required">with required class</button>
+</p>
+<p>
+Notice the use of <code class="javascript">required</code> and <code>minlength</code>. The submit button is disabled until <em>all</em> required criterias are fulfilled.
+Also notice the absence of browser-enforced <code>spellcheck</code> and <code>autocomplete</code>, those features are opt-in. 
+If the predefined <code>required</code> class is added to <code>classes</code>, the form control is outlined according to its validation status.
+</p>
+
+<h2>Form controls</h2>
+<p>
+Use the type property to specify the type of form control. You should also at least specify a <code>name</code> for each control, 
+if not the control is given an anonymous name like <code>select_1</code>. 
+</p>
+<pre><code class="javascript">const options = {
+  input: {
+    inputs: [
+      { 
+        type: 'input' || 'textarea' || 'select' || 'radio',
+        name: 'name',
+        ... //control specific properties
+      },
+    ]
+  }
+}
+</code></pre>
+<p>Each <code>type</code> is discussed below :</p>
+</section>
+<section id="forms-input">
+<h3>input</h3>
+<p>
+Set <code>inputType</code> to specify the type of the <code>&lt;input></code>. 
+See MDN's <a class="text-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#input_types" target=_blank>&lt;input> types</a> for a complete reference.
+</p>
+<pre><code class="javascript">const options = {
+  input: {
+    formLayout: 'left clear-left',
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'Text', name: 'input' },
+      { type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
+      { type: 'input', inputType: 'color', label: 'Color', name: 'color', value: '#123456' },
+      { type: 'input', inputType: 'number', label: 'Number', name: 'number', value: 42 },
+      { type: 'input', inputType: 'password', label: 'Password', name: 'password', style: 'color:maroon;' },
+      { type: 'input', inputType: 'date', label: 'Date', name: 'date' },
+      { type: 'input', inputType: 'datetime-local', label: 'Datetime-local', name: 'datetime-local' },
+      { type: 'input', inputType: 'week', label: 'Week', name: 'week' },
+      { type: 'input', inputType: 'file', label: 'File', name: 'file' },
+      { type: 'input', inputType: 'url', label: 'Url', name: 'url' },
+      { type: 'input', inputType: 'tel', label: 'Tel', name: 'tel' },
+      { type: 'input', inputType: 'email', label: 'Email', name: 'email' },
+      { type: 'input', inputType: 'range', label: 'Range', name: 'range', value: 25, max: 100 },
+      { type: 'input', inputType: 'hidden', label: '', name: 'hidden', value: 'Pass extra values to the form via hidden inputs' }
+    ]
+  }
+}
+Dlg.input('Lorem ipsum ...', options).then(input => console.log('result', input))
+</code></pre>
+<p><button id="btn-input-all">Test many types of input</button> </p>
+
+
+asdsad
+<p><button id="btn-input-simple-login-required">Try simple login with required</button></p>
+<pre><code class="javascript">inputs: [
+  { type="input', inputType='text', name='first_name', 'label': 'First name' },
+  { type="input', inputType='text', name='last_name', 'label': 'Last name' },
+]
+</code></pre>
+But you can by default submit 
+The problem is, that you can submit a login dialog without 
+You A login form should not be subat least have a sanity dialog Since we are dealing with username/password
+
+As soon as you have entered You can submit the form right awaySince there is no restrictions 
+
+But you can submit the form without entering any values, 
+and 
+
+ening Since However, since we ask for username and password we need a credentials are almost since it makes no sense you can a dialog form should at least The problem is that you can submit However,  - as soon . However, , whatever you have entered you  Click on the button, if you type some text and hit enter you will see something like <code>{ username: 'abc', password: 'def' }</code> 
+in the console. But 
+</p>
+
+of form controls To show a form, simply pass an array of elements <code>input.inputs</code> 
+Just pass the attributes you need, if not set <code>.DEFAULTS</code> are used. The elements in the form is positioned by a 
 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid" title="CSS grid on MDN">CSS grid</a>, via <code>.formLayout</code>
 <code>top</code>|<code>left</code> you can specify the label positions. </p>
-</section>
 
-<section id="input-inputs">
+<h3>.inputType</h3>
+<p>For <code>&lt;input></code>'s you specify the type throgh <code>inputType</code>. If the browser support the input type it can be shown. 
+Pass special properties by their name, i.e <code>value</code>, <code>min</code>, <code>placeholder</code> :</p>
+
+
 <h3>Define inputs</h3>
 <p><code>inputs</code> is an array of objects defining each input for the form :</p>
 <pre><code class="javascript">const options = {
@@ -629,7 +719,39 @@ Dlg.DEFAULTS.backdrop = `background: linear-gradient(63deg, #999 23%, transparen
 }
 Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
 </code></pre><p><button id="btn-input-textarea">Test input, textarea</button></p>
+
 </section>
+
+<section id="forms-select">
+<h3>Radios and selects</h3>
+<p>Radios are "paired" inputs and selects have child options, so those need a extended definition. Notice the use of <code>value</code> :</p>
+<pre><code class="javascript">const options = { 
+  input: { 
+    inputs [
+      { type: 'radio', label: 'radio', name: 'radio', value: 'option2',
+          options: [
+            { label: 'option1', value: 'option1' },
+            { label: 'option2', value: 'option2' },
+            { label: 'option3', value: 'option3' }
+          ]
+      },
+      { type: 'select', label: 'select', name: 'select', value: 'option3',
+          options: [
+            { label: 'option1', value: 'option1' },
+            { label: 'option2', value: 'option2' },
+            { label: 'option3', value: 'option3' }
+          ]
+      }
+    ],
+    callback: function(state) {
+      return state.radio !== null && state.select !== null
+    }
+  }
+}	
+</code></pre>
+<p><button id="btn-input-radio-select">Test radios and select</button> <button id="btn-input-radio-select-no-value">Same, without using value</button> </p>
+</section>
+
 
 <h3 id="input-autofocus">autofocus</h3>
 <p>If you set <code class="javascript">autofocus: true</code>, then the input (or textarea, select)
@@ -672,63 +794,6 @@ importance of the look of the dialog. Here all the combinations along with the i
 </p>
 </section>
 
-<section id="input-input-type">
-<h3>.inputType</h3>
-<p>For <code>&lt;input></code>'s you specify the type throgh <code>inputType</code>. If the browser support the input type it can be shown. 
-Pass special properties by their name, i.e <code>value</code>, <code>min</code>, <code>placeholder</code> :</p>
-<pre><code class="javascript">const options = {
-  input: {
-    inputs: [
-      { type: 'input', inputType: 'text', label: 'Text', name: 'input', spellcheck: false },
-      { type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
-      { type: 'input', inputType: 'color', label: 'Color', name: 'color', value: '#123456' },
-      { type: 'input', inputType: 'number', label: 'Number', name: 'number', value: 42 },
-      { type: 'input', inputType: 'password', label: 'Password', name: 'password', style: 'color:maroon;' },
-      { type: 'input', inputType: 'date', label: 'Date', name: 'date' },
-      { type: 'input', inputType: 'file', label: 'File', name: 'file' },
-      { type: 'input', inputType: 'url', label: 'Url', name: 'url' },
-      { type: 'input', inputType: 'range', label: 'Range', name: 'range', value: 25, max: 100 },
-      { type: 'input', inputType: 'hidden', label: '', name: 'hidden', value: 'You can pass extra values to the form via hidden inputs' }
-    ]
-  }
-}
-Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options).then(function(input) {
-  console.log('result', input)
-})
-</code></pre>
-<p><button id="btn-input-all">Test many types of input</button> </p>
-</section>
-
-<section id="input-radio-select">
-<h3>Radios and selects</h3>
-<p>Radios are "paired" inputs and selects have child options, so those need a extended definition. Notice the use of <code>value</code> :</p>
-<pre><code class="javascript">const options = { 
-  input: { 
-    inputs [
-      { type: 'radio', label: 'radio', name: 'radio', value: 'option2',
-          options: [
-            { label: 'option1', value: 'option1' },
-            { label: 'option2', value: 'option2' },
-            { label: 'option3', value: 'option3' }
-          ]
-      },
-      { type: 'select', label: 'select', name: 'select', value: 'option3',
-          options: [
-            { label: 'option1', value: 'option1' },
-            { label: 'option2', value: 'option2' },
-            { label: 'option3', value: 'option3' }
-          ]
-      }
-    ],
-    callback: function(state) {
-      return state.radio !== null && state.select !== null
-    }
-  }
-}	
-</code></pre>
-<p><button id="btn-input-radio-select">Test radios and select</button> <button id="btn-input-radio-select-no-value">Same, without using value</button> </p>
-</section>
-
 <section id="input-form-validation">
 <h2>Form validation</h2>
 <p>
@@ -750,7 +815,7 @@ and HTML5 properties. Here is a very basic example where the user is prompted to
       inputType: 'email', 
       name: 'email', 
       spellcheck: false,
-      required: true //<-- mark required as true
+      required: true //&lt;-- mark required as true
     }],
   }
 }
@@ -790,6 +855,7 @@ Mark any All you need to do is to mark the form control as required
 using declarative inputs, 
 You can 
 There are two ways to validate form input: <code>input.callback</code> and <code>input.promise</code>. </p>
+<p>
 If (and only if) you specify a callback (or a promise), the submit-button is disabled and the callback will determine when it should be enabled. 
 Callbacks are triggered whenever any of the inputs changes state, and the result will be handled as a boolean; i.e if you return <code>true</code> 
 the submit-button will be enabled. The callback passes two params : </p>

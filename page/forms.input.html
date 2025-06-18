@@ -1,0 +1,77 @@
+<section id="forms-input">
+<h3>input</h3>
+<p>
+Set <code>inputType</code> to specify the type of the <code>&lt;input></code>. 
+See MDN's <a class="text-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#input_types" target=_blank>&lt;input> types</a> for a complete reference.
+</p>
+<pre><code class="javascript">const options = {
+  input: {
+    formLayout: 'left clear-left',
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'Text', name: 'input' },
+      { type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
+      { type: 'input', inputType: 'color', label: 'Color', name: 'color', value: '#123456' },
+      { type: 'input', inputType: 'number', label: 'Number', name: 'number', value: 42 },
+      { type: 'input', inputType: 'password', label: 'Password', name: 'password', style: 'color:maroon;' },
+      { type: 'input', inputType: 'date', label: 'Date', name: 'date' },
+      { type: 'input', inputType: 'datetime-local', label: 'Datetime-local', name: 'datetime-local' },
+      { type: 'input', inputType: 'week', label: 'Week', name: 'week' },
+      { type: 'input', inputType: 'file', label: 'File', name: 'file' },
+      { type: 'input', inputType: 'url', label: 'Url', name: 'url' },
+      { type: 'input', inputType: 'tel', label: 'Tel', name: 'tel' },
+      { type: 'input', inputType: 'email', label: 'Email', name: 'email' },
+      { type: 'input', inputType: 'range', label: 'Range', name: 'range', value: 25, max: 100 },
+      { type: 'input', inputType: 'hidden', label: '', name: 'hidden', value: 'Pass extra values to the form via hidden inputs' }
+    ]
+  }
+}
+Dlg.input('Lorem ipsum ...', options).then(input => console.log('result', input))
+</code></pre>
+<p><button id="btn-input-all">Test many types of input</button> </p>
+
+
+asdsad
+<p><button id="btn-input-simple-login-required">Try simple login with required</button></p>
+<pre><code class="javascript">inputs: [
+  { type="input', inputType='text', name='first_name', 'label': 'First name' },
+  { type="input', inputType='text', name='last_name', 'label': 'Last name' },
+]
+</code></pre>
+But you can by default submit 
+The problem is, that you can submit a login dialog without 
+You A login form should not be subat least have a sanity dialog Since we are dealing with username/password
+
+As soon as you have entered You can submit the form right awaySince there is no restrictions 
+
+But you can submit the form without entering any values, 
+and 
+
+ening Since However, since we ask for username and password we need a credentials are almost since it makes no sense you can a dialog form should at least The problem is that you can submit However,  - as soon . However, , whatever you have entered you  Click on the button, if you type some text and hit enter you will see something like <code>{ username: 'abc', password: 'def' }</code> 
+in the console. But 
+</p>
+
+of form controls To show a form, simply pass an array of elements <code>input.inputs</code> 
+Just pass the attributes you need, if not set <code>.DEFAULTS</code> are used. The elements in the form is positioned by a 
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid" title="CSS grid on MDN">CSS grid</a>, via <code>.formLayout</code>
+<code>top</code>|<code>left</code> you can specify the label positions. </p>
+
+<h3>.inputType</h3>
+<p>For <code>&lt;input></code>'s you specify the type throgh <code>inputType</code>. If the browser support the input type it can be shown. 
+Pass special properties by their name, i.e <code>value</code>, <code>min</code>, <code>placeholder</code> :</p>
+
+
+<h3>Define inputs</h3>
+<p><code>inputs</code> is an array of objects defining each input for the form :</p>
+<pre><code class="javascript">const options = {
+  input: {
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required' },
+      { type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4 }
+    ]
+  }
+}
+Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
+</code></pre><p><button id="btn-input-textarea">Test input, textarea</button></p>
+
+</section>
+
