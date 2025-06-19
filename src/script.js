@@ -9,6 +9,7 @@ import { Positioning } from './lib/positioning.js'
 import { Keyboard } from './lib/keyboard.js'
 import { Progress } from './lib/progress.js'
 import { Wait } from './lib/wait.js'
+import { Radio } from './lib/radio.js'
 import { Backdrop } from './lib/backdrop.js'
 import { Input } from './lib/input.js'
 import { Examples } from './lib/examples.js'
@@ -41,7 +42,7 @@ const Test = (function(window, document, Dlg) {
 	}
 
 	window.addEventListener('scroll', function() {
-		testCollapse(['forms', 'forms-input', 'forms-select'], 'forms-details') 
+		testCollapse(['forms', 'forms-input', 'forms-select', 'forms-textarea', 'forms-formlayout'], 'forms-details') 
 	})
 
 	const initSyntaxHl = function() {

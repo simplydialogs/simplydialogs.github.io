@@ -16,30 +16,6 @@ Use <code class="javascript">autocomplete: 'on'</code> to enable autocomplete (i
 </p>
 <p><button id="btn-input-autocomplete-textarea">Test input autocomplete, textarea</button></p>
 
-
-<section id="input-form-layout">
-<h3>.formLayout</h3>
-<p><code>formLayout</code> can contain <code>left</code>/<code>top</code> and <code>full-width</code>. The basic layout have huge 
-importance of the look of the dialog. Here all the combinations along with the input/textarea example above :</p>
-<pre><code class="javascript">const options = {
-  input: {
-    formLayout: (not set | top | top full-width | left | left full-width | '')
-    inputs: [
-      ...
-    ]
-  }
-}
-</code></pre>
-<p>
-<button id="btn-input-form-layout-default">Default</button>
-<button id="btn-input-form-layout-top">top</button>
-<button id="btn-input-form-layout-top-full-width">top full-width</button>
-<button id="btn-input-form-layout-left">left</button>
-<button id="btn-input-form-layout-left-full-width">left full-width</button>
-<button id="btn-input-form-layout-none">none (empty, undefined)</button>
-</p>
-</section>
-
 <section id="input-form-validation">
 <h2>Form validation</h2>
 <p>

@@ -19,6 +19,9 @@ backdrop.html \
 forms.html \
 forms.input.html \
 forms.select.html \
+forms.radio.html \
+forms.textarea.html \
+forms.formLayout.html \
 index.old \
 examples.html \
 integration.html \

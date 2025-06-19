@@ -1,9 +1,10 @@
 
-import { gebi, shortText, longText } from './util.js'
+import { gebi, qall, shortText, longText } from './util.js'
 import { SimplyDialogs as Dlg } from './../../SimplyDialogs/SimplyDialogs.min.mjs'
 
 const Input = (function() {
 
+/*
 	gebi('btn-input-textarea').onclick = function() {
 		const options = {
 			input: {
@@ -17,6 +18,7 @@ const Input = (function() {
 			console.log('result', input)
 		})
 	}
+*/
 
 		gebi('btn-input-textarea-autofocus').onclick = function() {
 			const options = {
@@ -66,7 +68,7 @@ const Input = (function() {
 				input: {
 					formLayout: 'left clear-left',
 					inputs: [
-						{ type: 'input', inputType: 'text', label: 'Text', name: 'input', spellcheck: false },
+						{ type: 'input', inputType: 'text', label: 'Text', name: 'input', placeholder: 'Type some text ...' },
 						{ type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
 						{ type: 'input', inputType: 'color', label: 'Color', name: 'color', value: '#123456' },
 						{ type: 'input', inputType: 'number', label: 'Number', name: 'number', value: 42 },
@@ -85,36 +87,9 @@ const Input = (function() {
 			}
 			Dlg.input(shortText, options).then(input => console.log('result', input))
 		}
-
-		gebi('btn-input-radio-select').onclick = function() {
-			const options = { 
-				input: { 
-					inputs: [
-						{ type: 'radio', label: 'radio', name: 'radio', value: 'option2',
-							options: [
-									{ label: 'option1', value: 'option1' },
-									{ label: 'option2', value: 'option2' },
-									{ label: 'option3', value: 'option3' }
-								]
-						},
-						{ type: 'select', label: 'select', name: 'select', value: 'option3',
-								options: [
-									{ label: 'option1', value: 'option1' },
-									{ label: 'option2', value: 'option2' },
-									{ label: 'option3', value: 'option3' }
-								]
-						}
-					],
-          callback: function(state) {
-            return state.radio !== '' && state.select !== ''
-          }
-        }
-      }
-			Dlg.input(shortText, options).then(function(input) {
-				console.log('radio select', input)
-			})
-		}
-
+/*
+*/
+/*
 		gebi('btn-input-radio-select-no-value').onclick = function() {
 			const options = { 
 				input: { 
@@ -143,7 +118,7 @@ const Input = (function() {
 				console.log('radio select', input)
 			})
 		}
-
+*/
 		gebi('btn-input-file').onclick = function() {
 			const options = {
 				headers: { input: 'Upload Image' },
@@ -246,6 +221,7 @@ const Input = (function() {
 		Dlg.input('', options).then(input => console.log('login', input))
 	}
 
+/*
 	gebi('btn-input-simple-login-required').onclick = function() {
 		const options = {
 			header: 'Login',
@@ -259,6 +235,7 @@ const Input = (function() {
 		}
 		Dlg.input('', options).then(input => console.log('login', input))
 	}
+*/
 
 //validation
 	gebi('btn-validation-required-email').onclick = function() {
@@ -337,40 +314,22 @@ const Input = (function() {
 	//formLayout
 	const formLayout = (function() {
 		const options = {
+			formLayout: 'left full-width', //default
 			input: {
 				inputs: [
 					{ type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required' },
 					{ type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4 }
-				],
-				callback: function(state) {
-					return state.input.length > 3
-				}
+				]
 			}
 		}
-		gebi('btn-input-form-layout-default').onclick = function() {
-			options.input.formLayout = 'left full-width'
-			Dlg.input(shortText, options)
-		}
-		gebi('btn-input-form-layout-top').onclick = function() {
-			options.input.formLayout = 'top'
-			Dlg.input(shortText, options)
-		}
-		gebi('btn-input-form-layout-top-full-width').onclick = function() {
-			options.input.formLayout = 'top full-width'
-			Dlg.input(shortText, options)
-		}
-		gebi('btn-input-form-layout-left').onclick = function() {
-			options.input.formLayout = 'left'
-			Dlg.input(shortText, options)
-		}
-		gebi('btn-input-form-layout-left-full-width').onclick = function() {
-			options.input.formLayout = 'left full-width'
-			Dlg.input(shortText, options)
-		}
-		gebi('btn-input-form-layout-none').onclick = function() {
-			options.input.formLayout = ''
-			Dlg.input(shortText, options)
-		}
+		qall('.btn-forms-formlayout').forEach(function(btn) {
+			btn.onclick = function() {
+				if (this.hasAttribute('data-layout')) options.input.formLayout = this.getAttribute('data-layout')
+				options.header = this.hasAttribute('data-layout') ? this.getAttribute('data-layout') : '(not set)'
+				Dlg.input(shortText, options)
+			}
+		})
+
 	})()
 
 })()

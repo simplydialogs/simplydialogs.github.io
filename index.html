@@ -62,6 +62,9 @@ img.summary-image {
 	height: 6rem;
 	cursor: pointer;
 }
+table {
+	font-size: small;
+}
 /*
 pre code.hljs {
 	display: block;
@@ -95,19 +98,18 @@ code.hljs {
 		<li><a href="#defaults-backdrop">backdrop</a></li>
 		<li><a href="#forms" class="arrow">Forms</a> 
 			<ul id="forms-details">
-				<li><a href="#forms-input">inputs</a></li>
+				<li><a href="#forms-input">input</a></li>
 				<li><a href="#forms-select">select</a></li>
 				<li><a href="#forms-radio">radio</a></li>
 				<li><a href="#forms-textarea">textarea</a></li>
-
-				<li><a href="#input-inputs">Input options</a>
+				<li><a href="#forms-formlayout">formLayout</a></li>
+				<li>browser specific
 					<ul>
 						<li><a href="#input-autofocus">autofocus</a></li>
 						<li><a href="#input-spellcheck">spellcheck</a></li>
 						<li><a href="#input-autocomplete">autocomplete</a></li>
 					</ul>
 				</li>
-				<li><a href="#input-form-layout">.formLayout</a></li>
 				<li><a href="#input-input-type">.inputType</a></li>
 				<li><a href="#input-radio-select">Radios, select</a></li>
 				<li><a href="#input-form-validation">Form validation</a>
@@ -628,7 +630,7 @@ If the predefined <code>required</code> class is added to <code>classes</code>, 
 
 <h2>Form controls</h2>
 <p>
-Use the type property to specify the type of form control. You should also at least specify a <code>name</code> for each control, 
+Use the <code>type</code> property to specify the type of form control. You should also at least specify a <code>name</code> for each control, 
 if not the control is given an anonymous name like <code>select_1</code>. 
 </p>
 <pre><code class="javascript">const options = {
@@ -655,7 +657,7 @@ See MDN's <a class="text-link" href="https://developer.mozilla.org/en-US/docs/We
   input: {
     formLayout: 'left clear-left',
     inputs: [
-      { type: 'input', inputType: 'text', label: 'Text', name: 'input' },
+      { type: 'input', inputType: 'text', label: 'Text', name: 'input', placeholder: 'Type some text ...' },
       { type: 'input', inputType: 'checkbox', label: 'Checkbox', name: 'checkbox', checked: true },
       { type: 'input', inputType: 'color', label: 'Color', name: 'color', value: '#123456' },
       { type: 'input', inputType: 'number', label: 'Number', name: 'number', value: 42 },
@@ -675,82 +677,182 @@ See MDN's <a class="text-link" href="https://developer.mozilla.org/en-US/docs/We
 Dlg.input('Lorem ipsum ...', options).then(input => console.log('result', input))
 </code></pre>
 <p><button id="btn-input-all">Test many types of input</button> </p>
-
-
-asdsad
-<p><button id="btn-input-simple-login-required">Try simple login with required</button></p>
-<pre><code class="javascript">inputs: [
-  { type="input', inputType='text', name='first_name', 'label': 'First name' },
-  { type="input', inputType='text', name='last_name', 'label': 'Last name' },
-]
-</code></pre>
-But you can by default submit 
-The problem is, that you can submit a login dialog without 
-You A login form should not be subat least have a sanity dialog Since we are dealing with username/password
-
-As soon as you have entered You can submit the form right awaySince there is no restrictions 
-
-But you can submit the form without entering any values, 
-and 
-
-ening Since However, since we ask for username and password we need a credentials are almost since it makes no sense you can a dialog form should at least The problem is that you can submit However,  - as soon . However, , whatever you have entered you  Click on the button, if you type some text and hit enter you will see something like <code>{ username: 'abc', password: 'def' }</code> 
-in the console. But 
+<p>
+You can pass any <code>&ltinput></code>-specific attribute and it will blindly be rendered, even <code>style</code>. 
+<code>input</code> takes	 care of the following properties :
+<table>
+<tr>
+	<td><code>inputType</code></td>
+	<td>as described above</td>
+	<td></td>
+</tr>
+<tr>
+	<td><code>value</code></td>
+	<td>empty by default</td>
+	<td></td>
+</tr>
+<tr>
+	<td><code>classes</code></td>
+	<td>CSS classes</td>
+	<td>important predefined classes are <code>password</code>, <code>required</code></td>
+</tr>
+<tr>
+	<td><code>required</code></td>
+	<td>false by default</td>
+	<td>not supported by <code>inputType</code> color, range, hidden</td>
+</tr>
+<tr>
+	<td><code>spellcheck</code></td>
+	<td>false by default</td>
+	<td>only relevant for <code>inputType</code> text</td>
+</tr>
+</table>
 </p>
+</section>
 
-of form controls To show a form, simply pass an array of elements <code>input.inputs</code> 
-Just pass the attributes you need, if not set <code>.DEFAULTS</code> are used. The elements in the form is positioned by a 
-<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid" title="CSS grid on MDN">CSS grid</a>, via <code>.formLayout</code>
-<code>top</code>|<code>left</code> you can specify the label positions. </p>
+<section id="forms-select">
+<h3>select</h3>
+<p>
+<code>type: 'select</code> produces a <code>&lt;select></code> control. Use <code>options</code> to define the selects' options :
+</p>
+<pre><code class="javascript">const options = { 
+  input: { 
+    inputs [{ 
+      type: 'select', label: 'select', name: 'select', value: 'option2',
+        options: [
+          { label: 'option1', value: 'option1' },
+          { label: 'option2', value: 'option2' },
+          { label: 'option3', value: 'option3' }
+        ]
+      }
+    ]
+  }
+}	
+</code></pre>
+<!--
+<p><button id="btn-input-radio-select">Test radios and select</button> <button id="btn-input-radio-select-no-value">Same, without using value</button> </p>
+-->
+</section>
 
-<h3>.inputType</h3>
-<p>For <code>&lt;input></code>'s you specify the type throgh <code>inputType</code>. If the browser support the input type it can be shown. 
-Pass special properties by their name, i.e <code>value</code>, <code>min</code>, <code>placeholder</code> :</p>
+<section id="forms-radio">
+<h3>radio</h3>
+<p>
+<code>type: radio</code> renders a group of radio buttons.
+Use <code>options</code> to define the radio group items :
+</p>
+<pre><code class="javascript">const options = { 
+  input: { 
+    inputs: [{ 
+      type: 'radio', label: 'radio', name: 'radio', value: 'option2', //inline: true, 
+        options: [
+          { label: 'option1', value: 'option1' },
+          { label: 'option2', value: 'option2' },
+          { label: 'option3', value: 'option3' }
+        ]
+      }
+    ]
+  }
+}	
+</code></pre>
+<p>
+<button id="btn-input-radio">Test default radio</button>
+<button id="btn-input-radio-inline">radio group inline</button>
+</p>
+<p>
+<code>radio</code> takes special care of the following properties :
+<table>
+<tr>
+	<td><code>options</code></td>
+	<td>as described above</td>
+	<td></td>
+</tr>
+<tr>
+	<td><code>inline</code></td>
+	<td>false by default</td>
+	<td>continuous rendering of the inputs</td>
+</tr>
+<tr>
+	<td><code>classes</code></td>
+	<td>CSS classes</td>
+	<td></td>
+</tr>
+<tr>
+	<td><code>required</code></td>
+	<td>false by default</td>
+	<td>Will reset any <code>value</code></td>
+</tr>
+</table>
+</section>
 
+<section id="forms-textarea">
+<h3>textarea</h3>
+<p>
+<code>type: 'select</code> produces a <code>&lt;select></code> control. Use <code>options</code> to define the selects' options :
+</p>
+<pre><code class="javascript">const options = { 
+  input: { 
+    inputs [{ 
+      type: 'select', label: 'select', name: 'select', value: 'option2',
+        options: [
+          { label: 'option1', value: 'option1' },
+          { label: 'option2', value: 'option2' },
+          { label: 'option3', value: 'option3' }
+        ]
+      }
+    ]
+  }
+}	
+</code></pre>
+<!--
+<p><button id="btn-input-radio-select">Test radios and select</button> <button id="btn-input-radio-select-no-value">Same, without using value</button> </p>
+-->
+</section>
 
-<h3>Define inputs</h3>
-<p><code>inputs</code> is an array of objects defining each input for the form :</p>
+<section id="forms-formlayout">
+<h2>formLayout</h2>
+<p>A few classes that let you specify the layout of the form
+<table>
+<tr>
+	<td><code>left</code>, <code>top</code></td>
+	<td>labels to the left or on top of form controls, default is left</td>
+</tr>
+<tr>
+	<td><code>full-width</code></td>
+	<td>form controls 100% width, default</td>
+</tr>
+<tr>
+	<td><code>form-clear</code></td>
+	<td>by default the form floats inline after icon and message (if set), form-left clears the form to the left</td>
+</tr>
+</table>
+</p>
 <pre><code class="javascript">const options = {
   input: {
+    formLayout: 'top | left | full-width | form-clear',
     inputs: [
       { type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required' },
       { type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4 }
     ]
   }
 }
-Dlg.input('Lorem ipsum dolor sit amet, consectetur adipiscing elit', options)
-</code></pre><p><button id="btn-input-textarea">Test input, textarea</button></p>
-
-</section>
-
-<section id="forms-select">
-<h3>Radios and selects</h3>
-<p>Radios are "paired" inputs and selects have child options, so those need a extended definition. Notice the use of <code>value</code> :</p>
-<pre><code class="javascript">const options = { 
-  input: { 
-    inputs [
-      { type: 'radio', label: 'radio', name: 'radio', value: 'option2',
-          options: [
-            { label: 'option1', value: 'option1' },
-            { label: 'option2', value: 'option2' },
-            { label: 'option3', value: 'option3' }
-          ]
-      },
-      { type: 'select', label: 'select', name: 'select', value: 'option3',
-          options: [
-            { label: 'option1', value: 'option1' },
-            { label: 'option2', value: 'option2' },
-            { label: 'option3', value: 'option3' }
-          ]
-      }
-    ],
-    callback: function(state) {
-      return state.radio !== null && state.select !== null
-    }
-  }
-}	
 </code></pre>
-<p><button id="btn-input-radio-select">Test radios and select</button> <button id="btn-input-radio-select-no-value">Same, without using value</button> </p>
+<p>
+<button class="btn-forms-formlayout">Default</button>
+<button class="btn-forms-formlayout" data-layout="top">top</button>
+<button class="btn-forms-formlayout" data-layout="top full-width">top full-width</button>
+<button class="btn-forms-formlayout" data-layout="left">left</button>
+<button class="btn-forms-formlayout" data-layout="left full-width">left full-width</button>
+<button class="btn-forms-formlayout" data-layout="top form-clear">top form-clear</button>
+<button class="btn-forms-formlayout" data-layout="top full-width form-clear">top full-width form-clear</button>
+<button class="btn-forms-formlayout" data-layout="left form-clear">left form-clear</button>
+<button class="btn-forms-formlayout" data-layout="left full-width form-clear">left full-width form-clear</button>
+<button class="btn-forms-formlayout" data-layout="">null, '', undefined</button>
+</p>
+
 </section>
+
+
+
 
 
 <h3 id="input-autofocus">autofocus</h3>
@@ -769,30 +871,6 @@ Use <code class="javascript">spellcheck: true</code> to enable spellcheck
 Use <code class="javascript">autocomplete: 'on'</code> to enable autocomplete (input elements only)
 </p>
 <p><button id="btn-input-autocomplete-textarea">Test input autocomplete, textarea</button></p>
-
-
-<section id="input-form-layout">
-<h3>.formLayout</h3>
-<p><code>formLayout</code> can contain <code>left</code>/<code>top</code> and <code>full-width</code>. The basic layout have huge 
-importance of the look of the dialog. Here all the combinations along with the input/textarea example above :</p>
-<pre><code class="javascript">const options = {
-  input: {
-    formLayout: (not set | top | top full-width | left | left full-width | '')
-    inputs: [
-      ...
-    ]
-  }
-}
-</code></pre>
-<p>
-<button id="btn-input-form-layout-default">Default</button>
-<button id="btn-input-form-layout-top">top</button>
-<button id="btn-input-form-layout-top-full-width">top full-width</button>
-<button id="btn-input-form-layout-left">left</button>
-<button id="btn-input-form-layout-left-full-width">left full-width</button>
-<button id="btn-input-form-layout-none">none (empty, undefined)</button>
-</p>
-</section>
 
 <section id="input-form-validation">
 <h2>Form validation</h2>

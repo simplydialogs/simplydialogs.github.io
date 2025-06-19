@@ -1,0 +1,46 @@
+<section id="forms-formlayout">
+<h2>formLayout</h2>
+<p>A few classes that let you specify the layout of the form
+<table>
+<tr>
+	<td><code>left</code>, <code>top</code></td>
+	<td>labels to the left or on top of form controls, default is left</td>
+</tr>
+<tr>
+	<td><code>full-width</code></td>
+	<td>form controls 100% width, default</td>
+</tr>
+<tr>
+	<td><code>form-clear</code></td>
+	<td>by default the form floats inline after icon and message (if set), form-left clears the form to the left</td>
+</tr>
+</table>
+</p>
+<pre><code class="javascript">const options = {
+  input: {
+    formLayout: 'top | left | full-width | form-clear',
+    inputs: [
+      { type: 'input', inputType: 'text', label: 'Input', name: 'input', placeholder: 'Input required' },
+      { type: 'textarea', label: 'Textarea', name: 'textarea', placeholder: 'Additional text', rows: 4 }
+    ]
+  }
+}
+</code></pre>
+<p>
+<button class="btn-forms-formlayout">Default</button>
+<button class="btn-forms-formlayout" data-layout="top">top</button>
+<button class="btn-forms-formlayout" data-layout="top full-width">top full-width</button>
+<button class="btn-forms-formlayout" data-layout="left">left</button>
+<button class="btn-forms-formlayout" data-layout="left full-width">left full-width</button>
+<button class="btn-forms-formlayout" data-layout="top form-clear">top form-clear</button>
+<button class="btn-forms-formlayout" data-layout="top full-width form-clear">top full-width form-clear</button>
+<button class="btn-forms-formlayout" data-layout="left form-clear">left form-clear</button>
+<button class="btn-forms-formlayout" data-layout="left full-width form-clear">left full-width form-clear</button>
+<button class="btn-forms-formlayout" data-layout="">null, '', undefined</button>
+</p>
+
+</section>
+
+
+
+

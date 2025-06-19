@@ -1,0 +1,50 @@
+<section id="forms-radio">
+<h3>radio</h3>
+<p>
+<code>type: radio</code> renders a group of radio buttons.
+Use <code>options</code> to define the radio group items :
+</p>
+<pre><code class="javascript">const options = { 
+  input: { 
+    inputs: [{ 
+      type: 'radio', label: 'radio', name: 'radio', value: 'option2', //inline: true, 
+        options: [
+          { label: 'option1', value: 'option1' },
+          { label: 'option2', value: 'option2' },
+          { label: 'option3', value: 'option3' }
+        ]
+      }
+    ]
+  }
+}	
+</code></pre>
+<p>
+<button id="btn-input-radio">Test default radio</button>
+<button id="btn-input-radio-inline">radio group inline</button>
+</p>
+<p>
+<code>radio</code> takes special care of the following properties :
+<table>
+<tr>
+	<td><code>options</code></td>
+	<td>as described above</td>
+	<td></td>
+</tr>
+<tr>
+	<td><code>inline</code></td>
+	<td>false by default</td>
+	<td>continuous rendering of the inputs</td>
+</tr>
+<tr>
+	<td><code>classes</code></td>
+	<td>CSS classes</td>
+	<td></td>
+</tr>
+<tr>
+	<td><code>required</code></td>
+	<td>false by default</td>
+	<td>Will reset any <code>value</code></td>
+</tr>
+</table>
+</section>
+
