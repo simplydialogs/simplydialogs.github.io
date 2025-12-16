@@ -12,6 +12,7 @@ import { Wait } from './lib/wait.js'
 import { Radio } from './lib/radio.js'
 import { Backdrop } from './lib/backdrop.js'
 import { Input } from './lib/input.js'
+import { Validation } from './lib/validation.js'
 import { Examples } from './lib/examples.js'
 import { SimplyDialogs as Dlg } from './../SimplyDialogs/SimplyDialogs.min.mjs'
 

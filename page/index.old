@@ -89,6 +89,9 @@ the submit-button will be enabled. The callback passes two params : </p>
 	<li><code>state</code> is an object literal containing <code>{ name: value }</code> for all inputs.</li>
 	<li><code>dialog</code> is the dialog's actual <code>HTMLDialogElement</code>, which can be used to manipulate input fields on the form (or anything else).</li>
 </ul>
+<p>An example of using both, here the submit button is enabled only when the user type 42</p>
+
+<p><button id="btn-validation-example-42">test 42</button>
 </section>
 
 <section id="input-callback">
